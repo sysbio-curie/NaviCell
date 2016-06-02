@@ -9,7 +9,7 @@ Using <b>NaviCell Factory</b> consists of several steps
 
 1) Unpack the <b>NaviCell Factory</b> package (navicell.[version].tgz file) into a user-specified folder. Let us assume it is "C:\NaviCell" (and we assume to work under Windows though all instructions will work under any other operating system as well).
 
-2) If you use <b>NaviCell Factory</b> for the first time then go to "C:\NaviCell\factory\examples\" and launch the examples from there
+2) If you use <b>NaviCell Factory</b> for the first time then go to "C:\NaviCell\factory\examples\" and build the examples from there
 or from "C:\NaviCell\factory\maps\" folder.
 
 3) Prepare the images of CellDesigner files including, if necessary, several zoom images, b/w images for coloring the map, module definitions
