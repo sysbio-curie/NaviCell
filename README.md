@@ -22,7 +22,7 @@ from 0 (lowest resolution) to k (highest resolution), etc.).
 
 Simplest minimal set of files for <b>NaviCell Factory</b> can be found at "C:\NaviCell\factory\examples\\simple_map_src".
 
-4) Copy the prepared files into the  "C:\NaviCell\factory\maps\[src_folder]"
+4) Copy the prepared files into the  "C:\NaviCell\factory\maps\\[src_folder]"
 
 5) Create a .bat or .sh file for launching the command line based on the provided templates in "C:\NaviCell\factory\examples\".
 You must modify the first two lines with:
@@ -31,7 +31,7 @@ set srcFolderName=[src_folder]
 
 6) Launch the .bat or .sh file accordingly 
 
-7) Find the results in "C:\NaviCell\site\docroot\navicell\maps\[out_folder]\master\"
+7) Find the results in "C:\NaviCell\site\docroot\navicell\maps\\[out_folder]\master\"
 
 8) <i>Either</i> browse the map locally from "C:\NaviCell\site\docroot\navicell\maps\[out_folder]\master\index.html". 
 Beware of launching Chrome browser with "--allow-file-access-from-files" option!
