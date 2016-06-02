@@ -1,7 +1,9 @@
 # NaviCell
 
 This is a <b>NaviCell Factory</b> package allowing to convert a <a href="http://celldesigner.org">CellDesigner</a> map into <a href="http://navicell.curie.fr">NaviCell</a> 
-web-based enviroment, allowing to explore the map online and visualize high-throughput data on top of it with <a href="https://navicell.curie.fr/pages/nav_web_service.html">NaviCell Web Service</a>.
+Google Maps-based enviroment, allowing to explore the map online and visualize high-throughput data on top of it with <a href="https://navicell.curie.fr/pages/nav_web_service.html">NaviCell Web Service</a>.
+
+If you've never seen NaviCell then <a href="https://navicell.curie.fr/navicell/maps/cellcycle/master/index.php?demo=on">click here</a> in order to see <a href="https://navicell.curie.fr/pages/maps.html">an example</a>.
 
 Using <b>NaviCell Factory</b> consists of several steps
 
