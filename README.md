@@ -1,7 +1,7 @@
 # NaviCell
 
 This is a <b>NaviCell Factory</b> package allowing to convert a <a href="http://celldesigner.org">CellDesigner</a> map into <a href="http://navicell.curie.fr">NaviCell</a> 
-web-based enviroment, allowing to explore the map online and visualize high-throughput data on top of it with <a href="http://navicell.curie.fr">NaviCell Web Service</a>.
+web-based enviroment, allowing to explore the map online and visualize high-throughput data on top of it with <a href="https://navicell.curie.fr/pages/nav_web_service.html">NaviCell Web Service</a>.
 
 Using <b>NaviCell Factory</b> consists of several steps
 
@@ -12,7 +12,8 @@ or from "C:\NaviCell\factory\maps\" folder.
 
 3) Prepare the images of CellDesigner files including, if necessary, several zoom images, b/w images for coloring the map, module definitions
 (examples of map preparation are provided with the NaviCell Factory package in "C:\NaviCell\factory\examples\".
-Detailed instructions on preparation of high-quality set of images for NaviCell are provided at <a href="">???</a>.
+Detailed instructions on preparation of high-quality set of images for NaviCell are provided at <a href="https://navicell.curie.fr/doc/NaviCellMapperAdminGuide.pdf">here</a> (though for very simple use of the maps
+it is sufficient to look at the examples).
 Beware of exact naming of the files (i.e.,all images and main xml files shoud end up with "master", 
 black/white image files should end with "_nobg-[k].png" string, enumeration of png files goes 
 from 0 (lowest resolution) to k (highest resolution), etc.).
