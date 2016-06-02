@@ -33,8 +33,8 @@ set srcFolderName=[src_folder]
 
 7) Find the results in "C:\NaviCell\site\docroot\navicell\maps\\[out_folder]\master\"
 
-8) <i>Either</i> browse the map locally from "C:\NaviCell\site\docroot\navicell\maps\[out_folder]\master\index.html". 
+8) <i>Either</i> browse the map locally from "C:\NaviCell\site\docroot\navicell\maps\\[out_folder]\master\index.html". 
 Beware of launching Chrome browser with "--allow-file-access-from-files" option!
 
-9) <i>Or</i> copy the whole content of "C:\NaviCell\site\docroot\navicell\maps\[out_folder]" onto a web-server and browse online.
+9) <i>Or</i> copy the whole content of "C:\NaviCell\site\docroot\navicell\maps\\[out_folder]" onto a web-server and browse online.
 
