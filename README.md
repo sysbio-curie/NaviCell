@@ -1,7 +1,5 @@
 # NaviCell
 
-Instructions for github:
-
 This is a <b>NaviCell Factory</b> package allowing to convert a <a href="http://celldesigner.org">CellDesigner</a> map into <a href="http://navicell.curie.fr">NaviCell</a> 
 web-based enviroment, allowing to explore the map online and visualize high-throughput data on top of it with <a href="http://navicell.curie.fr">NaviCell Web Service</a>.
 
