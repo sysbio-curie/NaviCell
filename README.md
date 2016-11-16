@@ -6,7 +6,7 @@ Google Maps-based enviroment, allowing to explore the map online and visualize h
 If you've never seen NaviCell then <a href="https://navicell.curie.fr/navicell/maps/cellcycle/master/index.php?demo=on">click here</a> in order to see <a href="https://navicell.curie.fr/pages/maps.html">an example</a>.
 
 <b>Downloads:</b>
-<a href="http://xfer.curie.fr/get/DKP20Gim2gF/navicell_v2.1.zip">Version 2.1 of NaviCell Factory</a>
+<a href="http://xfer.curie.fr/get/WnhpaIjpBwF/navicell_v2.1.zip">Version 2.1 of NaviCell Factory</a>
 
 Using <b>NaviCell Factory</b> consists of several steps
 
