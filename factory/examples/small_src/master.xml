@@ -1,0 +1,860 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sbml xmlns="http://www.sbml.org/sbml/level2/version4" xmlns:celldesigner="http://www.sbml.org/2001/ns/celldesigner" level="2" version="4">
+  <model id="small_network.brf">
+    <annotation>
+      <celldesigner:listOfBlockDiagrams/>
+      <celldesigner:listOfLayers/>
+      <celldesigner:listOfAntisenseRNAs/>
+      <celldesigner:listOfRNAs/>
+      <celldesigner:listOfGenes/>
+      <celldesigner:listOfProteins>
+        <celldesigner:protein id="pr_EP300" name="EP300">
+          <celldesigner:notes>
+            <html xmlns="http://www.w3.org/1999/xhtml">
+              <body>Identifiers_begin:
+HUGO:EP300
+Identifiers_end</body>
+            </html>
+          </celldesigner:notes>
+        </celldesigner:protein>
+        <celldesigner:protein id="pr_DAXX" name="DAXX">
+          <celldesigner:notes>
+            <html xmlns="http://www.w3.org/1999/xhtml">
+              <body>Identifiers_begin:
+HUGO:DAXX
+Identifiers_end</body>
+            </html>
+          </celldesigner:notes>
+        </celldesigner:protein>
+        <celldesigner:protein id="pr_TP53" name="TP53">
+          <celldesigner:notes>
+            <html xmlns="http://www.w3.org/1999/xhtml">
+              <body>Identifiers_begin:
+HUGO:TP53
+Identifiers_end</body>
+            </html>
+          </celldesigner:notes>
+        </celldesigner:protein>
+        <celldesigner:protein id="pr_CDKN1A" name="CDKN1A">
+          <celldesigner:notes>
+            <html xmlns="http://www.w3.org/1999/xhtml">
+              <body>Identifiers_begin:
+HUGO:CDKN1A
+Identifiers_end</body>
+            </html>
+          </celldesigner:notes>
+        </celldesigner:protein>
+        <celldesigner:protein id="pr_SIAH1" name="SIAH1">
+          <celldesigner:notes>
+            <html xmlns="http://www.w3.org/1999/xhtml">
+              <body>Identifiers_begin:
+HUGO:SIAH1
+Identifiers_end</body>
+            </html>
+          </celldesigner:notes>
+        </celldesigner:protein>
+        <celldesigner:protein id="pr_MDM2" name="MDM2">
+          <celldesigner:notes>
+            <html xmlns="http://www.w3.org/1999/xhtml">
+              <body>Identifiers_begin:
+HUGO:MDM2
+Identifiers_end</body>
+            </html>
+          </celldesigner:notes>
+        </celldesigner:protein>
+        <celldesigner:protein id="pr_CARF" name="CARF">
+          <celldesigner:notes>
+            <html xmlns="http://www.w3.org/1999/xhtml">
+              <body>Identifiers_begin:
+HUGO:CARF
+Identifiers_end</body>
+            </html>
+          </celldesigner:notes>
+        </celldesigner:protein>
+        <celldesigner:protein id="pr_FAS" name="FAS">
+          <celldesigner:notes>
+            <html xmlns="http://www.w3.org/1999/xhtml">
+              <body>Identifiers_begin:
+HUGO:FAS
+Identifiers_end</body>
+            </html>
+          </celldesigner:notes>
+        </celldesigner:protein>
+        <celldesigner:protein id="pr_NUMB" name="NUMB">
+          <celldesigner:notes>
+            <html xmlns="http://www.w3.org/1999/xhtml">
+              <body>Identifiers_begin:
+HUGO:NUMB
+Identifiers_end</body>
+            </html>
+          </celldesigner:notes>
+        </celldesigner:protein>
+      </celldesigner:listOfProteins>
+      <celldesigner:listOfGroups/>
+      <celldesigner:listOfSpeciesAliases>
+        <celldesigner:speciesAlias id="s1_alias" species="s1">
+          <celldesigner:activity>inactive</celldesigner:activity>
+          <celldesigner:bounds x="107.25713" y="617.25726" h="50.0" w="50.0"/>
+          <celldesigner:view state="usual"/>
+          <celldesigner:usualView>
+            <celldesigner:innerPosition x="0" y="0"/>
+            <celldesigner:boxSize width="50.0" height="50.0"/>
+            <celldesigner:singleLine width="1"/>
+            <celldesigner:paint scheme="Color" color="ffccffcc"/>
+          </celldesigner:usualView>
+          <celldesigner:briefView>
+            <celldesigner:innerPosition x="0" y="0"/>
+            <celldesigner:boxSize width="50.0" height="50.0"/>
+            <celldesigner:singleLine width="1"/>
+            <celldesigner:paint scheme="Color" color="ffccffcc"/>
+          </celldesigner:briefView>
+        </celldesigner:speciesAlias>
+        <celldesigner:speciesAlias id="s2_alias" species="s2">
+          <celldesigner:activity>inactive</celldesigner:activity>
+          <celldesigner:bounds x="822.0" y="819.0" h="50.0" w="50.0"/>
+          <celldesigner:view state="usual"/>
+          <celldesigner:usualView>
+            <celldesigner:innerPosition x="0" y="0"/>
+            <celldesigner:boxSize width="50.0" height="50.0"/>
+            <celldesigner:singleLine width="1"/>
+            <celldesigner:paint scheme="Color" color="ffccffcc"/>
+          </celldesigner:usualView>
+          <celldesigner:briefView>
+            <celldesigner:innerPosition x="0" y="0"/>
+            <celldesigner:boxSize width="50.0" height="50.0"/>
+            <celldesigner:singleLine width="1"/>
+            <celldesigner:paint scheme="Color" color="ffccffcc"/>
+          </celldesigner:briefView>
+        </celldesigner:speciesAlias>
+        <celldesigner:speciesAlias id="s3_alias" species="s3">
+          <celldesigner:activity>inactive</celldesigner:activity>
+          <celldesigner:bounds x="440.40002" y="442.21567" h="50.0" w="50.0"/>
+          <celldesigner:view state="usual"/>
+          <celldesigner:usualView>
+            <celldesigner:innerPosition x="0" y="0"/>
+            <celldesigner:boxSize width="50.0" height="50.0"/>
+            <celldesigner:singleLine width="1"/>
+            <celldesigner:paint scheme="Color" color="ffccffcc"/>
+          </celldesigner:usualView>
+          <celldesigner:briefView>
+            <celldesigner:innerPosition x="0" y="0"/>
+            <celldesigner:boxSize width="50.0" height="50.0"/>
+            <celldesigner:singleLine width="1"/>
+            <celldesigner:paint scheme="Color" color="ffccffcc"/>
+          </celldesigner:briefView>
+        </celldesigner:speciesAlias>
+        <celldesigner:speciesAlias id="s4_alias" species="s4">
+          <celldesigner:activity>inactive</celldesigner:activity>
+          <celldesigner:bounds x="651.588" y="693.01825" h="50.0" w="50.0"/>
+          <celldesigner:view state="usual"/>
+          <celldesigner:usualView>
+            <celldesigner:innerPosition x="0" y="0"/>
+            <celldesigner:boxSize width="50.0" height="50.0"/>
+            <celldesigner:singleLine width="1"/>
+            <celldesigner:paint scheme="Color" color="ffccffcc"/>
+          </celldesigner:usualView>
+          <celldesigner:briefView>
+            <celldesigner:innerPosition x="0" y="0"/>
+            <celldesigner:boxSize width="50.0" height="50.0"/>
+            <celldesigner:singleLine width="1"/>
+            <celldesigner:paint scheme="Color" color="ffccffcc"/>
+          </celldesigner:briefView>
+        </celldesigner:speciesAlias>
+        <celldesigner:speciesAlias id="s5_alias" species="s5">
+          <celldesigner:activity>inactive</celldesigner:activity>
+          <celldesigner:bounds x="292.0" y="103.99999" h="50.0" w="50.0"/>
+          <celldesigner:view state="usual"/>
+          <celldesigner:usualView>
+            <celldesigner:innerPosition x="0" y="0"/>
+            <celldesigner:boxSize width="50.0" height="50.0"/>
+            <celldesigner:singleLine width="1"/>
+            <celldesigner:paint scheme="Color" color="ffccffcc"/>
+          </celldesigner:usualView>
+          <celldesigner:briefView>
+            <celldesigner:innerPosition x="0" y="0"/>
+            <celldesigner:boxSize width="50.0" height="50.0"/>
+            <celldesigner:singleLine width="1"/>
+            <celldesigner:paint scheme="Color" color="ffccffcc"/>
+          </celldesigner:briefView>
+        </celldesigner:speciesAlias>
+        <celldesigner:speciesAlias id="s6_alias" species="s6">
+          <celldesigner:activity>inactive</celldesigner:activity>
+          <celldesigner:bounds x="411.10187" y="776.6692" h="50.0" w="50.0"/>
+          <celldesigner:view state="usual"/>
+          <celldesigner:usualView>
+            <celldesigner:innerPosition x="0" y="0"/>
+            <celldesigner:boxSize width="50.0" height="50.0"/>
+            <celldesigner:singleLine width="1"/>
+            <celldesigner:paint scheme="Color" color="ffccffcc"/>
+          </celldesigner:usualView>
+          <celldesigner:briefView>
+            <celldesigner:innerPosition x="0" y="0"/>
+            <celldesigner:boxSize width="50.0" height="50.0"/>
+            <celldesigner:singleLine width="1"/>
+            <celldesigner:paint scheme="Color" color="ffccffcc"/>
+          </celldesigner:briefView>
+        </celldesigner:speciesAlias>
+        <celldesigner:speciesAlias id="s7_alias" species="s7">
+          <celldesigner:activity>inactive</celldesigner:activity>
+          <celldesigner:bounds x="198.11429" y="813.06635" h="50.0" w="50.0"/>
+          <celldesigner:view state="usual"/>
+          <celldesigner:usualView>
+            <celldesigner:innerPosition x="0" y="0"/>
+            <celldesigner:boxSize width="50.0" height="50.0"/>
+            <celldesigner:singleLine width="1"/>
+            <celldesigner:paint scheme="Color" color="ffccffcc"/>
+          </celldesigner:usualView>
+          <celldesigner:briefView>
+            <celldesigner:innerPosition x="0" y="0"/>
+            <celldesigner:boxSize width="50.0" height="50.0"/>
+            <celldesigner:singleLine width="1"/>
+            <celldesigner:paint scheme="Color" color="ffccffcc"/>
+          </celldesigner:briefView>
+        </celldesigner:speciesAlias>
+        <celldesigner:speciesAlias id="s8_alias" species="s8">
+          <celldesigner:activity>inactive</celldesigner:activity>
+          <celldesigner:bounds x="840.1714" y="474.85056" h="50.0" w="50.0"/>
+          <celldesigner:view state="usual"/>
+          <celldesigner:usualView>
+            <celldesigner:innerPosition x="0" y="0"/>
+            <celldesigner:boxSize width="50.0" height="50.0"/>
+            <celldesigner:singleLine width="1"/>
+            <celldesigner:paint scheme="Color" color="ffccffcc"/>
+          </celldesigner:usualView>
+          <celldesigner:briefView>
+            <celldesigner:innerPosition x="0" y="0"/>
+            <celldesigner:boxSize width="50.0" height="50.0"/>
+            <celldesigner:singleLine width="1"/>
+            <celldesigner:paint scheme="Color" color="ffccffcc"/>
+          </celldesigner:briefView>
+        </celldesigner:speciesAlias>
+        <celldesigner:speciesAlias id="s9_alias" species="s9">
+          <celldesigner:activity>inactive</celldesigner:activity>
+          <celldesigner:bounds x="134.51428" y="332.44397" h="50.0" w="50.0"/>
+          <celldesigner:view state="usual"/>
+          <celldesigner:usualView>
+            <celldesigner:innerPosition x="0" y="0"/>
+            <celldesigner:boxSize width="50.0" height="50.0"/>
+            <celldesigner:singleLine width="1"/>
+            <celldesigner:paint scheme="Color" color="ffccffcc"/>
+          </celldesigner:usualView>
+          <celldesigner:briefView>
+            <celldesigner:innerPosition x="0" y="0"/>
+            <celldesigner:boxSize width="50.0" height="50.0"/>
+            <celldesigner:singleLine width="1"/>
+            <celldesigner:paint scheme="Color" color="ffccffcc"/>
+          </celldesigner:briefView>
+        </celldesigner:speciesAlias>
+      </celldesigner:listOfSpeciesAliases>
+      <celldesigner:listOfComplexSpeciesAliases/>
+      <celldesigner:listOfIncludedSpecies/>
+      <celldesigner:listOfCompartmentAliases/>
+      <celldesigner:modelDisplay sizeX="922" sizeY="919"/>
+      <celldesigner:modelVersion>4.0</celldesigner:modelVersion>
+    </annotation>
+    <listOfFunctionDefinitions/>
+    <listOfUnitDefinitions/>
+    <listOfCompartments>
+      <compartment id="default" name="default"/>
+    </listOfCompartments>
+    <listOfSpecies>
+      <species id="s1" name="EP300" compartment="default">
+        <annotation>
+          <celldesigner:speciesIdentity>
+            <celldesigner:proteinReference>pr_EP300</celldesigner:proteinReference>
+            <celldesigner:class>PROTEIN</celldesigner:class>
+          </celldesigner:speciesIdentity>
+        </annotation>
+      </species>
+      <species id="s2" name="DAXX" compartment="default">
+        <annotation>
+          <celldesigner:speciesIdentity>
+            <celldesigner:proteinReference>pr_DAXX</celldesigner:proteinReference>
+            <celldesigner:class>PROTEIN</celldesigner:class>
+          </celldesigner:speciesIdentity>
+        </annotation>
+      </species>
+      <species id="s3" name="TP53" compartment="default">
+        <annotation>
+          <celldesigner:speciesIdentity>
+            <celldesigner:proteinReference>pr_TP53</celldesigner:proteinReference>
+            <celldesigner:class>PROTEIN</celldesigner:class>
+          </celldesigner:speciesIdentity>
+        </annotation>
+      </species>
+      <species id="s4" name="CDKN1A" compartment="default">
+        <annotation>
+          <celldesigner:speciesIdentity>
+            <celldesigner:proteinReference>pr_CDKN1A</celldesigner:proteinReference>
+            <celldesigner:class>PROTEIN</celldesigner:class>
+          </celldesigner:speciesIdentity>
+        </annotation>
+      </species>
+      <species id="s5" name="SIAH1" compartment="default">
+        <annotation>
+          <celldesigner:speciesIdentity>
+            <celldesigner:proteinReference>pr_SIAH1</celldesigner:proteinReference>
+            <celldesigner:class>PROTEIN</celldesigner:class>
+          </celldesigner:speciesIdentity>
+        </annotation>
+      </species>
+      <species id="s6" name="MDM2" compartment="default">
+        <annotation>
+          <celldesigner:speciesIdentity>
+            <celldesigner:proteinReference>pr_MDM2</celldesigner:proteinReference>
+            <celldesigner:class>PROTEIN</celldesigner:class>
+          </celldesigner:speciesIdentity>
+        </annotation>
+      </species>
+      <species id="s7" name="CARF" compartment="default">
+        <annotation>
+          <celldesigner:speciesIdentity>
+            <celldesigner:proteinReference>pr_CARF</celldesigner:proteinReference>
+            <celldesigner:class>PROTEIN</celldesigner:class>
+          </celldesigner:speciesIdentity>
+        </annotation>
+      </species>
+      <species id="s8" name="FAS" compartment="default">
+        <annotation>
+          <celldesigner:speciesIdentity>
+            <celldesigner:proteinReference>pr_FAS</celldesigner:proteinReference>
+            <celldesigner:class>PROTEIN</celldesigner:class>
+          </celldesigner:speciesIdentity>
+        </annotation>
+      </species>
+      <species id="s9" name="NUMB" compartment="default">
+        <annotation>
+          <celldesigner:speciesIdentity>
+            <celldesigner:proteinReference>pr_NUMB</celldesigner:proteinReference>
+            <celldesigner:class>PROTEIN</celldesigner:class>
+          </celldesigner:speciesIdentity>
+        </annotation>
+      </species>
+    </listOfSpecies>
+    <listOfRules/>
+    <listOfReactions>
+      <reaction reversible="false" id="re1">
+        <listOfProducts>
+          <speciesReference species="s3">
+            <annotation>
+              <celldesigner:alias>s3_alias</celldesigner:alias>
+            </annotation>
+          </speciesReference>
+        </listOfProducts>
+        <listOfReactants>
+          <speciesReference species="s1">
+            <annotation>
+              <celldesigner:alias>s1_alias</celldesigner:alias>
+            </annotation>
+          </speciesReference>
+        </listOfReactants>
+        <annotation>
+          <celldesigner:connectScheme connectPolicy="direct"/>
+          <celldesigner:baseProducts>
+            <celldesigner:baseProduct species="s3" alias="s3_alias"/>
+          </celldesigner:baseProducts>
+          <celldesigner:baseReactants>
+            <celldesigner:baseReactant species="s1" alias="s1_alias"/>
+          </celldesigner:baseReactants>
+          <celldesigner:reactionType>STATE_TRANSITION</celldesigner:reactionType>
+        </annotation>
+      </reaction>
+      <reaction reversible="false" id="re2">
+        <listOfProducts>
+          <speciesReference species="s8">
+            <annotation>
+              <celldesigner:alias>s8_alias</celldesigner:alias>
+            </annotation>
+          </speciesReference>
+        </listOfProducts>
+        <listOfReactants>
+          <speciesReference species="s2">
+            <annotation>
+              <celldesigner:alias>s2_alias</celldesigner:alias>
+            </annotation>
+          </speciesReference>
+        </listOfReactants>
+        <annotation>
+          <celldesigner:connectScheme connectPolicy="direct"/>
+          <celldesigner:baseProducts>
+            <celldesigner:baseProduct species="s8" alias="s8_alias"/>
+          </celldesigner:baseProducts>
+          <celldesigner:baseReactants>
+            <celldesigner:baseReactant species="s2" alias="s2_alias"/>
+          </celldesigner:baseReactants>
+          <celldesigner:reactionType>STATE_TRANSITION</celldesigner:reactionType>
+        </annotation>
+      </reaction>
+      <reaction reversible="false" id="re3">
+        <listOfProducts>
+          <speciesReference species="s6">
+            <annotation>
+              <celldesigner:alias>s6_alias</celldesigner:alias>
+            </annotation>
+          </speciesReference>
+        </listOfProducts>
+        <listOfReactants>
+          <speciesReference species="s2">
+            <annotation>
+              <celldesigner:alias>s2_alias</celldesigner:alias>
+            </annotation>
+          </speciesReference>
+        </listOfReactants>
+        <annotation>
+          <celldesigner:connectScheme connectPolicy="direct"/>
+          <celldesigner:baseProducts>
+            <celldesigner:baseProduct species="s6" alias="s6_alias"/>
+          </celldesigner:baseProducts>
+          <celldesigner:baseReactants>
+            <celldesigner:baseReactant species="s2" alias="s2_alias"/>
+          </celldesigner:baseReactants>
+          <celldesigner:reactionType>STATE_TRANSITION</celldesigner:reactionType>
+        </annotation>
+      </reaction>
+      <reaction reversible="false" id="re4">
+        <listOfProducts>
+          <speciesReference species="s4">
+            <annotation>
+              <celldesigner:alias>s4_alias</celldesigner:alias>
+            </annotation>
+          </speciesReference>
+        </listOfProducts>
+        <listOfReactants>
+          <speciesReference species="s3">
+            <annotation>
+              <celldesigner:alias>s3_alias</celldesigner:alias>
+            </annotation>
+          </speciesReference>
+        </listOfReactants>
+        <annotation>
+          <celldesigner:connectScheme connectPolicy="direct"/>
+          <celldesigner:baseProducts>
+            <celldesigner:baseProduct species="s4" alias="s4_alias"/>
+          </celldesigner:baseProducts>
+          <celldesigner:baseReactants>
+            <celldesigner:baseReactant species="s3" alias="s3_alias"/>
+          </celldesigner:baseReactants>
+          <celldesigner:reactionType>STATE_TRANSITION</celldesigner:reactionType>
+        </annotation>
+      </reaction>
+      <reaction reversible="false" id="re5">
+        <listOfProducts>
+          <speciesReference species="s6">
+            <annotation>
+              <celldesigner:alias>s6_alias</celldesigner:alias>
+            </annotation>
+          </speciesReference>
+        </listOfProducts>
+        <listOfReactants>
+          <speciesReference species="s3">
+            <annotation>
+              <celldesigner:alias>s3_alias</celldesigner:alias>
+            </annotation>
+          </speciesReference>
+        </listOfReactants>
+        <annotation>
+          <celldesigner:connectScheme connectPolicy="direct"/>
+          <celldesigner:baseProducts>
+            <celldesigner:baseProduct species="s6" alias="s6_alias"/>
+          </celldesigner:baseProducts>
+          <celldesigner:baseReactants>
+            <celldesigner:baseReactant species="s3" alias="s3_alias"/>
+          </celldesigner:baseReactants>
+          <celldesigner:reactionType>STATE_TRANSITION</celldesigner:reactionType>
+        </annotation>
+      </reaction>
+      <reaction reversible="false" id="re6">
+        <listOfProducts>
+          <speciesReference species="s8">
+            <annotation>
+              <celldesigner:alias>s8_alias</celldesigner:alias>
+            </annotation>
+          </speciesReference>
+        </listOfProducts>
+        <listOfReactants>
+          <speciesReference species="s3">
+            <annotation>
+              <celldesigner:alias>s3_alias</celldesigner:alias>
+            </annotation>
+          </speciesReference>
+        </listOfReactants>
+        <annotation>
+          <celldesigner:connectScheme connectPolicy="direct"/>
+          <celldesigner:baseProducts>
+            <celldesigner:baseProduct species="s8" alias="s8_alias"/>
+          </celldesigner:baseProducts>
+          <celldesigner:baseReactants>
+            <celldesigner:baseReactant species="s3" alias="s3_alias"/>
+          </celldesigner:baseReactants>
+          <celldesigner:reactionType>STATE_TRANSITION</celldesigner:reactionType>
+        </annotation>
+      </reaction>
+      <reaction reversible="false" id="re7">
+        <listOfProducts>
+          <speciesReference species="s5">
+            <annotation>
+              <celldesigner:alias>s5_alias</celldesigner:alias>
+            </annotation>
+          </speciesReference>
+        </listOfProducts>
+        <listOfReactants>
+          <speciesReference species="s3">
+            <annotation>
+              <celldesigner:alias>s3_alias</celldesigner:alias>
+            </annotation>
+          </speciesReference>
+        </listOfReactants>
+        <annotation>
+          <celldesigner:connectScheme connectPolicy="direct"/>
+          <celldesigner:baseProducts>
+            <celldesigner:baseProduct species="s5" alias="s5_alias"/>
+          </celldesigner:baseProducts>
+          <celldesigner:baseReactants>
+            <celldesigner:baseReactant species="s3" alias="s3_alias"/>
+          </celldesigner:baseReactants>
+          <celldesigner:reactionType>STATE_TRANSITION</celldesigner:reactionType>
+        </annotation>
+      </reaction>
+      <reaction reversible="false" id="re8">
+        <listOfProducts>
+          <speciesReference species="s3">
+            <annotation>
+              <celldesigner:alias>s3_alias</celldesigner:alias>
+            </annotation>
+          </speciesReference>
+        </listOfProducts>
+        <listOfReactants>
+          <speciesReference species="s4">
+            <annotation>
+              <celldesigner:alias>s4_alias</celldesigner:alias>
+            </annotation>
+          </speciesReference>
+        </listOfReactants>
+        <annotation>
+          <celldesigner:connectScheme connectPolicy="direct"/>
+          <celldesigner:baseProducts>
+            <celldesigner:baseProduct species="s3" alias="s3_alias"/>
+          </celldesigner:baseProducts>
+          <celldesigner:baseReactants>
+            <celldesigner:baseReactant species="s4" alias="s4_alias"/>
+          </celldesigner:baseReactants>
+          <celldesigner:reactionType>STATE_TRANSITION</celldesigner:reactionType>
+        </annotation>
+      </reaction>
+      <reaction reversible="false" id="re9">
+        <listOfProducts>
+          <speciesReference species="s9">
+            <annotation>
+              <celldesigner:alias>s9_alias</celldesigner:alias>
+            </annotation>
+          </speciesReference>
+        </listOfProducts>
+        <listOfReactants>
+          <speciesReference species="s5">
+            <annotation>
+              <celldesigner:alias>s5_alias</celldesigner:alias>
+            </annotation>
+          </speciesReference>
+        </listOfReactants>
+        <annotation>
+          <celldesigner:connectScheme connectPolicy="direct"/>
+          <celldesigner:baseProducts>
+            <celldesigner:baseProduct species="s9" alias="s9_alias"/>
+          </celldesigner:baseProducts>
+          <celldesigner:baseReactants>
+            <celldesigner:baseReactant species="s5" alias="s5_alias"/>
+          </celldesigner:baseReactants>
+          <celldesigner:reactionType>STATE_TRANSITION</celldesigner:reactionType>
+        </annotation>
+      </reaction>
+      <reaction reversible="false" id="re10">
+        <listOfProducts>
+          <speciesReference species="s3">
+            <annotation>
+              <celldesigner:alias>s3_alias</celldesigner:alias>
+            </annotation>
+          </speciesReference>
+        </listOfProducts>
+        <listOfReactants>
+          <speciesReference species="s6">
+            <annotation>
+              <celldesigner:alias>s6_alias</celldesigner:alias>
+            </annotation>
+          </speciesReference>
+        </listOfReactants>
+        <annotation>
+          <celldesigner:connectScheme connectPolicy="direct"/>
+          <celldesigner:baseProducts>
+            <celldesigner:baseProduct species="s3" alias="s3_alias"/>
+          </celldesigner:baseProducts>
+          <celldesigner:baseReactants>
+            <celldesigner:baseReactant species="s6" alias="s6_alias"/>
+          </celldesigner:baseReactants>
+          <celldesigner:reactionType>STATE_TRANSITION</celldesigner:reactionType>
+        </annotation>
+      </reaction>
+      <reaction reversible="false" id="re11">
+        <listOfProducts>
+          <speciesReference species="s9">
+            <annotation>
+              <celldesigner:alias>s9_alias</celldesigner:alias>
+            </annotation>
+          </speciesReference>
+        </listOfProducts>
+        <listOfReactants>
+          <speciesReference species="s6">
+            <annotation>
+              <celldesigner:alias>s6_alias</celldesigner:alias>
+            </annotation>
+          </speciesReference>
+        </listOfReactants>
+        <annotation>
+          <celldesigner:connectScheme connectPolicy="direct"/>
+          <celldesigner:baseProducts>
+            <celldesigner:baseProduct species="s9" alias="s9_alias"/>
+          </celldesigner:baseProducts>
+          <celldesigner:baseReactants>
+            <celldesigner:baseReactant species="s6" alias="s6_alias"/>
+          </celldesigner:baseReactants>
+          <celldesigner:reactionType>STATE_TRANSITION</celldesigner:reactionType>
+        </annotation>
+      </reaction>
+      <reaction reversible="false" id="re12">
+        <listOfProducts>
+          <speciesReference species="s1">
+            <annotation>
+              <celldesigner:alias>s1_alias</celldesigner:alias>
+            </annotation>
+          </speciesReference>
+        </listOfProducts>
+        <listOfReactants>
+          <speciesReference species="s6">
+            <annotation>
+              <celldesigner:alias>s6_alias</celldesigner:alias>
+            </annotation>
+          </speciesReference>
+        </listOfReactants>
+        <annotation>
+          <celldesigner:connectScheme connectPolicy="direct"/>
+          <celldesigner:baseProducts>
+            <celldesigner:baseProduct species="s1" alias="s1_alias"/>
+          </celldesigner:baseProducts>
+          <celldesigner:baseReactants>
+            <celldesigner:baseReactant species="s6" alias="s6_alias"/>
+          </celldesigner:baseReactants>
+          <celldesigner:reactionType>STATE_TRANSITION</celldesigner:reactionType>
+        </annotation>
+      </reaction>
+      <reaction reversible="false" id="re13">
+        <listOfProducts>
+          <speciesReference species="s4">
+            <annotation>
+              <celldesigner:alias>s4_alias</celldesigner:alias>
+            </annotation>
+          </speciesReference>
+        </listOfProducts>
+        <listOfReactants>
+          <speciesReference species="s6">
+            <annotation>
+              <celldesigner:alias>s6_alias</celldesigner:alias>
+            </annotation>
+          </speciesReference>
+        </listOfReactants>
+        <annotation>
+          <celldesigner:connectScheme connectPolicy="direct"/>
+          <celldesigner:baseProducts>
+            <celldesigner:baseProduct species="s4" alias="s4_alias"/>
+          </celldesigner:baseProducts>
+          <celldesigner:baseReactants>
+            <celldesigner:baseReactant species="s6" alias="s6_alias"/>
+          </celldesigner:baseReactants>
+          <celldesigner:reactionType>STATE_TRANSITION</celldesigner:reactionType>
+        </annotation>
+      </reaction>
+      <reaction reversible="false" id="re14">
+        <listOfProducts>
+          <speciesReference species="s7">
+            <annotation>
+              <celldesigner:alias>s7_alias</celldesigner:alias>
+            </annotation>
+          </speciesReference>
+        </listOfProducts>
+        <listOfReactants>
+          <speciesReference species="s6">
+            <annotation>
+              <celldesigner:alias>s6_alias</celldesigner:alias>
+            </annotation>
+          </speciesReference>
+        </listOfReactants>
+        <annotation>
+          <celldesigner:connectScheme connectPolicy="direct"/>
+          <celldesigner:baseProducts>
+            <celldesigner:baseProduct species="s7" alias="s7_alias"/>
+          </celldesigner:baseProducts>
+          <celldesigner:baseReactants>
+            <celldesigner:baseReactant species="s6" alias="s6_alias"/>
+          </celldesigner:baseReactants>
+          <celldesigner:reactionType>STATE_TRANSITION</celldesigner:reactionType>
+        </annotation>
+      </reaction>
+      <reaction reversible="false" id="re15">
+        <listOfProducts>
+          <speciesReference species="s3">
+            <annotation>
+              <celldesigner:alias>s3_alias</celldesigner:alias>
+            </annotation>
+          </speciesReference>
+        </listOfProducts>
+        <listOfReactants>
+          <speciesReference species="s7">
+            <annotation>
+              <celldesigner:alias>s7_alias</celldesigner:alias>
+            </annotation>
+          </speciesReference>
+        </listOfReactants>
+        <annotation>
+          <celldesigner:connectScheme connectPolicy="direct"/>
+          <celldesigner:baseProducts>
+            <celldesigner:baseProduct species="s3" alias="s3_alias"/>
+          </celldesigner:baseProducts>
+          <celldesigner:baseReactants>
+            <celldesigner:baseReactant species="s7" alias="s7_alias"/>
+          </celldesigner:baseReactants>
+          <celldesigner:reactionType>STATE_TRANSITION</celldesigner:reactionType>
+        </annotation>
+      </reaction>
+      <reaction reversible="false" id="re16">
+        <listOfProducts>
+          <speciesReference species="s6">
+            <annotation>
+              <celldesigner:alias>s6_alias</celldesigner:alias>
+            </annotation>
+          </speciesReference>
+        </listOfProducts>
+        <listOfReactants>
+          <speciesReference species="s7">
+            <annotation>
+              <celldesigner:alias>s7_alias</celldesigner:alias>
+            </annotation>
+          </speciesReference>
+        </listOfReactants>
+        <annotation>
+          <celldesigner:connectScheme connectPolicy="direct"/>
+          <celldesigner:baseProducts>
+            <celldesigner:baseProduct species="s6" alias="s6_alias"/>
+          </celldesigner:baseProducts>
+          <celldesigner:baseReactants>
+            <celldesigner:baseReactant species="s7" alias="s7_alias"/>
+          </celldesigner:baseReactants>
+          <celldesigner:reactionType>STATE_TRANSITION</celldesigner:reactionType>
+        </annotation>
+      </reaction>
+      <reaction reversible="false" id="re17">
+        <listOfProducts>
+          <speciesReference species="s8">
+            <annotation>
+              <celldesigner:alias>s8_alias</celldesigner:alias>
+            </annotation>
+          </speciesReference>
+        </listOfProducts>
+        <listOfReactants>
+          <speciesReference species="s8">
+            <annotation>
+              <celldesigner:alias>s8_alias</celldesigner:alias>
+            </annotation>
+          </speciesReference>
+        </listOfReactants>
+        <annotation>
+          <celldesigner:connectScheme connectPolicy="direct"/>
+          <celldesigner:baseProducts>
+            <celldesigner:baseProduct species="s8" alias="s8_alias"/>
+          </celldesigner:baseProducts>
+          <celldesigner:baseReactants>
+            <celldesigner:baseReactant species="s8" alias="s8_alias"/>
+          </celldesigner:baseReactants>
+          <celldesigner:reactionType>STATE_TRANSITION</celldesigner:reactionType>
+        </annotation>
+      </reaction>
+      <reaction reversible="false" id="re18">
+        <listOfProducts>
+          <speciesReference species="s2">
+            <annotation>
+              <celldesigner:alias>s2_alias</celldesigner:alias>
+            </annotation>
+          </speciesReference>
+        </listOfProducts>
+        <listOfReactants>
+          <speciesReference species="s8">
+            <annotation>
+              <celldesigner:alias>s8_alias</celldesigner:alias>
+            </annotation>
+          </speciesReference>
+        </listOfReactants>
+        <annotation>
+          <celldesigner:connectScheme connectPolicy="direct"/>
+          <celldesigner:baseProducts>
+            <celldesigner:baseProduct species="s2" alias="s2_alias"/>
+          </celldesigner:baseProducts>
+          <celldesigner:baseReactants>
+            <celldesigner:baseReactant species="s8" alias="s8_alias"/>
+          </celldesigner:baseReactants>
+          <celldesigner:reactionType>STATE_TRANSITION</celldesigner:reactionType>
+        </annotation>
+      </reaction>
+      <reaction reversible="false" id="re19">
+        <listOfProducts>
+          <speciesReference species="s6">
+            <annotation>
+              <celldesigner:alias>s6_alias</celldesigner:alias>
+            </annotation>
+          </speciesReference>
+        </listOfProducts>
+        <listOfReactants>
+          <speciesReference species="s9">
+            <annotation>
+              <celldesigner:alias>s9_alias</celldesigner:alias>
+            </annotation>
+          </speciesReference>
+        </listOfReactants>
+        <annotation>
+          <celldesigner:connectScheme connectPolicy="direct"/>
+          <celldesigner:baseProducts>
+            <celldesigner:baseProduct species="s6" alias="s6_alias"/>
+          </celldesigner:baseProducts>
+          <celldesigner:baseReactants>
+            <celldesigner:baseReactant species="s9" alias="s9_alias"/>
+          </celldesigner:baseReactants>
+          <celldesigner:reactionType>STATE_TRANSITION</celldesigner:reactionType>
+        </annotation>
+      </reaction>
+      <reaction reversible="false" id="re20">
+        <listOfProducts>
+          <speciesReference species="s3">
+            <annotation>
+              <celldesigner:alias>s3_alias</celldesigner:alias>
+            </annotation>
+          </speciesReference>
+        </listOfProducts>
+        <listOfReactants>
+          <speciesReference species="s9">
+            <annotation>
+              <celldesigner:alias>s9_alias</celldesigner:alias>
+            </annotation>
+          </speciesReference>
+        </listOfReactants>
+        <annotation>
+          <celldesigner:connectScheme connectPolicy="direct"/>
+          <celldesigner:baseProducts>
+            <celldesigner:baseProduct species="s3" alias="s3_alias"/>
+          </celldesigner:baseProducts>
+          <celldesigner:baseReactants>
+            <celldesigner:baseReactant species="s9" alias="s9_alias"/>
+          </celldesigner:baseReactants>
+          <celldesigner:reactionType>STATE_TRANSITION</celldesigner:reactionType>
+        </annotation>
+      </reaction>
+    </listOfReactions>
+    <listOfEvents/>
+    <notes/>
+  </model>
+</sbml>

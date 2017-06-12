@@ -1,0 +1,13 @@
+
+
+@COMMAND {"action":"nv_set_zoom","module":"cellcycle:master","args":[3,null,null,null,null,null,null],"timestamp":1418378648027}
+
+@COMMAND {"action":"nv_set_center","module":"cellcycle:master","args":["absolute",-2.52685546875,-3.5400390625,null,null,null,null],"timestamp":1418378649691}
+
+@COMMAND {"action":"nv_set_zoom","module":"cellcycle:master","args":[4,null,null,null,null,null,null],"timestamp":1418378649830}
+
+@COMMAND {"action":"nv_set_center","module":"cellcycle:master","args":["absolute",-3.778076171875,-3.515625,null,null,null,null],"timestamp":1418378651996}
+
+@COMMAND {"action":"nv_set_zoom","module":"cellcycle:master","args":[5,null,null,null,null,null,null],"timestamp":1418378652129}
+
+@COMMAND {"action": "nv_notice_perform", "args": ["set_message_and_open", "", "<span style='font-size: 14px'>Now we will use map staining to display mRNA expression values averaged for a given group of samples.<br/><br/>Click Next to continue or Cancel to exit.</span>", "left center", 380, 300, "{\"action\": \"nv_execute_commands\", \"args\": [\"\", \"demo/eb_demo_map_staining_group.nvc\"], \"module\": \"\"}", "Next"], "module": "", "timeout": 0}

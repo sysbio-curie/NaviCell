@@ -1,0 +1,12 @@
+Package: RNaviCell
+Title: Visualization of High-Throughput Data on Large-Scale Biological Networks
+Version: 0.2.1
+Authors@R: c(person("Eric", "Bonnet", role = c("aut", "cre"),
+             email = "eric.bonnet@curie.fr"),
+             person("Paul", "Deveau",role = "aut",
+             email = "paul.deveau@curie.fr"))
+Maintainer: Eric Bonnet <eric.bonnet@curie.fr>
+Description: Provides a set of functions to access a data visualization web service. For more information and a tutorial on how to use it, see https://navicell.curie.fr/pages/nav_web_service.html and https://github.com/sysbio-curie/RNaviCell. 
+Depends: R (>= 2.14.0), RCurl, RJSONIO
+Imports: methods
+License: LGPL-2.1 | file LICENSE

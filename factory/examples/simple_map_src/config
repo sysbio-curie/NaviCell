@@ -1,0 +1,4 @@
+base: NFKB_
+title: Toy model of NFKB signaling
+name: NFKB
+showDefaultCompartmentName: true

@@ -1,0 +1,25 @@
+## Loading data
+
+@COMMAND {"action":"nv_set_zoom","module":"","args":[3,null,null,null,null,null,null],"timestamp":1418308824306}
+
+@COMMAND {"action":"nv_import_datatables","module":"","args":["mRNA expression data","ovca-exp","","../../../../data/ovca_expression.txt",{"open_drawing_editor":true,"async":true,"import_display_markers":"checked"},null,null],"timestamp":1418308433838}
+
+@COMMAND {"action":"nv_uncheck_all_entities","module":"","args":[null,null,null,null,null,null,null],"timestamp":1418308442519}
+
+@COMMAND {"action":"nv_import_datatables","module":"","args":["Discrete Copy number data","ovca-cn","","../../../../data/ovca_copynumber.txt",{"open_drawing_editor":true,"async":true,"import_display_markers":"checked"},null,null],"timestamp":1418308512269}
+
+@COMMAND {"action":"nv_uncheck_all_entities","module":"","args":[null,null,null,null,null,null,null],"timestamp":1418308518218}
+
+@COMMAND {"action":"nv_import_datatables","module":"","args":["Mutation data","ovca-mut","","../../../../data/ovca_mutations.txt",{"open_drawing_editor":true,"async":true,"import_display_markers":"checked"},null,null],"timestamp":1418308581384}
+
+@COMMAND {"action":"nv_uncheck_all_entities","module":"","args":[null,null,null,null,null,null,null],"timestamp":1418308588438}
+
+@COMMAND {"action":"nv_sample_annotation_perform","module":"","args":["import","../../../../data/ovca_sampleinfo.txt",null,true,null,null,null],"timestamp":1418308624096}
+
+
+@COMMAND {"action":"nv_mydata_perform","module":"","args":["open",null,true,null,null,null],"timestamp":1418308624096}
+
+
+@COMMAND {"action": "nv_notice_perform", "args": ["set_message_and_open", "", "<span style='font-size: 14px'>Data loaded. The different data tables and their content is displayed in the “My Data” tab.<br/><br/>Now we will configure and display heatmaps for copy number data.<br/><br/>Click Next to continue or Cancel to exit</span>", "left center", 380, 320, "{\"action\": \"nv_execute_commands\", \"args\": [\"\", \"demo/eb_demo_heatmap.nvc\"], \"module\": \"\"}", "Next"], "module": "", "timeout": 0}
+
+

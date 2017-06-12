@@ -1,0 +1,6 @@
+base: MPhase_
+title: M-Phase map from CellDesiger sample set
+name: MPhase
+showDefaultCompartmentName: true
+
+atlasInfo: type=map|map=MPhase;name=MPhase map;module=WEE1;module=CDC25

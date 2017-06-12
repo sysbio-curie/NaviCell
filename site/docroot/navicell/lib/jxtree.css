@@ -1,0 +1,63 @@
+
+.jxtree {
+    font-size: 12px;
+    vertical-align: top;
+    white-space: nowrap;
+
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.jxtree a {
+    text-decoration: none;
+}
+
+.jxtree ul {
+    padding-left: 12px;
+}
+
+
+.jxtree ins {
+    text-decoration: none;
+}
+
+.jxtree ins img {
+/*    text-align: bottom;*/
+    vertical-align: top;
+}
+
+.jxtree-default {
+    background-image: url("d.png");
+    background-repeat: no-repeat;
+    background-color: transparent;
+    text-align: top;
+    vertical-align: top;
+    min-width: 18px;
+    min-height: 18px;
+    display: inline-block;
+}
+
+.jxtree-open {
+    background-position: -18px 0;
+}
+
+.jxtree-closed {
+    background-position: 0 0;
+}
+
+.jxtree-leaf {
+    background: transparent;
+}
+
+.jxtree-checkbox-checked {
+    background-position: -38px -19px;
+}
+
+.jxtree-checkbox-unchecked {
+    background-position: -2px -19px;
+}
+
+.jxtree-checkbox-undetermined {
+    background-position: -20px -19px;
+}
+

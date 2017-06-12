@@ -1,0 +1,141 @@
+## @COMMAND {"action":"nv_drawing_config_perform","module":"cellcycle:master","args":["select_map_staining",false,null,null,null,null,null],"timestamp":1418396459206}
+
+## @COMMAND {"action":"nv_drawing_config_perform","module":"cellcycle:master","args":["apply",null,null,null,null,null,null],"timestamp":1418396459206}
+
+@COMMAND {"action":"nv_heatmap_editor_perform","module":"cellcycle:master","args":["open",null,null,null,null,null,null],"timestamp":1418378288288}
+
+@COMMAND {"action":"nv_heatmap_editor_perform","module":"cellcycle:master","args":["select_datatable",0,"ovca-cn",null,null,null,null],"timestamp":1418378296562}
+
+@COMMAND {"action":"nv_heatmap_editor_perform","module":"cellcycle:master","args":["select_sample",0,"s_TCGA_25_1634",null,null,null,null],"timestamp":1418378317509}
+
+@COMMAND {"action":"nv_display_continuous_config_perform","module":"cellcycle:master","args":["switch_sample_tab","ovca-cn","color",null,null,null,null,null],"timestamp":1418378324084}
+
+@COMMAND {"action":"nv_display_continuous_config_perform","module":"cellcycle:master","args":["switch_sample_tab","ovca-cn","shape",null,null,null,null,null],"timestamp":1418378324093}
+
+@COMMAND {"action":"nv_display_continuous_config_perform","module":"cellcycle:master","args":["switch_sample_tab","ovca-cn","size",null,null,null,null,null],"timestamp":1418378324101}
+
+@COMMAND {"action":"nv_heatmap_editor_perform","module":"cellcycle:master","args":["apply",true,null,null,null,null,null],"timestamp":1418378324218}
+
+@COMMAND {"action":"nv_display_continuous_config_perform","module":"cellcycle:master","args":["open","ovca-cn","color",null,null,null,null],"timestamp":1418378325990}
+
+@COMMAND {"action":"nv_display_continuous_config_perform","module":"cellcycle:master","args":["set_input_color","ovca-cn","color","sample",0,"c2d0d1",null],"timestamp":1418378370319}
+
+@COMMAND {"action":"nv_display_continuous_config_perform","module":"cellcycle:master","args":["set_input_color","ovca-cn","color","sample",2,"f8ff36",null],"timestamp":1418378387533}
+
+@COMMAND {"action":"nv_display_continuous_config_perform","module":"cellcycle:master","args":["set_input_color","ovca-cn","color","sample",3,"de6e23",null],"timestamp":1418378400754}
+
+@COMMAND {"action":"nv_display_continuous_config_perform","module":"cellcycle:master","args":["set_input_color","ovca-cn","color","sample",4,"ff0000",null],"timestamp":1418378408547}
+
+@COMMAND {"action":"nv_display_continuous_config_perform","module":"cellcycle:master","args":["set_input_color","ovca-cn","color","sample",5,"FF0000",null],"timestamp":1418378414954}
+
+@COMMAND {"action":"nv_display_continuous_config_perform","module":"cellcycle:master","args":["set_input_color","ovca-cn","color","sample",6,"FF0000",null],"timestamp":1418378421274}
+
+@COMMAND {"action":"nv_display_continuous_config_perform","module":"cellcycle:master","args":["set_input_color","ovca-cn","color","sample",7,"FF0000",null],"timestamp":1418378427008}
+
+@COMMAND {"action":"nv_display_continuous_config_perform","module":"cellcycle:master","args":["apply","ovca-cn","color",null,null,null,null],"timestamp":1418378429367}
+
+@COMMAND {"action":"nv_display_continuous_config_perform","module":"cellcycle:master","args":["close","ovca-cn","color",null,null,null,null],"timestamp":1418378432397}
+
+@COMMAND {"action":"nv_heatmap_editor_perform","module":"cellcycle:master","args":["apply",true,null,null,null,null,null],"timestamp":1418378434129}
+
+@COMMAND {"action":"nv_heatmap_editor_perform","module":"cellcycle:master","args":["apply_and_close",true,null,null,null,null,null],"timestamp":1418378437126}
+
+@COMMAND {"action":"nv_drawing_config_perform","module":"cellcycle:master","args":["apply_and_close",null,null,null,null,null,null],"timestamp":1418378449827}
+
+@COMMAND {"action":"nv_glyph_editor_perform","module":"cellcycle:master","args":["open",1,null,null,null,null,null],"timestamp":1418378487320}
+
+@COMMAND {"action":"nv_glyph_editor_perform","module":"cellcycle:master","args":["select_sample",1,"s_TCGA_25_1634",null,null,null,null],"timestamp":1418378510131}
+
+@COMMAND {"action":"nv_glyph_editor_perform","module":"cellcycle:master","args":["select_datatable_shape",1,"ovca-mut",null,null,null,null],"timestamp":1418378514132}
+
+@COMMAND {"action":"nv_glyph_editor_perform","module":"cellcycle:master","args":["select_datatable_color",1,"ovca-mut",null,null,null,null],"timestamp":1418378516264}
+
+@COMMAND {"action":"nv_glyph_editor_perform","module":"cellcycle:master","args":["select_datatable_size",1,"ovca-mut",null,null,null,null],"timestamp":1418378518216}
+
+@COMMAND {"action":"nv_display_unordered_discrete_config_perform","module":"cellcycle:master","args":["switch_sample_tab","ovca-mut","color",null,null,null,null,null],"timestamp":1418378522953}
+
+@COMMAND {"action":"nv_display_unordered_discrete_config_perform","module":"cellcycle:master","args":["switch_sample_tab","ovca-mut","color_size", null,null,null,null,null],"timestamp":1418378522960}
+
+@COMMAND {"action":"nv_display_unordered_discrete_config_perform","module":"cellcycle:master","args":["switch_sample_tab","ovca-mut","shape", null,null,null,null,null],"timestamp":1418378522966}
+
+@COMMAND {"action":"nv_display_unordered_discrete_config_perform","module":"cellcycle:master","args":["switch_sample_tab","ovca-mut","size", null,null,null,null,null],"timestamp":1418378522972}
+
+@COMMAND {"action":"nv_glyph_editor_perform","module":"cellcycle:master","args":["apply",1,true,null,null,null,null],"timestamp":1418378523168}
+
+@COMMAND {"action":"nv_display_unordered_discrete_config_perform","module":"cellcycle:master","args":["open","ovca-mut","shape",null,null,null,null],"timestamp":1418378525324}
+
+@COMMAND {"action":"nv_display_unordered_discrete_config_perform","module":"cellcycle:master","args":["set_discrete_shape","ovca-mut","shape","sample",0,"1",null],"timestamp":1418378529401}
+
+@COMMAND {"action":"nv_display_unordered_discrete_config_perform","module":"cellcycle:master","args":["set_discrete_shape","ovca-mut","shape","sample",1,"0",null],"timestamp":1418378531125}
+
+@COMMAND {"action":"nv_display_unordered_discrete_config_perform","module":"cellcycle:master","args":["apply","ovca-mut","shape",null,null,null,null],"timestamp":1418378533938}
+
+@COMMAND {"action":"nv_display_unordered_discrete_config_perform","module":"cellcycle:master","args":["close","ovca-mut","shape",null,null,null,null],"timestamp":1418378534070}
+
+@COMMAND {"action":"nv_display_unordered_discrete_config_perform","module":"cellcycle:master","args":["open","ovca-mut","color",null,null,null,null],"timestamp":1418378535827}
+
+@COMMAND {"action":"nv_display_unordered_discrete_config_perform","module":"cellcycle:master","args":["apply","ovca-mut","color",null,null,null,null],"timestamp":1418378545372}
+
+@COMMAND {"action":"nv_display_unordered_discrete_config_perform","module":"cellcycle:master","args":["close","ovca-mut","color",null,null,null,null],"timestamp":1418378545494}
+
+@COMMAND {"action":"nv_display_unordered_discrete_config_perform","module":"cellcycle:master","args":["open","ovca-mut","size",null,null,null,null],"timestamp":1418378546945}
+
+@COMMAND {"action":"nv_display_unordered_discrete_config_perform","module":"cellcycle:master","args":["set_discrete_size","ovca-mut","size","sample",0,"0",null],"timestamp":1418378549958}
+
+@COMMAND {"action":"nv_display_unordered_discrete_config_perform","module":"cellcycle:master","args":["set_discrete_size","ovca-mut","size","sample",1,"12",null],"timestamp":1418378552000}
+
+@COMMAND {"action":"nv_display_unordered_discrete_config_perform","module":"cellcycle:master","args":["apply","ovca-mut","size",null,null,null,null],"timestamp":1418378554880}
+
+@COMMAND {"action":"nv_display_unordered_discrete_config_perform","module":"cellcycle:master","args":["close","ovca-mut","size",null,null,null,null],"timestamp":1418378556301}
+
+@COMMAND {"action":"nv_glyph_editor_perform","module":"cellcycle:master","args":["apply",1,true,null,null,null,null],"timestamp":1418378557849}
+
+@COMMAND {"action":"nv_glyph_editor_perform","module":"cellcycle:master","args":["apply_and_close",1,true,null,null,null,null],"timestamp":1418378559505}
+
+@COMMAND {"action":"nv_drawing_config_perform","module":"cellcycle:master","args":["apply_and_close",null,null,null,null,null,null],"timestamp":1418378560947}
+
+@COMMAND {"action":"nv_map_staining_editor_perform","module":"cellcycle:master","args":["open",null,null,null,null,null,null],"timestamp":1418378573750}
+
+@COMMAND {"action":"nv_map_staining_editor_perform","module":"cellcycle:master","args":["select_sample","s_TCGA_25_1634",null,null,null,null,null],"timestamp":1418378590635}
+
+@COMMAND {"action":"nv_map_staining_editor_perform","module":"cellcycle:master","args":["select_datatable","ovca-exp",null,null,null,null,null],"timestamp":1418378594974}
+
+@COMMAND {"action":"nv_display_continuous_config_perform","module":"cellcycle:master","args":["switch_sample_tab","ovca-exp","color", null,null,null,null,null],"timestamp":1418378596547}
+
+@COMMAND {"action":"nv_display_continuous_config_perform","module":"cellcycle:master","args":["switch_sample_tab","ovca-exp","shape",null,null,null,null,null],"timestamp":1418378596556}
+
+@COMMAND {"action":"nv_display_continuous_config_perform","module":"cellcycle:master","args":["switch_sample_tab","ovca-exp","size", null,null,null,null,null],"timestamp":1418378596564}
+
+@COMMAND {"action":"nv_map_staining_editor_perform","module":"cellcycle:master","args":["apply",true,null,null,null,null,null],"timestamp":1418378596796}
+
+@COMMAND {"action":"nv_display_continuous_config_perform","module":"cellcycle:master","args":["open","ovca-exp","color",null,null,null,null],"timestamp":1418378597997}
+
+@COMMAND {"action":"nv_display_continuous_config_perform","module":"cellcycle:master","args":["step_count_change","sample","color","ovca-exp","2",null,null],"timestamp":1418378601463}
+
+@COMMAND {"action":"nv_display_continuous_config_perform","module":"cellcycle:master","args":["set_input_color","ovca-exp","color","sample",1,"7F7F7F",null],"timestamp":1418378605590}
+
+@COMMAND {"action":"nv_display_continuous_config_perform","module":"cellcycle:master","args":["set_input_color","ovca-exp","color","sample",1,"FFFFFF",null],"timestamp":1418378607942}
+
+@COMMAND {"action":"nv_display_continuous_config_perform","module":"cellcycle:master","args":["set_input_value","ovca-exp","color","sample",0,"-0.5",null],"timestamp":1418378622470}
+
+@COMMAND {"action":"nv_display_continuous_config_perform","module":"cellcycle:master","args":["set_input_value","ovca-exp","color","sample",1,"0",null],"timestamp":1418378625814}
+
+@COMMAND {"action":"nv_display_continuous_config_perform","module":"cellcycle:master","args":["set_input_value","ovca-exp","color","sample",2,"0.5",null],"timestamp":1418378631985}
+
+@COMMAND {"action":"nv_display_continuous_config_perform","module":"cellcycle:master","args":["apply","ovca-exp","color",null,null,null,null],"timestamp":1418378633051}
+
+@COMMAND {"action":"nv_display_continuous_config_perform","module":"cellcycle:master","args":["close","ovca-exp","color",null,null,null,null],"timestamp":1418378634289}
+
+@COMMAND {"action":"nv_map_staining_editor_perform","module":"cellcycle:master","args":["apply",true,null,null,null,null,null],"timestamp":1418378636085}
+
+@COMMAND {"action":"nv_map_staining_editor_perform","module":"cellcycle:master","args":["apply_and_close",true,null,null,null,null,null],"timestamp":1418378637254}
+
+@COMMAND {"action":"nv_drawing_config_perform","module":"cellcycle:master","args":["apply_and_close",null,null,null,null,null,null],"timestamp":1418378638857}
+
+@COMMAND {"action":"nv_set_center","module":"cellcycle:master","args":["absolute",-1.6845703125,-2.001953125,null,null,null,null],"timestamp":1418378647842}
+
+
+@COMMAND {"action":"nv_set_zoom","module":"cellcycle:master","args":[2,null,null,null,null,null,null],"timestamp":1418378649830}
+
+@COMMAND {"action": "nv_notice_perform", "args": ["set_message_and_open", "", "<span style='font-size: 14px'>On this map, copy-number values are displayed as heatmaps, mutation as glyphs and mRNA expression with map staining.<br/><br/>Now we will zoom into a region of the map in order to have a more detailed view.<br/><br/>Click Next to continue or Cancel to exit.</span>", "left center", 380, 340, "{\"action\": \"nv_execute_commands\", \"args\": [\"\", \"demo/eb_demo_multiple_data_types_bis.nvc\"], \"module\": \"\"}", "Next"], "module": "", "timeout": 0}
+

@@ -5,12 +5,9 @@ Google Maps-based enviroment, allowing to explore the map online and visualize h
 
 If you've never seen NaviCell then <a href="https://navicell.curie.fr/navicell/maps/cellcycle/master/index.php?demo=on">click here</a> in order to see <a href="https://navicell.curie.fr/pages/maps.html">an example</a>.
 
-<b>Downloads:</b>
-<a href="http://xfer.curie.fr/get/WnhpaIjpBwF/navicell_v2.1.zip">Version 2.1 of NaviCell Factory</a>
-
 Using <b>NaviCell Factory</b> consists of several steps
 
-1) Unpack the <b>NaviCell Factory</b> package (navicell_[version].zip file) into a folder. Let us assume it is "C:\NaviCell" (and we assume to work under Windows though all instructions will work under any other operating system as well).
+1) Download the <b>NaviCell Factory</b> package from github into a folder. Let us assume it is "C:\NaviCell" (and we assume to work under Windows though all instructions will work under any other operating system as well).
 
 2) If you use <b>NaviCell Factory</b> for the first time then go to "C:\NaviCell\factory\examples\" and build the examples from there
 or from "C:\NaviCell\factory\maps\" folder. Open and browse the result locally.

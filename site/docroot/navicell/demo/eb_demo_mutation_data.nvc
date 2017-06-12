@@ -1,0 +1,79 @@
+
+
+@COMMAND {"action":"nv_drawing_config_perform","module":"cellcycle:master","args":["select_heatmap",false,null,null,null,null,null],"timestamp":1418396459206}
+
+@COMMAND {"action":"nv_drawing_config_perform","module":"cellcycle:master","args":["apply_and_close",null,null,null,null,null,null],"timestamp":1418396459206}
+
+
+@COMMAND {"action":"nv_set_zoom","module":"cellcycle:master","args":[4,null,null,null,null,null,null],"timestamp":1418382523000}
+
+@COMMAND {"action":"nv_heatmap_editor_perform","module":"","args":["close",null,null,null,null,null,null],"timestamp":1418308796185}
+@COMMAND {"action":"nv_drawing_config_perform","module":"","args":["close",null,null,null,null,null,null],"timestamp":1418308796185}
+@COMMAND {"action":"nv_display_continuous_config_perform","module":"","args":["close","ovca-cn","color",null,null,null],"timestamp":1418308704299}
+
+@COMMAND {"action":"nv_glyph_editor_perform","module":"cellcycle:master","args":["open",1,null,null,null,null,null],"timestamp":1418376416537}
+
+@COMMAND {"action":"nv_glyph_editor_perform","module":"cellcycle:master","args":["select_sample",1,"s_TCGA_25_1634",null,null,null,null],"timestamp":1418376494942}
+
+@COMMAND {"action":"nv_glyph_editor_perform","module":"cellcycle:master","args":["select_datatable_shape",1,"ovca-mut",null,null,null,null],"timestamp":1418376514288}
+
+@COMMAND {"action":"nv_glyph_editor_perform","module":"cellcycle:master","args":["select_datatable_color",1,"ovca-mut",null,null,null,null],"timestamp":1418376516476}
+
+@COMMAND {"action":"nv_glyph_editor_perform","module":"cellcycle:master","args":["select_datatable_size",1,"ovca-mut",null,null,null,null],"timestamp":1418376518116}
+
+@COMMAND {"action":"nv_display_unordered_discrete_config_perform","module":"cellcycle:master","args":["switch_sample_tab","ovca-mut","color", null,null,null,null,null],"timestamp":1418376541823}
+
+@COMMAND {"action":"nv_display_unordered_discrete_config_perform","module":"cellcycle:master","args":["switch_sample_tab","ovca-mut","color_size", null,null,null,null,null],"timestamp":1418376541830}
+
+@COMMAND {"action":"nv_display_unordered_discrete_config_perform","module":"cellcycle:master","args":["switch_sample_tab","ovca-mut","shape", null,null,null,null,null],"timestamp":1418376541836}
+
+@COMMAND {"action":"nv_display_unordered_discrete_config_perform","module":"cellcycle:master","args":["switch_sample_tab","ovca-mut","size", null,null,null,null,null],"timestamp":1418376541842}
+
+@COMMAND {"action":"nv_glyph_editor_perform","module":"cellcycle:master","args":["apply",1,true,null,null,null,null],"timestamp":1418376541925}
+
+@COMMAND {"action":"nv_display_unordered_discrete_config_perform","module":"cellcycle:master","args":["open","ovca-mut","shape",null,null,null,null],"timestamp":1418376544783}
+
+@COMMAND {"action":"nv_display_unordered_discrete_config_perform","module":"cellcycle:master","args":["set_discrete_shape","ovca-mut","shape","sample",0,"1",null],"timestamp":1418376552437}
+
+@COMMAND {"action":"nv_display_unordered_discrete_config_perform","module":"cellcycle:master","args":["set_discrete_shape","ovca-mut","shape","sample",1,"0",null],"timestamp":1418376554673}
+
+@COMMAND {"action":"nv_display_unordered_discrete_config_perform","module":"cellcycle:master","args":["apply","ovca-mut","shape",null,null,null,null],"timestamp":1418376558468}
+
+@COMMAND {"action":"nv_display_unordered_discrete_config_perform","module":"cellcycle:master","args":["close","ovca-mut","shape",null,null,null,null],"timestamp":1418376558663}
+
+@COMMAND {"action":"nv_display_unordered_discrete_config_perform","module":"cellcycle:master","args":["open","ovca-mut","color",null,null,null,null],"timestamp":1418376564575}
+
+@COMMAND {"action":"nv_display_unordered_discrete_config_perform","module":"cellcycle:master","args":["set_discrete_color","ovca-mut","color","sample",0,"FFFFFF",null],"timestamp":1418376574271}
+
+@COMMAND {"action":"nv_display_unordered_discrete_config_perform","module":"cellcycle:master","args":["set_discrete_color","ovca-mut","color","sample",1,"FF0505",null],"timestamp":1418376582560}
+
+@COMMAND {"action":"nv_display_unordered_discrete_config_perform","module":"cellcycle:master","args":["apply","ovca-mut","color",null,null,null,null],"timestamp":1418376588672}
+
+@COMMAND {"action":"nv_display_unordered_discrete_config_perform","module":"cellcycle:master","args":["close","ovca-mut","color",null,null,null,null],"timestamp":1418376590419}
+
+@COMMAND {"action":"nv_display_unordered_discrete_config_perform","module":"cellcycle:master","args":["open","ovca-mut","size",null,null,null,null],"timestamp":1418376591931}
+
+@COMMAND {"action":"nv_display_unordered_discrete_config_perform","module":"cellcycle:master","args":["set_discrete_size","ovca-mut","size","sample",0,"0",null],"timestamp":1418376594861}
+
+@COMMAND {"action":"nv_display_unordered_discrete_config_perform","module":"cellcycle:master","args":["set_discrete_size","ovca-mut","size","sample",1,"12",null],"timestamp":1418376602084}
+
+@COMMAND {"action":"nv_display_unordered_discrete_config_perform","module":"cellcycle:master","args":["apply","ovca-mut","size",null,null,null,null],"timestamp":1418376606742}
+
+@COMMAND {"action":"nv_display_unordered_discrete_config_perform","module":"cellcycle:master","args":["close","ovca-mut","size",null,null,null,null],"timestamp":1418376607156}
+
+@COMMAND {"action":"nv_glyph_editor_perform","module":"cellcycle:master","args":["apply",1,true,null,null,null,null],"timestamp":1418376609444}
+
+@COMMAND {"action":"nv_glyph_editor_perform","module":"cellcycle:master","args":["apply_and_close",1,true,null,null,null,null],"timestamp":1418376610513}
+
+## reopen the glyph
+## @COMMAND {"action":"nv_glyph_editor_perform","module":"cellcycle:master","args":["open",1,true,null,null,null,null],"timestamp":1418376610513}
+
+@COMMAND {"action":"nv_drawing_config_perform","module":"cellcycle:master","args":["apply_and_close",null,null,null,null,null,null],"timestamp":1418376613390}
+
+@COMMAND {"action":"nv_set_center","module":"cellcycle:master","args":["absolute",-0.2197265625,8.49609375,null,null,null,null],"timestamp":1418376625280}
+
+
+@COMMAND {"action":"nv_set_zoom","module":"cellcycle:master","args":[2,null,null,null,null,null,null],"timestamp":1418376625308}
+
+@COMMAND {"action": "nv_notice_perform", "args": ["set_message_and_open", "", "<span style='font-size: 14px'>Mutated genes for a given sample on this map are displayed as colored triangles (glyphs). Now we will zoom into a region of the map enriched in p53 mutated genes.<br/><br/>Click Next to continue or Cancel to exit.</span>", "left center", 380, 320, "{\"action\": \"nv_execute_commands\", \"args\": [\"\", \"demo/eb_demo_mutation_data_bis.nvc\"], \"module\": \"\"}", "Next"], "module": "", "timeout": 0}
+

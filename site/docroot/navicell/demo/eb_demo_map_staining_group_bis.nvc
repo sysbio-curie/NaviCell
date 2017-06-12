@@ -1,0 +1,7 @@
+@COMMAND {"action":"nv_set_zoom","module":"cellcycle:master","args":[5,null,null,null,null,null,null],"timestamp":1418378649830}
+
+@COMMAND {"action":"nv_set_center","module":"cellcycle:master","args":["absolute",9.307861328125,-1.0498046875,null,null,null,null],"timestamp":1418637220296}
+
+@COMMAND {"action": "nv_notice_perform", "args": ["set_message_and_open", "", "<span style='font-size: 14px'>The Live Example is now finished.<br/><br/>Click OK to exit.</span>", "left center", 380, 300, "{\"action\": \"nv_execute_commands\", \"args\": [\"\", \"demo/eb_demo_end.nvc\"], \"module\": \"\"}"], "module": "", "timeout": 0}
+
+## @COMMAND {"action": "nv_notice_perform", "args": ["set_message_and_open", "", "<span style='font-size: 14px'>The Live Example is now finished.<br/><br/>Click OK to exit.</span>", "left center", 380, 280, "{\"action\": \"nv_execute_commands\", \"args\": [\"\", \"demo/eb_demo_end.nvc\"], \"module\": \"\"}], "module": "", "timeout": 0}

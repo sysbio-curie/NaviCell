@@ -1,0 +1,5 @@
+@COMMAND {"action":"nv_heatmap_editor_perform","module":"","args":["close",null,null,null,null,null,null],"timestamp":1418308796185}
+@COMMAND {"action":"nv_drawing_config_perform","module":"","args":["close",null,null,null,null,null,null],"timestamp":1418308796185}
+@COMMAND {"action":"nv_display_continuous_config_perform","module":"","args":["close","ovca-cn","color",null,null,null],"timestamp":1418308704299}
+
+@COMMAND {"action": "nv_notice_perform", "args": ["set_message_and_open", "", "<span style='font-size: 14px'>Copy-number values are visible on the whole map, for each gene that has a match in the data table.<br/><br/>Now we will configure and display mutation data using glyphs.<br/><br/>Click Next to continue or Cancel to exit.</span>", "left center", 380, 350, "{\"action\": \"nv_execute_commands\", \"args\": [\"\", \"demo/eb_demo_mutation_data.nvc\"], \"module\": \"\"}", "Next"], "module": "", "timeout": 0}

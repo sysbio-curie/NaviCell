@@ -1,0 +1,3 @@
+@COMMAND {"action": "nv_notice_perform", "args": ["set_message_and_open", "", "<span style=\"font-size: 14px\">This Live Example will show you several examples of data visualization using different data types and drawing options.<br/><br/>We will now load ovarian cancer data for mRNA expression, gene copy number and mutations.<br/><br/>Click Next to continue or Cancel to exit.</span>", "left center", 380, 340, "{\"action\": \"nv_execute_commands\", \"args\": [\"\", \"demo/eb_demo_load_data.nvc\"], \"module\": \"\"}", "Next"], "module": "", "timeout": 0}
+
+## @COMMAND {"action": "nv_execute_commands", "args": ["", "demo/eb_demo_load_data.nvc"], "module": "", "timeout": 1000}

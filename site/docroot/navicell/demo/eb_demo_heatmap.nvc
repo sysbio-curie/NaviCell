@@ -1,0 +1,45 @@
+@COMMAND {"action": "nv_notice_perform", "args": ["close"], "module": "", "timeout": 0}
+@COMMAND {"action":"nv_mydata_perform","module":"","args":["close",null,true,null,null,null],"timestamp":1418308624096}
+
+@COMMAND {"action":"nv_heatmap_editor_perform","module":"","args":["open",null,null,null,null,null,null],"timestamp":1418308652670}
+
+@COMMAND {"action":"nv_heatmap_editor_perform","module":"","args":["select_datatable",0,"ovca-cn",null,null,null,null],"timestamp":1418308661111}
+
+@COMMAND {"action":"nv_heatmap_editor_perform","module":"","args":["select_sample",0,"s_TCGA_24_1418",null,null,null,null],"timestamp":1418308683179}
+
+@COMMAND {"action":"nv_heatmap_editor_perform","module":"","args":["select_sample",1,"s_TCGA_04_1648",null,null,null,null],"timestamp":1418308699435}
+
+@COMMAND {"action":"nv_display_continuous_config_perform","module":"","args":["switch_sample_tab","ovca-cn","color",null,null,null,null,null],"timestamp":1418308704171}
+
+@COMMAND {"action":"nv_display_continuous_config_perform","module":"","args":["switch_sample_tab","ovca-cn","color",null,null,null,null,null],"timestamp":1418308704178}
+
+@COMMAND {"action":"nv_display_continuous_config_perform","module":"","args":["switch_sample_tab","ovca-cn","size",null,null,null,null,null],"timestamp":1418308704185}
+
+@COMMAND {"action":"nv_display_continuous_config_perform","module":"","args":["open","ovca-cn","color",null,null,null,null],"timestamp":1418308704299}
+
+@COMMAND {"action":"nv_display_continuous_config_perform","module":"","args":["set_input_color","ovca-cn","color","sample",0,"c2d0d1",null],"timestamp":1418308719148}
+
+@COMMAND {"action":"nv_display_continuous_config_perform","module":"","args":["set_input_color","ovca-cn","color","sample",2,"f8ff36",null],"timestamp":1418308734379}
+
+@COMMAND {"action":"nv_display_continuous_config_perform","module":"","args":["set_input_color","ovca-cn","color","sample",3,"de6e23",null],"timestamp":1418308747334}
+
+@COMMAND {"action":"nv_display_continuous_config_perform","module":"","args":["set_input_color","ovca-cn","color","sample",4,"ff0000",null],"timestamp":1418308753324}
+
+@COMMAND {"action":"nv_display_continuous_config_perform","module":"","args":["set_input_color","ovca-cn","color","sample",5,"FF0000",null],"timestamp":1418308760260}
+
+@COMMAND {"action":"nv_display_continuous_config_perform","module":"","args":["set_input_color","ovca-cn","color","sample",6,"ff0000",null],"timestamp":1418308766823}
+
+@COMMAND {"action":"nv_display_continuous_config_perform","module":"","args":["set_input_color","ovca-cn","color","sample",7,"FF0000",null],"timestamp":1418308772980}
+
+@COMMAND {"action":"nv_display_continuous_config_perform","module":"","args":["apply","ovca-cn","color",null,null,null,null],"timestamp":1418308777344}
+
+@COMMAND {"action":"nv_heatmap_editor_perform","module":"","args":["set_transparency",30,null,null,null,null,null],"timestamp":1418308796185}
+
+@COMMAND {"action":"nv_heatmap_editor_perform","module":"","args":["apply",30,null,null,null,null,null],"timestamp":1418308796185}
+
+@COMMAND {"action":"nv_set_center","module":"","args":["absolute",-3.33251953125,0.732421875,null,null,null,null],"timestamp":1418308824231}
+
+## @COMMAND {"action": "nv_execute_commands", "args": ["", "demo/eb_demo_3.nvc"], "module": "", "timeout": 0}
+
+@COMMAND {"action": "nv_notice_perform", "args": ["set_message_and_open", "", "<span style='font-size: 14px'>We have selected two samples and adapted the color gradient for the different copy-number values.<br/><br/>Click Next to continue or Cancel to exit.</span>", "left center", 380, 300, "{\"action\": \"nv_execute_commands\", \"args\": [\"\", \"demo/eb_demo_heatmap_bis.nvc\"], \"module\": \"\"}", "Next"], "module": "", "timeout": 0}
+

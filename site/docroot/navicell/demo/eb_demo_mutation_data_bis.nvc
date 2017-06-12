@@ -1,0 +1,43 @@
+
+
+@COMMAND {"action":"nv_set_zoom","module":"cellcycle:master","args":[3,null,null,null,null,null,null],"timestamp":1418376625308}
+
+@COMMAND {"action":"nv_set_center","module":"cellcycle:master","args":["absolute",-0.37841796875,12.5,null,null,null,null],"timestamp":1418376626561}
+
+@COMMAND {"action":"nv_set_zoom","module":"cellcycle:master","args":[4,null,null,null,null,null,null],"timestamp":1418376626602}
+
+@COMMAND {"action":"nv_set_center","module":"cellcycle:master","args":["absolute",-0.457763671875,14.5263671875,null,null,null,null],"timestamp":1418376628416}
+
+@COMMAND {"action":"nv_set_zoom","module":"cellcycle:master","args":[5,null,null,null,null,null,null],"timestamp":1418376628439}
+
+@COMMAND {"action":"nv_set_center","module":"cellcycle:master","args":["absolute",-0.408935546875,14.6484375,null,null,null,null],"timestamp":1418376629438}
+
+@COMMAND {"action":"nv_set_center","module":"cellcycle:master","args":["absolute",-0.262451171875,14.97802734375,null,null,null,null],"timestamp":1418376629494}
+
+@COMMAND {"action":"nv_set_center","module":"cellcycle:master","args":["absolute",-0.054931640625,15.478515625,null,null,null,null],"timestamp":1418376629613}
+
+@COMMAND {"action":"nv_set_center","module":"cellcycle:master","args":["absolute",0.238037109375,16.3818359375,null,null,null,null],"timestamp":1418376629662}
+
+@COMMAND {"action":"nv_set_center","module":"cellcycle:master","args":["absolute",0.250244140625,16.76025390625,null,null,null,null],"timestamp":1418376629783}
+
+@COMMAND {"action":"nv_set_center","module":"cellcycle:master","args":["absolute",0.299072265625,17.3095703125,null,null,null,null],"timestamp":1418376629835}
+
+@COMMAND {"action":"nv_set_center","module":"cellcycle:master","args":["absolute",0.299072265625,17.49267578125,null,null,null,null],"timestamp":1418376629953}
+
+@COMMAND {"action":"nv_set_center","module":"cellcycle:master","args":["absolute",0.299072265625,17.67578125,null,null,null,null],"timestamp":1418376630003}
+
+@COMMAND {"action":"nv_set_center","module":"cellcycle:master","args":["absolute",0.299072265625,17.68798828125,null,null,null,null],"timestamp":1418376630167}
+
+@COMMAND {"action":"nv_set_center","module":"cellcycle:master","args":["absolute",0.311279296875,17.7001953125,null,null,null,null],"timestamp":1418376630257}
+
+@COMMAND {"action":"nv_set_center","module":"cellcycle:master","args":["absolute",0.323486328125,17.71240234375,null,null,null,null],"timestamp":1418376630353}
+
+@COMMAND {"action":"nv_set_center","module":"cellcycle:master","args":["absolute",0.335693359375,17.73681640625,null,null,null,null],"timestamp":1418376630401}
+
+@COMMAND {"action":"nv_set_center","module":"cellcycle:master","args":["absolute",0.347900390625,17.73681640625,null,null,null,null],"timestamp":1418376630491}
+
+@COMMAND {"action":"nv_set_center","module":"cellcycle:master","args":["absolute",5.902099609375,17.5048828125,null,null,null,null],"timestamp":1418382325597}
+
+@COMMAND {"action":"nv_set_center","module":"cellcycle:master","args":["absolute",-0.677490234375,17.7978515625,null,null,null,null],"timestamp":1418398444796}
+
+@COMMAND {"action": "nv_notice_perform", "args": ["set_message_and_open", "", "<span style='font-size: 14px'>Here we see p53 mutated genes for this sample on this region of the map.<br/><br/>Now we will use map staining to visualize expression data on the map.<br/><br/>Click Next to continue or Cancel to exit.</span>", "left center", 380, 320, "{\"action\": \"nv_execute_commands\", \"args\": [\"\", \"demo/eb_demo_map_staining.nvc\"], \"module\": \"\"}", "Next"], "module": "", "timeout": 0}

@@ -1,0 +1,52 @@
+
+@COMMAND {"action":"nv_drawing_config_perform","module":"cellcycle:master","args":["select_glyph",1,false,null,null,null,null,null],"timestamp":1418396459206}
+
+@COMMAND {"action":"nv_drawing_config_perform","module":"cellcycle:master","args":["apply",null,null,null,null,null,null],"timestamp":1418396459206}
+
+@COMMAND {"action":"nv_set_center","module":"","args":["MAP_CENTER",null,null,null,null,null,null],"timestamp":1418308823921}
+
+@COMMAND {"action":"nv_set_zoom","module":"cellcycle:master","args":[2,null,null,null,null,null,null],"timestamp":1418382523000}
+
+@COMMAND {"action":"nv_map_staining_editor_perform","module":"cellcycle:master","args":["open",null,null,null,null,null,null],"timestamp":1418377297522}
+
+@COMMAND {"action":"nv_map_staining_editor_perform","module":"cellcycle:master","args":["select_sample","s_TCGA_24_1560",null,null,null,null,null],"timestamp":1418377313830}
+
+@COMMAND {"action":"nv_map_staining_editor_perform","module":"cellcycle:master","args":["select_datatable","ovca-exp",null,null,null,null,null],"timestamp":1418377320844}
+
+@COMMAND {"action":"nv_display_continuous_config_perform","module":"cellcycle:master","args":["switch_sample_tab","ovca-exp","color",null,null,null,null,null],"timestamp":1418377330150}
+
+@COMMAND {"action":"nv_display_continuous_config_perform","module":"cellcycle:master","args":["switch_sample_tab","ovca-exp","shape",null,null,null,null,null],"timestamp":1418377330157}
+
+@COMMAND {"action":"nv_display_continuous_config_perform","module":"cellcycle:master","args":["switch_sample_tab","ovca-exp","size",null,null,null,null,null],"timestamp":1418377330164}
+
+@COMMAND {"action":"nv_map_staining_editor_perform","module":"cellcycle:master","args":["apply",true,null,null,null,null,null],"timestamp":1418377330303}
+
+@COMMAND {"action":"nv_display_continuous_config_perform","module":"cellcycle:master","args":["open","ovca-exp","color",null,null,null,null],"timestamp":1418377331746}
+
+@COMMAND {"action":"nv_display_continuous_config_perform","module":"cellcycle:master","args":["step_count_change","sample","color","ovca-exp","2",null,null],"timestamp":1418377335097}
+
+@COMMAND {"action":"nv_display_continuous_config_perform","module":"cellcycle:master","args":["set_input_color","ovca-exp","color","sample",1,"7F7F7F",null],"timestamp":1418377340524}
+
+@COMMAND {"action":"nv_display_continuous_config_perform","module":"cellcycle:master","args":["set_input_color","ovca-exp","color","sample",1,"FFFFFF",null],"timestamp":1418377345835}
+
+@COMMAND {"action":"nv_display_continuous_config_perform","module":"cellcycle:master","args":["set_input_value","ovca-exp","color","sample",0,"-0.5",null],"timestamp":1418377356460}
+
+@COMMAND {"action":"nv_display_continuous_config_perform","module":"cellcycle:master","args":["set_input_value","ovca-exp","color","sample",1,"0",null],"timestamp":1418377361243}
+
+@COMMAND {"action":"nv_display_continuous_config_perform","module":"cellcycle:master","args":["set_input_value","ovca-exp","color","sample",2,"0.5",null],"timestamp":1418377392877}
+
+@COMMAND {"action":"nv_display_continuous_config_perform","module":"cellcycle:master","args":["apply","ovca-exp","color",null,null,null,null],"timestamp":1418377393360}
+
+@COMMAND {"action":"nv_display_continuous_config_perform","module":"cellcycle:master","args":["close","ovca-exp","color",null,null,null,null],"timestamp":1418377395340}
+
+@COMMAND {"action":"nv_map_staining_editor_perform","module":"cellcycle:master","args":["apply_and_close",true,null,null,null,null,null],"timestamp":1418377396970}
+
+@COMMAND {"action":"nv_drawing_config_perform","module":"cellcycle:master","args":["apply_and_close",null,null,null,null,null,null],"timestamp":1418377398404}
+
+##@COMMAND {"action":"nv_set_zoom","module":"cellcycle:master","args":[4,null,null,null,null,null,null],"timestamp":1418382523000}
+
+@COMMAND {"action":"nv_sample_annotation_perform","module":"cellcycle:master","args":["select_annotation","IntrinsicExprClassJCI",true,null,null,null,null],"timestamp":1418379133005}
+
+@COMMAND {"action":"nv_sample_annotation_perform","module":"cellcycle:master","args":["apply",true,null,null,null,null,null],"timestamp":1418379135162}
+
+@COMMAND {"action": "nv_notice_perform", "args": ["set_message_and_open", "", "<span style='font-size: 14px'>Territories around entities are color coded on the map using expression data, ranging from low (green) to high (red) expression values.<br/><br/>We will now display copy-number, mutation and mRNA expression data at the same time on the map.<br/><br/>Click Next to continue or Cancel to exit.</span>", "left center", 380, 350, "{\"action\": \"nv_execute_commands\", \"args\": [\"\", \"demo/eb_demo_multiple_data_types.nvc\"], \"module\": \"\"}", "Next"], "module": "", "timeout": 0}

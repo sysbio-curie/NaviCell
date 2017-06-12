@@ -1,0 +1,10 @@
+
+@COMMAND {"action":"nv_drawing_config_perform","module":"cellcycle:master","args":["select_map_staining",false,null,null,null,null,null],"timestamp":1418396459206}
+
+@COMMAND {"action":"nv_drawing_config_perform","module":"cellcycle:master","args":["apply",null,null,null,null,null,null],"timestamp":1418396459206}
+
+@COMMAND {"action":"nv_set_center","module":"","args":["MAP_CENTER",null,null,null,null,null,null],"timestamp":1418308823921}
+
+@COMMAND {"action":"nv_set_zoom","module":"cellcycle:master","args":[2,null,null,null,null,null,null],"timestamp":1418382523000}
+
+@COMMAND {"action": "nv_notice_perform", "args": ["close"], "module": "", "timeout": 0}

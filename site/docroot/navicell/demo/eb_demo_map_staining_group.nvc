@@ -1,0 +1,38 @@
+@COMMAND {"action":"nv_drawing_config_perform","module":"cellcycle:master","args":["select_glyph",1,false,null,null,null,null,null],"timestamp":1418396459206}
+
+@COMMAND {"action":"nv_drawing_config_perform","module":"cellcycle:master","args":["select_heatmap",false,null,null,null,null,null],"timestamp":1418396459206}
+
+@COMMAND {"action":"nv_set_zoom","module":"cellcycle:master","args":[2,null,null,null,null,null,null],"timestamp":1418378649830}
+
+@COMMAND {"action":"nv_map_staining_editor_perform","module":"cellcycle:master","args":["open",null,null,null,null,null,null],"timestamp":1418379149424}
+
+@COMMAND {"action":"nv_map_staining_editor_perform","module":"cellcycle:master","args":["select_sample","g_IntrinsicExprClassJCI:_Proliferative",null,null,null,null,null],"timestamp":1418379154107}
+
+@COMMAND {"action":"nv_map_staining_editor_perform","module":"cellcycle:master","args":["select_datatable","ovca-exp",null,null,null,null,null],"timestamp":1418379157011}
+
+@COMMAND {"action":"nv_display_continuous_config_perform","module":"cellcycle:master","args":["switch_group_tab","ovca-exp","color",null,null,null,null,null],"timestamp":1418379232096}
+
+@COMMAND {"action":"nv_display_continuous_config_perform","module":"cellcycle:master","args":["step_count_change","group","color","ovca-exp","2",null,null],"timestamp":1418379240576}
+
+@COMMAND {"action":"nv_display_continuous_config_perform","module":"cellcycle:master","args":["set_input_value","ovca-exp","color","group",0,"-0.3",null],"timestamp":1418379248734}
+
+@COMMAND {"action":"nv_display_continuous_config_perform","module":"cellcycle:master","args":["set_input_value","ovca-exp","color","group",2,"0.3",null],"timestamp":1418379252657}
+
+@COMMAND {"action":"nv_display_continuous_config_perform","module":"cellcycle:master","args":["set_input_value","ovca-exp","color","group",1,"0",null],"timestamp":1418379256465}
+
+@COMMAND {"action":"nv_display_continuous_config_perform","module":"cellcycle:master","args":["set_input_color","ovca-exp","color","group",1,"7F7F7F",null],"timestamp":1418379259634}
+
+@COMMAND {"action":"nv_display_continuous_config_perform","module":"cellcycle:master","args":["set_input_color","ovca-exp","color","group",1,"FFFFFF",null],"timestamp":1418379262150}
+
+@COMMAND {"action":"nv_display_continuous_config_perform","module":"cellcycle:master","args":["apply","ovca-exp","color",null,null,null,null],"timestamp":1418379267922}
+
+@COMMAND {"action":"nv_display_continuous_config_perform","module":"cellcycle:master","args":["close","ovca-exp","color",null,null,null,null],"timestamp":1418379270082}
+
+@COMMAND {"action":"nv_map_staining_editor_perform","module":"cellcycle:master","args":["apply",true,null,null,null,null,null],"timestamp":1418379271644}
+
+@COMMAND {"action":"nv_map_staining_editor_perform","module":"cellcycle:master","args":["apply_and_close",true,null,null,null,null,null],"timestamp":1418379272546}
+
+@COMMAND {"action":"nv_drawing_config_perform","module":"cellcycle:master","args":["apply_and_close",null,null,null,null,null,null],"timestamp":1418379274030}
+
+@COMMAND {"action": "nv_notice_perform", "args": ["set_message_and_open", "", "<span style='font-size: 14px'>Here we see the map staining values automatically averaged for all the samples labeled as “Proliferative”.<br/><br/>Click Next to continue or Cancel to exit.</span>", "left center", 380, 300, "{\"action\": \"nv_execute_commands\", \"args\": [\"\", \"demo/eb_demo_map_staining_group_bis.nvc\"], \"module\": \"\"}", "Next"], "module": "", "timeout": 0}
+

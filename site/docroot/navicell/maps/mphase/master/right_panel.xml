@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<item id="entities" rel="Entity" name="Entities">
+		<content>		<name lang='en'>Entities</name></content>
+		<item id="PROTEIN" rel="PROTEIN" name="Proteins">
+			<content>			<name lang='en'>Proteins <img border='0' src="../../../map_icons/entity/PROTEIN.png"/></name></content>
+			<item id="p11">
+				<content>				<name lang='en'><img align='top' class='blogfromright' border='0' src='../../../map_icons/misc/blog.png' alt='10'/> APC</name></content>
+				<item class="s46 navicell">
+					<content><name lang='en'>(APC:Slp1)|active@cell</name></content>
+				</item>
+			</item>
+			<item id="p5">
+				<content>				<name lang='en'><img align='top' class='blogfromright' border='0' src='../../../map_icons/misc/blog.png' alt='4'/> CAK</name></content>
+				<item id="s5" class="navicell" position="95.625;80.875">
+					<content>
+						<name lang='en'>CAK@cell</name>
+						<name lang='ln'><![CDATA[<span class="bubble"><b><big>Protein<br><a href='javascript_required.html' onclick='try { show_markers(["s5"]) } catch (e) {}; return false;' title="s5 1 modifs">CAK</a> <a href='javascript_required.html' onclick='try { show_blog(4); } catch (e) {}; return false;' title="go to blog"><img border='0' width='16' height='16' src="../../../map_icons/misc/blog.png" alt='blog'></a></big></b><BR><p><p class="bubble-cyan"><b>Identifiers</b><BR>CDK-activating kinase (CAK1 or CIV1)<BR><a href='http://www.ncbi.nlm.nih.gov/gene/1022' target='_blank'>ENTREZ:1022</a>  <a href='http://www.expasy.org/uniprot/P43568' target='_blank'>UNIPROT:P43568</a></p><p class="bubble-LightGreen"><b>Maps_Modules</b><BR>MODULE:CDC2<a href='javascript_required.html' onclick='try { nv_perform("nv_open_module", window, "CDC2", ["s5"]); } catch (e) {}; return false;' title="s5 1 modifs"><img border='0' src="../../../map_icons/map.png" alt='map' /></a></p><p class="bubble-LightGoldenRodYellow"><b>References</b><BR><a href='http://www.ncbi.nlm.nih.gov/sites/entrez?Db=pubmed&amp;amp;Cmd=ShowDetailView&amp;amp;TermToSearch=15876871' target='_blank'>PMID:15876871</a></p><hr><BR><b>Modification:</b><br>CAK<br>in cell<br><p class="bubble-LightGreen"><b>Maps_Modules</b><BR>MODULE:CDC2<a href='javascript_required.html' onclick='try { nv_perform("nv_open_module", window, "CDC2", ["s5"]); } catch (e) {}; return false;' title="s5 1 modifs"><img border='0' src="../../../map_icons/map.png" alt='map' /></a></p></span>]]></name>
+					</content>
+				</item>
+			</item>
+			<item id="p2">
+				<content>				<name lang='en'><img align='top' class='blogfromright' border='0' src='../../../map_icons/misc/blog.png' alt='1'/> Cdc13</name></content>
+				<item id="s2" class="navicell" position="175.25;141.562">
+					<content>
+						<name lang='en'>Cdc13@cell</name>
+						<name lang='ln'><![CDATA[<span class="bubble"><b><big>Protein<br><a href='javascript_required.html' onclick='try { show_markers(["s2", "s31", "s16", "s17", "s18", "s19", "s20", "s41"]) } catch (e) {}; return false;' title="s2 s31 s16 s17 s18 s19 s20 s41 8 modifs">Cdc13</a> <a href='javascript_required.html' onclick='try { show_blog(1); } catch (e) {}; return false;' title="go to blog"><img border='0' width='16' height='16' src="../../../map_icons/misc/blog.png" alt='blog'></a></big></b><BR><p><p class="bubble-cyan"><b>Identifiers</b><BR>coiled-coil domain containing 13<BR><a href='http://www.genenames.org/cgi-bin/quick_search.pl?.cgifields=type&amp;type=equals&amp;num=50&amp;submit=Submit&amp;search=CCDC13' target='_blank'>HUGO:CCDC13</a> <a href='http://www.genenames.org/data/hgnc_data.php?hgnc_id=26358' target='_blank'>HGNC:26358</a> <a href='http://www.ncbi.nlm.nih.gov/gene/152206' target='_blank'>ENTREZ:152206</a> <a href='http://www.expasy.org/uniprot/Q8IYE1' target='_blank'>UNIPROT:Q8IYE1</a></p><p class="bubble-LightGreen"><b>Maps_Modules</b><BR>MODULE:CDC2<a href='javascript_required.html' onclick='try { nv_perform("nv_open_module", window, "CDC2", ["s2", "s31", "s16", "s17", "s18", "s19", "s20", "s41"]); } catch (e) {}; return false;' title="s2 s31 s16 s17 s18 s19 s20 s41 8 modifs"><img border='0' src="../../../map_icons/map.png" alt='map' /></a></p><hr><BR><b>Modification:</b><br>Cdc13<br>in cell<br><p class="bubble-LightGreen"><b>Maps_Modules</b><BR>MODULE:CDC2<a href='javascript_required.html' onclick='try { nv_perform("nv_open_module", window, "CDC2", ["s2"]); } catch (e) {}; return false;' title="s2 1 modifs"><img border='0' src="../../../map_icons/map.png" alt='map' /></a></p></span>]]></name>
+					</content>
+				</item>
+				<item id="s31" class="navicell" position="129.75;152.187">
+					<content>
+						<name lang='en'>Cdc13|ubi@cell</name>
+						<name lang='ln'><![CDATA[<span class="bubble"><b><big>Protein<br><a href='javascript_required.html' onclick='try { show_markers(["s2", "s31", "s16", "s17", "s18", "s19", "s20", "s41"]) } catch (e) {}; return false;' title="s2 s31 s16 s17 s18 s19 s20 s41 8 modifs">Cdc13</a> <a href='javascript_required.html' onclick='try { show_blog(1); } catch (e) {}; return false;' title="go to blog"><img border='0' width='16' height='16' src="../../../map_icons/misc/blog.png" alt='blog'></a></big></b><BR><p><p class="bubble-cyan"><b>Identifiers</b><BR>coiled-coil domain containing 13<BR><a href='http://www.genenames.org/cgi-bin/quick_search.pl?.cgifields=type&amp;type=equals&amp;num=50&amp;submit=Submit&amp;search=CCDC13' target='_blank'>HUGO:CCDC13</a> <a href='http://www.genenames.org/data/hgnc_data.php?hgnc_id=26358' target='_blank'>HGNC:26358</a> <a href='http://www.ncbi.nlm.nih.gov/gene/152206' target='_blank'>ENTREZ:152206</a> <a href='http://www.expasy.org/uniprot/Q8IYE1' target='_blank'>UNIPROT:Q8IYE1</a></p><p class="bubble-LightGreen"><b>Maps_Modules</b><BR>MODULE:CDC2<a href='javascript_required.html' onclick='try { nv_perform("nv_open_module", window, "CDC2", ["s2", "s31", "s16", "s17", "s18", "s19", "s20", "s41"]); } catch (e) {}; return false;' title="s2 s31 s16 s17 s18 s19 s20 s41 8 modifs"><img border='0' src="../../../map_icons/map.png" alt='map' /></a></p><hr><BR><b>Modification:</b><br>Cdc13|ubi<br>in cell<br><p class="bubble-LightGreen"><b>Maps_Modules</b><BR>MODULE:CDC2<a href='javascript_required.html' onclick='try { nv_perform("nv_open_module", window, "CDC2", ["s31"]); } catch (e) {}; return false;' title="s31 1 modifs"><img border='0' src="../../../map_icons/map.png" alt='map' /></a></p></span>]]></name>
+					</content>
+				</item>
+				<item class="s16 navicell">
+					<content><name lang='en'>Cdc13:Cdc2@cell</name></content>
+				</item>
+				<item class="s17 navicell">
+					<content><name lang='en'>Cdc13:Cdc2|Tyr15_pho@cell</name></content>
+				</item>
+				<item class="s20 navicell">
+					<content><name lang='en'>(Cdc13:Cdc2|Thr167_pho)|active@cell</name></content>
+				</item>
+				<item class="s18 navicell">
+					<content><name lang='en'>Cdc13:Cdc2|Thr14_pho|Tyr15_pho@cell</name></content>
+				</item>
+				<item class="s19 navicell">
+					<content><name lang='en'>Cdc13:Cdc2|Thr14_pho|Tyr15_pho|Thr167_pho@cell</name></content>
+				</item>
+				<item class="s41 navicell">
+					<content><name lang='en'>Cdc13:Cdc2|Thr167_pho:Rum1@cell</name></content>
+				</item>
+			</item>
+			<item id="p1">
+				<content>				<name lang='en'><img align='top' class='blogfromright' border='0' src='../../../map_icons/misc/blog.png' alt='0'/> Cdc2</name></content>
+				<item id="s1" class="navicell" position="160.125;141.431">
+					<content>
+						<name lang='en'>Cdc2@cell</name>
+						<name lang='ln'><![CDATA[<span class="bubble"><b><big>Protein<br><a href='javascript_required.html' onclick='try { show_markers(["s1", "s13", "s16", "s17", "s18", "s19", "s20", "s41"]) } catch (e) {}; return false;' title="s1 s13 s16 s17 s18 s19 s20 s41 8 modifs">Cdc2</a> <a href='javascript_required.html' onclick='try { show_blog(0); } catch (e) {}; return false;' title="go to blog"><img border='0' width='16' height='16' src="../../../map_icons/misc/blog.png" alt='blog'></a></big></b><BR><p><p class="bubble-cyan"><b>Identifiers</b><BR>cyclin-dependent kinase 1<BR><a href='http://www.genenames.org/cgi-bin/quick_search.pl?.cgifields=type&amp;type=equals&amp;num=50&amp;submit=Submit&amp;search=CDK1' target='_blank'>HUGO:CDK1</a> <a href='http://www.genenames.org/data/hgnc_data.php?hgnc_id=1722' target='_blank'>HGNC:1722</a> <a href='http://www.ncbi.nlm.nih.gov/gene/983' target='_blank'>ENTREZ:983</a> <a href='http://www.expasy.org/uniprot/P06493' target='_blank'>UNIPROT:P06493</a>  <a href='http://atlasgeneticsoncology.org//Genes/GC_CDK1.html' target='_blank'>ATONC:GC_CDK1</a> go:GO:1234567</p><p class="bubble-LightGreen"><b>Maps_Modules</b><BR>MODULE:CDC2<a href='javascript_required.html' onclick='try { nv_perform("nv_open_module", window, "CDC2", ["s1", "s13", "s16", "s17", "s18", "s19", "s20", "s41"]); } catch (e) {}; return false;' title="s1 s13 s16 s17 s18 s19 s20 s41 8 modifs"><img border='0' src="../../../map_icons/map.png" alt='map' /></a></p><hr><BR><b>Modification:</b><br>Cdc2<br>in cell<br><p class="bubble-LightGreen"><b>Maps_Modules</b><BR>MODULE:CDC2<a href='javascript_required.html' onclick='try { nv_perform("nv_open_module", window, "CDC2", ["s1"]); } catch (e) {}; return false;' title="s1 1 modifs"><img border='0' src="../../../map_icons/map.png" alt='map' /></a></p></span>]]></name>
+					</content>
+				</item>
+				<item id="s13" class="navicell" position="129.654;141.099">
+					<content>
+						<name lang='en'>Cdc2|Thr167_pho@cell</name>
+						<name lang='ln'><![CDATA[<span class="bubble"><b><big>Protein<br><a href='javascript_required.html' onclick='try { show_markers(["s1", "s13", "s16", "s17", "s18", "s19", "s20", "s41"]) } catch (e) {}; return false;' title="s1 s13 s16 s17 s18 s19 s20 s41 8 modifs">Cdc2</a> <a href='javascript_required.html' onclick='try { show_blog(0); } catch (e) {}; return false;' title="go to blog"><img border='0' width='16' height='16' src="../../../map_icons/misc/blog.png" alt='blog'></a></big></b><BR><p><p class="bubble-cyan"><b>Identifiers</b><BR>cyclin-dependent kinase 1<BR><a href='http://www.genenames.org/cgi-bin/quick_search.pl?.cgifields=type&amp;type=equals&amp;num=50&amp;submit=Submit&amp;search=CDK1' target='_blank'>HUGO:CDK1</a> <a href='http://www.genenames.org/data/hgnc_data.php?hgnc_id=1722' target='_blank'>HGNC:1722</a> <a href='http://www.ncbi.nlm.nih.gov/gene/983' target='_blank'>ENTREZ:983</a> <a href='http://www.expasy.org/uniprot/P06493' target='_blank'>UNIPROT:P06493</a>  <a href='http://atlasgeneticsoncology.org//Genes/GC_CDK1.html' target='_blank'>ATONC:GC_CDK1</a> go:GO:1234567</p><p class="bubble-LightGreen"><b>Maps_Modules</b><BR>MODULE:CDC2<a href='javascript_required.html' onclick='try { nv_perform("nv_open_module", window, "CDC2", ["s1", "s13", "s16", "s17", "s18", "s19", "s20", "s41"]); } catch (e) {}; return false;' title="s1 s13 s16 s17 s18 s19 s20 s41 8 modifs"><img border='0' src="../../../map_icons/map.png" alt='map' /></a></p><hr><BR><b>Modification:</b><br>Cdc2|Thr167_pho<br>in cell<br><p class="bubble-LightGreen"><b>Maps_Modules</b><BR>MODULE:CDC2<a href='javascript_required.html' onclick='try { nv_perform("nv_open_module", window, "CDC2", ["s13"]); } catch (e) {}; return false;' title="s13 1 modifs"><img border='0' src="../../../map_icons/map.png" alt='map' /></a></p></span>]]></name>
+					</content>
+				</item>
+				<item class="s16 navicell">
+					<content><name lang='en'>Cdc13:Cdc2@cell</name></content>
+				</item>
+				<item class="s17 navicell">
+					<content><name lang='en'>Cdc13:Cdc2|Tyr15_pho@cell</name></content>
+				</item>
+				<item class="s20 navicell">
+					<content><name lang='en'>(Cdc13:Cdc2|Thr167_pho)|active@cell</name></content>
+				</item>
+				<item class="s18 navicell">
+					<content><name lang='en'>Cdc13:Cdc2|Thr14_pho|Tyr15_pho@cell</name></content>
+				</item>
+				<item class="s19 navicell">
+					<content><name lang='en'>Cdc13:Cdc2|Thr14_pho|Tyr15_pho|Thr167_pho@cell</name></content>
+				</item>
+				<item class="s41 navicell">
+					<content><name lang='en'>Cdc13:Cdc2|Thr167_pho:Rum1@cell</name></content>
+				</item>
+			</item>
+			<item id="p7">
+				<content>				<name lang='en'><img align='top' class='blogfromright' border='0' src='../../../map_icons/misc/blog.png' alt='5'/> Cdc25</name></content>
+				<item id="s7" class="navicell" position="70.812;121.187">
+					<content>
+						<name lang='en'>Cdc25@cell</name>
+						<name lang='ln'><![CDATA[<span class="bubble"><b><big>Protein<br><a href='javascript_required.html' onclick='try { show_markers(["s7", "s26"]) } catch (e) {}; return false;' title="s7 s26 2 modifs">Cdc25</a> <a href='javascript_required.html' onclick='try { show_blog(5); } catch (e) {}; return false;' title="go to blog"><img border='0' width='16' height='16' src="../../../map_icons/misc/blog.png" alt='blog'></a></big></b><BR><p><p class="bubble-cyan"><b>Identifiers</b><BR>cell division cycle 25C<BR><a href='http://www.genenames.org/cgi-bin/quick_search.pl?.cgifields=type&amp;type=equals&amp;num=50&amp;submit=Submit&amp;search=CDC25C' target='_blank'>HUGO:CDC25C</a> <a href='http://www.genenames.org/data/hgnc_data.php?hgnc_id=1727' target='_blank'>HGNC:1727</a> <a href='http://www.ncbi.nlm.nih.gov/gene/995' target='_blank'>ENTREZ:995</a> <a href='http://www.expasy.org/uniprot/P30307' target='_blank'>UNIPROT:P30307</a>  <a href='http://wikipedia.org/wiki/CDC25C' target='_blank'>WIKI:CDC25C</a> KEGGSPO:SPAC24H6.05</p><p class="bubble-LightGreen"><b>Maps_Modules</b><BR>MODULE:CDC25<a href='javascript_required.html' onclick='try { nv_perform("nv_open_module", window, "CDC25", ["s7", "s26"]); } catch (e) {}; return false;' title="s7 s26 2 modifs"><img border='0' src="../../../map_icons/map.png" alt='map' /></a></p><p class="bubble-LightGoldenRodYellow"><b>References</b><BR>Cdc25 protein phosphatases in cell proliferation: <a href='http://www.ncbi.nlm.nih.gov/sites/entrez?Db=pubmed&amp;amp;Cmd=ShowDetailView&amp;amp;TermToSearch=9141461' target='_blank'>PMID:9141461</a></p><hr><BR><b>Modification:</b><br>Cdc25<br>in cell<br><p class="bubble-LightGreen"><b>Maps_Modules</b><BR>MODULE:CDC25<a href='javascript_required.html' onclick='try { nv_perform("nv_open_module", window, "CDC25", ["s7"]); } catch (e) {}; return false;' title="s7 1 modifs"><img border='0' src="../../../map_icons/map.png" alt='map' /></a></p></span>]]></name>
+					</content>
+				</item>
+				<item id="s26" class="navicell" position="87.75;121.125">
+					<content>
+						<name lang='en'>Cdc25|pho|active@cell</name>
+						<name lang='ln'><![CDATA[<span class="bubble"><b><big>Protein<br><a href='javascript_required.html' onclick='try { show_markers(["s7", "s26"]) } catch (e) {}; return false;' title="s7 s26 2 modifs">Cdc25</a> <a href='javascript_required.html' onclick='try { show_blog(5); } catch (e) {}; return false;' title="go to blog"><img border='0' width='16' height='16' src="../../../map_icons/misc/blog.png" alt='blog'></a></big></b><BR><p><p class="bubble-cyan"><b>Identifiers</b><BR>cell division cycle 25C<BR><a href='http://www.genenames.org/cgi-bin/quick_search.pl?.cgifields=type&amp;type=equals&amp;num=50&amp;submit=Submit&amp;search=CDC25C' target='_blank'>HUGO:CDC25C</a> <a href='http://www.genenames.org/data/hgnc_data.php?hgnc_id=1727' target='_blank'>HGNC:1727</a> <a href='http://www.ncbi.nlm.nih.gov/gene/995' target='_blank'>ENTREZ:995</a> <a href='http://www.expasy.org/uniprot/P30307' target='_blank'>UNIPROT:P30307</a>  <a href='http://wikipedia.org/wiki/CDC25C' target='_blank'>WIKI:CDC25C</a> KEGGSPO:SPAC24H6.05</p><p class="bubble-LightGreen"><b>Maps_Modules</b><BR>MODULE:CDC25<a href='javascript_required.html' onclick='try { nv_perform("nv_open_module", window, "CDC25", ["s7", "s26"]); } catch (e) {}; return false;' title="s7 s26 2 modifs"><img border='0' src="../../../map_icons/map.png" alt='map' /></a></p><p class="bubble-LightGoldenRodYellow"><b>References</b><BR>Cdc25 protein phosphatases in cell proliferation: <a href='http://www.ncbi.nlm.nih.gov/sites/entrez?Db=pubmed&amp;amp;Cmd=ShowDetailView&amp;amp;TermToSearch=9141461' target='_blank'>PMID:9141461</a></p><hr><BR><b>Modification:</b><br>Cdc25|pho|active<br>in cell<br><p class="bubble-LightGreen"><b>Maps_Modules</b><BR>MODULE:CDC25<a href='javascript_required.html' onclick='try { nv_perform("nv_open_module", window, "CDC25", ["s26"]); } catch (e) {}; return false;' title="s26 1 modifs"><img border='0' src="../../../map_icons/map.png" alt='map' /></a></p></span>]]></name>
+					</content>
+				</item>
+			</item>
+			<item id="p8">
+				<content>				<name lang='en'><img align='top' class='blogfromright' border='0' src='../../../map_icons/misc/blog.png' alt='6'/> PP2A</name></content>
+				<item id="s8" class="navicell" position="80.25;113.625">
+					<content>
+						<name lang='en'>PP2A@cell</name>
+						<name lang='ln'><![CDATA[<span class="bubble"><b><big>Protein<br><a href='javascript_required.html' onclick='try { show_markers(["s8"]) } catch (e) {}; return false;' title="s8 1 modifs">PP2A</a> <a href='javascript_required.html' onclick='try { show_blog(6); } catch (e) {}; return false;' title="go to blog"><img border='0' width='16' height='16' src="../../../map_icons/misc/blog.png" alt='blog'></a></big></b><BR><p><p class="bubble-cyan"><b>Identifiers</b><BR>protein phosphatase 2, catalytic subunit, beta isozyme<BR><a href='http://www.genenames.org/cgi-bin/quick_search.pl?.cgifields=type&amp;type=equals&amp;num=50&amp;submit=Submit&amp;search=PPP2CB' target='_blank'>HUGO:PPP2CB</a> <a href='http://www.genenames.org/data/hgnc_data.php?hgnc_id=9300' target='_blank'>HGNC:9300</a> <a href='http://www.ncbi.nlm.nih.gov/gene/5516' target='_blank'>ENTREZ:5516</a> <a href='http://www.expasy.org/uniprot/P62714' target='_blank'>UNIPROT:P62714</a> <a href='http://wikipedia.org/wiki/PP2A' target='_blank'>WIKI:PP2A</a></p><p class="bubble-LightGreen"><b>Maps_Modules</b><BR>MODULE:CDC25<a href='javascript_required.html' onclick='try { nv_perform("nv_open_module", window, "CDC25", ["s8"]); } catch (e) {}; return false;' title="s8 1 modifs"><img border='0' src="../../../map_icons/map.png" alt='map' /></a></p><hr><BR><b>Modification:</b><br>PP2A<br>in cell<br><p class="bubble-LightGreen"><b>Maps_Modules</b><BR>MODULE:CDC25<a href='javascript_required.html' onclick='try { nv_perform("nv_open_module", window, "CDC25", ["s8"]); } catch (e) {}; return false;' title="s8 1 modifs"><img border='0' src="../../../map_icons/map.png" alt='map' /></a></p></span>]]></name>
+					</content>
+				</item>
+			</item>
+			<item id="p10">
+				<content>				<name lang='en'><img align='top' class='blogfromright' border='0' src='../../../map_icons/misc/blog.png' alt='8'/> Plo1</name></content>
+				<item id="s27" class="navicell" position="74.25;129.0">
+					<content>
+						<name lang='en'>Plo1@cell</name>
+						<name lang='ln'><![CDATA[<span class="bubble"><b><big>Protein<br><a href='javascript_required.html' onclick='try { show_markers(["s27"]) } catch (e) {}; return false;' title="s27 1 modifs">Plo1</a> <a href='javascript_required.html' onclick='try { show_blog(8); } catch (e) {}; return false;' title="go to blog"><img border='0' width='16' height='16' src="../../../map_icons/misc/blog.png" alt='blog'></a></big></b><BR><p><p class="bubble-cyan"><b>Identifiers</b><BR>Polo kinase Plo1<BR>POMBASE:SPAC23C11.16  <a href='http://www.expasy.org/uniprot/P50528' target='_blank'>UNIPROT:P50528</a> KEGGSPO:SPAC23C11.16</p><p class="bubble-LightGreen"><b>Maps_Modules</b><BR>MODULE:CDC25<a href='javascript_required.html' onclick='try { nv_perform("nv_open_module", window, "CDC25", ["s27"]); } catch (e) {}; return false;' title="s27 1 modifs"><img border='0' src="../../../map_icons/map.png" alt='map' /></a></p><hr><BR><b>Modification:</b><br>Plo1<br>in cell<br><p class="bubble-LightGreen"><b>Maps_Modules</b><BR>MODULE:CDC25<a href='javascript_required.html' onclick='try { nv_perform("nv_open_module", window, "CDC25", ["s27"]); } catch (e) {}; return false;' title="s27 1 modifs"><img border='0' src="../../../map_icons/map.png" alt='map' /></a></p></span>]]></name>
+					</content>
+				</item>
+			</item>
+			<item id="p13">
+				<content>				<name lang='en'><img align='top' class='blogfromright' border='0' src='../../../map_icons/misc/blog.png' alt='11'/> Rum1</name></content>
+				<item id="s32" class="navicell" position="122.133;126.093">
+					<content>
+						<name lang='en'>Rum1@cell</name>
+						<name lang='ln'><![CDATA[<span class="bubble"><b><big>Protein<br><a href='javascript_required.html' onclick='try { show_markers(["s32", "s34", "s41"]) } catch (e) {}; return false;' title="s32 s34 s41 3 modifs">Rum1</a> <a href='javascript_required.html' onclick='try { show_blog(11); } catch (e) {}; return false;' title="go to blog"><img border='0' width='16' height='16' src="../../../map_icons/misc/blog.png" alt='blog'></a></big></b><BR><p><p class="bubble-cyan"><b>Identifiers</b><BR>Cyclin-dependent kinase inhibitor rum1 (or p25-rum1)<BR><a href='http://www.expasy.org/uniprot/P40380' target='_blank'>UNIPROT:P40380</a></p><p class="bubble-LightGreen"><b>Maps_Modules</b><BR>MODULE:RUM1<a href='javascript_required.html' onclick='try { nv_perform("nv_open_module", window, "RUM1", ["s32", "s34", "s41"]); } catch (e) {}; return false;' title="s32 s34 s41 3 modifs"><img border='0' src="../../../map_icons/map.png" alt='map' /></a></p><p class="bubble-LightGoldenRodYellow"><b>References</b><BR><a href='http://www.ncbi.nlm.nih.gov/sites/entrez?Db=pubmed&amp;amp;Cmd=ShowDetailView&amp;amp;TermToSearch=12135491' target='_blank'>PMID:12135491</a></p><hr><BR><b>Modification:</b><br>Rum1<br>in cell<br><p class="bubble-LightGreen"><b>Maps_Modules</b><BR>MODULE:RUM1<a href='javascript_required.html' onclick='try { nv_perform("nv_open_module", window, "RUM1", ["s32"]); } catch (e) {}; return false;' title="s32 1 modifs"><img border='0' src="../../../map_icons/map.png" alt='map' /></a></p></span>]]></name>
+					</content>
+				</item>
+				<item id="s34" class="navicell" position="122.258;113.968">
+					<content>
+						<name lang='en'>Rum1|pho@cell</name>
+						<name lang='ln'><![CDATA[<span class="bubble"><b><big>Protein<br><a href='javascript_required.html' onclick='try { show_markers(["s32", "s34", "s41"]) } catch (e) {}; return false;' title="s32 s34 s41 3 modifs">Rum1</a> <a href='javascript_required.html' onclick='try { show_blog(11); } catch (e) {}; return false;' title="go to blog"><img border='0' width='16' height='16' src="../../../map_icons/misc/blog.png" alt='blog'></a></big></b><BR><p><p class="bubble-cyan"><b>Identifiers</b><BR>Cyclin-dependent kinase inhibitor rum1 (or p25-rum1)<BR><a href='http://www.expasy.org/uniprot/P40380' target='_blank'>UNIPROT:P40380</a></p><p class="bubble-LightGreen"><b>Maps_Modules</b><BR>MODULE:RUM1<a href='javascript_required.html' onclick='try { nv_perform("nv_open_module", window, "RUM1", ["s32", "s34", "s41"]); } catch (e) {}; return false;' title="s32 s34 s41 3 modifs"><img border='0' src="../../../map_icons/map.png" alt='map' /></a></p><p class="bubble-LightGoldenRodYellow"><b>References</b><BR><a href='http://www.ncbi.nlm.nih.gov/sites/entrez?Db=pubmed&amp;amp;Cmd=ShowDetailView&amp;amp;TermToSearch=12135491' target='_blank'>PMID:12135491</a></p><hr><BR><b>Modification:</b><br>Rum1|pho<br>in cell<br><p class="bubble-LightGreen"><b>Maps_Modules</b><BR>MODULE:RUM1<a href='javascript_required.html' onclick='try { nv_perform("nv_open_module", window, "RUM1", ["s34"]); } catch (e) {}; return false;' title="s34 1 modifs"><img border='0' src="../../../map_icons/map.png" alt='map' /></a></p></span>]]></name>
+					</content>
+				</item>
+				<item class="s41 navicell">
+					<content><name lang='en'>Cdc13:Cdc2|Thr167_pho:Rum1@cell</name></content>
+				</item>
+			</item>
+			<item id="p12">
+				<content>				<name lang='en'><img align='top' class='blogfromright' border='0' src='../../../map_icons/misc/blog.png' alt='9'/> Slp1</name></content>
+				<item class="s46 navicell">
+					<content><name lang='en'>(APC:Slp1)|active@cell</name></content>
+				</item>
+			</item>
+			<item id="p3">
+				<content>				<name lang='en'><img align='top' class='blogfromright' border='0' src='../../../map_icons/misc/blog.png' alt='3'/> Wee1</name></content>
+				<item id="s3" class="navicell" position="135.875;95.0">
+					<content>
+						<name lang='en'>Wee1@cell</name>
+						<name lang='ln'><![CDATA[<span class="bubble"><b><big>Protein<br><a href='javascript_required.html' onclick='try { show_markers(["s3", "s24"]) } catch (e) {}; return false;' title="s3 s24 2 modifs">Wee1</a> <a href='javascript_required.html' onclick='try { show_blog(3); } catch (e) {}; return false;' title="go to blog"><img border='0' width='16' height='16' src="../../../map_icons/misc/blog.png" alt='blog'></a></big></b><BR><p><p class="bubble-cyan"><b>Identifiers</b><BR>WEE1 homolog (S. pombe)<BR><a href='http://www.genenames.org/cgi-bin/quick_search.pl?.cgifields=type&amp;type=equals&amp;num=50&amp;submit=Submit&amp;search=WEE1' target='_blank'>HUGO:WEE1</a> <a href='http://www.genenames.org/data/hgnc_data.php?hgnc_id=12761' target='_blank'>HGNC:12761</a> <a href='http://www.ncbi.nlm.nih.gov/gene/7465' target='_blank'>ENTREZ:7465</a> <a href='http://www.expasy.org/uniprot/P30291' target='_blank'>UNIPROT:P30291</a></p><p class="bubble-LightGreen"><b>Maps_Modules</b><BR>MODULE:WEE1<a href='javascript_required.html' onclick='try { nv_perform("nv_open_module", window, "WEE1", ["s3", "s24"]); } catch (e) {}; return false;' title="s3 s24 2 modifs"><img border='0' src="../../../map_icons/map.png" alt='map' /></a></p><hr><BR><b>Modification:</b><br>Wee1<br>in cell<br><p class="bubble-LightGreen"><b>Maps_Modules</b><BR>MODULE:WEE1<a href='javascript_required.html' onclick='try { nv_perform("nv_open_module", window, "WEE1", ["s3"]); } catch (e) {}; return false;' title="s3 1 modifs"><img border='0' src="../../../map_icons/map.png" alt='map' /></a></p></span>]]></name>
+					</content>
+				</item>
+				<item id="s24" class="navicell" position="135.875;105.062">
+					<content>
+						<name lang='en'>Wee1|pho@cell</name>
+						<name lang='ln'><![CDATA[<span class="bubble"><b><big>Protein<br><a href='javascript_required.html' onclick='try { show_markers(["s3", "s24"]) } catch (e) {}; return false;' title="s3 s24 2 modifs">Wee1</a> <a href='javascript_required.html' onclick='try { show_blog(3); } catch (e) {}; return false;' title="go to blog"><img border='0' width='16' height='16' src="../../../map_icons/misc/blog.png" alt='blog'></a></big></b><BR><p><p class="bubble-cyan"><b>Identifiers</b><BR>WEE1 homolog (S. pombe)<BR><a href='http://www.genenames.org/cgi-bin/quick_search.pl?.cgifields=type&amp;type=equals&amp;num=50&amp;submit=Submit&amp;search=WEE1' target='_blank'>HUGO:WEE1</a> <a href='http://www.genenames.org/data/hgnc_data.php?hgnc_id=12761' target='_blank'>HGNC:12761</a> <a href='http://www.ncbi.nlm.nih.gov/gene/7465' target='_blank'>ENTREZ:7465</a> <a href='http://www.expasy.org/uniprot/P30291' target='_blank'>UNIPROT:P30291</a></p><p class="bubble-LightGreen"><b>Maps_Modules</b><BR>MODULE:WEE1<a href='javascript_required.html' onclick='try { nv_perform("nv_open_module", window, "WEE1", ["s3", "s24"]); } catch (e) {}; return false;' title="s3 s24 2 modifs"><img border='0' src="../../../map_icons/map.png" alt='map' /></a></p><hr><BR><b>Modification:</b><br>Wee1|pho<br>in cell<br><p class="bubble-LightGreen"><b>Maps_Modules</b><BR>MODULE:WEE1<a href='javascript_required.html' onclick='try { nv_perform("nv_open_module", window, "WEE1", ["s24"]); } catch (e) {}; return false;' title="s24 1 modifs"><img border='0' src="../../../map_icons/map.png" alt='map' /></a></p></span>]]></name>
+					</content>
+				</item>
+			</item>
+		</item>
+		<item id="GENE" rel="GENE" name="Genes">
+			<content>			<name lang='en'>Genes <img border='0' src="../../../map_icons/entity/GENE.png"/></name></content>
+		</item>
+		<item id="RNA" rel="RNA" name="RNAs">
+			<content>			<name lang='en'>RNAs <img border='0' src="../../../map_icons/entity/RNA.png"/></name></content>
+		</item>
+		<item id="ANTISENSE_RNA" rel="ANTISENSE_RNA" name="antisense RNAs">
+			<content>			<name lang='en'>antisense RNAs <img border='0' src="../../../map_icons/entity/ANTISENSE_RNA.png"/></name></content>
+		</item>
+		<item id="SIMPLE_MOLECULE" rel="SIMPLE_MOLECULE" name="Simple molecules">
+			<content>			<name lang='en'>Simple molecules <img border='0' src="../../../map_icons/entity/SIMPLE_MOLECULE.png"/></name></content>
+		</item>
+		<item id="ION" rel="ION" name="Ions">
+			<content>			<name lang='en'>Ions <img border='0' src="../../../map_icons/entity/ION.png"/></name></content>
+		</item>
+		<item id="DRUG" rel="DRUG" name="Drugs">
+			<content>			<name lang='en'>Drugs <img border='0' src="../../../map_icons/entity/DRUG.png"/></name></content>
+		</item>
+		<item id="PHENOTYPE" rel="PHENOTYPE" name="Phenotypes">
+			<content>			<name lang='en'>Phenotypes <img border='0' src="../../../map_icons/entity/PHENOTYPE.png"/></name></content>
+		</item>
+		<item id="UNKNOWN" rel="UNKNOWN" name="Unknown">
+			<content>			<name lang='en'>Unknown <img border='0' src="../../../map_icons/entity/UNKNOWN.png"/></name></content>
+		</item>
+		<item id="COMPLEX" rel="COMPLEX" name="Complexes">
+			<content>			<name lang='en'>Complexes <img border='0' src="../../../map_icons/entity/COMPLEX.png"/></name></content>
+			<item id="p11_p12">
+				<content>				<name lang='en'><img align='top' class='blogfromright' border='0' src='../../../map_icons/misc/blog.png' alt='12'/> APC:Slp1</name></content>
+				<item id="s46" class="navicell" position="91.125;155.375 111.812;155.062">
+					<content>
+						<name lang='en'>(APC:Slp1)|active@cell</name>
+						<name lang='ln'><![CDATA[<span class="bubble"><b><big>Complex<br><a href='javascript_required.html' onclick='try { show_markers(["s46"]) } catch (e) {}; return false;' title="s46 1 modifs">APC:&#8203;Slp1</a> <a href='javascript_required.html' onclick='try { show_blog(12); } catch (e) {}; return false;' title="go to blog"><img border='0' width='16' height='16' src="../../../map_icons/misc/blog.png" alt='blog'></a></big></b><BR><p><hr><BR><b>Modification:</b><br><a href='javascript_required.html' onclick='try { show_markers(["s37"]) } catch (e) {}; return false;' title="s37 1 modifs">APC</a>:<a href='javascript_required.html' onclick='try { show_markers(["s36"]) } catch (e) {}; return false;' title="s36 1 modifs">Slp1</a>|active<br>in cell<br><p class="bubble-cyan"><b>Identifiers</b><BR>NAME:APC:Slp1</p></span>]]></name>
+					</content>
+				</item>
+			</item>
+			<item id="p1_p2">
+				<content>				<name lang='en'><img align='top' class='blogfromright' border='0' src='../../../map_icons/misc/blog.png' alt='2'/> Cdc13:Cdc2</name></content>
+				<item id="s16" class="navicell" position="165.277;105.708">
+					<content>
+						<name lang='en'>Cdc13:Cdc2@cell</name>
+						<name lang='ln'><![CDATA[<span class="bubble"><b><big>Complex<br><a href='javascript_required.html' onclick='try { show_markers(["s20", "s17", "s16", "s19", "s18"]) } catch (e) {}; return false;' title="s20 s17 s16 s19 s18 5 modifs">Cdc13:&#8203;Cdc2</a> <a href='javascript_required.html' onclick='try { show_blog(2); } catch (e) {}; return false;' title="go to blog"><img border='0' width='16' height='16' src="../../../map_icons/misc/blog.png" alt='blog'></a></big></b><BR><p><hr><BR><b>Modification:</b><br><a href='javascript_required.html' onclick='try { show_markers(["s2", "s31", "s4", "s10", "s12", "s23", "s28", "s30"]) } catch (e) {}; return false;' title="s2 s31 s4 s10 s12 s23 s28 s30 8 modifs">Cdc13</a>:<a href='javascript_required.html' onclick='try { show_markers(["s1", "s13", "s9", "s11", "s21", "s25", "s29", "s33"]) } catch (e) {}; return false;' title="s1 s13 s9 s11 s21 s25 s29 s33 8 modifs">Cdc2</a><br>in cell<br><p class="bubble-cyan"><b>Identifiers</b><BR>NAME:Cdc13:Cdc2</p></span>]]></name>
+					</content>
+				</item>
+				<item id="s17" class="navicell" position="151.908;75.823">
+					<content>
+						<name lang='en'>Cdc13:Cdc2|Tyr15_pho@cell</name>
+						<name lang='ln'><![CDATA[<span class="bubble"><b><big>Complex<br><a href='javascript_required.html' onclick='try { show_markers(["s20", "s17", "s16", "s19", "s18"]) } catch (e) {}; return false;' title="s20 s17 s16 s19 s18 5 modifs">Cdc13:&#8203;Cdc2</a> <a href='javascript_required.html' onclick='try { show_blog(2); } catch (e) {}; return false;' title="go to blog"><img border='0' width='16' height='16' src="../../../map_icons/misc/blog.png" alt='blog'></a></big></b><BR><p><hr><BR><b>Modification:</b><br><a href='javascript_required.html' onclick='try { show_markers(["s2", "s31", "s4", "s10", "s12", "s23", "s28", "s30"]) } catch (e) {}; return false;' title="s2 s31 s4 s10 s12 s23 s28 s30 8 modifs">Cdc13</a>:<a href='javascript_required.html' onclick='try { show_markers(["s1", "s13", "s9", "s11", "s21", "s25", "s29", "s33"]) } catch (e) {}; return false;' title="s1 s13 s9 s11 s21 s25 s29 s33 8 modifs">Cdc2</a>|Tyr15_pho<br>in cell<br><p class="bubble-cyan"><b>Identifiers</b><BR>NAME:Cdc13:Cdc2</p></span>]]></name>
+					</content>
+				</item>
+				<item id="s20" class="navicell" position="96.244;139.911">
+					<content>
+						<name lang='en'>(Cdc13:Cdc2|Thr167_pho)|active@cell</name>
+						<name lang='ln'><![CDATA[<span class="bubble"><b><big>Complex<br><a href='javascript_required.html' onclick='try { show_markers(["s20", "s17", "s16", "s19", "s18"]) } catch (e) {}; return false;' title="s20 s17 s16 s19 s18 5 modifs">Cdc13:&#8203;Cdc2</a> <a href='javascript_required.html' onclick='try { show_blog(2); } catch (e) {}; return false;' title="go to blog"><img border='0' width='16' height='16' src="../../../map_icons/misc/blog.png" alt='blog'></a></big></b><BR><p><hr><BR><b>Modification:</b><br><a href='javascript_required.html' onclick='try { show_markers(["s2", "s31", "s4", "s10", "s12", "s23", "s28", "s30"]) } catch (e) {}; return false;' title="s2 s31 s4 s10 s12 s23 s28 s30 8 modifs">Cdc13</a>:<a href='javascript_required.html' onclick='try { show_markers(["s1", "s13", "s9", "s11", "s21", "s25", "s29", "s33"]) } catch (e) {}; return false;' title="s1 s13 s9 s11 s21 s25 s29 s33 8 modifs">Cdc2</a>|Thr167_pho)|active<br>in cell<br><p class="bubble-cyan"><b>Identifiers</b><BR>NAME:Cdc13:Cdc2</p></span>]]></name>
+					</content>
+				</item>
+				<item id="s18" class="navicell" position="117.375;75.848">
+					<content>
+						<name lang='en'>Cdc13:Cdc2|Thr14_pho|Tyr15_pho@cell</name>
+						<name lang='ln'><![CDATA[<span class="bubble"><b><big>Complex<br><a href='javascript_required.html' onclick='try { show_markers(["s20", "s17", "s16", "s19", "s18"]) } catch (e) {}; return false;' title="s20 s17 s16 s19 s18 5 modifs">Cdc13:&#8203;Cdc2</a> <a href='javascript_required.html' onclick='try { show_blog(2); } catch (e) {}; return false;' title="go to blog"><img border='0' width='16' height='16' src="../../../map_icons/misc/blog.png" alt='blog'></a></big></b><BR><p><hr><BR><b>Modification:</b><br><a href='javascript_required.html' onclick='try { show_markers(["s2", "s31", "s4", "s10", "s12", "s23", "s28", "s30"]) } catch (e) {}; return false;' title="s2 s31 s4 s10 s12 s23 s28 s30 8 modifs">Cdc13</a>:<a href='javascript_required.html' onclick='try { show_markers(["s1", "s13", "s9", "s11", "s21", "s25", "s29", "s33"]) } catch (e) {}; return false;' title="s1 s13 s9 s11 s21 s25 s29 s33 8 modifs">Cdc2</a>|Thr14_pho|Tyr15_pho<br>in cell<br><p class="bubble-cyan"><b>Identifiers</b><BR>NAME:Cdc13:Cdc2</p></span>]]></name>
+					</content>
+				</item>
+				<item id="s19" class="navicell" position="96.5;96.848">
+					<content>
+						<name lang='en'>Cdc13:Cdc2|Thr14_pho|Tyr15_pho|Thr167_pho@cell</name>
+						<name lang='ln'><![CDATA[<span class="bubble"><b><big>Complex<br><a href='javascript_required.html' onclick='try { show_markers(["s20", "s17", "s16", "s19", "s18"]) } catch (e) {}; return false;' title="s20 s17 s16 s19 s18 5 modifs">Cdc13:&#8203;Cdc2</a> <a href='javascript_required.html' onclick='try { show_blog(2); } catch (e) {}; return false;' title="go to blog"><img border='0' width='16' height='16' src="../../../map_icons/misc/blog.png" alt='blog'></a></big></b><BR><p><hr><BR><b>Modification:</b><br><a href='javascript_required.html' onclick='try { show_markers(["s2", "s31", "s4", "s10", "s12", "s23", "s28", "s30"]) } catch (e) {}; return false;' title="s2 s31 s4 s10 s12 s23 s28 s30 8 modifs">Cdc13</a>:<a href='javascript_required.html' onclick='try { show_markers(["s1", "s13", "s9", "s11", "s21", "s25", "s29", "s33"]) } catch (e) {}; return false;' title="s1 s13 s9 s11 s21 s25 s29 s33 8 modifs">Cdc2</a>|Thr14_pho|Tyr15_pho|Thr167_pho<br>in cell<br><p class="bubble-cyan"><b>Identifiers</b><BR>NAME:Cdc13:Cdc2</p></span>]]></name>
+					</content>
+				</item>
+			</item>
+			<item id="p1_p13_p2">
+				<content>				<name lang='en'><img align='top' class='blogfromright' border='0' src='../../../map_icons/misc/blog.png' alt='7'/> Cdc13:Cdc2:Rum1</name></content>
+				<item id="s41" class="navicell" position="138.459;127.086">
+					<content>
+						<name lang='en'>Cdc13:Cdc2|Thr167_pho:Rum1@cell</name>
+						<name lang='ln'><![CDATA[<span class="bubble"><b><big>Complex<br><a href='javascript_required.html' onclick='try { show_markers(["s41"]) } catch (e) {}; return false;' title="s41 1 modifs">Cdc13:&#8203;Cdc2:&#8203;Rum1</a> <a href='javascript_required.html' onclick='try { show_blog(7); } catch (e) {}; return false;' title="go to blog"><img border='0' width='16' height='16' src="../../../map_icons/misc/blog.png" alt='blog'></a></big></b><BR><p><hr><BR><b>Modification:</b><br><a href='javascript_required.html' onclick='try { show_markers(["s2", "s31", "s4", "s10", "s12", "s23", "s28", "s30"]) } catch (e) {}; return false;' title="s2 s31 s4 s10 s12 s23 s28 s30 8 modifs">Cdc13</a>:<a href='javascript_required.html' onclick='try { show_markers(["s1", "s13", "s9", "s11", "s21", "s25", "s29", "s33"]) } catch (e) {}; return false;' title="s1 s13 s9 s11 s21 s25 s29 s33 8 modifs">Cdc2</a>|Thr167_pho:<a href='javascript_required.html' onclick='try { show_markers(["s32", "s34", "s35"]) } catch (e) {}; return false;' title="s32 s34 s35 3 modifs">Rum1</a><br>in cell<br><p class="bubble-cyan"><b>Identifiers</b><BR>NAME:Cdc13:Cdc2:Rum1</p></span>]]></name>
+					</content>
+				</item>
+			</item>
+		</item>
+		<item id="REACTION" rel="REACTION" name="Reactions">
+			<content>			<name lang='en'>Reactions <img border='0' src="../../../map_icons/entity/REACTION.png"/></name></content>
+			<item id="re2" class="navicell" position="163.063;92.621">
+				<content>
+					<name lang='en'><img align='top' class='blogfromright' border='0' src='../../../map_icons/misc/blog.png' alt='13'/> re2</name>
+					<name lang='ln'><![CDATA[<span class="bubble">Reaction state_transition re2 <a href='javascript_required.html' onclick='try { show_blog(13); } catch (e) {}; return false;' title="go to blog"><img border='0' width='16' height='16' src="../../../map_icons/misc/blog.png" alt='blog'></a>
+<br><a href='javascript_required.html' onclick='try { show_markers(["s16"]) } catch (e) {}; return false;' title="s16 1 modifs">Cdc13:&#8203;Cdc2@cell</a> &rarr; <a href='javascript_required.html' onclick='try { show_markers(["s17"]) } catch (e) {}; return false;' title="s17 1 modifs">Cdc13:&#8203;Cdc2|&#8203;Tyr15_pho@cell</a>
+<br><b>Reaction regulators:</b>
+<dl><dt>Catalysis</dt><dd><ol><li><a href='javascript_required.html' onclick='try { show_markers(["s3"]) } catch (e) {}; return false;' title="s3 1 modifs">Wee1@cell</a></ol></dd></dl>
+</span>]]></name>
+				</content>
+			</item>
+			<item id="re3" class="navicell" position="135.584;82.769">
+				<content>
+					<name lang='en'><img align='top' class='blogfromright' border='0' src='../../../map_icons/misc/blog.png' alt='14'/> re3</name>
+					<name lang='ln'><![CDATA[<span class="bubble">Reaction state_transition re3 <a href='javascript_required.html' onclick='try { show_blog(14); } catch (e) {}; return false;' title="go to blog"><img border='0' width='16' height='16' src="../../../map_icons/misc/blog.png" alt='blog'></a>
+<br><a href='javascript_required.html' onclick='try { show_markers(["s17"]) } catch (e) {}; return false;' title="s17 1 modifs">Cdc13:&#8203;Cdc2|&#8203;Tyr15_pho@cell</a> &rarr; <a href='javascript_required.html' onclick='try { show_markers(["s18"]) } catch (e) {}; return false;' title="s18 1 modifs">Cdc13:&#8203;Cdc2|&#8203;Thr14_pho|&#8203;Tyr15_pho@cell</a>
+<br><b>Reaction regulators:</b>
+<dl><dt>Catalysis</dt><dd><ol><li><a href='javascript_required.html' onclick='try { show_markers(["s3"]) } catch (e) {}; return false;' title="s3 1 modifs">Wee1@cell</a></ol></dd></dl>
+</span>]]></name>
+				</content>
+			</item>
+			<item id="re4" class="navicell" position="110.145;96.777">
+				<content>
+					<name lang='en'><img align='top' class='blogfromright' border='0' src='../../../map_icons/misc/blog.png' alt='15'/> re4</name>
+					<name lang='ln'><![CDATA[<span class="bubble">Reaction state_transition re4 <a href='javascript_required.html' onclick='try { show_blog(15); } catch (e) {}; return false;' title="go to blog"><img border='0' width='16' height='16' src="../../../map_icons/misc/blog.png" alt='blog'></a>
+<br><a href='javascript_required.html' onclick='try { show_markers(["s18"]) } catch (e) {}; return false;' title="s18 1 modifs">Cdc13:&#8203;Cdc2|&#8203;Thr14_pho|&#8203;Tyr15_pho@cell</a> &rarr; <a href='javascript_required.html' onclick='try { show_markers(["s19"]) } catch (e) {}; return false;' title="s19 1 modifs">Cdc13:&#8203;Cdc2|&#8203;Thr14_pho|&#8203;Tyr15_pho|&#8203;Thr167_pho@cell</a>
+<br><b>Reaction regulators:</b>
+<dl><dt>Catalysis</dt><dd><ol><li><a href='javascript_required.html' onclick='try { show_markers(["s5"]) } catch (e) {}; return false;' title="s5 1 modifs">CAK@cell</a></ol></dd></dl>
+</span>]]></name>
+				</content>
+			</item>
+			<item id="re5" class="navicell" position="103.143;132.652">
+				<content>
+					<name lang='en'><img align='top' class='blogfromright' border='0' src='../../../map_icons/misc/blog.png' alt='16'/> re5</name>
+					<name lang='ln'><![CDATA[<span class="bubble">Reaction state_transition re5 <a href='javascript_required.html' onclick='try { show_blog(16); } catch (e) {}; return false;' title="go to blog"><img border='0' width='16' height='16' src="../../../map_icons/misc/blog.png" alt='blog'></a>
+<br><a href='javascript_required.html' onclick='try { show_markers(["s19"]) } catch (e) {}; return false;' title="s19 1 modifs">Cdc13:&#8203;Cdc2|&#8203;Thr14_pho|&#8203;Tyr15_pho|&#8203;Thr167_pho@cell</a> &rarr; <a href='javascript_required.html' onclick='try { show_markers(["s20"]) } catch (e) {}; return false;' title="s20 1 modifs">(Cdc13:&#8203;Cdc2|&#8203;Thr167_pho)|&#8203;active@cell</a>
+<br><b>Reaction regulators:</b>
+<dl><dt>Catalysis</dt><dd><ol><li><a href='javascript_required.html' onclick='try { show_markers(["s26"]) } catch (e) {}; return false;' title="s26 1 modifs">Cdc25|&#8203;pho|&#8203;active@cell</a></ol></dd></dl>
+</span>]]></name>
+				</content>
+			</item>
+			<item id="re10" class="navicell" position="154.968;143.925">
+				<content>
+					<name lang='en'><img align='top' class='blogfromright' border='0' src='../../../map_icons/misc/blog.png' alt='17'/> re10</name>
+					<name lang='ln'><![CDATA[<span class="bubble">Reaction state_transition re10 <a href='javascript_required.html' onclick='try { show_blog(17); } catch (e) {}; return false;' title="go to blog"><img border='0' width='16' height='16' src="../../../map_icons/misc/blog.png" alt='blog'></a>
+<br><a href='javascript_required.html' onclick='try { show_markers(["s13"]) } catch (e) {}; return false;' title="s13 1 modifs">Cdc2|&#8203;Thr167_pho@cell</a> &rarr; <a href='javascript_required.html' onclick='try { show_markers(["s1"]) } catch (e) {}; return false;' title="s1 1 modifs">Cdc2@cell</a>
+<br><b>No reaction regulators</b>
+</span>]]></name>
+				</content>
+			</item>
+			<item id="re11" class="navicell" position="108.615;147.070">
+				<content>
+					<name lang='en'><img align='top' class='blogfromright' border='0' src='../../../map_icons/misc/blog.png' alt='18'/> re11</name>
+					<name lang='ln'><![CDATA[<span class="bubble">Reaction dissociation re11 <a href='javascript_required.html' onclick='try { show_blog(18); } catch (e) {}; return false;' title="go to blog"><img border='0' width='16' height='16' src="../../../map_icons/misc/blog.png" alt='blog'></a>
+<br><a href='javascript_required.html' onclick='try { show_markers(["s20"]) } catch (e) {}; return false;' title="s20 1 modifs">(Cdc13:&#8203;Cdc2|&#8203;Thr167_pho)|&#8203;active@cell</a> &rarr; <a href='javascript_required.html' onclick='try { show_markers(["s13"]) } catch (e) {}; return false;' title="s13 1 modifs">Cdc2|&#8203;Thr167_pho@cell</a> + <a href='javascript_required.html' onclick='try { show_markers(["s31"]) } catch (e) {}; return false;' title="s31 1 modifs">Cdc13|&#8203;ubi@cell</a>
+<br><b>Reaction regulators:</b>
+<dl><dt>Catalysis</dt><dd><ol><li><a href='javascript_required.html' onclick='try { show_markers(["s46"]) } catch (e) {}; return false;' title="s46 1 modifs">(APC:&#8203;Slp1)|&#8203;active@cell</a></ol></dd></dl>
+</span>]]></name>
+				</content>
+			</item>
+			<item id="re12" class="navicell" position="143.5;154.604">
+				<content>
+					<name lang='en'><img align='top' class='blogfromright' border='0' src='../../../map_icons/misc/blog.png' alt='19'/> re12</name>
+					<name lang='ln'><![CDATA[<span class="bubble">Reaction state_transition re12 <a href='javascript_required.html' onclick='try { show_blog(19); } catch (e) {}; return false;' title="go to blog"><img border='0' width='16' height='16' src="../../../map_icons/misc/blog.png" alt='blog'></a>
+<br><a href='javascript_required.html' onclick='try { show_markers(["s31"]) } catch (e) {}; return false;' title="s31 1 modifs">Cdc13|&#8203;ubi@cell</a> &rarr; degraded
+<br><b>No reaction regulators</b>
+</span>]]></name>
+				</content>
+			</item>
+			<item id="re14" class="navicell" position="140.875;104.208">
+				<content>
+					<name lang='en'><img align='top' class='blogfromright' border='0' src='../../../map_icons/misc/blog.png' alt='20'/> re14</name>
+					<name lang='ln'><![CDATA[<span class="bubble">Reaction state_transition re14 <a href='javascript_required.html' onclick='try { show_blog(20); } catch (e) {}; return false;' title="go to blog"><img border='0' width='16' height='16' src="../../../map_icons/misc/blog.png" alt='blog'></a>
+<br><a href='javascript_required.html' onclick='try { show_markers(["s3"]) } catch (e) {}; return false;' title="s3 1 modifs">Wee1@cell</a> &rarr; <a href='javascript_required.html' onclick='try { show_markers(["s24"]) } catch (e) {}; return false;' title="s24 1 modifs">Wee1|&#8203;pho@cell</a>
+<br><b>Reaction regulators:</b>
+<dl><dt>Catalysis</dt><dd><ol><li><a href='javascript_required.html' onclick='try { show_markers(["s20"]) } catch (e) {}; return false;' title="s20 1 modifs">(Cdc13:&#8203;Cdc2|&#8203;Thr167_pho)|&#8203;active@cell</a></ol></dd></dl>
+</span>]]></name>
+				</content>
+			</item>
+			<item id="re15" class="navicell" position="87.104;123.645">
+				<content>
+					<name lang='en'><img align='top' class='blogfromright' border='0' src='../../../map_icons/misc/blog.png' alt='21'/> re15</name>
+					<name lang='ln'><![CDATA[<span class="bubble">Reaction state_transition re15 <a href='javascript_required.html' onclick='try { show_blog(21); } catch (e) {}; return false;' title="go to blog"><img border='0' width='16' height='16' src="../../../map_icons/misc/blog.png" alt='blog'></a>
+<br><a href='javascript_required.html' onclick='try { show_markers(["s7"]) } catch (e) {}; return false;' title="s7 1 modifs">Cdc25@cell</a> &rarr; <a href='javascript_required.html' onclick='try { show_markers(["s26"]) } catch (e) {}; return false;' title="s26 1 modifs">Cdc25|&#8203;pho|&#8203;active@cell</a>
+<br><b>Reaction regulators:</b>
+<dl><dt>Catalysis</dt><dd><ol><li><a href='javascript_required.html' onclick='try { show_markers(["s20"]) } catch (e) {}; return false;' title="s20 1 modifs">(Cdc13:&#8203;Cdc2|&#8203;Thr167_pho)|&#8203;active@cell</a><li><a href='javascript_required.html' onclick='try { show_markers(["s27"]) } catch (e) {}; return false;' title="s27 1 modifs">Plo1@cell</a></ol></dd></dl>
+</span>]]></name>
+				</content>
+			</item>
+			<item id="re16" class="navicell" position="81.458;123.666">
+				<content>
+					<name lang='en'><img align='top' class='blogfromright' border='0' src='../../../map_icons/misc/blog.png' alt='22'/> re16</name>
+					<name lang='ln'><![CDATA[<span class="bubble">Reaction state_transition re16 <a href='javascript_required.html' onclick='try { show_blog(22); } catch (e) {}; return false;' title="go to blog"><img border='0' width='16' height='16' src="../../../map_icons/misc/blog.png" alt='blog'></a>
+<br><a href='javascript_required.html' onclick='try { show_markers(["s26"]) } catch (e) {}; return false;' title="s26 1 modifs">Cdc25|&#8203;pho|&#8203;active@cell</a> &rarr; <a href='javascript_required.html' onclick='try { show_markers(["s7"]) } catch (e) {}; return false;' title="s7 1 modifs">Cdc25@cell</a>
+<br><b>Reaction regulators:</b>
+<dl><dt>Catalysis</dt><dd><ol><li><a href='javascript_required.html' onclick='try { show_markers(["s8"]) } catch (e) {}; return false;' title="s8 1 modifs">PP2A@cell</a></ol></dd></dl>
+</span>]]></name>
+				</content>
+			</item>
+			<item id="re17" class="navicell" position="171.919;119.257">
+				<content>
+					<name lang='en'><img align='top' class='blogfromright' border='0' src='../../../map_icons/misc/blog.png' alt='23'/> re17</name>
+					<name lang='ln'><![CDATA[<span class="bubble">Reaction heterodimer_association re17 <a href='javascript_required.html' onclick='try { show_blog(23); } catch (e) {}; return false;' title="go to blog"><img border='0' width='16' height='16' src="../../../map_icons/misc/blog.png" alt='blog'></a>
+<br><a href='javascript_required.html' onclick='try { show_markers(["s1"]) } catch (e) {}; return false;' title="s1 1 modifs">Cdc2@cell</a> + <a href='javascript_required.html' onclick='try { show_markers(["s2"]) } catch (e) {}; return false;' title="s2 1 modifs">Cdc13@cell</a> &rarr; <a href='javascript_required.html' onclick='try { show_markers(["s16"]) } catch (e) {}; return false;' title="s16 1 modifs">Cdc13:&#8203;Cdc2@cell</a>
+<br><b>No reaction regulators</b>
+</span>]]></name>
+				</content>
+			</item>
+			<item id="re18" class="navicell" position="110.895;161.083">
+				<content>
+					<name lang='en'><img align='top' class='blogfromright' border='0' src='../../../map_icons/misc/blog.png' alt='24'/> re18</name>
+					<name lang='ln'><![CDATA[<span class="bubble">Reaction state_transition re18 <a href='javascript_required.html' onclick='try { show_blog(24); } catch (e) {}; return false;' title="go to blog"><img border='0' width='16' height='16' src="../../../map_icons/misc/blog.png" alt='blog'></a>
+<br><a href='javascript_required.html' onclick='try { show_markers(["s46"]) } catch (e) {}; return false;' title="s46 1 modifs">(APC:&#8203;Slp1)|&#8203;active@cell</a> &rarr; <a href='javascript_required.html' onclick='try { show_markers(["s46"]) } catch (e) {}; return false;' title="s46 1 modifs">(APC:&#8203;Slp1)|&#8203;active@cell</a>
+<br><b>Reaction regulators:</b>
+<dl><dt>Catalysis</dt><dd><ol><li><a href='javascript_required.html' onclick='try { show_markers(["s20"]) } catch (e) {}; return false;' title="s20 1 modifs">(Cdc13:&#8203;Cdc2|&#8203;Thr167_pho)|&#8203;active@cell</a></ol></dd></dl>
+</span>]]></name>
+				</content>
+			</item>
+			<item id="re20" class="navicell" position="125.216;121.364">
+				<content>
+					<name lang='en'><img align='top' class='blogfromright' border='0' src='../../../map_icons/misc/blog.png' alt='25'/> re20</name>
+					<name lang='ln'><![CDATA[<span class="bubble">Reaction state_transition re20 <a href='javascript_required.html' onclick='try { show_blog(25); } catch (e) {}; return false;' title="go to blog"><img border='0' width='16' height='16' src="../../../map_icons/misc/blog.png" alt='blog'></a>
+<br><a href='javascript_required.html' onclick='try { show_markers(["s32"]) } catch (e) {}; return false;' title="s32 1 modifs">Rum1@cell</a> &rarr; <a href='javascript_required.html' onclick='try { show_markers(["s34"]) } catch (e) {}; return false;' title="s34 1 modifs">Rum1|&#8203;pho@cell</a>
+<br><b>Reaction regulators:</b>
+<dl><dt>Catalysis</dt><dd><ol><li><a href='javascript_required.html' onclick='try { show_markers(["s20"]) } catch (e) {}; return false;' title="s20 1 modifs">(Cdc13:&#8203;Cdc2|&#8203;Thr167_pho)|&#8203;active@cell</a></ol></dd></dl>
+</span>]]></name>
+				</content>
+			</item>
+			<item id="re23" class="navicell" position="125.258;110.489">
+				<content>
+					<name lang='en'><img align='top' class='blogfromright' border='0' src='../../../map_icons/misc/blog.png' alt='26'/> re23</name>
+					<name lang='ln'><![CDATA[<span class="bubble">Reaction state_transition re23 <a href='javascript_required.html' onclick='try { show_blog(26); } catch (e) {}; return false;' title="go to blog"><img border='0' width='16' height='16' src="../../../map_icons/misc/blog.png" alt='blog'></a>
+<br><a href='javascript_required.html' onclick='try { show_markers(["s34"]) } catch (e) {}; return false;' title="s34 1 modifs">Rum1|&#8203;pho@cell</a> &rarr; degraded
+<br><b>No reaction regulators</b>
+</span>]]></name>
+				</content>
+			</item>
+			<item id="re24" class="navicell" position="143.234;134.059">
+				<content>
+					<name lang='en'><img align='top' class='blogfromright' border='0' src='../../../map_icons/misc/blog.png' alt='27'/> re24</name>
+					<name lang='ln'><![CDATA[<span class="bubble">Reaction heterodimer_association re24 <a href='javascript_required.html' onclick='try { show_blog(27); } catch (e) {}; return false;' title="go to blog"><img border='0' width='16' height='16' src="../../../map_icons/misc/blog.png" alt='blog'></a>
+<br><a href='javascript_required.html' onclick='try { show_markers(["s20"]) } catch (e) {}; return false;' title="s20 1 modifs">(Cdc13:&#8203;Cdc2|&#8203;Thr167_pho)|&#8203;active@cell</a> + <a href='javascript_required.html' onclick='try { show_markers(["s32"]) } catch (e) {}; return false;' title="s32 1 modifs">Rum1@cell</a> &rarr; <a href='javascript_required.html' onclick='try { show_markers(["s41"]) } catch (e) {}; return false;' title="s41 1 modifs">Cdc13:&#8203;Cdc2|&#8203;Thr167_pho:&#8203;Rum1@cell</a>
+<br><b>No reaction regulators</b>
+</span>]]></name>
+				</content>
+			</item>
+		</item>
+	</item>
+	<item id="modules" state="open">
+		<content>		<name lang='en'>Modules</name></content>
+		<item id="RUM1__" class="navicell" position="123.25;120.625">
+			<content>
+				<name lang='en'><img align='top' class='blogfromright' border='0' src='../../../map_icons/misc/blog.png' alt='29' title='go to RUM1 blog'/> <img align='top' class='mapmodulefromright' border='0' src='../../../map_icons/map.png' alt='RUM1' title='go to RUM1 map view'/> RUM1</name>
+				<name lang='ln'><![CDATA[<span class="bubble"><b>M-Phase map from CellDesigner samples set</b> <a href='javascript_required.html' onclick='try { show_blog(29); } catch (e) {}; return false;' title="go to blog"><img border='0' width='16' height='16' src="../../../map_icons/misc/blog.png" alt='blog'></a> <a href='javascript_required.html' onclick='try { nv_perform("nv_open_module", window, "RUM1", []); } catch (e) {}; return false;' title="RUM1"><img border='0' src="../../../map_icons/map.png" alt='map' /></a></span>]]></name>
+			</content>
+		</item>
+		<item id="WEE1__" class="navicell" position="138.5;98.375">
+			<content>
+				<name lang='en'><img align='top' class='blogfromright' border='0' src='../../../map_icons/misc/blog.png' alt='30' title='go to WEE1 blog'/> <img align='top' class='mapmodulefromright' border='0' src='../../../map_icons/map.png' alt='WEE1' title='go to WEE1 map view'/> WEE1</name>
+				<name lang='ln'><![CDATA[<span class="bubble"><b>WEE1 map</b> <a href='javascript_required.html' onclick='try { show_blog(30); } catch (e) {}; return false;' title="go to blog"><img border='0' width='16' height='16' src="../../../map_icons/misc/blog.png" alt='blog'></a> <a href='javascript_required.html' onclick='try { nv_perform("nv_open_module", window, "WEE1", []); } catch (e) {}; return false;' title="WEE1"><img border='0' src="../../../map_icons/map.png" alt='map' /></a><br>This module describes phosphorylation of Wee1</span>]]></name>
+			</content>
+		</item>
+		<item id="CDC25__" class="navicell" position="82.875;120.375">
+			<content>
+				<name lang='en'><img align='top' class='blogfromright' border='0' src='../../../map_icons/misc/blog.png' alt='31' title='go to CDC25 blog'/> <img align='top' class='mapmodulefromright' border='0' src='../../../map_icons/map.png' alt='CDC25' title='go to CDC25 map view'/> CDC25</name>
+				<name lang='ln'><![CDATA[<span class="bubble"><b>CDC25 Module map</b> <a href='javascript_required.html' onclick='try { show_blog(31); } catch (e) {}; return false;' title="go to blog"><img border='0' width='16' height='16' src="../../../map_icons/misc/blog.png" alt='blog'></a> <a href='javascript_required.html' onclick='try { nv_perform("nv_open_module", window, "CDC25", []); } catch (e) {}; return false;' title="CDC25"><img border='0' src="../../../map_icons/map.png" alt='map' /></a><br>This module describes phosphorylation-dephosphorylation cycle of Cdc25</span>]]></name>
+			</content>
+		</item>
+		<item id="SLP1__" class="navicell" position="105.25;158.5">
+			<content>
+				<name lang='en'><img align='top' class='blogfromright' border='0' src='../../../map_icons/misc/blog.png' alt='32' title='go to SLP1 blog'/> <img align='top' class='mapmodulefromright' border='0' src='../../../map_icons/map.png' alt='SLP1' title='go to SLP1 map view'/> SLP1</name>
+				<name lang='ln'><![CDATA[<span class="bubble"><b>M-Phase map from CellDesigner samples set</b> <a href='javascript_required.html' onclick='try { show_blog(32); } catch (e) {}; return false;' title="go to blog"><img border='0' width='16' height='16' src="../../../map_icons/misc/blog.png" alt='blog'></a> <a href='javascript_required.html' onclick='try { nv_perform("nv_open_module", window, "SLP1", []); } catch (e) {}; return false;' title="SLP1"><img border='0' src="../../../map_icons/map.png" alt='map' /></a></span>]]></name>
+			</content>
+		</item>
+		<item id="CDC2__" class="navicell" position="148.125;142.125">
+			<content>
+				<name lang='en'><img align='top' class='blogfromright' border='0' src='../../../map_icons/misc/blog.png' alt='33' title='go to CDC2 blog'/> <img align='top' class='mapmodulefromright' border='0' src='../../../map_icons/map.png' alt='CDC2' title='go to CDC2 map view'/> CDC2</name>
+				<name lang='ln'><![CDATA[<span class="bubble"><b>M-Phase map from CellDesigner samples set</b> <a href='javascript_required.html' onclick='try { show_blog(33); } catch (e) {}; return false;' title="go to blog"><img border='0' width='16' height='16' src="../../../map_icons/misc/blog.png" alt='blog'></a> <a href='javascript_required.html' onclick='try { nv_perform("nv_open_module", window, "CDC2", []); } catch (e) {}; return false;' title="CDC2"><img border='0' src="../../../map_icons/map.png" alt='map' /></a></span>]]></name>
+			</content>
+		</item>
+	</item>
+</root>

@@ -1,0 +1,5 @@
+LICENSE.txt
+README.txt
+setup.py
+curie/__init__.py
+curie/navicell.py
