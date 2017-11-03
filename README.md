@@ -1,5 +1,7 @@
 # NaviCell
 
+Here is the [procedure for construction of maps](map_construction_procedures/NaviCell_Maps_Preparation_Procedure.pdf) in CellDesigner and preparation of modular hierarchical map structure. The procedure contains instructions for generation of semantic zoom levels for maps using a [set of scripts](map_construction_procedures/procedure_scripts).
+
 This is a <b>NaviCell Factory</b> package allowing to convert a <a href="http://celldesigner.org">CellDesigner</a> map into <a href="http://navicell.curie.fr">NaviCell</a> 
 Google Maps-based enviroment, allowing to explore the map online and visualize high-throughput data on top of it with <a href="https://navicell.curie.fr/pages/nav_web_service.html">NaviCell Web Service</a>.
 
