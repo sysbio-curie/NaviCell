@@ -12,12 +12,12 @@ import argparse
 class CustomFormatter(argparse.RawDescriptionHelpFormatter,
 					argparse.ArgumentDefaultsHelpFormatter): pass
 
-parser = argparse.ArgumentParser(prog='BiNoM_Like_Staining',
+parser = argparse.ArgumentParser(prog='Module_staining',
 								formatter_class=CustomFormatter,
 								description=
 """
 #-------------------------------------------#
-# BiNoM_Like_Staining                       #
+# Module_staining                       #
 #                                           #
 # Author : SOMPAIRAC Nicolas                #
 # Contact : nicolas.sompairac@gmail.com     #
