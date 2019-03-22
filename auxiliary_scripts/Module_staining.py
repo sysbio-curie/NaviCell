@@ -17,7 +17,7 @@ parser = argparse.ArgumentParser(prog='Module_staining',
 								description=
 """
 #-------------------------------------------#
-# Module_staining                       #
+# Module_staining                           #
 #                                           #
 # Author : SOMPAIRAC Nicolas                #
 # Contact : nicolas.sompairac@gmail.com     #
