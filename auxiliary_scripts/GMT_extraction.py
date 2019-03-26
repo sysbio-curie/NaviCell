@@ -45,7 +45,11 @@ file_locations.add_argument('--gmt', metavar='GMTs_folder', type=str,
 							default="GMT",
 							help=("Location and name of the GMT folder used to"
 								"output GMT files from maps."))
-
+file_locations.add_argument('--cor', metavar='Cor_file', type=str,
+							default="ACSN2_HUGO_Correspondence.gmt",
+							help=("Location and name of the correspondence file"
+								" between the specie names and their HUGO IDs, "
+								"in GMT format."))
 
 args = parser.parse_args()
 
@@ -56,19 +60,35 @@ args = parser.parse_args()
 
 
 
+def Get_correspondencies(filename):
+	"""
+		Read a GMT file of correspondence between specie names and their HUGO.
+	"""
 
-def Print_number_of_existing_modules(info_dict):
+	name_hugo_dict = {}
 
-	mod = 0
-	for item in info_dict.keys():
-		if info_dict[item]['module']:
-			mod+=1
-	print mod, len(info_dict.keys())
+	with open(filename, 'rU') as infile:
 
-	return
+		for line in infile:
+
+			tmp = line.split()
+
+			if tmp[0] not in name_hugo_dict:
+
+				name_hugo_dict[tmp[0]] = []
+
+			for hugo in xrange(2, len(tmp)):
+
+				if tmp[hugo] not in name_hugo_dict[tmp[0]]:
+					name_hugo_dict[tmp[0]].append(tmp[hugo])
+
+	return name_hugo_dict
 
 
 def Get_notes(item_tree):
+	"""
+		Find the MODULE information in the annotations.
+	"""
 
 	modules_list = []
 
@@ -84,6 +104,9 @@ def Get_notes(item_tree):
 
 
 def Retrieve_proteins_info(root, mod_dict):
+	"""
+		Retrieve annotations of Proteins.
+	"""
 
 	prot_dict = {}
 
@@ -113,9 +136,6 @@ def Retrieve_proteins_info(root, mod_dict):
 
 			prot_dict[prot_id]['module'].extend(Get_notes(prot))
 
-			# print prot.get('id'), prot.get('name')
-			# print prot_dict[prot_id]['module']
-
 			for mod in prot_dict[prot_id]['module']:
 
 				if mod not in mod_dict:
@@ -141,6 +161,9 @@ def Retrieve_proteins_info(root, mod_dict):
 
 
 def Retrieve_genes_info(root, mod_dict):
+	"""
+		Retrieve annotations of Genes.
+	"""
 
 	gene_dict = {}
 
@@ -195,6 +218,9 @@ def Retrieve_genes_info(root, mod_dict):
 
 
 def Retrieve_rna_info(root, mod_dict):
+	"""
+		Retrieve annotations of RNA.
+	"""
 
 	rna_dict = {}
 
@@ -249,6 +275,9 @@ def Retrieve_rna_info(root, mod_dict):
 
 
 def Retrieve_antisense_rna_info(root, mod_dict):
+	"""
+		Retrieve annotations of Antisense RNA.
+	"""
 
 	antirna_dict = {}
 
@@ -303,6 +332,9 @@ def Retrieve_antisense_rna_info(root, mod_dict):
 
 
 def Retrieve_species_info(root, prot_dict, gene_dict, rna_dict, antirna_dict, mod_dict):
+	"""
+		Retrieve annotations of Species and Included Species.
+	"""
 
 	spec_dict = {}
 	spec_inc_list = []
@@ -312,7 +344,6 @@ def Retrieve_species_info(root, prot_dict, gene_dict, rna_dict, antirna_dict, mo
 
 		for spec in list_spec:
 
-			#print spec.tag, spec.attrib
 			spec_id = spec.get('id')
 			spec_dict[spec_id] = {}
 			spec_dict[spec_id]['name'] = spec.get('name')
@@ -332,11 +363,8 @@ def Retrieve_species_info(root, prot_dict, gene_dict, rna_dict, antirna_dict, mo
 						if 'MODULE:' in item and item[index+1:] not in spec_dict[spec_id]['module']:
 
 							spec_dict[spec_id]['module'].append(item[index+1:])
-							#print spec_id, spec_dict[spec_id]['module']
 
 			spec_dict[spec_id]['module'].extend(Get_notes(spec))
-
-			#print spec_dict[spec_id]['module']
 
 			for mod in spec_dict[spec_id]['module']:
 
@@ -364,7 +392,6 @@ def Retrieve_species_info(root, prot_dict, gene_dict, rna_dict, antirna_dict, mo
 
 		for spec in list_spec:
 
-			#print spec.tag, spec.attrib
 			spec_id = spec.get('id')
 			spec_dict[spec_id] = {}
 			spec_dict[spec_id]['name'] = spec.get('name')
@@ -386,7 +413,6 @@ def Retrieve_species_info(root, prot_dict, gene_dict, rna_dict, antirna_dict, mo
 						if 'MODULE:' in item and item[index+1:] not in spec_dict[spec_id]['module']:
 
 							spec_dict[spec_id]['module'].append(item[index+1:])
-							#print spec_id, spec_dict[spec_id]['module']
 
 			spec_dict[spec_id]['module'].extend(Get_notes(spec))
 
@@ -418,25 +444,53 @@ def Retrieve_species_info(root, prot_dict, gene_dict, rna_dict, antirna_dict, mo
 
 	return spec_dict, spec_inc_list, mod_dict
 
-def Save_GMT_file(mod_dict, filename):
+
+def Save_GMT_file(mod_dict, name_hugo_dict, filename):
+	"""
+		Save the Modules and their corresponding species content in HUGO IDs.
+		The output file is in GMT format.
+	"""
 
 	with open(filename, 'w') as outfile:
 
 		for mod in mod_dict.keys():
 
 			if "name" in mod_dict[mod]:
-				outfile.write(mod+"\tna\t")
-				for name in mod_dict[mod]["name"]:
-					#print repr(name)
-					name = name.encode("utf-8")
-					outfile.write(name+'\t')
-				outfile.write("\n")
 
-			if "spec_id" in mod_dict[mod]:
-				outfile.write(mod+"\tSpec_ID\t")
-				for spec_id in mod_dict[mod]["spec_id"]:
-					outfile.write(spec_id+'\t')
-				outfile.write("\n")
+				to_print = []
+
+				for name in mod_dict[mod]["name"]:
+
+					name = name.encode("utf-8")
+
+					not_hugo = False
+
+					if name in name_hugo_dict:
+
+						for hugo in name_hugo_dict[name]:
+
+							to_print.append(hugo)
+
+						continue
+
+					else:
+						if "*" in name:
+							not_hugo = True
+						for c in name:
+							if c.islower():
+								not_hugo = True
+
+					if not_hugo:
+						continue
+					else:
+						to_print.append(name)
+
+				if to_print:
+					outfile.write(mod+"\tna\t")
+					for item in to_print:
+						outfile.write(item+"\t")
+
+					outfile.write("\n")
 
 	return
 
@@ -448,6 +502,9 @@ print "\n"
 
 maps_folder = args.map
 gmt_folder = args.gmt
+cor_file = args.cor
+
+Name_to_HUGO_dict = Get_correspondencies(cor_file)
 
 glob_list = glob.glob(maps_folder+"*.xml")
 map_names = [os.path.basename(x) for x in glob.glob(maps_folder+"*.xml")]
@@ -470,7 +527,9 @@ for file_path, filename in zip(glob_list, map_names):
 
 	Antisense_RNA_dict_info, Module_dict = Retrieve_antisense_rna_info(Root, Module_dict)
 
-	Save_GMT_file(Module_dict, Filename)
+	Species_info_dict, Species_included_list, Module_dict = Retrieve_species_info(Root, Proteins_dict_info, Genes_dict_info, RNA_dict_info, Antisense_RNA_dict_info, Module_dict)
+
+	Save_GMT_file(Module_dict, Name_to_HUGO_dict, Filename)
 	print "Done!"
 
 print "You can find the resulting GMT files in the folder: "+gmt_folder
