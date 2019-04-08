@@ -11,8 +11,7 @@
 #
 
 PMID	http://www.ncbi.nlm.nih.gov/sites/entrez?Db=pubmed&amp;Cmd=ShowDetailView&amp;TermToSearch=%PMID%	[0-9]+
-HUGO	http://www.genenames.org/cgi-bin/quick_search.pl?.cgifields=type&type=equals&num=50&submit=Submit&search=%HUGO%	[A-Za-z0-9-_]+
-MOLSIGDB	http://software.broadinstitute.org/gsea/msigdb/cards/%MOLSIGDB%	[A-Za-z0-9-_.]+
+HUGO	http://www.genenames.org/cgi-bin/quick_search.pl?.cgifields=type&type=equals&num=50&submit=Submit&search=%HUGO%	[A-Z0-9-_]+
 HGNC	http://www.genenames.org/data/hgnc_data.php?hgnc_id=%HGNC%	[0-9]+
 ENTREZ	http://www.ncbi.nlm.nih.gov/gene/%ENTREZ%	[0-9]+
 UNIPROT	http://www.expasy.org/uniprot/%UNIPROT%	[A-Z][A-Z0-9]{5}
@@ -27,14 +26,26 @@ KEGG	http://www.genome.jp/dbget-bin/www_bget?hsa:%KEGG%	[A-Z0-9]+
 GENECARDS	http://www.genecards.org/cgi-bin/carddisp.pl?gc_id=%GENECARDS%	[A-Z0-9]+
 ATLASONC	http://atlasgeneticsoncology.org//Genes/%ATLASONC%.html	[A-Za-z0-9_]+
 ATONC	http://atlasgeneticsoncology.org//Genes/%ATONC%.html	[A-Za-z0-9_]+
-ACSN	https://acsn.curie.fr/files/acsn_v1.1.gmt	[A-Z0-9-_]+
-SPEED	http://speed.sys-bio.net/cgi-bin/download_annotations.py	[A-Z0-9-_]+
-ICABITON	http://www.cell.com/cell-reports/fulltext/S2211-1247(14)00904-8	[A-Z0-9-_]+
 
+# Added by Nicolas Sompairac for RECON2 Map June 2017
+VMH	http://vmh.uni.lu/#%VMH%	[A-Za-z0-9/]+
+# hmdb	http://identifiers.org/hmdb/%hmdb%	[A-Z0-9]+
+# ec-code	http://identifiers.org/ec-code/%ec-code%	[0-9\.]+
+# kegg.compound	http://identifiers.org/kegg.compound/%kegg.compound%	[A-Z0-9]+
+# obo.chebi	http://identifiers.org/obo.chebi/%obo.chebi%	[A-Z0-9%]+
+# End of addition
+
+# Added by Nicolas Sompairac for ACSN2 Map July 2018
+HMC	https://acsn.curie.fr/Temp/HMC.html	[A-Za-z0-9_]+
 
 CONFIDENCE	@<img width='100' height='22' border='0' src='../../../map_icons/confidence/%CONFIDENCE%.gif'/>	[0-9_]+
 
-MAP	../../%MAP%/master/index.html	[A-Za-z0-9_]+	-	&nbsp;	%MAP%_master	icon
-MODULE	../../%MAP%/%MODULE%/index.html	[A-Za-z0-9_]+	 */ *\b(MODULE)(:)	&nbsp;/&nbsp;	%MAP%_%MODULE%	icon
+# EV: 2017-05-26
+
+# MAP	../../%MAP%/master/index.html	[A-Za-z0-9_]+	-	&nbsp;	%MAP%_master	icon
+# MODULE	../../%MAP%/%MODULE%/index.html	[A-Za-z0-9_]+	 */ *\b(MODULE)(:)	&nbsp;/&nbsp;	%MAP%_%MODULE%	icon
+
+MAP	../../%MAP%/master/index.html	[A-Za-z0-9_]+(#[A-Za-z0-9_,]+)?	-	&nbsp;	%MAP%_master	icon
+MODULE	../../%MAP%/%MODULE%/index.html	[A-Za-z0-9_]+(#[A-Za-z0-9_,]+)?	 */ *\b(MODULE)(:)	&nbsp;/&nbsp;	%MAP%_%MODULE%	icon
 
 ~@[A-Za-z0-9_\.-]+	http://identifiers.org/@TAG/@VAL	[A-Za-z0-9_/\.:-]+					~^@
