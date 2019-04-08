@@ -154,9 +154,15 @@ function scaled_boxes_from_boxes(overlay, boxes) {
 			box.gpt = new google.maps.Point(box[0], box[2]);
 		}
 		var latlng = mapProjection.fromPointToLatLng(box.gpt);
-		var pix = overlayProjection.fromLatLngToDivPixel(latlng);
-		var bx = pix.x - div_left;
-		var by = pix.y - div_top;
+		if (GMAPS_V3_3x) {
+			var pix = overlayProjection.fromLatLngToContainerPixel(latlng);
+			var bx = pix.x;
+			var by = pix.y;
+		} else {
+			var pix = overlayProjection.fromLatLngToDivPixel(latlng);
+			var bx = pix.x - div_left;
+			var by = pix.y - div_top;
+		}
 		var bw = box[1]*scale;
 		var bh = box[3]*scale;
 		array.push([pix.x, bw, pix.y, bh]);
@@ -447,15 +453,18 @@ function event_ckmap(e, type, overlay) {
 	//var event = (overlay.win.event ? overlay.win.event : overlay.event);
 	var event = overlay.win.event;
 	var button = (event ? event.button : -1);
-	if (type != 'mouseover' && event) {
-		console.log("type=" + type + " alt " + event.altKey + " " + event.ctrlKey + " " + event.shiftKey + " button=" + button + " " + x + " " + y);
-	}
 
 	var is_click = button <= 0 && (type == "click" || (type == "mouseup" && event && event.ctrlKey));
 	var overlayProjection = overlay.getProjection();
 	var mapProjection = overlay.map_.getProjection();
 	var scale = Math.pow(2, overlay.map_.zoom);
 	var div = overlay.div_;
+
+	if (type != 'mouseover' && event) {
+		console.log("type=" + type + " alt " + event.altKey + " " + event.ctrlKey + " " + event.shiftKey + " button=" + button + " " + x + " " + y);
+		var latlng = mapProjection.fromPointToLatLng({x: x, y: y}, 0, 1);
+		console.log("lat-lng: " + latlng.lat() + " " + latlng.lng() + " " + div.left + " " + div.top + " " + overlay.draw_canvas_.style.left + " " + overlay.draw_canvas_.style.top);
+	}
 
 	var found = false;
 	var module = overlay.win.document.navicell_module_name;
@@ -468,15 +477,23 @@ function event_ckmap(e, type, overlay) {
 	var clicked_center_box = null;
 	for (var id in modif_map) {
 		var boxes = modif_map[id];
+		//console.log("boxes.length: " + id + " " + boxes.length + " " + x + " " + y);
 		for (var kk = 0; kk < boxes.length; ++kk) {
 			var box = boxes[kk];
 			if (!box.gpt) {
 				box.gpt = new google.maps.Point(box[0], box[2]);
 			}
 			var latlng = mapProjection.fromPointToLatLng(box.gpt);
-			var pix = overlayProjection.fromLatLngToDivPixel(latlng);
-			var bx = pix.x - div.left;
-			var by = pix.y - div.top;
+			if (GMAPS_V3_3x) {
+				var pix = overlayProjection.fromLatLngToContainerPixel(latlng);
+				var bx = pix.x;
+				var by = pix.y;
+			} else {
+				// the following function will call projection.fromLatLngToPoint
+				var pix = overlayProjection.fromLatLngToDivPixel(latlng);
+				var bx = pix.x - div.left;
+				var by = pix.y - div.top;
+			}
 			var bw = box[1]*scale;
 			var bh = box[3]*scale;
 			if (x >= bx && x <= bx+bw && y >= by && y <= by+bh) {
@@ -743,6 +760,7 @@ USGSOverlay.prototype.onAdd = function() {
 	div.appendChild(draw_canvas);
 
 	this.div_ = div;
+	this.draw_canvas_ = draw_canvas;
 
 	if (draw_canvas.getContext) {
 		this.context = draw_canvas.getContext('2d');
@@ -761,11 +779,25 @@ USGSOverlay.prototype.resize = function() {
 		return;
 	}
 	var overlayProjection = this.getProjection();
-	var ne = overlayProjection.fromLatLngToDivPixel(this.map_.getBounds().getSouthWest());
-	var sw = overlayProjection.fromLatLngToDivPixel(this.map_.getBounds().getNorthEast());
+	if (GMAPS_V3_3x) {
+		var ne = overlayProjection.fromLatLngToContainerPixel(this.map_.getBounds().getSouthWest());
+		var sw = overlayProjection.fromLatLngToContainerPixel(this.map_.getBounds().getNorthEast());
+	} else {
+		var ne = overlayProjection.fromLatLngToDivPixel(this.map_.getBounds().getSouthWest());
+		var sw = overlayProjection.fromLatLngToDivPixel(this.map_.getBounds().getNorthEast());
+	}
 
-	var width = ne.x - sw.x;
-	var height = sw.y - ne.y;
+	var width = sw.x;
+	var height = ne.y;
+	if (GMAPS_V3_3x_force) {
+		var width = sw.x - ne.x;
+		var height = ne.y - sw.y;
+	} else {
+		var width = ne.x - sw.x;
+		var height = sw.y - ne.y;
+	}
+	//console.log("ne " + ne.x + " " + ne.y + " " + sw.x + " " + sw.y);
+	//console.log("width " + width + " " + height);
 
 	var div = this.div_;
 	if (div.width != width || div.height != height) {
@@ -775,8 +807,14 @@ USGSOverlay.prototype.resize = function() {
 		div.style.height = height + 'px';
 	}
 
-	var left = sw.x;
-	var top = ne.y;
+	if (GMAPS_V3_3x_force) {
+		var left = ne.x;
+		var top = sw.y;
+	} else {
+		var left = sw.x;
+		var top = ne.y;
+	}
+	//console.log("width " + width + " height " + height + " left " + left + " top " + top);
 	if (div.left != left || div.top != top) {
 		div.left = left;
 		div.top = top;
@@ -802,8 +840,13 @@ USGSOverlay.prototype.highlight = function(boxes) {
 	var div_top = this.image_mode ? this.delta_y : div.top;
 	for (var idx in boxes) {
 		var box = boxes[idx];
-		var x = box[0] - div_left;
-		var y = box[2] - div_top;
+		if (GMAPS_V3_3x) {
+			var x = box[0];
+			var y = box[2];
+		} else {
+			var x = box[0] - div_left;
+			var y = box[2] - div_top;
+		}
 		var w = box[1];
 		var h = box[3];
 		context.clearRect(x-1, y-1, w+2, h+2);
@@ -858,6 +901,12 @@ USGSOverlay.prototype.draw = function(module) {
 			this.arrpos = navicell.dataset.getSelectedArrayPos(module);
 		}
 
+		/*
+		console.log("filling black!");
+		this.context.fillStyle = "#00ff00";
+		this.context.fillRect(20, 20, MAX_SCREEN_WIDTH, MAX_SCREEN_HEIGHT);
+		return;
+		*/
 		var arrpos = this.arrpos;
 		if (arrpos && arrpos.length) {
 			var div = this.div_;
@@ -870,26 +919,38 @@ USGSOverlay.prototype.draw = function(module) {
 			var div_height = this.image_mode ? MAX_SCREEN_HEIGHT : div.height+MARGIN;
 			var div_left = this.image_mode ? this.delta_x : div.left;
 			var div_top = this.image_mode ? this.delta_y : div.top;
-			//var div_left = div.left;
-			//var div_top = div.top;
 			cache_value_cnt = 0;
 			no_cache_value_cnt = 0;
-			console.log("div width: " + div_width + " height: " + div_height + " left: " + div_left + " (" + div.left + ") top: " + div_top + " (" + div.top + ") " + arrpos.length);
+			//console.log("image_mode " + this.image_mode + " " + div.width + " " + div.height);
+			//console.log("div width: " + div_width + " height: " + div_height + " left: " + div_left + " (" + div.left + ") top: " + div_top + " (" + div.top + ") " + arrpos.length);
 			for (var nn = 0; nn < arrpos.length; ++nn) {
 				var latlng = mapProjection.fromPointToLatLng(arrpos[nn].p);
-				var pix = overlayProjection.fromLatLngToDivPixel(latlng);
-				if (nn == 0) {
-					console.log("latlng: " + latlng.lat() + " " + latlng.lng());
-					console.log("pix: " + pix.x + " " + pix.y);
+				if (GMAPS_V3_3x) {
+					var pix = overlayProjection.fromLatLngToContainerPixel(latlng);
+					var pos_x = pix.x;
+					var pos_y = pix.y;
+					// TEST:
+					pos_x -= div.left;
+					pos_y -= div.top;
+				} else {
+					var pix = overlayProjection.fromLatLngToDivPixel(latlng);
+					var pos_x = pix.x - div_left;
+					var pos_y = pix.y - div_top;
 				}
-				var pos_x = pix.x - div_left;
-				var pos_y = pix.y - div_top;
+				if (nn == 0) {
+					//console.log("latlng: " + latlng.lat() + " " + latlng.lng());
+					//console.log("pix: " + pix.x + " " + pix.y);
+				}
 				if (this.image_mode ||
+				    /*(pos_x > -MARGIN && pos_y >= 0)) {*/ // to complete: EV-2018-08-29
 				    (pos_x > -MARGIN && pos_x < div_width &&
 				     pos_y >= 0 && pos_y < div_height)) {
-					navicell.dataset.drawDLO(module, this, this.context, scale, arrpos[nn].id, arrpos[nn].gene_name, pix.x-div_left, pix.y-div_top);
+					navicell.dataset.drawDLO(module, this, this.context, scale, arrpos[nn].id, arrpos[nn].gene_name, pos_x, pos_y);
+					//console.log("drawn " + pos_x + " " + pos_y);
+					//console.log("drawn");
 				} else {
-					console.log("not drawed");
+					//console.log("not drawed " + pos_x + " " + pos_y);
+					//console.log("not drawed");
 				}
 			}
 			//console.log("CACHE_VALUE_CNT " + cache_value_cnt + " " + no_cache_value_cnt);
@@ -906,8 +967,13 @@ USGSOverlay.prototype.draw = function(module) {
 		var box = boxes[0];
 		var div_left = this.image_mode ? this.delta_x : div.left;
 		var div_top = this.image_mode ? this.delta_y : div.top;
-		var x = box[0] - div_left;
-		var y = box[2] - div_top;
+		if (GMAPS_V3_3x) {
+			var x = box[0];
+			var y = box[2];
+		} else {
+			var x = box[0] - div_left;
+			var y = box[2] - div_top;
+		}
 		var w = box[1];
 		var h = box[3];
 		var dim = w > h ? w : h;

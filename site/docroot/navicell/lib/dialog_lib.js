@@ -2220,6 +2220,7 @@ function draw_heatmap(module, overlay, context, scale, modif_id, gene_name, topx
 			if (bg != undefined && value != undefined && value != INVALID_VALUE) {
 				var fg = getFG_from_BG(bg);
 				context.fillStyle = "#" + bg;
+				//console.log("start_x " + start_x + " " + start_y + " " + cell_w + " " + cell_h);
 				fillStrokeRect(context, start_x, start_y, cell_w, cell_h);
 				start_x += cell_w;
 			}
@@ -3364,7 +3365,7 @@ function draw_map_staining_perform(context, canvas_w, canvas_h, points, color) {
 		var y = points[kk+1];
 		var xx  = (x-min_x+delta_x)*ratio+margin_x;
 		var yy = (y-min_y+delta_y)*ratio+margin_y;
-		if (kk == 1) {
+		if (kk == 0) { // EV: 2018-08-31
 			context.moveTo(xx, yy);
 		} else {
 			context.lineTo(xx, yy);
@@ -3611,6 +3612,130 @@ function get_voronoi_color(module, modifs_id, sel_color_datatable, sel_sample, s
 	return len == 0 ? 0 : (new RGBColor(red/len, green/len, blue/len)).getRGBValue();
 }
 
+var CHECK_ANGLE = false;
+var CHECK_INTERSECTS = false;
+var CHECK_SEGMENT_LEN = true;
+var MAX_SEGMENT_LEN = 1000;
+var MIN_ANGLE = 0.01;
+
+function sameSign(a,b){
+	return a * b >= 0;
+}
+
+function intersects(x1, y1, x2, y2, x3, y3, x4, y4){
+	if (x2 == x3 && y2 == y3) {
+		return 0;
+	}
+	if (x1 == x4 && y1 == y4) {
+		return 0;
+	}
+	var a1, a2, b1, b2, c1, c2;
+	var r1, r2 , r3, r4;
+	var denom, offset, num;
+
+	// Compute a1, b1, c1, where line joining points 1 and 2
+	// is "a1 x + b1 y + c1 = 0".
+	a1 = y2 - y1;
+	b1 = x1 - x2;
+	c1 = (x2 * y1) - (x1 * y2);
+
+	// Compute r3 and r4.
+	r3 = ((a1 * x3) + (b1 * y3) + c1);
+	r4 = ((a1 * x4) + (b1 * y4) + c1);
+
+	// Check signs of r3 and r4. If both point 3 and point 4 lie on
+	// same side of line 1, the line segments do not intersect.
+	if ((r3 !== 0) && (r4 !== 0) && sameSign(r3, r4)){
+		return 0; //return that they do not intersect
+	}
+
+	// Compute a2, b2, c2
+	a2 = y4 - y3;
+	b2 = x3 - x4;
+	c2 = (x4 * y3) - (x3 * y4);
+
+	// Compute r1 and r2
+	r1 = (a2 * x1) + (b2 * y1) + c2;
+	r2 = (a2 * x2) + (b2 * y2) + c2;
+
+	// Check signs of r1 and r2. If both point 1 and point 2 lie
+	// on same side of second line segment, the line segments do
+	// not intersect.
+	if ((r1 !== 0) && (r2 !== 0) && (sameSign(r1, r2))){
+		return 0; //return that they do not intersect
+	}
+
+	//Line segments intersect: compute intersection point.
+	denom = (a1 * b2) - (a2 * b1);
+
+	if (denom === 0) {
+		return 1; //collinear
+	}
+
+	// lines_intersect
+	return 1; //lines intersect, return true
+}
+
+function get_angle(x1, y1, x2, y2, x3, y3, x4, y4){
+	if (x2 == x3 && y2 == y3) {
+		var p1_x = x4 - x2;
+		var p1_y = y4 - y2;
+		var p2_x = x1 - x2;
+		var p2_y = y1 - y2;
+		return Math.atan2(p2_y - p1_y, p2_x - p1_x) * 180 / Math.PI
+	}
+	if (x1 == x4 && y1 == y4) {
+		var p1_x = x3 - x2;
+		var p1_y = y3 - y2;
+		var p2_x = x2 - x2;
+		var p2_y = y2 - y2;
+		return Math.atan2(p2_y - p1_y, p2_x - p1_x) * 180 / Math.PI
+	}
+	return 0;
+}
+
+function segments_intersect(segments)
+{
+	if (!CHECK_ANGLE && !CHECK_INTERSECTS) {
+		return 0;
+	}
+	for (var idx in segments) {
+		if (idx == 0) {continue;}
+		var segment = segments[idx];
+		for (var idx1 = 0; idx1 < idx; idx1++) {
+			var last_segment = segments[idx1];
+			if (CHECK_ANGLE) {
+				var angle = get_angle(last_segment[0], last_segment[1], last_segment[2], last_segment[3], segment[0], segment[1], segment[2], segment[3]);
+				if (angle != 0 && Math.abs(angle) < IN_ANGLE) {
+					//console.log("angle: " + angle + " " + (last_segment[0]) + " " +  (last_segment[1]) + " -- " +  (last_segment[2]) + " " +  (last_segment[3]) + "\n" +  (segment[0]) + " " + (segment[1]) + " -- " +  (segment[2]) + " " + (segment[3]));
+					return 1;
+				}
+			}
+			if (CHECK_INTERSECTS) {
+				if (intersects(last_segment[0], last_segment[1], last_segment[2], last_segment[3], segment[0], segment[1], segment[2], segment[3])) {
+					//console.log("intersets: " + (last_segment[0]) + " " +  (last_segment[1]) + " -- " +  (last_segment[2]) + " " +  (last_segment[3]) + "\n" +  (segment[0]) + " " + (segment[1]) + " -- " +  (segment[2]) + " " + (segment[3]));
+					return 1;
+				}
+			}
+		}
+	}
+	return 0;
+}
+
+function add_segment(last_bx, last_by, bx, by, segments)
+{
+	if (last_bx == -1 && last_by == -1) {return;}
+	segments.push([last_bx, -last_by, bx, -by]);
+	if (CHECK_SEGMENT_LEN) {
+		if (Math.abs(bx - last_bx) > MAX_SEGMENT_LEN || Math.abs(by - last_by) > MAX_SEGMENT_LEN) {
+			//console.log("BAD: " + last_bx + " " + last_by + " -- " + bx + " " + by);
+			return 1;
+		}
+	}
+
+	return 0;
+}
+
 function draw_voronoi(module, context, div, image_mode, delta_x, delta_y)
 {
 	var map_staining_display_labels = $("#map_staining_display_labels").attr("checked") == "checked";
@@ -3641,6 +3766,7 @@ function draw_voronoi(module, context, div, image_mode, delta_x, delta_y)
 	var map_pos = get_map_pos(module);
 	var map_pos_size = mapSize(map_pos);
 
+	//console.log("drawing voronoi");
 	for (var shape_id in voronoi_shape_map) {
 		if (map_pos && !map_pos[shape_id]) {
 			continue;
@@ -3658,19 +3784,42 @@ function draw_voronoi(module, context, div, image_mode, delta_x, delta_y)
 		var min_y = Number.MAX_NUMBER;
 		var max_x = Number.MIN_NUMBER;
 		var max_y = Number.MIN_NUMBER;
+		var segments = [];
+		var last_bx = -1;
+		var last_by = -1;
+		var first_bx = -1;
+		var first_by = -1;
+		var bx, by;
+		var break_loop = 0;
 		for (var kk = 0; kk < points.length; kk+=2) {
 			var xx = points[kk];
 			var yy = points[kk+1];
 			var gpt = new google.maps.Point(xx, yy);
 			var latlng = mapProjection.fromPointToLatLng(gpt);
-			var pix = overlayProjection.fromLatLngToDivPixel(latlng);
-			var bx = pix.x - (image_mode ? delta_x : div.left);
-			var by = pix.y - (image_mode ? delta_y : div.top);
-			if (kk == 1) {
+			if (GMAPS_V3_3x) {
+				var pix = overlayProjection.fromLatLngToContainerPixel(latlng);
+				bx = pix.x - (image_mode ? delta_x : 0);
+				by = pix.y - (image_mode ? delta_y : 0);
+			} else {
+				var pix = overlayProjection.fromLatLngToDivPixel(latlng);
+				bx = pix.x - (image_mode ? delta_x : div.left);
+				by = pix.y - (image_mode ? delta_y : div.top);
+			}
+			if (kk == 0) { // EV: 2018-08-31
 				context.moveTo(bx, by);
 			} else {
 				context.lineTo(bx, by);
 			}
+			if (first_bx == -1 && first_by == -1) {
+				first_bx = bx;
+				first_by = by;
+			}
+			if (add_segment(last_bx, last_by, bx, by, segments)) {
+				break_loop = 1;
+				break;
+			}
+			last_bx = bx;
+			last_by = by;
 			if (bx < min_x) {
 				min_x = bx;
 			}
@@ -3685,6 +3834,10 @@ function draw_voronoi(module, context, div, image_mode, delta_x, delta_y)
 			}
 		}
 		context.closePath();
+		if (break_loop || add_segment(bx, by, first_bx, first_by, segments) || segments_intersect(segments)) {
+			console.log("voronoi:, skipping shape fill");
+			continue;
+		}
 		if (color) {
 			context.fillStyle = "#" + color;
 			context.fill();

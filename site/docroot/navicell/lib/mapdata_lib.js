@@ -24,6 +24,8 @@ var DISPLAY_TIMEOUT = 500;
 var MAX_DISCRETE_VALUES = 30;
 var DATATABLE_LIST = 'Datatable list';
 var MULTI_REV_SHAPE_MAP = true;
+var GMAPS_V3_3x = false; // google map new version; finally, code modified can be as previous
+var GMAPS_V3_3x_force = true; // google map new version
 
 var cache_value_cnt = 0;
 var no_cache_value_cnt = 0;

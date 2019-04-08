@@ -227,10 +227,10 @@ function nv_unhighlight_all_entities(win)
 	return null;
 }
 
-function nv_set_center(win, where, posx, posy)
+function nv_set_center(win, where, lng, lat)
 {
 	var map = win.map;
-	//console.log("nv_set_center " + posx + " " + posy);
+	//console.log("nv_set_center " + lng + " " + lat);
 
 	var center = map.getCenter();
 	var scrolled_center;
@@ -255,13 +255,18 @@ function nv_set_center(win, where, posx, posy)
 		scrolled_center = new google.maps.LatLng(win.map_ori_bounds.getNorthEast().lat(), win.map_ori_bounds.getSouthWest().lng());
 	} else if (where == "MAP_NORTH_WEST") {
 		scrolled_center = new google.maps.LatLng(win.map_ori_bounds.getSouthWest().lat(), win.map_ori_bounds.getNorthEast().lng()); 
-	} else if ((where == "RELATIVE") && typeof posx == "number" && typeof posy == "number") {
-		scrolled_center = new google.maps.LatLng(center.lat()+posy, center.lng()+posx, true);
-	} else if ((where == "ABSOLUTE") && typeof posx == "number" && typeof posy == "number") {
-		scrolled_center = new google.maps.LatLng(posy, posx, true);
+	} else if ((where == "RELATIVE") && typeof lng == "number" && typeof lat == "number") {
+		scrolled_center = new google.maps.LatLng(center.lat()+lat, center.lng()+lng, true);
+	} else if ((where == "ABSOLUTE") && typeof lng == "number" && typeof lat == "number") {
+		scrolled_center = new google.maps.LatLng(lat, lng, true);
+	} else if ((where == "ABSOLUTE_LEGACY") && typeof lng == "number" && typeof lat == "number") {
+		scrolled_center = new google.maps.LatLng(lat, lng, true);
+		var projection = win.map.getProjection();
+		var p = projection.fromLatLngToPoint_legacy(scrolled_center);
+		scrolled_center = projection.fromPointToLatLng(p);
 	} else {
-		if (posy) {
-			throw "nv_set_center: unknown directive \"" + where + ", " + posx + "," + posy + "\"";
+		if (lat) {
+			throw "nv_set_center: unknown directive \"" + where + ", " + lng + "," + lat + "\"";
 		}
 		throw "nv_set_center: unknown directive \"" + where + "\"";
 	}
