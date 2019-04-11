@@ -28,10 +28,11 @@ parser = argparse.ArgumentParser(prog='GMT_extraction',
 # Version : (March 2019); Institut Curie    #
 #-------------------------------------------#
 This script allows to take as input a folder containing maps in a CellDesigner
-XML format and generate a list of genes per Modules in a GMT format file. The
-resulting GMTs will have the same names as maps followed by the .gmt extension.
-ATTENTION! The Module information has to be annotated inside the map using the
-'MODULE:' tag followed by the module name (e.g. MODULE:CELL_CYCLE).
+XML format plus a correspondence file between species names to an ID
+(e.g. HUGO), and generate a list of genes per Modules in a GMT format file.
+The resulting GMTs will have the same names as maps followed by the .gmt
+extension. ATTENTION! The Module information has to be annotated inside the map
+using the 'MODULE:' tag followed by the module name (e.g. MODULE:CELL_CYCLE).
 """)
 
 file_locations = parser.add_argument_group('Location of different folders')
