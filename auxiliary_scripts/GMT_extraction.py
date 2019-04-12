@@ -28,15 +28,18 @@ parser = argparse.ArgumentParser(prog='GMT_extraction',
 # Version : (March 2019); Institut Curie    #
 #-------------------------------------------#
 This script allows to take as input a folder containing maps in a CellDesigner
-XML format plus a correspondence file between species names to an ID
-(e.g. HUGO), and generate a list of genes per Modules in a GMT format file.
+XML format and generate a list of proteins per Modules in a GMT format file.
 The resulting GMTs will have the same names as maps followed by the .gmt
-extension. ATTENTION! The Module information has to be annotated inside the map
+extension.
+ATTENTION!
+The Module information has to be annotated inside the map
 using the 'MODULE:' tag followed by the module name (e.g. MODULE:CELL_CYCLE).
+The ID to use for the GMT content has to be annotated in the same fashion
+(e.g. HUGO:AKT2)
+Both these annotations can be specified as arguments with --mod and --id.
 """)
 
 file_locations = parser.add_argument_group('Location of different folders')
-
 
 file_locations.add_argument('--map', metavar='Maps_folder', type=str,
 							default="",
@@ -46,11 +49,17 @@ file_locations.add_argument('--gmt', metavar='GMTs_folder', type=str,
 							default="GMT",
 							help=("Location and name of the GMT folder used to"
 								"output GMT files from maps."))
-file_locations.add_argument('--cor', metavar='Cor_file', type=str,
-							default="ACSN2_HUGO_Correspondence.gmt",
-							help=("Location and name of the correspondence file"
-								" between the specie names and their HUGO IDs, "
-								"in GMT format."))
+
+annotation_type = parser.add_argument_group('Type of annotations')
+
+annotation_type.add_argument('--mod', metavar='Module', type=str,
+							default="MODULE",
+							help=("Prefix of the module to use from annotation "
+								"to construct the GMT file."))
+annotation_type.add_argument('--id', metavar='ID', type=str,
+							default="HUGO",
+							help=("Prefix of the species ID to use from"
+								"annotation to construct the GMT file."))
 
 args = parser.parse_args()
 
@@ -60,390 +69,170 @@ args = parser.parse_args()
 #########################
 
 
-
-def Get_correspondencies(filename):
-	"""
-		Read a GMT file of correspondence between specie names and their HUGO.
-	"""
-
-	name_hugo_dict = {}
-
-	with open(filename, 'rU') as infile:
-
-		for line in infile:
-
-			tmp = line.split()
-
-			if tmp[0] not in name_hugo_dict:
-
-				name_hugo_dict[tmp[0]] = []
-
-			for hugo in xrange(2, len(tmp)):
-
-				if tmp[hugo] not in name_hugo_dict[tmp[0]]:
-					name_hugo_dict[tmp[0]].append(tmp[hugo])
-
-	return name_hugo_dict
-
-
-def Get_notes(item_tree):
+def Get_module(item_tree, mod_name):
 	"""
 		Find the MODULE information in the annotations.
 	"""
 
 	modules_list = []
 
-	for item_notes in item_tree.iter('{http://www.sbml.org/sbml/level2}body'):
-				if item_notes.text and 'MODULE:' in item_notes.text:
+	for item_notes in item_tree.iter('{http://www.w3.org/1999/xhtml}body'):
+				if item_notes.text and mod_name+':' in item_notes.text:
 					tmp = item_notes.text.split()
 					for item in tmp:
 						index = item.find(":")
-						if 'MODULE:' in item and item[index+1:] not in modules_list:
+						if mod_name+':' in item and item[index+1:] not in modules_list:
 							modules_list.append(item[index+1:])
 
 	return modules_list
 
 
-def Retrieve_proteins_info(root, mod_dict):
+def Get_ids(item_tree, id_name):
+	"""
+		Find the ID information in the annotations.
+	"""
+
+	id_list = []
+
+	for item_notes in item_tree.iter('{http://www.w3.org/1999/xhtml}body'):
+				if item_notes.text and id_name+':' in item_notes.text:
+					tmp = item_notes.text.split()
+					for item in tmp:
+						index = item.find(":")
+						if id_name+':' in item and item[index+1:] not in id_list:
+							id_list.append(item[index+1:])
+
+	return id_list
+
+
+def Clean_ids(id_dict):
+	"""
+		Delete repetitions in the dictionary values list.
+	"""
+
+	to_delete = []
+
+	for item in id_dict:
+		if len(id_dict[item]) >= 1:
+			id_dict[item] = list(set(id_dict[item]))
+		else:
+			to_delete.append(item)
+
+	for key in to_delete:
+		id_dict.pop(key, None)
+
+	return id_dict
+
+
+def Add_modules_to_dict(module_list, mod_dict, specie):
+
+	for mod in module_list:
+
+		if mod not in mod_dict:
+
+			mod_dict[mod] = []
+
+			if specie.get('name') not in mod_dict[mod]:
+				mod_dict[mod].append(specie.get('name'))
+
+		else:
+
+			if specie.get('name') not in mod_dict[mod]:
+				mod_dict[mod].append(specie.get('name'))
+
+	return mod_dict
+
+
+def Retrieve_proteins_info(root, mod_dict, id_dict, id_type, mod_type):
 	"""
 		Retrieve annotations of Proteins.
 	"""
-
-	prot_dict = {}
 
 	for list_prot in root.iter('{http://www.sbml.org/2001/ns/celldesigner}listOfProteins'):
 
 		for prot in list_prot:
 
-			prot_id = prot.get('id')
-			prot_dict[prot_id] = {}
-			prot_dict[prot_id]['name'] = prot.get('name')
-			prot_dict[prot_id]['module'] = []
+			prot_name = prot.get('name')
+			prot_mod_list = []
+			if prot_name not in id_dict:
+				id_dict[prot_name] = []
 
 			# Get Proteins Modules
-			for prot_notes in prot.iter('{http://www.w3.org/1999/xhtml}body'):
+			prot_mod_list.extend(Get_module(prot,mod_type))
+			id_dict[prot_name].extend(Get_ids(prot,id_type))
 
-				if prot_notes.text and 'MODULE:' in prot_notes.text:
+			mod_dict = Add_modules_to_dict(prot_mod_list, mod_dict, prot)
 
-					tmp = prot_notes.text.split()
-
-					for item in tmp:
-
-						index = item.find(":")
-
-						if 'MODULE:' in item and item[index+1:] not in prot_dict[prot_id]['module']:
-
-							prot_dict[prot_id]['module'].append(item[index+1:])
-
-			prot_dict[prot_id]['module'].extend(Get_notes(prot))
-
-			for mod in prot_dict[prot_id]['module']:
-
-				if mod not in mod_dict:
-
-					mod_dict[mod] = {}
-					mod_dict[mod]["name"] = []
-					mod_dict[mod]["prot_id"] = []
-
-					if prot.get('name') not in mod_dict[mod]["name"]:
-						mod_dict[mod]["name"].append(prot.get('name'))
-					mod_dict[mod]["prot_id"].append(prot.get('id'))
-
-				else:
-
-					if "prot_id" not in mod_dict[mod]:
-						mod_dict[mod]["prot_id"] = []
-
-					if prot.get('name') not in mod_dict[mod]["name"]:
-						mod_dict[mod]["name"].append(prot.get('name'))
-					mod_dict[mod]["prot_id"].append(prot.get('id'))
-
-	return prot_dict, mod_dict
+	return mod_dict, id_dict
 
 
-def Retrieve_genes_info(root, mod_dict):
+def Retrieve_genes_info(root, mod_dict, id_dict, id_type, mod_type):
 	"""
 		Retrieve annotations of Genes.
 	"""
-
-	gene_dict = {}
 
 	for list_gene in root.iter('{http://www.sbml.org/2001/ns/celldesigner}listOfGenes'):
 
 		for gene in list_gene:
 
-			gene_id = gene.get('id')
-			gene_dict[gene_id] = {}
-			gene_dict[gene_id]['name'] = gene.get('name')
-			gene_dict[gene_id]['module'] = []
+			gene_name = gene.get('name')
+			gene_mod_list = []
+			if gene_name not in id_dict:
+				id_dict[gene_name] = []
 
-			# Get Proteins Modules
-			for gene_notes in gene.iter('{http://www.w3.org/1999/xhtml}body'):
+			# Get Gene Modules
+			gene_mod_list.extend(Get_module(gene,mod_type))
+			id_dict[gene_name].extend(Get_ids(gene,id_type))
 
-				if gene_notes.text and 'MODULE:' in gene_notes.text:
+			mod_dict = Add_modules_to_dict(gene_mod_list, mod_dict, gene)
 
-					tmp = gene_notes.text.split()
-					
-					for item in tmp:
-
-						index = item.find(":")
-
-						if 'MODULE:' in item and item[index+1:] not in gene_dict[gene_id]['module']:
-
-							gene_dict[gene_id]['module'].append(item[index+1:])
-
-			gene_dict[gene_id]['module'].extend(Get_notes(gene))
-
-			for mod in gene_dict[gene_id]['module']:
-
-				if mod not in mod_dict:
-
-					mod_dict[mod] = {}
-					mod_dict[mod]["name"] = []
-					mod_dict[mod]["gene_id"] = []
-
-					if gene.get('name') not in mod_dict[mod]["name"]:
-						mod_dict[mod]["name"].append(gene.get('name'))
-					mod_dict[mod]["gene_id"].append(gene.get('id'))
-
-				else:
-
-					if "gene_id" not in mod_dict[mod]:
-						mod_dict[mod]["gene_id"] = []
-
-					if gene.get('name') not in mod_dict[mod]["name"]:
-						mod_dict[mod]["name"].append(gene.get('name'))
-					mod_dict[mod]["gene_id"].append(gene.get('id'))
-
-	return gene_dict, mod_dict
+	return mod_dict, id_dict
 
 
-def Retrieve_rna_info(root, mod_dict):
+def Retrieve_rna_info(root, mod_dict, id_dict, id_type, mod_type):
 	"""
 		Retrieve annotations of RNA.
 	"""
-
-	rna_dict = {}
 
 	for list_rna in root.iter('{http://www.sbml.org/2001/ns/celldesigner}listOfRNAs'):
 
 		for rna in list_rna:
 
-			rna_id = rna.get('id')
-			rna_dict[rna_id] = {}
-			rna_dict[rna_id]['name'] = rna.get('name')
-			rna_dict[rna_id]['module'] = []
+			rna_name = rna.get('name')
+			rna_mod_list = []
+			if rna_name not in id_dict:
+				id_dict[rna_name] = []
 
 			# Get RNA Modules
-			for rna_notes in rna.iter('{http://www.w3.org/1999/xhtml}body'):
+			rna_mod_list.extend(Get_module(rna,mod_type))
+			id_dict[rna_name].extend(Get_ids(rna,id_type))
 
-				if rna_notes.text and 'MODULE:' in rna_notes.text:
+			mod_dict = Add_modules_to_dict(rna_mod_list, mod_dict, rna)
 
-					tmp = rna_notes.text.split()
-					
-					for item in tmp:
-
-						index = item.find(":")
-
-						if 'MODULE:' in item and item[index+1:] not in rna_dict[rna_id]['module']:
-
-							rna_dict[rna_id]['module'].append(item[index+1:])
-
-			rna_dict[rna_id]['module'].extend(Get_notes(rna))
-
-			for mod in rna_dict[rna_id]['module']:
-
-				if mod not in mod_dict:
-
-					mod_dict[mod] = {}
-					mod_dict[mod]["name"] = []
-					mod_dict[mod]["rna_id"] = []
-
-					if rna.get('name') not in mod_dict[mod]["name"]:
-						mod_dict[mod]["name"].append(rna.get('name'))
-					mod_dict[mod]["rna_id"].append(rna.get('id'))
-
-				else:
-
-					if "rna_id" not in mod_dict[mod]:
-						mod_dict[mod]["rna_id"] = []
-
-					if rna.get('name') not in mod_dict[mod]["name"]:
-						mod_dict[mod]["name"].append(rna.get('name'))
-					mod_dict[mod]["rna_id"].append(rna.get('id'))
-
-	return rna_dict, mod_dict
+	return rna_dict, mod_dict, id_dict
 
 
-def Retrieve_antisense_rna_info(root, mod_dict):
+def Retrieve_antisense_rna_info(root, mod_dict, id_dict, id_type, mod_type):
 	"""
 		Retrieve annotations of Antisense RNA.
 	"""
-
-	antirna_dict = {}
 
 	for list_antirna in root.iter('{http://www.sbml.org/2001/ns/celldesigner}listOfAntisenseRNAs'):
 
 		for antirna in list_antirna:
 
-			antirna_id = antirna.get('id')
-			antirna_dict[antirna_id] = {}
-			antirna_dict[antirna_id]['name'] = antirna.get('name')
-			antirna_dict[antirna_id]['module'] = []
+			antirna_name = antirna.get('name')
+			antirna_mod_list = []
+			if antirna_name not in id_dict:
+				id_dict[antirna_name] = []
 
-			# Get Proteins Modules
-			for antirna_notes in antirna.iter('{http://www.w3.org/1999/xhtml}body'):
+			# Get AntiRNA Modules
+			antirna_mod_list.extend(Get_module(antirna,mod_type))
+			id_dict[antirna_name].extend(Get_ids(antirna,id_type))
 
-				if antirna_notes.text and 'MODULE:' in antirna_notes.text:
+			mod_dict = Add_modules_to_dict(antirna_mod_list, mod_dict, antirna)
 
-					tmp = antirna_notes.text.split()
-					
-					for item in tmp:
-
-						index = item.find(":")
-
-						if 'MODULE:' in item and item[index+1:] not in antirna_dict[antirna_id]['module']:
-
-							antirna_dict[antirna_id]['module'].append(item[index+1:])
-
-			antirna_dict[antirna_id]['module'].extend(Get_notes(antirna))
-
-			for mod in antirna_dict[antirna_id]['module']:
-
-				if mod not in mod_dict:
-
-					mod_dict[mod] = {}
-					mod_dict[mod]["name"] = []
-					mod_dict[mod]["antirna_id"] = []
-
-					if antirna.get('name') not in mod_dict[mod]["name"]:
-						mod_dict[mod]["name"].append(antirna.get('name'))
-					mod_dict[mod]["antirna_id"].append(antirna.get('id'))
-
-				else:
-
-					if "antirna_id" not in mod_dict[mod]:
-						mod_dict[mod]["antirna_id"] = []
-
-					if antirna.get('name') not in mod_dict[mod]["name"]:
-						mod_dict[mod]["name"].append(antirna.get('name'))
-					mod_dict[mod]["antirna_id"].append(antirna.get('id'))
-
-	return antirna_dict, mod_dict
-
-
-def Retrieve_species_info(root, prot_dict, gene_dict, rna_dict, antirna_dict, mod_dict):
-	"""
-		Retrieve annotations of Species and Included Species.
-	"""
-
-	spec_dict = {}
-	spec_inc_list = []
-
-	# Find Species ID info
-	for list_spec in root.iter('{http://www.sbml.org/sbml/level2}listOfSpecies'):
-
-		for spec in list_spec:
-
-			spec_id = spec.get('id')
-			spec_dict[spec_id] = {}
-			spec_dict[spec_id]['name'] = spec.get('name')
-			spec_dict[spec_id]['module'] = []
-
-			# Get species direct Modules
-			for spec_notes in spec.iter('{http://www.w3.org/1999/xhtml}body'):
-
-				if spec_notes.text and 'MODULE:' in spec_notes.text:
-
-					tmp = spec_notes.text.split()
-					
-					for item in tmp:
-
-						index = item.find(":")
-
-						if 'MODULE:' in item and item[index+1:] not in spec_dict[spec_id]['module']:
-
-							spec_dict[spec_id]['module'].append(item[index+1:])
-
-			spec_dict[spec_id]['module'].extend(Get_notes(spec))
-
-			for mod in spec_dict[spec_id]['module']:
-
-				if mod not in mod_dict:
-
-					mod_dict[mod] = {}
-					mod_dict[mod]["name"] = []
-					mod_dict[mod]["spec_id"] = []
-
-					if spec.get('name') not in mod_dict[mod]["name"]:
-						mod_dict[mod]["name"].append(spec.get('name'))
-					mod_dict[mod]["spec_id"].append(spec.get('id'))
-
-				else:
-
-					if "spec_id" not in mod_dict[mod]:
-						mod_dict[mod]["spec_id"] = []
-
-					if spec.get('name') not in mod_dict[mod]["name"]:
-						mod_dict[mod]["name"].append(spec.get('name'))
-					mod_dict[mod]["spec_id"].append(spec.get('id'))
-
-	# Find Included Species ID info
-	for list_spec in root.iter('{http://www.sbml.org/2001/ns/celldesigner}listOfIncludedSpecies'):
-
-		for spec in list_spec:
-
-			spec_id = spec.get('id')
-			spec_dict[spec_id] = {}
-			spec_dict[spec_id]['name'] = spec.get('name')
-			spec_dict[spec_id]['module'] = []
-
-			spec_inc_list.append(spec_id)
-
-			# Get species Modules
-			for spec_notes in spec.iter('{http://www.w3.org/1999/xhtml}body'):
-
-				if spec_notes.text and 'MODULE:' in spec_notes.text:
-
-					tmp = spec_notes.text.split()
-					
-					for item in tmp:
-
-						index = item.find(":")
-
-						if 'MODULE:' in item and item[index+1:] not in spec_dict[spec_id]['module']:
-
-							spec_dict[spec_id]['module'].append(item[index+1:])
-
-			spec_dict[spec_id]['module'].extend(Get_notes(spec))
-
-			for mod in spec_dict[spec_id]['module']:
-
-				if mod not in mod_dict:
-
-					mod_dict[mod] = {}
-					mod_dict[mod]["name"] = []
-					mod_dict[mod]["spec_id"] = []
-					mod_dict[mod]["spec_id_all"] = []
-
-					if spec.get('name') not in mod_dict[mod]["name"]:
-						mod_dict[mod]["name"].append(spec.get('name'))
-					mod_dict[mod]["spec_id"].append(spec.get('id'))
-					mod_dict[mod]["spec_id_all"].append(spec.get('id'))
-
-				else:
-
-					if "spec_id" not in mod_dict[mod]:
-						mod_dict[mod]["spec_id"] = []
-					if "spec_id_all" not in mod_dict[mod]:
-						mod_dict[mod]["spec_id_all"] = []
-
-					if spec.get('name') not in mod_dict[mod]["name"]:
-						mod_dict[mod]["name"].append(spec.get('name'))
-					mod_dict[mod]["spec_id"].append(spec.get('id'))
-					mod_dict[mod]["spec_id_all"].append(spec.get('id'))
-
-	return spec_dict, spec_inc_list, mod_dict
+	return antirna_dict, mod_dict, id_dict
 
 
 def Save_GMT_file(mod_dict, name_hugo_dict, filename):
@@ -456,11 +245,11 @@ def Save_GMT_file(mod_dict, name_hugo_dict, filename):
 
 		for mod in mod_dict.keys():
 
-			if "name" in mod_dict[mod]:
+			if mod_dict[mod]:
 
 				to_print = []
 
-				for name in mod_dict[mod]["name"]:
+				for name in mod_dict[mod]:
 
 					name = name.encode("utf-8")
 
@@ -488,7 +277,8 @@ def Save_GMT_file(mod_dict, name_hugo_dict, filename):
 
 				if to_print:
 					outfile.write(mod+"\tna\t")
-					for item in to_print:
+					to_print_unique = sorted(list(set(to_print)))
+					for item in to_print_unique:
 						outfile.write(item+"\t")
 
 					outfile.write("\n")
@@ -503,9 +293,8 @@ print "\n"
 
 maps_folder = args.map
 gmt_folder = args.gmt
-cor_file = args.cor
-
-Name_to_HUGO_dict = Get_correspondencies(cor_file)
+id_type = args.id
+mod_type = args.mod
 
 glob_list = glob.glob(maps_folder+"*.xml")
 map_names = [os.path.basename(x) for x in glob.glob(maps_folder+"*.xml")]
@@ -513,26 +302,27 @@ if not os.path.exists(gmt_folder):
 	os.makedirs(gmt_folder)
 for file_path, filename in zip(glob_list, map_names):
 	Filename = gmt_folder+"/"+filename[:-4]+".gmt"
-	print "Working on "+filename
+	print("Working on "+filename)
 
 	Tree = ET.parse(file_path)
 	Root = Tree.getroot()
 
 	Module_dict = {}
+	Name_to_HUGO_dict = {}
 
-	Proteins_dict_info, Module_dict = Retrieve_proteins_info(Root, Module_dict)
+	Proteins_dict_info, Module_dict, Name_to_HUGO_dict = Retrieve_proteins_info(Root, Module_dict, Name_to_HUGO_dict, id_type, mod_type)
 
-	Genes_dict_info, Module_dict = Retrieve_genes_info(Root, Module_dict)
+	Genes_dict_info, Module_dict, Name_to_HUGO_dict = Retrieve_genes_info(Root, Module_dict, Name_to_HUGO_dict, id_type, mod_type)
 
-	RNA_dict_info, Module_dict = Retrieve_rna_info(Root, Module_dict)
+	RNA_dict_info, Module_dict, Name_to_HUGO_dict = Retrieve_rna_info(Root, Module_dict, Name_to_HUGO_dict, id_type, mod_type)
 
-	Antisense_RNA_dict_info, Module_dict = Retrieve_antisense_rna_info(Root, Module_dict)
+	Antisense_RNA_dict_info, Module_dict, Name_to_HUGO_dict = Retrieve_antisense_rna_info(Root, Module_dict, Name_to_HUGO_dict, id_type, mod_type)
 
-	Species_info_dict, Species_included_list, Module_dict = Retrieve_species_info(Root, Proteins_dict_info, Genes_dict_info, RNA_dict_info, Antisense_RNA_dict_info, Module_dict)
+	Name_to_HUGO_dict = Clean_ids(Name_to_HUGO_dict)
 
 	Save_GMT_file(Module_dict, Name_to_HUGO_dict, Filename)
-	print "Done!"
+	print("Done!")
 
-print "You can find the resulting GMT files in the folder: "+gmt_folder
+print("You can find the resulting GMT files in the folder: "+gmt_folder)
 
-print "\n"
+print("\n")
