@@ -69,25 +69,7 @@ args = parser.parse_args()
 #########################
 
 
-def Get_module(item_tree, mod_name):
-	"""
-		Find the MODULE information in the annotations.
-	"""
-
-	modules_list = []
-
-	for item_notes in item_tree.iter('{http://www.w3.org/1999/xhtml}body'):
-				if item_notes.text and mod_name+':' in item_notes.text:
-					tmp = item_notes.text.split()
-					for item in tmp:
-						index = item.find(":")
-						if mod_name+':' in item and item[index+1:] not in modules_list:
-							modules_list.append(item[index+1:])
-
-	return modules_list
-
-
-def Get_ids(item_tree, id_name):
+def Get_annotation(item_tree, id_name):
 	"""
 		Find the ID information in the annotations.
 	"""
@@ -124,7 +106,7 @@ def Clean_ids(id_dict):
 	return id_dict
 
 
-def Add_modules_to_dict(module_list, mod_dict, specie):
+def Add_modules_to_dict(module_list, mod_dict, spec_name):
 
 	for mod in module_list:
 
@@ -132,13 +114,13 @@ def Add_modules_to_dict(module_list, mod_dict, specie):
 
 			mod_dict[mod] = []
 
-			if specie.get('name') not in mod_dict[mod]:
-				mod_dict[mod].append(specie.get('name'))
+			if spec_name not in mod_dict[mod]:
+				mod_dict[mod].append(spec_name)
 
 		else:
 
-			if specie.get('name') not in mod_dict[mod]:
-				mod_dict[mod].append(specie.get('name'))
+			if spec_name not in mod_dict[mod]:
+				mod_dict[mod].append(spec_name)
 
 	return mod_dict
 
@@ -158,10 +140,10 @@ def Retrieve_proteins_info(root, mod_dict, id_dict, id_type, mod_type):
 				id_dict[prot_name] = []
 
 			# Get Proteins Modules
-			prot_mod_list.extend(Get_module(prot,mod_type))
-			id_dict[prot_name].extend(Get_ids(prot,id_type))
+			prot_mod_list.extend(Get_annotation(prot,mod_type))
+			id_dict[prot_name].extend(Get_annotation(prot,id_type))
 
-			mod_dict = Add_modules_to_dict(prot_mod_list, mod_dict, prot)
+			mod_dict = Add_modules_to_dict(prot_mod_list, mod_dict, prot_name)
 
 	return mod_dict, id_dict
 
@@ -181,10 +163,10 @@ def Retrieve_genes_info(root, mod_dict, id_dict, id_type, mod_type):
 				id_dict[gene_name] = []
 
 			# Get Gene Modules
-			gene_mod_list.extend(Get_module(gene,mod_type))
-			id_dict[gene_name].extend(Get_ids(gene,id_type))
+			gene_mod_list.extend(Get_annotation(gene,mod_type))
+			id_dict[gene_name].extend(Get_annotation(gene,id_type))
 
-			mod_dict = Add_modules_to_dict(gene_mod_list, mod_dict, gene)
+			mod_dict = Add_modules_to_dict(gene_mod_list, mod_dict, gene_name)
 
 	return mod_dict, id_dict
 
@@ -204,12 +186,12 @@ def Retrieve_rna_info(root, mod_dict, id_dict, id_type, mod_type):
 				id_dict[rna_name] = []
 
 			# Get RNA Modules
-			rna_mod_list.extend(Get_module(rna,mod_type))
-			id_dict[rna_name].extend(Get_ids(rna,id_type))
+			rna_mod_list.extend(Get_annotation(rna,mod_type))
+			id_dict[rna_name].extend(Get_annotation(rna,id_type))
 
-			mod_dict = Add_modules_to_dict(rna_mod_list, mod_dict, rna)
+			mod_dict = Add_modules_to_dict(rna_mod_list, mod_dict, rna_name)
 
-	return rna_dict, mod_dict, id_dict
+	return mod_dict, id_dict
 
 
 def Retrieve_antisense_rna_info(root, mod_dict, id_dict, id_type, mod_type):
@@ -227,12 +209,12 @@ def Retrieve_antisense_rna_info(root, mod_dict, id_dict, id_type, mod_type):
 				id_dict[antirna_name] = []
 
 			# Get AntiRNA Modules
-			antirna_mod_list.extend(Get_module(antirna,mod_type))
-			id_dict[antirna_name].extend(Get_ids(antirna,id_type))
+			antirna_mod_list.extend(Get_annotation(antirna,mod_type))
+			id_dict[antirna_name].extend(Get_annotation(antirna,id_type))
 
 			mod_dict = Add_modules_to_dict(antirna_mod_list, mod_dict, antirna)
 
-	return antirna_dict, mod_dict, id_dict
+	return mod_dict, id_dict
 
 
 def Save_GMT_file(mod_dict, name_hugo_dict, filename):
@@ -251,7 +233,9 @@ def Save_GMT_file(mod_dict, name_hugo_dict, filename):
 
 				for name in mod_dict[mod]:
 
+					# print name
 					name = name.encode("utf-8")
+					# print name
 
 					not_hugo = False
 
@@ -310,13 +294,17 @@ for file_path, filename in zip(glob_list, map_names):
 	Module_dict = {}
 	Name_to_HUGO_dict = {}
 
-	Proteins_dict_info, Module_dict, Name_to_HUGO_dict = Retrieve_proteins_info(Root, Module_dict, Name_to_HUGO_dict, id_type, mod_type)
+	Module_dict, Name_to_HUGO_dict = Retrieve_proteins_info(Root, Module_dict,
+		Name_to_HUGO_dict, id_type, mod_type)
 
-	Genes_dict_info, Module_dict, Name_to_HUGO_dict = Retrieve_genes_info(Root, Module_dict, Name_to_HUGO_dict, id_type, mod_type)
+	Module_dict, Name_to_HUGO_dict = Retrieve_genes_info(Root, Module_dict,
+		Name_to_HUGO_dict, id_type, mod_type)
 
-	RNA_dict_info, Module_dict, Name_to_HUGO_dict = Retrieve_rna_info(Root, Module_dict, Name_to_HUGO_dict, id_type, mod_type)
+	Module_dict, Name_to_HUGO_dict = Retrieve_rna_info(Root, Module_dict,
+		Name_to_HUGO_dict, id_type, mod_type)
 
-	Antisense_RNA_dict_info, Module_dict, Name_to_HUGO_dict = Retrieve_antisense_rna_info(Root, Module_dict, Name_to_HUGO_dict, id_type, mod_type)
+	# Module_dict, Name_to_HUGO_dict = Retrieve_antisense_rna_info(Root,
+	# 	Module_dict, Name_to_HUGO_dict, id_type, mod_type)
 
 	Name_to_HUGO_dict = Clean_ids(Name_to_HUGO_dict)
 
