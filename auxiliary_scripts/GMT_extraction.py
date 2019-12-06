@@ -82,7 +82,7 @@ def Get_annotation(item_tree, id_name):
 					for item in tmp:
 						index = item.find(":")
 						if id_name+':' in item and item[index+1:] not in id_list:
-							id_list.append(item[index+1:])
+							id_list.append(item[index+1:].replace(',', ''))
 
 	return id_list
 
