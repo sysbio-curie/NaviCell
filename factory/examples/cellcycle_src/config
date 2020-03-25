@@ -1,0 +1,5 @@
+base:
+title: Cell Cycle (RB-E2F) molecular interaction map
+name: cellcycle 
+showDefaultCompartmentName: true
+
