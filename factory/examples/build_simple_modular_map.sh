@@ -17,7 +17,7 @@ if [ -d $destdir ]; then echo "$0: TARGET_DIR $destdir already exists"; exit 1; 
 mkdir $destdir
 
 set -e
-sh ../scripts/run_factory.sh --config simple_modular_map_src/config --xrefs xrefs.txt --destination $destdir --verbose --demo $*
+sh ../scripts/run_factory.sh --config simple_modular_src/config --xrefs xrefs.txt --destination $destdir --verbose --demo $*
 
 cd $destdir
 url=$(pwd)/master/index.html
