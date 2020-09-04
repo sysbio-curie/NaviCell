@@ -1,0 +1,79 @@
+#docker-compose.yml
+version: '3.4'
+services:
+
+  navicell-db:
+    image: mongo:4.2.9
+    container_name: navicell-db
+    restart: always
+    volumes:
+      - db:/data/db
+      
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+      MONGO_INITDB_DATABASE: navicell
+
+  navicell:
+    build:
+      context: ./
+      dockerfile: docker/Dockerfile
+      target: navicell
+
+    image: navicell
+    container_name: navicell
+    ports:
+      - "8080:8080"
+      - "80:80"
+    user: root
+    volumes:
+      - data:/var/navicell
+    
+    depends_on:
+      - navicell-db
+      - newt-converter
+
+  navicell-dev:
+    build:
+      context: ./
+      dockerfile: docker/Dockerfile
+      target: navicell-dev
+
+    image: navicell-dev
+    container_name: navicell
+    ports:
+      - "8080:8080"
+      - "80:80"
+      
+    volumes:
+      - .:/var/navicell
+    user: root
+    
+    depends_on:
+      - navicell-db
+      - newt-converter
+  
+  cd2sbgnml:
+    build:
+      context: ./
+      dockerfile: docker/Dockerfile
+      target: cd2sbgnml
+    image: cd2sbgnml
+    container_name: cd2sbgnml
+
+  newt-converter:
+    build:
+      context: ./
+      dockerfile: docker/Dockerfile
+      target: newt-converter
+    image: newt-converter
+    container_name: newt-converter
+    restart: always
+        
+    ports: 
+      - "8081:80"
+
+      
+volumes:
+  db:
+  data:

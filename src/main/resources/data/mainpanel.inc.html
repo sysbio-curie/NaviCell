@@ -1,0 +1,464 @@
+<!-- jquery UI themes: -->
+<!-- flick is not too bad -->
+<!-- humanity is not too bad -->
+<!-- pepper-grinder is not too bad -->
+<!-- smoothness is not too bad -->
+<!-- hot-sneaks is not too bad -->
+
+<div id="dt_import_dialog">
+  <h3>Load Data</h3>
+  <!--    <div id="dt_import_help"/> -->
+  <form>
+    <fieldset>
+      <h4>Import Options</h4>
+
+      <div id="dt_import_main">
+	Data
+	<div id="dt_import_file_or_url">
+	  <div id="dt_import_file_message" style="display: none"></div>
+	  <label for="file">File</label>
+	  <input type="file" name="file" id="dt_import_file" value="" class="text ui-widget-content ui-corner-all" />
+	  <label for="url">URL</label>
+	  <input type="text" name="name" id="dt_import_url" class="text ui-widget-content ui-corner-all" size='50'/>
+	  <div id="dt_import_url_help"></div>
+	</div>
+
+	<label for="name">Name</label>
+	<input type="text" name="name" id="dt_import_name" class="text ui-widget-content ui-corner-all" />
+	<div id="dt_import_name_help"></div>
+
+	<label for="type">Type</label>
+	<div id="dt_import_type_select"></div>
+
+	<div id="dt_import_type_help"></div>
+
+      </div>
+
+      <h4>Display Options</h4>
+
+      <div id="dt_import_display">
+	<table>
+	  <tr>
+	    <td><input type="checkbox" name="display_markers" id="dt_import_display_markers" class="ui-widget-content ui-corner-all" checked="checked"/></td>
+	    <td><label for="display_markers">Display Gene Markers</label></td>
+	    <td><div id="dt_import_marker_help"></div></td>
+	  </tr>
+	  <tr>
+	    <td>&nbsp;</td>
+	  </tr>
+	  <tr>
+	    <td><input name="dt_import_display_graphics" id="dt_import_no_display" type="radio" checked></input></td>
+	    <td><label id='no_display'>No Display</label></td>
+	  </tr>
+	  <tr>
+	    <td><input name="dt_import_display_graphics" id="dt_import_display_barplot" type="radio"></input></td>
+	    <td><label id='display_barplot'>Display Barplot</label></td>
+	  </tr>
+	  <tr>
+	  <tr>
+	    <td><input name="dt_import_display_graphics" id="dt_import_display_heatmap" type="radio"></input></td>
+	    <td><label id='display_heatmap'>Display Heatmap</label></td>
+	  </tr>
+	</table>
+
+	</table>
+      </div>
+
+    </fieldset>
+  </form>
+
+  <h4>Status Summary</h4>
+  <div id="dt_import_status"></div> 
+</div>
+
+<div id="dt_status_tabs">
+  <h3>My Data</h3>
+
+  <ul>
+    <li><a class="ui-button-text" href="#dt_datatable_status">Datatables</a></li>
+    <li><a class="ui-button-text" href="#dt_sample_status">Samples</a></li>
+    <li><a class="ui-button-text" href="#dt_gene_status">Genes</a></li>
+    <li><a class="ui-button-text" href="#dt_group_status">Groups</a></li>
+    <li><a class="ui-button-text" href="#dt_module_status">Modules</a></li>
+  </ul>
+
+  <div id="dt_datatable_status">
+    <h3>Datatables</h3>
+
+    <form>
+      <div id='dt_datatable_status_editing'></div>
+      <table id="dt_datatable_status_table" class="tablesorter">
+      </table>
+      <br/>
+      <br/>
+      <div id="dt_datatable_buttonpane">
+	<table border='0'>
+	  <tr><td style='width: 85%; cellspacing: 20px'>&nbsp;</td>
+	    <td>
+	      <input type="button" style='-moz-border-radius: 4px; border-radius: 4px; font-size: small' class="ui-widget ui-button ui-dialog-buttonpane ui-button-text ui-button-text-only ui-state-default ui-widget-content" id="dt_datatable_update" value="Update" onclick='update_datatables()'></input>
+	    </td>
+	    <td>
+	      <input type="button" style='-moz-border-radius: 4px; border-radius: 4px; font-size: small' class="ui-widget ui-button ui-dialog-buttonpane ui-button-text ui-button-text-only ui-state-default ui-widget-content" id="dt_datatable_cancel" value="Cancel" onclick='cancel_datatables()'></input>
+	  </td></tr>
+	</table>
+      </div>
+    </form>
+  </div>
+
+  <div id="dt_sample_status">
+    <h3>Samples</h3>
+    <div class='download-data'><a id='download_samples' href='#' onclick='download_samples()'>download data</a></div>
+    <form>
+      <table id="dt_sample_status_table" class="tablesorter">
+      </table>
+    </form>
+  </div>
+  
+  <div id="dt_gene_status">
+    <h3>Genes</h3>
+    <div class='download-data'><a href='#' id='download_genes' onclick='download_genes()'>download data</a></div>
+    <table id="dt_gene_status_table" class="tablesorter">
+    </table>
+  </div>
+
+  <div id="dt_group_status">
+    <h3>Groups</h3>
+    <div class='download-data'><a href='#' id='download_groups' onclick='download_groups()'>download data</a></div>
+    <table id="dt_group_status_table" class="tablesorter">
+    </table>
+  </div>
+
+  <div id="dt_module_status">
+    <h3>Modules</h3>
+    <table id="dt_module_status_table" class="tablesorter">
+    </table>
+  </div>
+</div>
+
+<div id="dt_sample_annot">
+  <h3>Sample Annotations</h3>
+  <div id="group_editing"></div>
+  <form>
+    <fieldset>
+      <div id="dt_sample_annot_table_div">
+	<table id="dt_sample_annot_table" class="tablesorter">
+	</table>
+      </div>
+      <div id="dt_sample_annot_status"></div> 
+      <div align='left'>
+	<table border='0'>
+	  <tr>
+	    <td><label for="file"><span style='font-weight: bold'>Sample&nbsp;annotation&nbsp;file:</span></label></td>
+	    <td><input type="file" name="file" id="dt_sample_file" value="" style='vertical-align: bottom' class="text ui-widget-content ui-corner-all" /></td>
+	    <td rowspan='2' align='center'><input type="button" style='padding-left: 10px; -moz-border-radius: 4px; border-radius: 4px; font-size: small' class="ui-widget ui-button ui-dialog-buttonpane ui-button-text ui-button-text-only ui-state-default ui-widget-content" value="Import Annotations" onclick='import_annot_file()'></input></td>
+	  </tr>
+	  <tr>
+	    <td><label for="file"><span style='font-weight: bold'>Sample&nbsp;annotation&nbsp;URL:</span></label></td>
+	    <td><input type="text" name="name" id="dt_sample_url" class="text ui-widget-content ui-corner-all" size='35'/></td>
+	  </tr>
+	</table>
+      </div>
+    </fieldset>
+  </form>
+</div>
+
+<div id="drawing_config_div">
+  <h3>Drawing Configuration</h3>
+  <div id="drawing_editing"></div>
+<!--
+  <h4>Markers</h4>
+  <div class='drawing_config_box'>
+    <table>
+      <tr>
+	<td>Display</td><td><input id="drawing_config_marker_display" type="checkbox" checked="checked" onchange='drawing_editing(true)'></input></td>
+      </tr>
+      <tr>
+	<td>&nbsp;</td>
+	<td>
+	  <select id="drawing_config_old_marker" onchange='drawing_editing(true)'>
+	    <option value="1">Keep old markers with a different color</option>
+	    <option value="2">Keep old markers with the same color</option>
+	    <option value="0">Don't keep old markers</option>
+	  </select>
+	</td>
+      </tr>
+    </table>
+  </div>
+-->
+  <h4>Chart</h4>
+  <div class='drawing_config_box'>
+    <table style=''>
+      <tr>
+	<td>Display</td><td><input id="drawing_config_chart_display" type="checkbox" onchange='drawing_editing(true)'></input></td>
+      </tr>
+      <tr>
+	<td>
+	  Chart Type
+	</td>
+	<td>
+	  <select id="drawing_config_chart_type" onchange='drawing_editing(true)'>
+	    <option value="Heatmap">Heatmap</option>
+	    <option value="Barplot">Barplot</option>
+<!--	    <option value="Piechart">Piechart</option> -->
+	  </select>
+	</td>
+      </tr>
+      <tr>
+	<td>&nbsp;</td>
+	<td colspan="1"><a href="#" class='drawing_config_link' onclick='drawing_config_chart()'><span class='drawing_config_link'>configuration</span></a></td>
+      </tr>
+    </table>
+  </div>
+
+  <h4>Glyphs</h4>
+  <div class='drawing_config_box' style='overflow: auto; max-height: 125px'>
+    <table>
+      <tr><td style='text-align: center; font-weight: bold'>Glyph 1</td></tr>
+      <tr>
+	<td>&nbsp;</td>
+	<td>Display</td><td><input id="drawing_config_glyph_display_1" type="checkbox" onchange='drawing_editing(true)'></input></td>
+	<td><a href="#" class='drawing_config_link' onclick='drawing_config_glyph(1)'><span class='drawing_config_link'>configuration</span></a></td>
+      </tr>
+
+      <tr>
+      <tr><td style='text-align: center; font-weight: bold'>Glyph 2</td></tr>
+	<td>&nbsp;</td>
+	<td>Display</td><td><input id="drawing_config_glyph_display_2" type="checkbox" onchange='drawing_editing(true)'></input></td>
+	<td><a href="#" class='drawing_config_link' onclick='drawing_config_glyph(2)'><span class='drawing_config_link'>configuration</span></a></td>
+      </tr>
+
+      <tr><td style='text-align: center; font-weight: bold'>Glyph 3</td></tr>
+      <tr>
+	<td>&nbsp;</td>
+	<td>Display</td><td><input id="drawing_config_glyph_display_3" type="checkbox" onchange='drawing_editing(true)'></input></td>
+	<td><a href="#" class='drawing_config_link' onclick='drawing_config_glyph(3)'><span class='drawing_config_link'>configuration</span></a></td>
+      </tr>
+
+      <tr><td style='text-align: center; font-weight: bold'>Glyph 4</td></tr>
+      <tr>
+	<td>&nbsp;</td>
+	<td>Display</td><td><input id="drawing_config_glyph_display_4" type="checkbox" onchange='drawing_editing(true)'></input></td>
+	<td><a href="#" class='drawing_config_link' onclick='drawing_config_glyph(4)'><span class='drawing_config_link'>configuration</span></a></td>
+      </tr>
+
+      <tr><td style='text-align: center; font-weight: bold'>Glyph 5</td></tr>
+      <tr>
+	<td>&nbsp;</td>
+	<td>Display</td><td><input id="drawing_config_glyph_display_5" type="checkbox" onchange='drawing_editing(true)'></input></td>
+	<td><a href="#" class='drawing_config_link' onclick='drawing_config_glyph(5)'><span class='drawing_config_link'>configuration</span></a></td>
+      </tr>
+
+      </table>
+  </div>
+
+  <h4>Map Staining</h4>
+  <div class='drawing_config_box' style='overflow: auto; max-height: 125px'>
+    <table>
+      <tr>
+	<td>Display</td><td><input id="drawing_config_map_staining_display" type="checkbox" onchange='drawing_editing(true)'></input></td>
+	<td><a href="#" class='drawing_config_link' onclick='drawing_config_map_staining()'><span class='drawing_config_link'>configuration</span></a></td>
+      </tr>
+    </table>
+  </div>
+
+<!--
+  <h4>Label</h4>
+  <div class='drawing_config_box'>
+    <table>
+      <tr>
+	<td>Display</td><td><input id="drawing_config_label_display" type="checkbox" onchange='drawing_editing(true)'></input></td>
+      </tr>
+      <tr>
+	<td>&nbsp;</td>
+	<td><a href="#" class='drawing_config_link' onclick='drawing_config_label()'><span class='drawing_config_link'>configuration</span></a></td>
+      </tr>
+    </table>
+  </div>
+-->
+  <h4>Display DLOs</h4>
+  <div class='drawing_config_box'>
+  <table>
+    <tr>
+      <td>For all genes</td>
+      <td><input name="drawing_config_display" id="drawing_config_display_all" type="radio" checked onchange='drawing_editing(true)'></input></td>
+    </tr>
+    <tr>
+      <td>For selected genes</td>
+      <td><input name="drawing_config_display" id="drawing_config_display_selected" type="radio" onchange='drawing_editing(true)'></input></td>
+    </tr>
+    </table>
+  </div>
+</div>
+
+<div id="heatmap_editor_div">
+  <h3>Heatmap Configuration Editor</h3>
+  <div id="heatmap_editing"></div>
+  <table id='heatmap_editor_table'>
+  </table>
+  <div id="heatmap_editor_msg_div" class="heatmap-message"></div>
+  <div id="heatmap_editor_size_div"></div>
+  <div id="heatmap_gene_choice"></div>
+</div>
+
+<div id="barplot_editor_div">
+  <h3>Barplot Configuration Editor</h3>
+  <div id="barplot_editing"></div>
+  <table id='barplot_editor_table'>
+  </table>
+  <div id="barplot_editor_msg_div" class="barplot-message"></div>
+  <div id="barplot_editor_size_div"></div>
+  <div id="barplot_gene_choice"></div>
+</div>
+
+<div id="glyph_editor_div_1">
+  <h3>Glyph 1 Configuration Editor</h3>
+  <div id="glyph_editing_1"></div>
+  <table id='glyph_editor_table_1'>
+  </table>
+  <div id="glyph_editor_msg_div_1" class="glyph-message"></div>
+  <div id="glyph_editor_size_div_1"></div>
+  <div id="glyph_gene_choice_1"></div>
+</div>
+
+<div id="glyph_editor_div_2">
+  <h3>Glyph 2 Configuration Editor</h3>
+  <div id="glyph_editing_2"></div>
+  <table id='glyph_editor_table_2'>
+  </table>
+  <div id="glyph_editor_msg_div_2" class="glyph-message"></div>
+  <div id="glyph_editor_size_div_2"></div>
+  <div id="glyph_gene_choice_2"></div>
+</div>
+
+<div id="glyph_editor_div_3">
+  <h3>Glyph 3 Configuration Editor</h3>
+  <div id="glyph_editing_3"></div>
+  <table id='glyph_editor_table_3'>
+  </table>
+  <div id="glyph_editor_msg_div_3" class="glyph-message"></div>
+  <div id="glyph_editor_size_div_3"></div>
+  <div id="glyph_gene_choice_3"></div>
+</div>
+
+<div id="glyph_editor_div_4">
+  <h3>Glyph 4 Configuration Editor</h3>
+  <div id="glyph_editing_4"></div>
+  <table id='glyph_editor_table_4'>
+  </table>
+  <div id="glyph_editor_msg_div_4" class="glyph-message"></div>
+  <div id="glyph_editor_size_div_4"></div>
+  <div id="glyph_gene_choice_4"></div>
+</div>
+
+<div id="glyph_editor_div_5">
+  <h3>Glyph 5 Configuration Editor</h3>
+  <div id="glyph_editing_5"></div>
+  <table id='glyph_editor_table_5'>
+  </table>
+  <div id="glyph_editor_msg_div_5" class="glyph-message"></div>
+  <div id="glyph_editor_size_div_5"></div>
+  <div id="glyph_gene_choice_5"></div>
+</div>
+
+<div id="map_staining_editor_div">
+  <h3>Map Staining Configuration Editor</h3>
+  <div id="map_staining_editing"></div>
+  <table id='map_staining_editor_table'>
+  </table>
+  <div id="map_staining_editor_msg_div" class="glyph-message"></div>
+  <div id="map_staining_editor_size_div"></div>
+  <div id="map_staining_gene_choice"></div>
+</div>
+
+<div id='command-dialog'>
+  <h3>Command Dialog</h3>
+  <table>
+    <tr>
+      <td><h4>History</h4></td><td><h4>Commands</h4></td>
+    </tr>
+    <tr>
+      <td><textarea id='command-history' rows='30' cols='65'></textarea></td>
+      <td><textarea id='command-exec' rows='20' cols='65'></textarea></td>
+    </tr>
+  </table>
+</div>
+
+<div id='search_dialog'>
+  <h3>Advanced Search</h3>
+  <table>
+    <tr><td class='search-label'>Patterns</td><td><textarea id="search_dialog_patterns" cols="40" rows="8"></textarea></tr>
+    <tr><td>&nbsp;</td></tr>
+    <tr><td>&nbsp;</td><td><input name='search_dialog_match' id='search_dialog_match_eq_any' type='radio' checked></input><label>Match any pattern</label></td></tr>
+    <tr><td class='search-label'>Match mode</td><td><input name='search_dialog_match' id='search_dialog_match_eq_all' type='radio'></input><label>Match all these patterns</label></td></tr>
+    <tr><td>&nbsp;</td><td><input name='search_dialog_match' id='search_dialog_match_neq_all' type='radio'></input><label>Does not match all patterns</label></td></tr>
+    <tr><td>&nbsp;</td><td><input name='search_dialog_match' id='search_dialog_match_neq_any' type='radio'></input><label>Does not match any pattern</label></td></tr>
+    <tr><td>&nbsp;</td></tr>
+    <tr><td class='search-label'>Patterns are</td><td><input name='search_dialog_pattern_mode' id='search_dialog_pattern_mode_word' type='radio' checked></input><label>Words</label></td></tr>
+    <tr><td>&nbsp;</td><td><input name='search_dialog_pattern_mode' id='search_dialog_pattern_mode_regex' type='radio'></input><label>Substrings / Regular expressions</label></td></tr>
+    <tr><td>&nbsp;</td></tr>
+    <tr><td class='search-label'>Search in</td>
+    <td>
+      <select id='search_dialog_search_in' size='4' multiple>
+	<option value='label' selected>Labels</option>
+	<option value='tag' selected>Tags</option>
+	<option value='annot'>Annotations</option>
+      </select>
+    </td>
+    </tr>
+    <tr><td>&nbsp;</td></tr>
+    <tr><td>&nbsp;</td><td><input name='search_dialog_class' id='search_dialog_class_all_but_included' type='radio' checked></input><label>Any class but complex components</label></td></tr>
+    <tr><td class='search-label'>Entity classes</td><td><input name='search_dialog_class' id='search_dialog_class_all' type='radio'></input><label>Any class</label></td></tr>
+    <tr><td>&nbsp;</td><td><input name='search_dialog_class' id='search_dialog_class_all_included' type='radio'></input><label>Any complex component</label></td></tr>
+    <tr><td>&nbsp;</td><td><input name='search_dialog_class' id='search_dialog_class_select' type='radio'></input><label>Choose classes:</label></td></tr>
+    <tr><td>&nbsp;</td><td>
+      <select id='search_dialog_class_choose' size='5' multiple>
+	<option value='protein'>Protein</option>
+	<option value='gene'>Gene</option>
+	<option value='complex'>Complex</option>
+	<option value='rna'>Rna</option>
+	<option value='antisense_rna'>Antisense rna</option>
+	<option value='phenotype'>Phenotype</option>
+	<option value='simple_molecule'>Simple molecule</option>
+	<option value='ion'>Ion</option>
+	<option value='drug'>Drug</option>
+	<option value='reaction'>Reaction</option>
+	<option value='unknown'>Unknown</option>
+	<option value='protein:included'>Protein Complex Component</option>
+	<option value='gene:included'>Gene Complex Component</option>
+	<option value='rna:included'>Rna Complex Component</option>
+	<option value='antisense_rna:included'>Antisense rna Complex Component</option>
+	<option value='phenotype:included'>Phenotype Complex Component</option>
+	<option value='simple_molecule:included'>Simple molecule Complex Component</option>
+	<option value='ion:included'>Ion Complex Component</option>
+	<option value='drug:included'>Drug Complex Component</option>
+	<option value='reaction:included'>Reaction Complex Component</option>
+      </select>
+    </td>
+    </tr>
+    <tr><td>&nbsp;</td></tr>
+    <tr>
+      <td class='search-label'>Highlight&nbsp;results</td>
+      <td><input id="search_dialog_highlight" type="checkbox"></input></td>
+    </tr>
+    <tr><td>&nbsp;</td></tr>
+    <tr><td class='search-label'>Open bubbles</td><td><input name='search_dialog_class' id='search_dialog_open_bubble' type='checkbox'></input></td></tr>
+  </table>
+</div>
+
+<div id='analysis_dialog'>
+  <h3>Functional Analysis</h3>
+  <br/>
+  <table width='100%'>
+    <tr>
+      <td class='analysis-label'>Select an Analysis</td>
+      <td><select id='analysis_id' onchange='select_analysis(window)'></select></td>
+    </tr>
+    <tr><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td colspan='2'><div id='selected_analysis_panel'></div></td>
+    </tr>
+  </table>
+</div>
+
+</body>
+</html>

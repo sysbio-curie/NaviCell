@@ -1,0 +1,1049 @@
+/*
+ *    Stuart Pook & Eric Viara, Copyright (C) 2011 Institut Curie
+ *
+ *    This program is free software: you can redistribute it and/or modify
+ *    it under the terms of the GNU General Public License as published by
+ *    the Free Software Foundation, either version 3 of the License, or
+ *    (at your option) any later version.
+ *
+ *    This program is distributed in the hope that it will be useful,
+ *    but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *    GNU General Public License for more details.
+ *
+ *    You should have received a copy of the GNU General Public License
+ *    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ *	This file needs to be read by each module of each map.
+ *
+ * $Id: clickmap_map.css 16937 2013-05-31 14:57:18Z eviara $
+ *
+ * NaviCell version 2
+ *
+ */
+
+html, body {
+    height: 100%; /* needed for container min-height */
+    margin: 0;
+    padding: 0;
+    border: none;
+    font-size: 100%; /* http://www.w3schools.com/css/css_font.asp */
+    overflow: hidden;	/* Remove scroll bars on browser window */
+}
+
+/* http://www.w3.org/TR/CSS2/text.html */
+/*#right { text-align: right }*/
+
+/* http://stackoverflow.com/questions/6472991/how-do-you-do-tab-stops-in-html-css */
+.header-right {
+    position:absolute;
+    right: 10px; 
+    top: 0; 
+    font-size: 14px;
+}
+
+.header-left {
+    position:absolute;
+    left: 0px; 
+    top: 0; 
+}
+
+.header-centre {
+    font-size: 1.4em;
+}
+
+#header {
+    position: relative;
+    padding-left: 1em;
+    text-align: center;
+    border-width: 1px;
+    border-bottom-style : solid;
+    border-color: gray;
+    color: #ff8400;
+    background-color: white;
+    width: 99%;
+    line-height: 40px;
+    height: 40px;
+}
+
+#map {
+    position: absolute;
+    top: 40px;
+    margin-top: 1px;			
+    left: 0;
+    padding: 0;
+    width: 100%;
+    bottom: 0px; /* http://stackoverflow.com/questions/1192783/css-how-to-set-div-height-100-minus-npx */
+    border: none;
+    border-bottom: solid;
+    border-width: 1px;
+    border-color: gray;		
+}
+
+#right_panel {
+    min-width: 245px;
+/*    background-color: white; */
+    background: white;
+}
+
+/* replace marker_checkboxes */
+#right_tabs {
+    top: 0.5%;
+    background: white;
+    position: absolute;
+    right: 0;
+    padding: 0;
+    width: 100%;
+/*    height: 74.5%; */
+    height: 69.5%; /* if demo */
+    border-bottom: solid;
+    border-left: solid;
+    border-width: 1px;
+    border-color: gray;
+    overflow: auto;
+}
+
+#result_tree {
+    margin: 0px;
+    padding-top: 5px;
+    padding-left: 0px;
+}
+
+#result_tree_header {
+    margin: 0px;
+    padding-left: 12px;
+    font-size: small;
+    font-weight: bold;
+}
+
+#entity_tree, #datatable_tree, #result_tree_contents {
+    padding-top: 10px;
+    padding-left: 5px;
+    background: white;
+}
+
+.jstree-default .jstree-search
+{
+    background-color: pink;
+    font-style: normal ! important;
+    font-weight: bold;
+}
+
+.jstree a {
+    font-size: 12px;
+}
+
+.jstree-default a.jstree-search
+{
+    color: black ! important;
+}
+
+#MySplitter {
+    height: 99.9%;
+    width: 99.9%;
+    border: 0px solid #aaa;
+    background-color: white;
+}
+
+.vsplitbar {
+    width: 3px;
+    background: #aaa;
+}
+
+.ui-state-default { background-color: #aca }
+.ui-state-hover { background-color: #bdb }
+.ui-state-highlight { background-color: #add }
+.ui-state-error { background-color: #eaa }
+
+.splitter-pane {
+    overflow: auto;
+}
+
+.splitter-bar-vertical {
+    width: 3px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.splitter-bar-vertical-docked {
+    width: 10px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.splitter-bar.ui-state-highlight {
+    opacity: 0.7;
+}
+
+.splitter-iframe-hide {
+    visibility: hidden;
+}
+
+.bubble-cyan {
+    background-color: cyan;
+}
+
+.bubble-LightGreen {
+    background-color: lightgreen;
+}
+
+.bubble-LightGoldenRodYellow {
+    background-color: lightgoldenrodyellow;
+}
+
+.bubble-Khaki {
+    background-color: khaki;
+}
+
+.bubble-White {
+    background-color: white;
+}
+
+.bubble-cyan, .bubble-LightGreen, .bubble-LightGoldenRodYellow, .bubble-Khaki, .bubble-White {
+    font-family: "Arial", "Helvetica", "Verdana", "sans-serif";
+    font-size: 13px;
+}
+
+.bubble-cyan a, .bubble-LightGreen a, .bubble-LightGoldenRodYellow a, .bubble-Khaki a, .bubble-White a {
+    color: blue;
+}
+
+.bubble {
+    font-size: smaller;
+}
+
+.download-data {
+    text-align: left;
+    font-size: smaller;
+}
+
+/* NaviCell version 2 */
+
+#datatable_input {
+/*    top: 75%;  */
+    top: 69%; /* if demo: */
+    position: absolute;
+    right: 0;
+    padding: 0;
+    width: 100%;
+    height: 45%;
+    border-bottom: solid;
+    border-top: solid;
+    border-left: solid;
+    border-width: 2px;
+    border-color: gray;
+    background-color: white;
+    padding-top: 5px;
+}
+
+#datatable_input h4 {
+    font-size: 80%;
+}
+
+#datatable_input button {
+    font-size: 11px;
+}
+
+#dt_import_dialog, #dt_sample_status, #dt_gene_status, #dt_group_status, #dt_module_status, #dt_datatable_status, #dt_sample_annot, #drawing_config_div, #search_dialog {
+    font-size: 75%;
+    font-family: "Arial", "Helvetica", "Verdana", "sans-serif";
+}
+
+#dt_import_dialog h3, #dt_sample_annot h3, #search_dialog h3 {
+    margin-top: 20px;
+    text-align: center;
+    font-size: larger;
+}
+
+#dt_import_dialog input.text, #dt_sample_annot input.text {
+    margin-bottom: 12px;
+    padding: .4em;
+}
+
+.ui-button-text {
+    font-size: 13px;
+}
+
+fieldset { padding: 0; border: 0; margin-top: 25px; }
+
+.ui-dialog .ui-state-error { padding: .3em; }
+
+.validateTips { border: 1px solid transparent; padding: 0.3em; }
+
+/*td {height: 100%;}*/
+
+label {font-size: 12px; vertical-align: middle;}
+
+#dt_import_main, #dt_import_display {
+    margin-left: 10px;
+    margin-right: 20px;
+    padding-left: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border: 1px solid lightgray;
+}
+
+#dt_import_file_or_url {
+    margin-left: 10px;
+    margin-right: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border: 1px solid lightgray;
+}
+
+#dt_sample_annot {
+    min-height: 600px;
+}
+
+#dt_import_status, #dt_sample_annot_status {
+    margin-left: 10px;
+    margin-right: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-left: 5px;
+    border: 1px solid lightgray;
+}
+
+#dt_import_status {
+/*    min-height: 50px;*/
+    min-height: 100px;
+    overflow: auto;
+}
+
+#dt_sample_annot_status {
+    min-height: 45px;
+}
+
+.less-than {
+    font-size: 10px;
+    opacity: 0.6;
+}
+
+#dt_import_main input { display:block;} 
+#dt_import_main select { display:block;} 
+#dt_import_status {font-size: 11px; background-color: white;}
+#dt_sample_annot_status {font-size: 12px; background-color: white;}
+#dt_import_dialog {overflow: auto;}
+#dt_sample_annot {overflow: auto;}
+#search_dialog {overflow: auto;}
+
+#dt_sample_status_table table, #dt_sample_status_table th, #dt_sample_status_table td, #dt_gene_status_table table, #dt_gene_status_table th, #dt_gene_status_table td, #dt_datatable_status_table table, #dt_datatable_status_table th, #dt_datatable_status_table td, #dt_group_status_table table, #dt_group_status_table th, #dt_group_status_table td, #dt_module_status_table table, #dt_module_status_table th, #dt_module_status_table td {
+    border: 1px solid lightgray;
+    border-spacing: 10px;
+    border-padding: 10px;
+    padding: 3px;
+}
+
+#dt_sample_status_table, #dt_gene_status_table, #dt_group_status_table, #dt_module_status_table, #dt_datatable_status_table {
+    width: 200px;
+    padding-right: 20px;
+}
+
+#dt_sample_status_table thead {
+    background-color: rgb(60, 138, 189);
+    color: white;
+    text-align: center;
+}
+
+#dt_sample_status_table tbody {
+    background-color: white;
+    color: #222222;
+}
+
+#dt_group_status_table thead {
+    background-color: rgb(60, 38, 89);
+    color: white;
+    text-align: center;
+}
+
+#dt_group_status_table tbody {
+    background-color: white;
+    color: #222222;
+}
+
+#dt_module_status_table thead {
+    background-color: rgb(60, 38, 189);
+    color: white;
+    text-align: center;
+}
+
+#dt_module_status_table tbody {
+    background-color: white;
+    color: #222222;
+}
+
+#dt_sample_status h3, #dt_gene_status h3, #dt_datatable_status h3, #dt_status_tabs h3, #dt_group_status h3, #dt_module_status h3, #right_tabs h3 {
+    margin-top: 20px;
+    text-align: center;
+    font-size: larger;
+}
+
+.status-message {
+    color: #CC6C00;
+}
+
+.glyph-message {
+    color: #CC6C00;
+    font-size: small;
+    margin-top: 10px;
+    padding-left: 40px;
+    font-style: italic;
+}
+
+.heatmap-message, .barplot-message {
+    color: #CC6C00;
+    font-size: small;
+    margin-top: 10px;
+    padding-left: 0px;
+    font-style: italic;
+}
+
+.slider-title {
+/*    color: #CC6C00;*/
+    color: #000000;
+    font-size: small;
+    font-weight: bold;
+}
+
+.slider-label {
+    position: absolute;
+    font-size: x-small;
+    margin-top: 15px;
+}
+
+.error-message {
+    color: red;
+}
+
+#dt_import_file_message {
+    font-size: small;
+    color: red;
+    padding: 5px;
+}
+
+#dt_gene_status_table thead {
+    background-color: rgb(160, 138, 189);
+    color: white;
+    text-align: center;
+}
+
+#dt_gene_status_table tbody {
+    /*    background-color: rgb(200, 238, 0) */
+    background-color: white;
+    color: #222222;
+}
+#dt_datatable_status_table thead {
+    background-color: rgb(0, 0, 60);
+    color: white;
+    text-align: center;
+    padding: 30px;
+}
+
+.datatable-too-large {
+    font-size: large;
+    font-weight: bold;
+    padding-top: 20px;
+    text-align: center;
+}
+
+#dt_datatable_status_table tbody {
+    /*    background-color: rgb(200, 238, 0) */
+    background-color: white;
+    color: #222222;
+}
+
+#dt_datatable_status_table tbody {
+    text-align: center;
+}
+
+#dt_datatable_status_table td {
+    min-width: 80px;
+}
+
+.zz-hidden {
+    visibility: hidden;
+}
+
+.update-checkbox {
+    font-size: 13px;
+    color: darkred;
+    vertical-align: top;
+}
+
+#dt_sample_annot_table_div {
+/*    direction: rtl; */
+}
+
+#dt_sample_annot_table {
+    min-height: 400px;
+    min-width: 600px;
+    padding-right: 10px;
+    padding-left: 10px;
+/*    direction: rtl; */
+    overflow: auto;
+}
+
+#dt_sample_annot_table thead {
+/*    background-color: rgb(0, 0, 60); */
+/*    color: white; */
+/*    background-color: rgb(20, 28, 169); */
+    background-color: lightblue;
+    color: #555555;
+    text-align: center;
+}
+
+#dt_sample_annot_table tbody {
+    background-color: white;
+    color: #222222;
+}
+
+#dt_sample_annot_table_div {
+    overflow: auto;
+    min-height: 400px;
+    max-height: 400px;
+/*    max-width: 700px; */
+/*    max-width: 900px; */
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-right: 20px;
+}
+
+#dt_datatable_buttonpane {
+    border-top: 1px solid black;
+    margin-top: 20px;
+    padding-top: 20px;
+}
+
+.buttonpane {
+    border-top: 1px solid black;
+    margin-top: 20px;
+    padding-top: 20px;
+}
+
+.group_name {
+    font-weight: bold;
+/*  color: red; */
+}
+
+.group_value {
+    color: #333333;
+/*  color: green; */
+}
+
+.group_annot {
+    background: lightyellow;
+}
+
+.non_group_annot {
+/*    background: #DDDDDD; */
+}
+
+/* TableSorter */
+
+table.tablesorter {
+    font-family:arial;
+/*     background-color: #CDCDCD; */
+    margin:10px 0pt 15px;
+/*    font-size: 8pt; */
+    width: 100%;
+    text-align: left;
+}
+
+table.tablesorter thead tr th, table.tablesorter tfoot tr th {
+/*     background-color: #E6EEEE; */
+    border: 1px solid #FFF;
+/*    font-size: 8pt; */
+    padding: 4px;
+}
+
+table.tablesorter thead tr .header {
+/*    background-image: url(bg.gif); */
+    background-repeat: no-repeat;
+    background-position: center right;
+    cursor: pointer;
+}
+
+/*
+table.tablesorter tbody td {
+    color: #3D3D3D;
+    padding: 4px;
+    background-color: #FFF;
+    vertical-align: top;
+}
+
+table.tablesorter tbody tr.odd td {
+    background-color:#F0F0F6;
+}
+*/
+
+table.tablesorter thead tr .headerSortUp {
+/*    background-image: url(asc.gif); */
+}
+
+table.tablesorter thead tr .headerSortDown {
+/*    background-image: url(desc.gif); */
+}
+
+table.tablesorter thead tr .headerSortDown, table.tablesorter thead tr .headerSortUp {
+    background-color: #8DBDD8;
+    color: #777777;
+}
+
+.input-value {
+    width: 110px;
+}
+
+/*
+div.tablesorterPager {
+    padding: 10px 0 10px 0;
+    background-color: #D6D2C2;
+    text-align: center;
+}
+
+div.tablesorterPager span {
+    padding: 0 5px 0 5px;
+}
+
+div.tablesorterPager input.prev {
+    width: auto;
+    margin-right: 10px;
+}
+
+div.tablesorterPager input.next {
+    width: auto;
+    margin-left: 10px;
+}
+
+div.tablesorterPager input {
+    font-size: 8px;
+    width: 50px;
+    border: 1px solid #330000;
+    text-align: center;
+}
+*/
+
+.datatable_table td, .datatable_table th, .datatable_table table {
+    font-size: 75%;
+    font-family: "Arial", "Helvetica", "Verdana", "sans-serif";
+    width: 200px;
+    padding-right: 20px;
+    border: 1px solid lightgray;
+    border-spacing: 10px;
+    border-padding: 10px;
+    padding: 3px;
+}
+
+.datatable_table {
+    width: 200px;
+    padding-right: 20px;
+}
+
+.datatable_table thead {
+    background-color: rgb(0, 0, 60);
+    color: white;
+    text-align: center;
+}
+
+.datatable_table tbody {
+    /*    background-color: rgb(200, 238, 0) */
+    background-color: white;
+    color: #222222;
+}
+
+.datatable_table tbody {
+    text-align: center;
+}
+
+.datatable_table td {
+    min-width: 100px;
+}
+
+.switch-button {
+    font-size: 10px;
+/*    background: rgb(255, 238, 195); */
+    background: white;
+    color: lightblue;
+}
+
+/*
+.switch-view-div {
+    position: fixed;
+    top: 80px;
+    right: 10%;
+}
+*/
+
+.step-config {
+    font-size: 80%;
+    font-family: "Arial", "Helvetica", "Verdana", "sans-serif";
+}
+
+.step-config h3 {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.step-config-table thead {
+    background-color: rgb(0, 0, 60);
+    color: white;
+    text-align: center;
+}
+
+.step-config-table tbody {
+    background-color: white;
+    color: #222222;
+}
+
+.step-config table {
+    font-size: 80%;
+    font-family: "Arial", "Helvetica", "Verdana", "sans-serif";
+}
+
+.discrete-config {
+    font-size: 80%;
+    font-family: "Arial", "Helvetica", "Verdana", "sans-serif";
+}
+
+.discrete-config h3 {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.discrete-config-table thead {
+    background-color: rgb(0, 0, 60);
+    color: white;
+    text-align: center;
+}
+
+.discrete-config-table tbody {
+    /*    text-align: center; */
+    /*    background-color: rgb(200, 238, 0) */
+    background-color: white;
+    color: #222222;
+}
+
+.discrete-config table {
+    font-size: 80%;
+    font-family: "Arial", "Helvetica", "Verdana", "sans-serif";
+}
+
+#drawing_config_div {
+    font-size: small;
+}
+
+#drawing_config_div h3 {
+    text-align: center;
+    font-size: larger;
+}
+
+.drawing_config_box {
+    border: 1px solid lightgray;
+    margin-left: 20px;
+    margin-right: 40px;
+    padding: 10px;
+    background: white;
+    font-size: small;
+}
+
+.drawing_config_link {
+    font-size: small;
+    text-decoration: none;
+    color: darkblue;
+}
+
+#heatmap_config_div, #barplot_config_div, #glyph_config_div_1, #glyph_config_div_2, #glyph_config_div_3, #glyph_config_div_4, #glyph_config_div_5, #map_staining_config_div {
+    font-size: small;
+}
+
+#heatmap_config_div h3, #barplot_config_div h3, #glyph_config_div_1 h3, #glyph_config_div_2 h3, #glyph_config_div_2 h3, #glyph_config_div_3 h3, #glyph_config_div_4 h3, #glyph_config_div_5 h3, #map_staining_config_div h3 {
+    text-align: center;
+    font-size: larger;
+}
+
+/* OBSOLETE ? */
+/*
+#heatmap_config_datatable_list, #heatmap_config_sample_list, #heatmap_config_group_list, #barplot_config_datatable_list, #barplot_config_sample_list, #barplot_config_group_list, #glyph_config_datatable_list_1, #glyph_config_sample_list_1, #glyph_config_group_list_1, #glyph_config_datatable_list_2, #glyph_config_sample_list_2, #glyph_config_group_list_2, #glyph_config_datatable_list_3, #glyph_config_sample_list_3, #glyph_config_group_list_3, #glyph_config_datatable_list_4, #glyph_config_sample_list_4, #glyph_config_group_list_4, #glyph_config_datatable_list_5, #glyph_config_sample_list_5, #glyph_config_group_list_5 {
+    background: white;
+}
+*/
+
+/* OBSOLETE ? */
+/*
+#heatmap_config_datatable_list thead, #heatmap_config_sample_list thead, #heatmap_config_group_list thead, #barplot_config_datatable_list, #barplot_config_sample_list, #barplot_config_group_list, #glyph_config_datatable_list_1, #glyph_config_sample_list_1, #glyph_config_group_list_1, #glyph_config_datatable_list_2, #glyph_config_sample_list_2, #glyph_config_group_list_2, #glyph_config_datatable_list_3, #glyph_config_sample_list_3, #glyph_config_group_list_3, #glyph_config_datatable_list_4, #glyph_config_sample_list_4, #glyph_config_group_list_4, #glyph_config_datatable_list_5, #glyph_config_sample_list_5, #glyph_config_group_list_5 {
+    text-align: center;
+    background-color: rgb(160, 138, 189);
+}
+*/
+
+.heatmap_config_head, .barplot_config_head, .glyph_config_head, .map_staining_head {
+    text-align: center;
+    font-weight: bold;
+    font-size: larger;
+}
+
+
+#heatmap_editor_div, #barplot_editor_div, #glyph_editor_div_1, #glyph_editor_div_2, #glyph_editor_div_3, #glyph_editor_div_4, #glyph_editor_div_5, #map_staining_editor_div {
+/*    font-size: small; */
+}
+
+#heatmap_editor_div h3, #barplot_editor_div h3, #glyph_editor_div_1 h3, #glyph_editor_div_2 h3, #glyph_editor_div_3 h3, #glyph_editor_div_4 h3, #glyph_editor_div_5 h3, #map_staining_editor_div h3 {
+    text-align: center;
+/*    font-size: larger; */
+}
+
+#heatmap_editor_table, #barplot_editor_table, #glyph_editor_table_1, #glyph_editor_table_2, #glyph_editor_table_3, #glyph_editor_table_4, #glyph_editor_table_5, #map_staining_editor_table {
+/*    background: lightyellow;  */
+/*    border: 1px solid lightgray; */
+/*    border-spacing: 3px; */
+/*    border-padding: 3px; */
+    padding: 3px;
+/*    padding-right: 20px; */
+}
+
+#heatmap_editor_table td, #barplot_editor_table td, #glyph_editor_table_1 td, #glyph_editor_table_2 td, #glyph_editor_table_3 td, #glyph_editor_table_4 td, #glyph_editor_table_5 td, #map_staining_editor_table td {
+    background: white;
+    border: 1px solid;
+    border-top: 1px solid;
+    border-color: lightgray;
+    font-size: x-small;
+}
+
+#heatmap_editor_table tbody, #barplot_editor_table tbody, #glyph_editor_table_1 tbody, #glyph_editor_table_2 tbody, #glyph_editor_table_3 tbody, #glyph_editor_table_4 tbody, #glyph_editor_table_5 tbody, #map_staining_editor_table tbody {
+/*    border: 1px solid; */
+}
+
+#heatmap_editing, #barplot_editing, #drawing_editing, #group_editing, #dt_datatable_status_editing, .step-config-editing, .discrete-config-editing, #glyph_editing_1, #glyph_editing_2, #glyph_editing_3, #glyph_editing_4, #glyph_editing_5 {
+    font-size: small;
+/*    margin-bottom: 10px;*/
+/*    padding-bottom: 10px;*/
+    font-style: italic;
+    color: #CC6C00;
+}
+
+#heatmap_editor_size_div, #barplot_editor_size_div, #glyph_editor_size_div_1, #glyph_editor_size_div_2, #glyph_editor_size_div_3, #glyph_editor_size_div_4, #glyph_editor_size_div_5 {
+    margin-top: 15px;
+    font-size: x-small;
+}
+
+#heatmap_gene_choice, #barplot_gene_choice, #glyph_gene_choice_1, #glyph_gene_choice_2, #glyph_gene_choice_3, #glyph_gene_choice_4, #glyph_gene_choice_5, #map_staining_gene_choice {
+    border-top: solid;
+    border-width: 1px;
+    border-color: gray;
+    margin-top: 20px;
+    padding-top: 20px;
+    font-size: small;
+}
+
+#confirm_dialog, #info_dialog {
+    font-size: 80%;
+    font-family: "Arial", "Helvetica", "Verdana", "sans-serif";
+}
+
+#info_dialog h3 {
+    text-align: center;
+}
+
+#loading-jxtree {
+    margin: 12px;
+    font-size: small;
+}
+
+.loading-jxtree-head-msg {
+    font-weight: bold;
+}
+
+.loading-jstree-head-msg {
+    font-weight: bold;
+}
+
+.tree-control {
+    font-size: small;
+    text-decoration: none;
+    color: #FF8C00;
+}
+
+/*
+#barplot_config_div {
+    font-size: small;
+}
+
+#barplot_config_div h3 {
+    text-align: center;
+    font-size: larger;
+}
+
+#barplot_config_datatable_list, #barplot_config_sample_list, #barplot_config_group_list {
+    background: white;
+}
+
+#barplot_config_datatable_list thead, #barplot_config_sample_list thead, #barplot_config_group_list thead {
+    text-align: center;
+    background-color: rgb(160, 138, 189);
+}
+
+.barplot_config_head {
+    text-align: center;
+    font-weight: bold;
+    font-size: larger;
+}
+
+
+#barplot_editor_div {
+}
+
+#barplot_editor_div h3 {
+    text-align: center;
+}
+
+#barplot_editor_table {
+    padding: 3px;
+}
+
+#barplot_editor_table td {
+    background: white;
+    border: 1px solid;
+    border-top: 1px solid;
+    border-color: lightgray;
+    font-size: x-small;
+}
+
+#barplot_editor_table tbody {
+}
+
+#barplot_editing {
+    font-size: small;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    font-style: italic;
+    color: #CC6C00;
+}
+
+#barplot_editor_size_div {
+    margin-top: 15px;
+    font-size: x-small;
+}
+
+#barplot_gene_choice {
+    border-top: solid;
+    border-width: 1px;
+    border-color: gray;
+    margin-top: 20px;
+    padding-top: 20px;
+    font-size: small;
+}
+*/
+
+.right_tab {
+    font-size: x-small;
+    display: inline-block;
+    vertical-align: center;
+}
+
+.info_window {
+    max-height: 500px;
+}
+
+.config-label {
+    font-size: 80%;
+    font-weight: bold;
+    background: #EEEEEE;
+}
+
+.config-small-label {
+    font-size: 60%;
+    font-weight: bold;
+    background: #EEEEEE;
+}
+
+.data-visualization {
+    color: #331111;
+}
+
+.search-label {
+    font-weight: bold;
+}
+
+#command-dialog table {
+    font-size: small;
+}
+
+#command-dialog h3, #command-dialog h4 {
+    text-align: center;
+}
+
+#command-history {
+    margin-right: 25px;
+}
+
+#demo {
+    color: red;
+    display: none;
+}
+
+.context-menu {
+    margin-right: 60px;
+}
+
+.species-contextmenu-data-title:before {
+    content: attr(data-menutitle);
+    display: block;
+    text-align: center;
+    position: absolute;
+    right: 0;
+    left: 0;
+
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.species-contextmenu-interacting-entities:before {
+    content: attr(interacting-menutitle);
+    display: block;
+    text-align: center;
+    position: absolute;
+    right: 0;
+    left: 0;
+
+    font-weight: bold;
+}
+
+.species-contextmenu-reaction-neighbours:before {
+    content: attr(neighbours-menutitle);
+    display: block;
+    text-align: center;
+    position: absolute;
+    right: 0;
+    left: 0;
+
+    font-weight: bold;
+}
+
+.species-contextmenu-highlight:before {
+    content: attr(highlight-menutitle);
+}
+
+#analysis_dialog {
+    font-size: 75%;
+    font-family: "Arial", "Helvetica", "Verdana", "sans-serif";
+}
+
+#analysis_dialog h3 {
+    margin-top: 20px;
+    text-align: center;
+    font-size: larger;
+}
+
+#analysis_dialog h4 {
+    text-align: center;
+}
+
+#analysis_dialog {overflow: auto;}
+
+.analysis-label {
+    font-weight: bold;
+}

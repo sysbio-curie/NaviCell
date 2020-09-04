@@ -1,0 +1,222 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>NaviCell</title>
+  <meta name="description" content="Data analysis, navigation, curation and maintenance of molecular interactions maps">
+  <meta name="author" content="Institut Curie">
+  <!-- CSS only -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+  <!-- JS, Popper.js, and jQuery -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+  <!-- <meta name="msapplication-config" content="/docs/4.5/assets/img/favicons/browserconfig.xml">
+  <meta name="theme-color" content="#563d7c"> -->
+
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+    <!-- Custom styles for this template -->
+    <!-- <link href="starter-template.css" rel="stylesheet"> -->
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+      <a class="navbar-brand" href="#">
+        <img src="navicell-logo.png" height="40px">
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+  
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+         
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+          <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+        </form>
+      </div>
+    </nav>
+  
+    <main role="main" class="container" style="margin-top: 100px">
+    
+      <div class="container">
+        <h1>Maps</h1>
+        <table id="table-maps" class="table table-stripped"><tbody></tbody></table>
+        <br/><br/>
+        <h1>Create a new map</h1>
+        <br/>
+        <table class="table">
+          <tbody>
+            <tr>
+              <td>Name:</td>
+              <td><input type="text" id="map-name" /></td>
+            </tr>
+            <tr>
+              <td>Network file:</td>
+              <td><input type="file" id="map-network" /></td>
+            </tr>
+            <tr>
+              <td></td>
+              
+              <td>
+                <div class="float-right">
+                <div class="spinner-border mr-3" role="status" style="visibility:hidden" id="creating_status">
+                  <span class="sr-only">Creating the map...</span>
+                </div>
+              
+
+                <button class="btn btn-primary float-right" id="map-create-button">Create map</button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    
+    </main><!-- /.container -->
+    
+    <script type="text/javascript">
+      document.querySelector("#map-create-button").addEventListener('click', async function() {
+        let upload = await uploadFile();
+        
+        // if(upload.error == 0)
+        //   alert('File uploaded successful');
+        // else if(upload.error == 1)
+        //   alert('File uploading failed - ' + upload.message);
+      });
+
+      // async function managing upload operation
+      async function uploadFile() {
+        // function return value
+        let return_data = { error: 0, message: '' };
+
+        try {
+          // no file selected
+          if(document.querySelector("#map-name").value === "") {
+            throw new Error('No name given');
+            
+          } else if(document.querySelector("#map-network").files.length == 0) {
+            throw new Error('No network file selected');
+            
+          } else {
+            // formdata
+            let data = new FormData();
+            data.append('name', document.querySelector("#map-name").value);
+            data.append('network-file', document.querySelector("#map-network").files[0]);
+            
+            document.querySelector("#creating_status").style.visibility = "visible";
+            // send fetch along with cookies
+            let response = await fetch('http://localhost:8080/api/maps/', {
+                  method: 'POST',
+                  credentials: 'same-origin',
+                  body: data
+            });
+
+            // server responded with http response != 200
+            // if(response.status != 201)
+            //   throw new Error('HTTP response code != 201');
+            document.querySelector("#creating_status").style.visibility = "hidden";
+            getMaps();
+            // read json response from server
+            // success response example : {"error":0,"message":""}
+            // error response example : {"error":1,"message":"File type not allowed"}
+            // let json_response = await response.json();
+            //   if(json_response.error == 1)
+            //       throw new Error(json_response.message);	
+          }
+        }
+        catch(e) {
+          // catch rejected Promises and Error objects
+            return_data = { error: 1, message: e.message };
+          }
+
+        return return_data;
+      }
+      async function deleteFile(id) {
+          // send fetch along with cookies
+          let response = await fetch('http://localhost:8080/api/maps/' + id, {
+                  method: 'DELETE',
+                  credentials: 'same-origin',
+          });
+          
+          if (response.status != 200) 
+            throw new Error('HTTP response code != 200')
+            
+          getMaps();
+          
+      }
+      async function getMaps() {
+
+        try {
+          
+          // send fetch along with cookies
+          let response = await fetch('http://localhost:8080/api/maps/', {
+              method: 'GET',
+              credentials: 'same-origin',
+          });
+
+          // server responded with http response != 200
+          if(response.status != 200)
+            throw new Error('HTTP response code != 200');
+
+          // read json response from server
+          // success response example : {"error":0,"message":""}
+          // error response example : {"error":1,"message":"File type not allowed"}
+          let json_response = await response.json();
+            if(json_response.error == 1)
+                throw new Error(json_response.message);	
+          
+          console.log(json_response);
+          table = document.querySelector("#table-maps");
+          table.tBodies[0].innerHTML = "";
+          json_response.map((value) => {
+            
+            console.log(value);
+            row = table.tBodies[0].insertRow();
+            name_cell = row.insertCell();
+            name_cell.innerText = value.name;
+            link_cell = row.insertCell();
+            link_cell.innerHTML = "<a href=\"" + value.url + "\">Access map</a>";
+            delete_cell = row.insertCell();
+            delete_cell.style = "padding-top: 0.25rem";
+            delete_cell.innerHTML = "<button type=\"button\" class=\"btn btn-danger\" id=\"delete_" + value.id + "\">Delete</button>"
+            
+            document.querySelector("#delete_" + value.id).addEventListener('click', async function() {
+              let delete_res = await deleteFile(value.id);
+            });
+          });
+        }
+        catch(e) {
+          // catch rejected Promises and Error objects
+            return_data = { error: 1, message: e.message };
+          }
+      }
+      document.addEventListener("DOMContentLoaded", async function () {
+        await getMaps();  
+      });
+      
+      // console.log(document.json_response);
+    </script>
+  </body>
+</html>
