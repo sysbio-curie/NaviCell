@@ -1,0 +1,35 @@
+#
+# Navicell project
+#
+# Xref File
+# 
+# Eric Viara for Institut Curie (c) 29 April 2013
+#
+
+#
+# TAG | HREF template | ID regex | TAG pattern (default is TAG:) | TAG replacement (default is TAG:) | HREF target (default is _blank) | icon link?
+#
+
+PMID	http://www.ncbi.nlm.nih.gov/sites/entrez?Db=pubmed&amp;Cmd=ShowDetailView&amp;TermToSearch=%PMID%	[0-9]+
+HUGO	http://www.genenames.org/cgi-bin/quick_search.pl?.cgifields=type&type=equals&num=50&submit=Submit&search=%HUGO%	[A-Z0-9-_]+
+HGNC	http://www.genenames.org/data/hgnc_data.php?hgnc_id=%HGNC%	[0-9]+
+ENTREZ	http://www.ncbi.nlm.nih.gov/gene/%ENTREZ%	[0-9]+
+UNIPROT	http://www.expasy.org/uniprot/%UNIPROT%	[A-Z][A-Z0-9]{5}
+PUBCHEM	http://pubchem.ncbi.nlm.nih.gov/summary/summary.cgi?sid=%PUBCHEM%	[0-9][-0-9]*[0-9]
+KEGGCOMPOUND	http://www.genome.jp/dbget-bin/www_bget?cpd:%KEGGCOMPOUND%	[A-Z0-9]+
+CAS	http://www.chemnet.com/cas/supplier.cgi?l=&exact=dict&f=plist&mark=&submit.x=43&submit.y=12&submit=search&terms=%CAS%	[0-9][-0-9]*[0-9]
+CHEBI	http://www.ebi.ac.uk/chebi/searchId.do?chebiId=CHEBI:%CHEBI%	[0-9]+
+KEGGDRUG	http://www.genome.jp/dbget-bin/www_bget?dr:%KEGGDRUG%	[A-Z0-9]+
+REACTOME	http://www.reactome.org/cgi-bin/eventbrowser?DB=gk_current&ID=%REACTOME%	[0-9]+
+WIKI	http://wikipedia.org/wiki/%WIKI%	[A-Z0-9]+
+KEGG	http://www.genome.jp/dbget-bin/www_bget?hsa:%KEGG%	[A-Z0-9]+
+GENECARDS	http://www.genecards.org/cgi-bin/carddisp.pl?gc_id=%GENECARDS%	[A-Z0-9]+
+ATLASONC	http://atlasgeneticsoncology.org//Genes/%ATLASONC%.html	[A-Za-z0-9_]+
+ATONC	http://atlasgeneticsoncology.org//Genes/%ATONC%.html	[A-Za-z0-9_]+
+
+CONFIDENCE	@<img width='100' height='22' border='0' src='../../../map_icons/confidence/%CONFIDENCE%.gif'/>	[0-9_]+
+
+MAP	../../%MAP%_light/master/index.html	[A-Za-z0-9_]+	-	&nbsp;	%MAP%_master	icon
+MODULE	../../%MAP%_light/%MODULE%/index.html	[A-Za-z0-9_]+	 */ *\b(MODULE)(:)	&nbsp;/&nbsp;	%MAP%_%MODULE%	icon
+
+~@[A-Za-z0-9_\.-]+	http://identifiers.org/@TAG/@VAL	[A-Za-z0-9_/\.:-]+					~^@

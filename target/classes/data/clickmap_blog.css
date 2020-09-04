@@ -1,0 +1,31 @@
+@CHARSET "UTF-8";
+
+html, body {
+   overflow: auto;
+   padding: 10px;
+}
+
+.bubble-cyan {
+    background-color: cyan;
+}
+
+.bubble-LightGreen {
+    background-color: lightgreen;
+}
+
+.bubble-LightGoldenRodYellow {
+    background-color: lightgoldenrodyellow;
+}
+
+.bubble-cyan, .bubble-LightGreen, .bubble-LightGoldenRodYellow {
+    font-family: "Arial", "Helvetica", "Verdana", "sans-serif";
+    font-size: 13px;
+}
+
+.bubble-cyan a, .bubble-LightGreen a, .bubble-LightGoldenRodYellow a{
+    color: blue;
+}
+
+.bubble {
+    font-size: smaller;
+}
