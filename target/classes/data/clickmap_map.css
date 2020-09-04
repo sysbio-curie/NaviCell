@@ -1,0 +1,202 @@
+/*
+ *    Stuart Pook & Eric Viara, Copyright (C) 2011 Institut Curie
+ *
+ *    This program is free software: you can redistribute it and/or modify
+ *    it under the terms of the GNU General Public License as published by
+ *    the Free Software Foundation, either version 3 of the License, or
+ *    (at your option) any later version.
+ *
+ *    This program is distributed in the hope that it will be useful,
+ *    but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *    GNU General Public License for more details.
+ *
+ *    You should have received a copy of the GNU General Public License
+ *    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ *	This file needs to be read by each module of each map.
+ *
+ * $Id: clickmap_map.css 18759 2013-10-29 17:05:46Z eviara $
+ *
+ * NaviCell version 1
+ *
+ */
+
+html, body {
+    height: 100%; /* needed for container min-height */
+    margin: 0;
+    padding: 0;
+    border: none;
+    font-size: 100%; /* http://www.w3schools.com/css/css_font.asp */
+    overflow: hidden;	/* Remove scroll bars on browser window */
+}
+
+/* http://www.w3.org/TR/CSS2/text.html */
+/*#right { text-align: right }*/
+
+/* http://stackoverflow.com/questions/6472991/how-do-you-do-tab-stops-in-html-css */
+.header-right {
+    position:absolute;
+    right: 10px; 
+    top: 0; 
+    font-size: 14px;
+}
+
+.header-left {
+    position:absolute;
+    left: 0px; 
+    top: 0; 
+}
+
+.header-centre {
+    font-size: 1.4em;
+}
+
+#header {
+    position: relative;
+    padding-left: 1em;
+    text-align: center;
+    border-width: 1px;
+    border-bottom-style: solid;
+    border-color: gray;
+    color: #ff8400;
+    background-color: white;
+    
+    width: 99%;
+    line-height: 40px;
+    height: 40px;
+}
+
+#map {
+    position: absolute;
+    top: 40px;
+    margin-top: 1px;			
+    left: 0;
+    padding: 0;
+    width: 100%;
+    bottom: 0px; /* http://stackoverflow.com/questions/1192783/css-how-to-set-div-height-100-minus-npx */
+    border: none;
+    border-bottom: solid;
+    border-width: 1px;
+    border-color: gray;		
+}
+
+#right_panel {
+    min-width: 240px;
+    background-color: white;
+}
+
+/*#marker_checkboxes {*/
+#entity_tree {
+    top: 0%;
+    background-color: white;
+    position: absolute;
+    right: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    border-bottom: solid;
+    border-left: solid;
+    border-width: 1px;
+    border-color: gray;
+    margin-top: 15px;
+    overflow: auto;
+}
+
+.jstree-default .jstree-search
+{
+    background-color: pink;
+    font-style: normal ! important;
+    font-weight: bold;
+}
+
+.jstree a {
+    font-size: 12px;
+}
+
+.jstree-default a.jstree-search
+{
+    color: black ! important;
+}
+
+#MySplitter {
+    height: 99.9%;
+    width: 99.9%;
+    border: 0px solid #aaa;
+}
+
+.vsplitbar {
+    width: 3px;
+    background: #aaa;
+}
+
+.ui-state-default { background-color: #aca }
+.ui-state-hover { background-color: #bdb }
+.ui-state-highlight { background-color: #add }
+.ui-state-error { background-color: #eaa }
+
+.splitter-pane {
+    overflow: auto;
+}
+
+.splitter-bar-vertical {
+    width: 3px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.splitter-bar-vertical-docked {
+    width: 10px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.splitter-bar.ui-state-highlight {
+    opacity: 0.7;
+}
+
+.splitter-iframe-hide {
+    visibility: hidden;
+}
+
+.bubble-cyan {
+    background-color: cyan;
+}
+
+.bubble-LightGreen {
+    background-color: lightgreen;
+}
+
+.bubble-LightGoldenRodYellow {
+    background-color: lightgoldenrodyellow;
+}
+
+.bubble-cyan, .bubble-LightGreen, .bubble-LightGoldenRodYellow {
+    font-family: "Arial", "Helvetica", "Verdana", "sans-serif";
+    font-size: 13px;
+}
+
+.bubble-cyan a, .bubble-LightGreen a, .bubble-LightGoldenRodYellow a{
+    color: blue;
+}
+
+.bubble {
+    font-size: smaller;
+}
+
+#confirm_dialog {
+    font-size: 80%;
+    font-family: "Arial", "Helvetica", "Verdana", "sans-serif";
+}
+
+.loading-jstree-head-msg {
+    font-weight: bold;
+}
+
+.ui-button-text {
+    font-size: 13px;
+}
+
+.ui-dialog .ui-state-error { padding: .3em; }
+
+fieldset { padding: 0; border: 0; margin-top: 25px; }
