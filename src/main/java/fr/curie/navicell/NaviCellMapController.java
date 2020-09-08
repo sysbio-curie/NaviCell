@@ -1,5 +1,6 @@
 package fr.curie.navicell;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,7 +30,7 @@ import fr.curie.navicell.storage.StorageService;
 public class NaviCellMapController {
 
   private final StorageService storageService;
-
+  
   @Autowired
   private NaviCellMapRepository repository;
   
@@ -47,13 +48,18 @@ public class NaviCellMapController {
   @DeleteMapping("/api/maps")
   @ResponseStatus(value = HttpStatus.OK)
   void deleteAll() {
+    this.storageService.deleteAll();
     repository.deleteAll();
   }
   
   @DeleteMapping("/api/maps/{id}")
   @ResponseStatus(value = HttpStatus.OK)
   void delete(@PathVariable("id") String id)  {
-    repository.deleteById(id);
+    Optional<NaviCellMap> entry = repository.findById(id);
+    if (entry.isPresent()) {
+      this.storageService.deleteByFolder(entry.get().folder);
+      repository.deleteById(id);
+    }
   }
   
   @PostMapping("/api/maps")
