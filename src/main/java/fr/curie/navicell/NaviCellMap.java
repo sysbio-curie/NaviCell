@@ -102,12 +102,14 @@ public class NaviCellMap {
       String fullprefix = prefix + path + initials + "_master-";
       
       BufferedImage map1 = ImageIO.read(new File(this.imagePath));
-		  int width = map1.getWidth();
+      int width = map1.getWidth();
+      int height = map1.getHeight();
       int max_zoom = 0;
       
       // How many division by two to be of "screen size"
-      while ( width > 720) {
+      while ( width > 640 || height > 480) {
           width /= 2;
+          height /= 2;
           max_zoom += 1;
       }
       
@@ -121,9 +123,10 @@ public class NaviCellMap {
       
       // Making reduced resolution
       width = map1.getWidth();
+      height = map1.getHeight();
       int zoom = max_zoom;
       String old_image_path, new_image_path;
-      while ( width > 720 ) {
+      while ( width > 640 || height > 480 ) {
         
         if (zoom == max_zoom) {
           old_image_path = new_max_zoom.toString();
@@ -135,6 +138,7 @@ public class NaviCellMap {
         ACSNProcedures.doScalePng(old_image_path, new_image_path);  
         
         width /= 2;
+        height /= 2;
         zoom -= 1;
       }
       
