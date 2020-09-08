@@ -8,6 +8,7 @@ services:
     restart: always
     volumes:
       - db:/data/db
+      - config-db:/data/configdb
       
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
@@ -76,4 +77,5 @@ services:
       
 volumes:
   db:
+  config-db:
   data:
