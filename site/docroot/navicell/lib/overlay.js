@@ -29,6 +29,7 @@ var DEAL_CENTER = false;
 var BNN = 1;
 
 USGSOverlay.prototype = new google.maps.OverlayView();
+// USGSOverlay.prototype = new ol.Overlay();
 
 var contextmenu_data = null;
 
@@ -37,7 +38,7 @@ function nv_set_contextmenu_data(ctx_data) {
 }
 
 function overlay_init(map) {
-	overlay = new USGSOverlay(map);
+	// overlay = new USGSOverlay(map);
 }
 
 function USGSOverlay(map) {
@@ -91,7 +92,8 @@ function click_node(overlay, node, mode, center, clicked_boundbox, was_checked) 
 	var latlng;
 	if (clicked_boundbox) {
 		if (!clicked_boundbox.gpt) {
-				clicked_boundbox.gpt = new google.maps.Point(clicked_boundbox[0], clicked_boundbox[2]);
+			// clicked_boundbox.gpt = new ol.geometry.Point([clicked_boundbox[0], clicked_boundbox[2]]);
+			clicked_boundbox.gpt = new google.maps.Point(clicked_boundbox[0], clicked_boundbox[2]);
 		}
 		latlng = mapProjection.fromPointToLatLng(clicked_boundbox.gpt);
 	} else {

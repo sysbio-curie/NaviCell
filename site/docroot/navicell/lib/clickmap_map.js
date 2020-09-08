@@ -17,7 +17,7 @@
  * along with this library; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA
  */
-
+ 
 var filter = ".navicell";
 var old_marker_mode = "1";
 
@@ -465,93 +465,150 @@ function start_map(map_name, map_elementId, min_zoom, max_zoom, tile_width, tile
 	}
 
 	var element = document.getElementById(map_elementId);
+	console.log("VINCENT IN THE RIGHT PLACE : Creating the map");
 
-	map = new google.maps.Map(element, {
-		copyright_owner: 'Institut Curie',
-		center : new google.maps.LatLng(10, 10),
-		//center : new google.maps.LatLng(90, 90),
-		// EV: 2018-08-26
-		//center : {lat: 0, lng: 0},
-		// EV: 2018-08-26
-		streetViewControl: false,
-		disableDefaultUI: true,
-		zoomControl: true,
-		disableDoubleClickZoom: true,
-		overviewMapControl: false, // disconnecting minimap
-		overviewMapControlOptions :
-		{
-			opened: true
-		},
-		zoom : min_zoom,
-		mapTypeId : "navicell"
+	var ol_layer = new ol.layer.Tile({
+		// visible: false,
+		preload: Infinity,
+		source: new ol.source.XYZ({
+			tileUrlFunction: function(coord) {
+			var ntiles = 1 << coord[0];
+			var x = coord[1];
+			var y = coord[2];
+
+			if (y < 0 || y >= ntiles) {
+				y = (y % ntiles + ntiles) % ntiles;
+				return null;
+			}
+			if (x < 0 || x >= ntiles) {
+				x = (x % ntiles + ntiles) % ntiles;
+				return null;
+				console.log("ADJUSTING");
+			}
+			
+			return "tiles/" + coord[0] + "/" + x + "_" + y + ".png";
+		  },
+		  attributions:
+			'ATTRIBUTIONS : VINCENT',
+		}),
+	})
+	window.ol_layer = ol_layer;
+	
+	var ol_map = new ol.Map({
+		layers: [ ol_layer ],
+		target: map_elementId,
+		view: new ol.View({
+		  center: [10, 10],
+		  zoom: min_zoom,
+		  maxZoom: max_zoom,
+		  minZoom: min_zoom
+		})
 	});
+	
+	// var t_maptypes = new MapTypes(ol_map, has_nobg);
+	var mapTypes = navicell.addMapTypes(map_name, new MapTypes(ol_map, has_nobg));
 
-	map.setOptions({draggableCursor:'default', draggingCursor: 'move'});
+	
+	// map = new google.maps.Map(element, {
+	// 	copyright_owner: 'Institut Curie',
+	// 	center : new google.maps.LatLng(10, 10),
+	// 	//center : new google.maps.LatLng(90, 90),
+	// 	// EV: 2018-08-26
+	// 	//center : {lat: 0, lng: 0},
+	// 	// EV: 2018-08-26
+	// 	streetViewControl: false,
+	// 	disableDefaultUI: true,
+	// 	zoomControl: true,
+	// 	disableDoubleClickZoom: true,
+	// 	overviewMapControl: false, // disconnecting minimap
+	// 	overviewMapControlOptions :
+	// 	{
+	// 		opened: true
+	// 	},
+	// 	zoom : min_zoom,
+	// 	mapTypeId : "navicell"
+	// });
 
-	google.maps.event.addListener(map, 'zoom_changed', function() {
-		nv_record_action(window, "nv_set_zoom", map.getZoom());
-	});
-
-
-	google.maps.event.addListener(map, 'center_changed', function() {
-		var center = map.getCenter();
-		nv_record_action(window, "nv_set_center", "ABSOLUTE", center.lng(), center.lat());
-		if (!window.map_ori_center) {
-			window.map_ori_center = map.getCenter();
+	// map.setOptions({draggableCursor:'default', draggingCursor: 'move'});
+	var currZoom = ol_map.getView().getZoom();
+	var currCenter = ol_map.getView().getZoom();
+	ol_map.on('moveend', function(e) {
+		var newZoom = ol_map.getView().getZoom();
+		if (currZoom != newZoom) {
+		  console.log('zoom end, new zoom: ' + newZoom);
+		  currZoom = newZoom;
+		  nv_record_action(window, "nv_set_zoom", newZoom);
 		}
-	});
+		
+		
+	  });
+	// google.maps.event.addListener(map, 'zoom_changed', function() {
+	// 	nv_record_action(window, "nv_set_zoom", map.getZoom());
+	// });
 
 
-	window.map = map;
+	// google.maps.event.addListener(map, 'center_changed', function() {
+	// 	var center = map.getCenter();
+	// 	nv_record_action(window, "nv_set_center", "ABSOLUTE", center.lng(), center.lat());
+	// 	if (!window.map_ori_center) {
+	// 		window.map_ori_center = map.getCenter();
+	// 	}
+	// });
+
+
+	window.map = ol_map;
 
 	projection = new ClickMapProjection();
 
-	var mapTypes = navicell.addMapTypes(map_name, new MapTypes(map, has_nobg));
+	// var mapTypes = navicell.addMapTypes(map_name, new MapTypes(map, has_nobg));
 
-	var map_type_info = mapTypes.getMapTypeInfo();
-	for (var id in map_type_info) {
-		var map_type = new google.maps.ImageMapType({
-			getTileUrl: function(coord, zoom) {
-				var ntiles = 1 << zoom;
-				var x = coord.x;
-				var y = coord.y;
-				//console.log("getTileUrl: " + zoom + " " + ntiles + " " + x + " " + y);
-				if (y < 0 || y >= ntiles) {
-					y = (y % ntiles + ntiles) % ntiles;
-					return null;
-				}
-				if (x < 0 || x >= ntiles) {
-					x = (x % ntiles + ntiles) % ntiles;
-					return null;
-					console.log("ADJUSTING");
-				}
+	// var map_type_info = mapTypes.getMapTypeInfo();
+	// for (var id in map_type_info) {
+	// 	console.log("MAP TYPES INFO : ");
+	// 	console.log(id);
+		
+	// 	var map_type = new google.maps.ImageMapType({
+	// 		getTileUrl: function(coord, zoom) {
+	// 			var ntiles = 1 << zoom;
+	// 			var x = coord.x;
+	// 			var y = coord.y;
+	// 			//console.log("getTileUrl: " + zoom + " " + ntiles + " " + x + " " + y);
+	// 			if (y < 0 || y >= ntiles) {
+	// 				y = (y % ntiles + ntiles) % ntiles;
+	// 				return null;
+	// 			}
+	// 			if (x < 0 || x >= ntiles) {
+	// 				x = (x % ntiles + ntiles) % ntiles;
+	// 				return null;
+	// 				console.log("ADJUSTING");
+	// 			}
 					
-				//console.log("getTileUrl_bis: " + x + " " + y);
-				var r = x + "_" + y;
-				var ret_tile = "tiles/" + zoom + "/" + r + navicell.getMapTypes(get_module()).tile_suffix + ".png";
-				return "tiles/" + zoom + "/" + r + navicell.getMapTypes(get_module()).tile_suffix + ".png";
-			},
-			tileSize : new google.maps.Size(tile_width, tile_height),
-			maxZoom : max_zoom,
-			minZoom : min_zoom
-		});
+	// 			//console.log("getTileUrl_bis: " + x + " " + y);
+	// 			var r = x + "_" + y;
+	// 			var ret_tile = "tiles/" + zoom + "/" + r + navicell.getMapTypes(get_module()).tile_suffix + ".png";
+	// 			return "tiles/" + zoom + "/" + r + navicell.getMapTypes(get_module()).tile_suffix + ".png";
+	// 		},
+	// 		tileSize : new google.maps.Size(tile_width, tile_height),
+	// 		maxZoom : max_zoom,
+	// 		minZoom : min_zoom
+	// 	});
 	
-		map_type.projection = projection;
-		mapTypes.set(id, map_type);
-		//map.mapTypes.set(id, map_type); // EV: 2018-08-26
-	}
+	// 	map_type.projection = projection;
+	// 	mapTypes.set(id, map_type);
+	// 	//map.mapTypes.set(id, map_type); // EV: 2018-08-26
+	// }
 	
-	mapTypes.setDefaultMapType();
+	// mapTypes.setDefaultMapType();
 
-	var bounds = new google.maps.LatLngBounds();
-	bounds.extend(map_type.projection.fromPointToLatLng(new google.maps.Point(xshift + width, yshift + height)));
-	bounds.extend(map_type.projection.fromPointToLatLng(new google.maps.Point(xshift, yshift)));
-	map.fitBounds(bounds);
+	// var bounds = new google.maps.LatLngBounds();
+	// bounds.extend(map_type.projection.fromPointToLatLng(new google.maps.Point(xshift + width, yshift + height)));
+	// bounds.extend(map_type.projection.fromPointToLatLng(new google.maps.Point(xshift, yshift)));
+	// map.fitBounds(bounds);
 
 	window.map_ori_center = null;
-	window.map_ori_bounds = bounds;
+	// window.map_ori_bounds = bounds;
 
-	return { map : map, projection : map_type.projection};
+	return { map : map, projection : projection};
 }
 
 function get_markers_for_modification(element, projection, map)
