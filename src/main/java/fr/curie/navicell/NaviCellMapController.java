@@ -23,7 +23,7 @@ import fr.curie.navicell.storage.StorageProperties;
 import fr.curie.navicell.storage.StorageService;
 
 
-@CrossOrigin(origins = "http://localhost", maxAge = 3600)
+@CrossOrigin(origins = "*", maxAge = 3600)
 @EnableConfigurationProperties(StorageProperties.class)
 @RestController
 public class NaviCellMapController {
