@@ -199,8 +199,8 @@
             link_cell = row.insertCell();
             link_cell.innerHTML = "<a href=\"" + value.url + "\">Access map</a>";
             delete_cell = row.insertCell();
-            delete_cell.style = "padding-top: 0.25rem";
-            delete_cell.innerHTML = "<button type=\"button\" class=\"btn btn-danger\" id=\"delete_" + value.id + "\">Delete</button>"
+            delete_cell.style = "padding: 0.25rem";
+            delete_cell.innerHTML = "<div class=\"float-right\"><button type=\"button\" class=\"btn btn-danger\" id=\"delete_" + value.id + "\">Delete</button></div>"
             
             document.querySelector("#delete_" + value.id).addEventListener('click', async function() {
               let delete_res = await deleteFile(value.id);
