@@ -70,12 +70,16 @@ public class NaviCellMap {
     
     // Creating SBGN-ML file    
     Cd2SbgnmlScript.convert(network_path.toString(), "temp_sbgnml.xml");
-    Path sbgnml_path = storageService.store(new File("temp_sbgnml.xml"), this.folder, initials + "_sbgnml.xml");
+    
+    // Here I'm storing it to make it accessible via the API webserver
+    Path sbgnml_path = storageService.store(new File("temp_sbgnml.xml"), this.folder, "sbgnml.xml");
     
     // Creating the PNG rendered file
-    System.out.println(this.folder + File.separatorChar + FilenameUtils.getBaseName(sbgnml_path.toString()) + ".xml");
+    // Here we call the rendering API with the link to the sbgn-ml file
+    // System.out.println(this.folder + File.separatorChar + FilenameUtils.getBaseName(sbgnml_path.toString()) + ".xml");
     SBGNRenderer.render(this.folder + File.separatorChar + FilenameUtils.getBaseName(sbgnml_path.toString()) + ".xml", "temp_sbgnml.png");
-    Path image_path = storageService.store(new File("temp_sbgnml.png"), this.folder, initials + "_sbgnml.png");
+    
+    Path image_path = storageService.store(new File("temp_sbgnml.png"), this.folder, "sbgnml.png");
     
     try {
       Files.delete(Paths.get("temp_sbgnml.xml"));
@@ -134,20 +138,20 @@ public class NaviCellMap {
       // Files.delete(Paths.get(entry.imagePath));
       
       final String[][] xrefs;
-      
-      BufferedReader xref_stream = open_file("/var/navicell/xrefs.txt");
-      xrefs = load_xrefs(xref_stream, "/var/navicell/xrefs.txt");
 
-      Files.createDirectories(Paths.get("/var/navicell/site/docroot/navicell/maps/" + name.replace(" ", "").toLowerCase()));
+      BufferedReader xref_stream = open_file("/var/navicell/xrefs.txt");
+      xrefs = load_xrefs(xref_stream, "/var/navicell/xrefs.txt");      
+      
+      Files.createDirectories(Paths.get(storageService.getLocation().toString(), this.folder));
       
       ProduceClickableMap.run(
         initials + "_", new File(prefix+path), true, false, this.name.replace(" ", ""), null, xrefs, true, 
         null, null, null, null, false, false, // Wordpress
-        new File("/var/navicell/site/docroot/navicell/maps/" + this.name.replace(" ", "").toLowerCase()),
+        new File(Paths.get(storageService.getLocation().toString(), this.folder).toString()),
         false, true, false
       );
       
-      this.url = "maps/" + this.name.replace(" ", "").toLowerCase() + "/master/index.html";
+      this.url = "maps/" + this.folder + "/master/index.html";
     }
     catch (IOException e) {
       System.out.println(e);
