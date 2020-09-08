@@ -488,8 +488,8 @@ function start_map(map_name, map_elementId, min_zoom, max_zoom, tile_width, tile
 			
 			return "tiles/" + coord[0] + "/" + x + "_" + y + ".png";
 		  },
-		  attributions:
-			'ATTRIBUTIONS : VINCENT',
+		  minZoom: min_zoom,
+		  maxZoom: max_zoom
 		}),
 	})
 	window.ol_layer = ol_layer;
@@ -501,10 +501,12 @@ function start_map(map_name, map_elementId, min_zoom, max_zoom, tile_width, tile
 		  center: [10, 10],
 		  zoom: min_zoom,
 		  maxZoom: max_zoom,
-		  minZoom: min_zoom
+		  minZoom: min_zoom,
+		  showFullExtent: true
 		})
 	});
 	
+	// console.log("Zooms : " + min_zoom.toString() + " -> " + max_zoom.toString());
 	// var t_maptypes = new MapTypes(ol_map, has_nobg);
 	var mapTypes = navicell.addMapTypes(map_name, new MapTypes(ol_map, has_nobg));
 
@@ -538,8 +540,13 @@ function start_map(map_name, map_elementId, min_zoom, max_zoom, tile_width, tile
 		  console.log('zoom end, new zoom: ' + newZoom);
 		  currZoom = newZoom;
 		  nv_record_action(window, "nv_set_zoom", newZoom);
+		} else {
+		  var center = ol_map.getView().getCenter();
+		  nv_record_action(window, "nv_set_center", "ABSOLUTE", center[0], center[1]);
+		  if (!window.map_ori_center) {
+			// window.map_ori_center = map.getCenter();
+		  }
 		}
-		
 		
 	  });
 	// google.maps.event.addListener(map, 'zoom_changed', function() {
