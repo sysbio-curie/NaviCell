@@ -4,7 +4,8 @@ import java.util.UUID;
 import java.util.Vector;
 
 import javax.imageio.ImageIO;
-
+import java.awt.Graphics;
+import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -13,6 +14,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
 
 import org.springframework.data.annotation.Id;
 import org.springframework.web.multipart.MultipartFile;
@@ -25,7 +27,6 @@ import fr.curie.navicell.storage.StorageService;
 
 import org.apache.commons.io.FilenameUtils;
 import java.awt.image.BufferedImage;
-import fr.curie.BiNoM.pathways.utils.Utils;
 
 public class NaviCellMap {
 
@@ -110,8 +111,11 @@ public class NaviCellMap {
           max_zoom += 1;
       }
       
-      BufferedImage im = Utils.getScaledImageSlow(map1, map1.getWidth(), map1.getHeight());
-      ImageIO.write(im, "PNG", new File(fullprefix + max_zoom + "." + ext));
+      BufferedImage imageBuff = new BufferedImage(map1.getWidth(), map1.getHeight(), BufferedImage.TYPE_INT_RGB);
+      Graphics g = imageBuff.createGraphics();
+      g.drawImage(map1, 0, 0, new Color(255,255,255), null);
+      g.dispose();
+      ImageIO.write(imageBuff, "PNG", new File(fullprefix + max_zoom + "." + ext));
       Path new_max_zoom = Paths.get(fullprefix + max_zoom + "." + ext);
       
       
