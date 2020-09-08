@@ -155,5 +155,10 @@ public class FileSystemStorageService implements StorageService {
 		catch (IOException e) {
 			throw new StorageException("Could not initialize storage", e);
 		}
-    }
+	}
+	
+	@Override
+	public Path getLocation() {
+		return rootLocation;
+	}
 }
