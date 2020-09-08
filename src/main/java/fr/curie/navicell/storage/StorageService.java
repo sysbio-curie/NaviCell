@@ -25,6 +25,8 @@ public interface StorageService {
 
 	void deleteAll();
 	
+	void deleteByFolder(String folder);
+	
 	Path getLocation();
 
 }

@@ -161,4 +161,14 @@ public class FileSystemStorageService implements StorageService {
 	public Path getLocation() {
 		return rootLocation;
 	}
+	
+	@Override
+	public void deleteByFolder(String folder) {
+		try{
+			FileSystemUtils.deleteRecursively(Paths.get(rootLocation.toString(), folder));
+		}
+		catch (IOException e) {
+			throw new StorageException("Could not remove folder " + folder);
+		}
+	}
 }
