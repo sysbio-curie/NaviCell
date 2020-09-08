@@ -62,12 +62,7 @@ public class NaviCellMap {
       folder_created = this.createFolder(storageService);
     }
     
-    String initials = "";
-    for (String s : name.split(" ")) {
-      initials+=s.charAt(0);
-    }
-    
-    Path network_path = storageService.store(network_file, this.folder, initials + "_master.xml");
+    Path network_path = storageService.store(network_file, this.folder, "master.xml");
     
     // Creating SBGN-ML file    
     Cd2SbgnmlScript.convert(network_path.toString(), "temp_sbgnml.xml");
@@ -99,7 +94,7 @@ public class NaviCellMap {
       String path = FilenameUtils.getPath(this.imagePath);
       String ext = FilenameUtils.getExtension(this.imagePath);
       String prefix = FilenameUtils.getPrefix(this.imagePath);
-      String fullprefix = prefix + path + initials + "_master-";
+      String fullprefix = prefix + path + "master-";
       
       BufferedImage map1 = ImageIO.read(new File(this.imagePath));
       int width = map1.getWidth();
@@ -153,7 +148,7 @@ public class NaviCellMap {
       Files.createDirectories(Paths.get(storageService.getLocation().toString(), this.folder));
       
       ProduceClickableMap.run(
-        initials + "_", new File(prefix+path), true, false, this.name.replace(" ", ""), null, xrefs, true, 
+        "", new File(prefix+path), true, false, this.name.replace(" ", ""), null, xrefs, true, 
         null, null, null, null, false, false, // Wordpress
         new File(Paths.get(storageService.getLocation().toString(), this.folder).toString()),
         false, true, false
