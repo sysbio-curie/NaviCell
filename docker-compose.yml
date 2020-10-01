@@ -24,7 +24,6 @@ services:
     image: navicell
     container_name: navicell
     ports:
-      - "8080:8080"
       - "80:80"
     user: root
     volumes:
@@ -43,7 +42,6 @@ services:
     image: navicell-dev
     container_name: navicell
     ports:
-      - "8080:8080"
       - "80:80"
       
     volumes:

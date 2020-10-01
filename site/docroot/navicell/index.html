@@ -127,7 +127,7 @@
             
             document.querySelector("#creating_status").style.visibility = "visible";
             // send fetch along with cookies
-            let response = await fetch('http://localhost:8080/api/maps/', {
+            let response = await fetch('/api/maps/', {
                   method: 'POST',
                   credentials: 'same-origin',
                   body: data
@@ -155,7 +155,7 @@
       }
       async function deleteFile(id) {
           // send fetch along with cookies
-          let response = await fetch('http://localhost:8080/api/maps/' + id, {
+          let response = await fetch('/api/maps/' + id, {
                   method: 'DELETE',
                   credentials: 'same-origin',
           });
@@ -171,7 +171,7 @@
         try {
           
           // send fetch along with cookies
-          let response = await fetch('http://localhost:8080/api/maps/', {
+          let response = await fetch('/api/maps/', {
               method: 'GET',
               credentials: 'same-origin',
           });
