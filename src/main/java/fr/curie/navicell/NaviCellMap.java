@@ -24,7 +24,7 @@ import fr.curie.BiNoM.pathways.utils.acsn.ACSNProcedures;
 import fr.curie.cd2sbgnml.Cd2SbgnmlScript;
 import fr.curie.navicell.storage.StorageException;
 import fr.curie.navicell.storage.StorageService;
-
+import fr.curie.navicell.SBGNRendererException;
 import org.apache.commons.io.FilenameUtils;
 import java.awt.image.BufferedImage;
 
@@ -73,7 +73,13 @@ public class NaviCellMap {
     // Creating the PNG rendered file
     // Here we call the rendering API with the link to the sbgn-ml file
     // System.out.println(this.folder + File.separatorChar + FilenameUtils.getBaseName(sbgnml_path.toString()) + ".xml");
-    SBGNRenderer.render(this.folder + File.separatorChar + FilenameUtils.getBaseName(sbgnml_path.toString()) + ".xml", "temp_sbgnml.png");
+    try {
+      SBGNRenderer.render(this.folder + File.separatorChar + FilenameUtils.getBaseName(sbgnml_path.toString()) + ".xml", "temp_sbgnml.png");
+    }
+    catch (SBGNRendererException e) {
+      System.out.println("SBGNRenderer Error : " + e);
+    }
+ 
     
     Path image_path = storageService.store(new File("temp_sbgnml.png"), this.folder, "sbgnml.png");
     
@@ -108,12 +114,10 @@ public class NaviCellMap {
           max_zoom += 1;
       }
       
-      BufferedImage imageBuff = new BufferedImage(map1.getWidth(), map1.getHeight(), BufferedImage.TYPE_INT_RGB);
-      Graphics g = imageBuff.createGraphics();
-      g.drawImage(map1, 0, 0, new Color(255,255,255), null);
-      g.dispose();
-      ImageIO.write(imageBuff, "PNG", new File(fullprefix + max_zoom + "." + ext));
       Path new_max_zoom = Paths.get(fullprefix + max_zoom + "." + ext);
+
+      Files.copy(Paths.get(this.imagePath), new_max_zoom);        
+
       
       
       // Making reduced resolution
@@ -157,11 +161,12 @@ public class NaviCellMap {
       this.url = "maps/" + this.folder + "/master/index.html";
     }
     catch (IOException e) {
-      System.out.println(e);
+      System.out.println("IO Error : " + e);
     }
     catch (Exception e) {
       System.out.println(e);
     }
+    
   }
 
   
