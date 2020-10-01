@@ -64,10 +64,21 @@ RUN mvn install:install-file \
    -DgeneratePom=true
    
 RUN rm -r /var/www/html && ln -s /var/navicell/site/docroot/navicell /var/www/html
-RUN a2enmod php7.3
+COPY docker/apache_config.sh .
+RUN a2enmod php7.3 \
+   && a2enmod proxy \
+   && a2enmod proxy_http
+   
+RUN /bin/sh ./apache_config.sh \
+   && cat /etc/apache2/sites-available/navicell.conf 
+   
+RUN a2dissite 000-default \
+   && a2ensite navicell \
+   && service apache2 start
+   
+
 
 # Exposing port 8080 for server access
-EXPOSE 8080
 EXPOSE 80
 
 
