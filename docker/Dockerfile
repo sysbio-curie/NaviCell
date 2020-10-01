@@ -83,27 +83,6 @@ EXPOSE 80
 
 
 
-FROM openjdk:8 AS cd2sbgnml
-
-USER root
-WORKDIR /var/
-# RUN apt update -qq && apt install -yq git maven
-# RUN git clone https://github.com/sbgn/cd2sbgnml.git
-# WORKDIR /var/cd2sbgnml
-# RUN mvn clean && mvn install
-
-FROM node:10.22 as newt-converter
-
-USER root
-WORKDIR /var/
-
-RUN git clone https://github.com/vincent-noel/newt.git
-WORKDIR /var/newt/
-RUN npm install
-EXPOSE 80
-
-CMD npm run debug-build
-
 
 FROM navicell-base AS navicell
 
