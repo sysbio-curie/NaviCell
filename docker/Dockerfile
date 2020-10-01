@@ -3,9 +3,12 @@ FROM openjdk:11.0.8 AS navicell-base
 USER root
 WORKDIR /var/navicell
 
-RUN apt-get update -qq && apt-get install -yq maven apache2 libapache2-mod-php chromium-driver
-
-COPY factory/lib /var/navicell/lib
+RUN apt-get update -qq && apt-get install -yq --no-install-recommends curl maven apache2 libapache2-mod-php chromium-driver \
+    && curl -sL https://deb.nodesource.com/setup_12.x | bash - \
+    && apt-get install -y --no-install-recommends nodejs \
+    && apt-get clean -y
+    
+COPY factory/lib /var/navicell/lib 
 
 RUN mvn install:install-file \
    -Dfile=./lib/navicell.jar \
@@ -62,7 +65,13 @@ RUN mvn install:install-file \
    -Dversion=0.2 \
    -Dpackaging=jar \
    -DgeneratePom=true
-   
+
+COPY src/main/resources /var/navicell/src/main/resources
+
+RUN cd /var/navicell/src/main/resources \
+   && npm install \
+   && npm run build-bundle-js
+
 RUN rm -r /var/www/html && ln -s /var/navicell/site/docroot/navicell /var/www/html
 COPY docker/apache_config.sh .
 RUN a2enmod php7.3 \
