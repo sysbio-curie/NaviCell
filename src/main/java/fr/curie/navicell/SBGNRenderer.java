@@ -38,7 +38,7 @@ public class SBGNRenderer {
         
         WebDriver driver = new ChromeDriver(options);
         
-        String driver_url = "file:///var/navicell/src/main/resources/index.html?url=/var/navicell/site/docroot/navicell/maps/" + input + "&bg=#fff";
+        String driver_url = "file:///var/navicell/src/main/resources/index.html?url=/var/navicell/site/docroot/navicell/maps/" + input + "&bg=#fff&scale=1";
         System.out.println("Getting " + driver_url);
         driver.get(driver_url);
         
