@@ -64,6 +64,11 @@ public class NaviCellMap {
     
     Path network_path = storageService.store(network_file, this.folder, "master.xml");
     
+    float[] borders = ProduceClickableMap.getBorders(new File(network_path.toString()));
+    
+    System.out.println("Borders : " + borders[0] + " -> " + borders[2] + ", " + borders[1] + " -> " + borders[3]);
+    
+    
     // Creating SBGN-ML file    
     Cd2SbgnmlScript.convert(network_path.toString(), "temp_sbgnml.xml");
     
@@ -75,17 +80,33 @@ public class NaviCellMap {
     // System.out.println(this.folder + File.separatorChar + FilenameUtils.getBaseName(sbgnml_path.toString()) + ".xml");
     try {
       SBGNRenderer.render(this.folder + File.separatorChar + FilenameUtils.getBaseName(sbgnml_path.toString()) + ".xml", "temp_sbgnml.png");
+
+      BufferedImage map1 = ImageIO.read(new File("temp_sbgnml.png"));
+      int full_width = map1.getWidth() + (int) (borders[0] + borders[2] - 20.0);
+      int full_height = map1.getHeight() + (int) (borders[1] + borders[3] - 20);
+      System.out.println("Map created with dimensions : " + map1.getWidth() + ", " + map1.getHeight());
+      BufferedImage imageBuff = new BufferedImage(full_width, full_height, BufferedImage.TYPE_INT_ARGB);
+      Graphics g = imageBuff.createGraphics();
+      g.setColor(Color.WHITE);
+      g.fillRect(0, 0, full_width, full_height);
+      g.drawImage(map1, (int) borders[0]-10, (int)borders[1]-10, new Color(255,255,255), null);
+      g.dispose();
+      ImageIO.write(imageBuff, "PNG", new File("temp_sbgnml_rescaled.png"));
+  
     }
     catch (SBGNRendererException e) {
       System.out.println("SBGNRenderer Error : " + e);
     }
- 
+    catch (IOException e) {
+      System.out.println("IOException Error : " + e);
+    }
     
-    Path image_path = storageService.store(new File("temp_sbgnml.png"), this.folder, "sbgnml.png");
+    Path image_path = storageService.store(new File("temp_sbgnml_rescaled.png"), this.folder, "sbgnml.png");
     
     try {
       Files.delete(Paths.get("temp_sbgnml.xml"));
       Files.delete(Paths.get("temp_sbgnml.png"));
+      Files.delete(Paths.get("temp_sbgnml_rescaled.png"));
     }
     catch (IOException e) {
       System.out.println("File cannot be deleted : " + e);
