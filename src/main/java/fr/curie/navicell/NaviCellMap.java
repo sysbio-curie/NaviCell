@@ -39,7 +39,6 @@ public class NaviCellMap {
   public String sbgnPath;
   public String imagePath;
   public String url;
-  // public String configPath;
   
   private boolean createFolder(StorageService storage) {
     this.folder = UUID.randomUUID().toString();
@@ -61,25 +60,41 @@ public class NaviCellMap {
     while (!folder_created) {
       folder_created = this.createFolder(storageService);
     }
-    
+  
+    this.name = name;
+  
     Path network_path = storageService.store(network_file, this.folder, "master.xml");
+    this.networkPath = network_path.toString();
+  
+    this.createSBGNML(storageService);
     
-    float[] borders = ProduceClickableMap.getBorders(new File(network_path.toString()));
+    this.createImage(storageService);
+    this.createZooms(storageService);
+    this.buildMap(storageService);
     
-    System.out.println("Borders : " + borders[0] + " -> " + borders[2] + ", " + borders[1] + " -> " + borders[3]);
     
+  }
+  
+  private void createSBGNML(StorageService storage) {
+        // Creating SBGN-ML file    
+        Cd2SbgnmlScript.convert(this.networkPath, "temp_sbgnml.xml");
     
-    // Creating SBGN-ML file    
-    Cd2SbgnmlScript.convert(network_path.toString(), "temp_sbgnml.xml");
-    
-    // Here I'm storing it to make it accessible via the API webserver
-    Path sbgnml_path = storageService.store(new File("temp_sbgnml.xml"), this.folder, "sbgnml.xml");
-    
+        // Here I'm storing it to make it accessible via the API webserver
+        Path sbgnml_path = storage.store(new File("temp_sbgnml.xml"), this.folder, "sbgnml.xml");
+        this.sbgnPath = sbgnml_path.toString();
+  }
+  private void createImage(StorageService storage) {
     // Creating the PNG rendered file
     // Here we call the rendering API with the link to the sbgn-ml file
     // System.out.println(this.folder + File.separatorChar + FilenameUtils.getBaseName(sbgnml_path.toString()) + ".xml");
     try {
-      SBGNRenderer.render(this.folder + File.separatorChar + FilenameUtils.getBaseName(sbgnml_path.toString()) + ".xml", "temp_sbgnml.png");
+  
+      float[] borders = ProduceClickableMap.getBorders(new File(this.networkPath));
+    
+      System.out.println("Borders : " + borders[0] + " -> " + borders[2] + ", " + borders[1] + " -> " + borders[3]);
+      
+      
+      SBGNRenderer.render(this.folder + File.separatorChar + FilenameUtils.getBaseName(this.sbgnPath) + ".xml", "temp_sbgnml.png");
 
       BufferedImage map1 = ImageIO.read(new File("temp_sbgnml.png"));
       int full_width = map1.getWidth() + (int) (borders[0] + borders[2] - 20.0);
@@ -101,7 +116,8 @@ public class NaviCellMap {
       System.out.println("IOException Error : " + e);
     }
     
-    Path image_path = storageService.store(new File("temp_sbgnml_rescaled.png"), this.folder, "sbgnml.png");
+    Path image_path = storage.store(new File("temp_sbgnml_rescaled.png"), this.folder, "sbgnml.png");
+    this.imagePath = image_path.toString();
     
     try {
       Files.delete(Paths.get("temp_sbgnml.xml"));
@@ -111,12 +127,10 @@ public class NaviCellMap {
     catch (IOException e) {
       System.out.println("File cannot be deleted : " + e);
     }
-    
-    this.name = name;
-    this.networkPath = network_path.toString();
-    this.imagePath = image_path.toString();
-    this.sbgnPath = sbgnml_path.toString();
+  }
 
+  private void createZooms(StorageService storage) {
+    
     try {
       String path = FilenameUtils.getPath(this.imagePath);
       String ext = FilenameUtils.getExtension(this.imagePath);
@@ -164,18 +178,32 @@ public class NaviCellMap {
       
       // Deleting original image (still here as max image)      
       // Files.delete(Paths.get(entry.imagePath));
-      
+    }
+    catch (IOException e) {
+      System.out.println("IO Error : " + e);
+    }
+    catch (Exception e) {
+      System.out.println(e);
+    }
+    
+    
+  }
+  
+  private void buildMap(StorageService storage) {
+    try { 
+      String path = FilenameUtils.getPath(this.imagePath);
+      String prefix = FilenameUtils.getPrefix(this.imagePath);
       final String[][] xrefs;
 
       BufferedReader xref_stream = open_file("/var/navicell/xrefs.txt");
       xrefs = load_xrefs(xref_stream, "/var/navicell/xrefs.txt");      
       
-      Files.createDirectories(Paths.get(storageService.getLocation().toString(), this.folder));
+      Files.createDirectories(Paths.get(storage.getLocation().toString(), this.folder));
       
       ProduceClickableMap.run(
         "", new File(prefix+path), true, false, this.name.replace(" ", ""), null, xrefs, true, 
         null, null, null, null, false, false, // Wordpress
-        new File(Paths.get(storageService.getLocation().toString(), this.folder).toString()),
+        new File(Paths.get(storage.getLocation().toString(), this.folder).toString()),
         false, true, false
       );
       
@@ -189,8 +217,6 @@ public class NaviCellMap {
     }
     
   }
-
-  
   private static BufferedReader open_file(String filename)
 	{
 		try
