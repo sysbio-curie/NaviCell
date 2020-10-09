@@ -65,7 +65,13 @@ public class NaviCellMapController {
   @PostMapping("/api/maps")
 	@ResponseStatus(value = HttpStatus.CREATED)
 	public void handleFileUpload(@RequestParam("name") String name, @RequestParam("network-file") MultipartFile network_file) {
-    NaviCellMap entry = new NaviCellMap(this.storageService, name, network_file);
-    repository.save(entry);
+    try{
+      NaviCellMap entry = new NaviCellMap(this.storageService, name, network_file);
+      repository.save(entry);
+    }
+    catch (NaviCellMapException e) {
+      throw new NaviCellMapControllerException(e.getMessage());
+    }
+    
 	}
 }
