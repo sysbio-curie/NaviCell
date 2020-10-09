@@ -81,6 +81,8 @@
               
               <td>
                 <div class="float-right">
+                  <span id="error_message"></span>
+
                 <div class="spinner-border mr-3" role="status" style="visibility:hidden" id="creating_status">
                   <span class="sr-only">Creating the map...</span>
                 </div>
@@ -109,6 +111,8 @@
       // async function managing upload operation
       async function uploadFile() {
         // function return value
+        document.querySelector("#error_message").innerHTML = "";
+
         let return_data = { error: 0, message: '' };
 
         try {
@@ -134,8 +138,12 @@
             });
 
             // server responded with http response != 200
-            // if(response.status != 201)
-            //   throw new Error('HTTP response code != 201');
+            if(response.status === 500){
+              
+              res = await response.text();
+              document.querySelector("#error_message").innerHTML = res;
+              // throw new Error('HTTP response code != 201');
+            }
             document.querySelector("#creating_status").style.visibility = "hidden";
             getMaps();
             // read json response from server
