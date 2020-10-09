@@ -15,7 +15,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-
 import org.springframework.data.annotation.Id;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -54,7 +53,11 @@ public class NaviCellMap {
     
   }
   
-  public NaviCellMap(StorageService storageService, String name, MultipartFile network_file) {
+  public NaviCellMap(StorageService storageService, String name, MultipartFile network_file) throws NaviCellMapException {
+    
+    if (network_file.isEmpty()) {
+      throw new NaviCellMapException("Error : Empty file !");
+    }
     
     boolean folder_created = this.createFolder(storageService);
     while (!folder_created) {
@@ -63,11 +66,21 @@ public class NaviCellMap {
   
     this.name = name;
   
-    Path network_path = storageService.store(network_file, this.folder, "master.xml");
-    this.networkPath = network_path.toString();
+    String extension = FilenameUtils.getExtension(network_file.getOriginalFilename());
+    if (extension.equals("xml")) {
+      
+      // Simple case, no conversion needed
+      Path network_path = storageService.store(network_file, this.folder, "master.xml");
+      this.networkPath = network_path.toString();
+
+    } else {
+      throw new NaviCellMapException("Unknown file type : " + extension);
+
+    }
+  
+    
   
     this.createSBGNML(storageService);
-    
     this.createImage(storageService);
     this.createZooms(storageService);
     this.buildMap(storageService);
@@ -83,7 +96,7 @@ public class NaviCellMap {
         Path sbgnml_path = storage.store(new File("temp_sbgnml.xml"), this.folder, "sbgnml.xml");
         this.sbgnPath = sbgnml_path.toString();
   }
-  private void createImage(StorageService storage) {
+  private void createImage(StorageService storage) throws NaviCellMapException {
     // Creating the PNG rendered file
     // Here we call the rendering API with the link to the sbgn-ml file
     // System.out.println(this.folder + File.separatorChar + FilenameUtils.getBaseName(sbgnml_path.toString()) + ".xml");
@@ -110,10 +123,10 @@ public class NaviCellMap {
   
     }
     catch (SBGNRendererException e) {
-      System.out.println("SBGNRenderer Error : " + e);
+      throw new NaviCellMapException("SBGNRenderer Error : " + e);
     }
     catch (IOException e) {
-      System.out.println("IOException Error : " + e);
+      throw new NaviCellMapException("IOException Error : " + e);
     }
     
     Path image_path = storage.store(new File("temp_sbgnml_rescaled.png"), this.folder, "sbgnml.png");
@@ -125,11 +138,11 @@ public class NaviCellMap {
       Files.delete(Paths.get("temp_sbgnml_rescaled.png"));
     }
     catch (IOException e) {
-      System.out.println("File cannot be deleted : " + e);
+      throw new NaviCellMapException("File cannot be deleted : " + e);
     }
   }
 
-  private void createZooms(StorageService storage) {
+  private void createZooms(StorageService storage) throws NaviCellMapException {
     
     try {
       String path = FilenameUtils.getPath(this.imagePath);
@@ -180,16 +193,16 @@ public class NaviCellMap {
       // Files.delete(Paths.get(entry.imagePath));
     }
     catch (IOException e) {
-      System.out.println("IO Error : " + e);
+      throw new NaviCellMapException("IO Error : " + e.getMessage());
     }
     catch (Exception e) {
-      System.out.println(e);
+      throw new NaviCellMapException(e.getMessage());
     }
     
     
   }
   
-  private void buildMap(StorageService storage) {
+  private void buildMap(StorageService storage) throws NaviCellMapException{
     try { 
       String path = FilenameUtils.getPath(this.imagePath);
       String prefix = FilenameUtils.getPrefix(this.imagePath);
@@ -210,10 +223,10 @@ public class NaviCellMap {
       this.url = "maps/" + this.folder + "/master/index.html";
     }
     catch (IOException e) {
-      System.out.println("IO Error : " + e);
+      throw new NaviCellMapException("IO Error : " + e);
     }
     catch (Exception e) {
-      System.out.println(e);
+      throw new NaviCellMapException(e.getMessage());
     }
     
   }
