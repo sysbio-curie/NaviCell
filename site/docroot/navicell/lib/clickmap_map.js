@@ -430,66 +430,25 @@ function start_map(map_name, map_elementId, min_zoom, max_zoom, tile_width, tile
 	var bound_max_lng = 180.;
 
 	var COEF = 10;
-	function ClickMapProjection()
-	{
-		// http://code.google.com/apis/maps/documentation/javascript/examples/map-projection-simple.html
-	};
-	ClickMapProjection.prototype.fromPointToLatLng = function(point, noWrap) {
-		var y = point.y;
-		var x = point.x;
-		var lat = (y / tile_height) * (2 * lat_) - lat_;
-		var lng = (x-bound_min_x)*((bound_max_lng-bound_min_lng)/(bound_max_x-bound_min_x)) + bound_min_lng;
-		var r = new google.maps.LatLng(lat, lng, noWrap);
-		if (false) {
-			console.log("fromPointToLatLng: " + x + " " + y + " -> " + r);
-		}
-		return r;
-	};
-	ClickMapProjection.prototype.fromLatLngToPoint = function(latLng, point)
-	{
-		var y = ((latLng.lat() + lat_) / (2 * lat_)) * tile_height;
-		var x = (latLng.lng() - bound_min_lng) * ((bound_max_x-bound_min_x)/(bound_max_lng-bound_min_lng)) + bound_min_x;
-		var r = new google.maps.Point(x, y);
-		if (false) {
-			console.log("fromLatLngToPoint: lat=" + latLng.lat() + " lng=" + latLng.lng() + " -> " + r);
-		}
-		return r;
-	}
 	
-	ClickMapProjection.prototype.fromLatLngToPoint_legacy = function(latLng, point)
-	{
-		var x = ((latLng.lng() + lng_) / (2 * lng_)) * tile_width;
-		var y = ((latLng.lat() + lat_) / (2 * lat_)) * tile_height;
-		var r = new google.maps.Point(x, y);
-		return r;
-	}
-
-	var element = document.getElementById(map_elementId);
-	console.log("VINCENT IN THE RIGHT PLACE : Creating the map");
-
+	
+	ol_projection =  new ol.proj.Projection({
+		code: 'navicell',
+		extent: [0, 0, tile_width, tile_height],
+		units: 'm'
+	});
+	ol.proj.addProjection(ol_projection);
+	
 	var ol_layer = new ol.layer.Tile({
 		// visible: false,
 		preload: Infinity,
 		source: new ol.source.XYZ({
+			projection: 'navicell',
 			tileUrlFunction: function(coord) {
-			var ntiles = 1 << coord[0];
-			var x = coord[1];
-			var y = coord[2];
-
-			if (y < 0 || y >= ntiles) {
-				y = (y % ntiles + ntiles) % ntiles;
-				return null;
-			}
-			if (x < 0 || x >= ntiles) {
-				x = (x % ntiles + ntiles) % ntiles;
-				return null;
-				console.log("ADJUSTING");
-			}
-			
-			return "tiles/" + coord[0] + "/" + x + "_" + y + ".png";
-		  },
-		  minZoom: min_zoom,
-		  maxZoom: max_zoom
+				return "tiles/" + coord[0] + "/" + coord[1] + "_" + coord[2] + ".png";
+		  	},
+		  wrapX: false,
+		
 		}),
 	})
 	window.ol_layer = ol_layer;
@@ -498,7 +457,8 @@ function start_map(map_name, map_elementId, min_zoom, max_zoom, tile_width, tile
 		layers: [ ol_layer ],
 		target: map_elementId,
 		view: new ol.View({
-		  center: [10, 10],
+		  projection: 'navicell',
+		  center: [tile_height/2, tile_width/2],
 		  zoom: min_zoom,
 		  maxZoom: max_zoom,
 		  minZoom: min_zoom,
@@ -506,7 +466,6 @@ function start_map(map_name, map_elementId, min_zoom, max_zoom, tile_width, tile
 		})
 	});
 	
-	// console.log("Zooms : " + min_zoom.toString() + " -> " + max_zoom.toString());
 	// var t_maptypes = new MapTypes(ol_map, has_nobg);
 	var mapTypes = navicell.addMapTypes(map_name, new MapTypes(ol_map, has_nobg));
 
@@ -565,57 +524,35 @@ function start_map(map_name, map_elementId, min_zoom, max_zoom, tile_width, tile
 
 	window.map = ol_map;
 
-	projection = new ClickMapProjection();
-
+	
+	
+	
 	// var mapTypes = navicell.addMapTypes(map_name, new MapTypes(map, has_nobg));
 
-	// var map_type_info = mapTypes.getMapTypeInfo();
-	// for (var id in map_type_info) {
-	// 	console.log("MAP TYPES INFO : ");
-	// 	console.log(id);
-		
-	// 	var map_type = new google.maps.ImageMapType({
-	// 		getTileUrl: function(coord, zoom) {
-	// 			var ntiles = 1 << zoom;
-	// 			var x = coord.x;
-	// 			var y = coord.y;
-	// 			//console.log("getTileUrl: " + zoom + " " + ntiles + " " + x + " " + y);
-	// 			if (y < 0 || y >= ntiles) {
-	// 				y = (y % ntiles + ntiles) % ntiles;
-	// 				return null;
-	// 			}
-	// 			if (x < 0 || x >= ntiles) {
-	// 				x = (x % ntiles + ntiles) % ntiles;
-	// 				return null;
-	// 				console.log("ADJUSTING");
-	// 			}
-					
-	// 			//console.log("getTileUrl_bis: " + x + " " + y);
-	// 			var r = x + "_" + y;
-	// 			var ret_tile = "tiles/" + zoom + "/" + r + navicell.getMapTypes(get_module()).tile_suffix + ".png";
-	// 			return "tiles/" + zoom + "/" + r + navicell.getMapTypes(get_module()).tile_suffix + ".png";
-	// 		},
-	// 		tileSize : new google.maps.Size(tile_width, tile_height),
-	// 		maxZoom : max_zoom,
-	// 		minZoom : min_zoom
-	// 	});
+	var map_type_info = mapTypes.getMapTypeInfo();
+	for (var id in map_type_info) {
+		console.log("MAP TYPES INFO : ");
+		console.log(id);
 	
-	// 	map_type.projection = projection;
-	// 	mapTypes.set(id, map_type);
+	
+		// map_type.projection = ol_projection;
+		// mapTypes.set(id, map_type);
 	// 	//map.mapTypes.set(id, map_type); // EV: 2018-08-26
-	// }
+	}
 	
-	// mapTypes.setDefaultMapType();
-
-	// var bounds = new google.maps.LatLngBounds();
+	
+	// bounds = ol.extend.boundingExtent([])
+	// ol_map.getView().fit(bounds);
+	
+	
 	// bounds.extend(map_type.projection.fromPointToLatLng(new google.maps.Point(xshift + width, yshift + height)));
 	// bounds.extend(map_type.projection.fromPointToLatLng(new google.maps.Point(xshift, yshift)));
 	// map.fitBounds(bounds);
-
+	
 	window.map_ori_center = null;
 	// window.map_ori_bounds = bounds;
 
-	return { map : map, projection : projection};
+	return { map : map, projection : ol_projection};
 }
 
 function get_markers_for_modification(element, projection, map)
@@ -1192,32 +1129,59 @@ function ClickmapTreeNode(map, module_name, id, cls, name, _positions, mapdata)
 		positions.push(_positions);
 	}
 
+	var styles = {
+			
+		// 'icon': new Style({
+		//   image: new Icon({
+		// 	anchor: [0.5, 1],
+		// 	src: 'data/icon.png',
+		//   }),
+		// }),
+
+		'marker_orange': new ol.style.Style({
+			image: new ol.style.Circle({
+			radius: 7,
+			fill: new ol.style.Fill({color: 'orange'}),
+			stroke: new ol.style.Stroke({
+				color: 'white',
+				width: 2,
+			}),
+			}),
+		})
+	};
+	
 	this.markers = [];
 	for (var nn = 0; nn < positions.length; ++nn) {
 		var pos = positions[nn];
-		var p = new google.maps.Point(pos.x, pos.y);
-		var marker = new google.maps.Marker(
-			{
-				position: projection.fromPointToLatLng(p),
-				map: map,
-				title: name + " (" + id + ")",
-				visible: false,
-				icon: icon
-			}
-		);
+		
+		var marker = new ol.Feature({
+			type: 'marker_orange',
+			geometry: new ol.geom.Point([pos.x, 256-pos.y]), 
+			name: 'truc'
+		})
+		
+		var vector_source = new ol.source.Vector({
+			features: [marker]
+			
+		});
+		
+		window.vector_source = vector_source;
+		var vector_layer = new ol.layer.Vector({source: vector_source, style: function (feature) {
+			return styles[feature.get('type')];
+		}});
+		map.addLayer(vector_layer);
+		// marker.context = {map: map, mapdata: mapdata, module_name: module_name, id: id, bubble: null};
 
-		marker.context = {map: map, mapdata: mapdata, module_name: module_name, id: id, bubble: null};
+		// google.maps.event.addListener
+		// (
+		// 	marker, 'click', function()
+		// 	{
+		// 		bubble_toggle(this);
+		// 	}
+		// );
 
-		google.maps.event.addListener
-		(
-			marker, 'click', function()
-			{
-				bubble_toggle(this);
-			}
-		);
-
-		this.markers.push(marker);
-		marker_list.push(marker);
+		// this.markers.push(marker);
+		// marker_list.push(marker);
 	}
 }
 
