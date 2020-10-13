@@ -434,8 +434,9 @@ function start_map(map_name, map_elementId, min_zoom, max_zoom, tile_width, tile
 	
 	ol_projection =  new ol.proj.Projection({
 		code: 'navicell',
-		extent: [0, 0, tile_width, tile_height],
-		units: 'm'
+		extent: [0, -tile_height, tile_width, 0],
+		// axisOrientation: 'esu', // This is supposed to work, but doesn't. And that's why we have to invert y axis.
+		units: 'pixels'
 	});
 	ol.proj.addProjection(ol_projection);
 	
@@ -458,7 +459,7 @@ function start_map(map_name, map_elementId, min_zoom, max_zoom, tile_width, tile
 		target: map_elementId,
 		view: new ol.View({
 		  projection: 'navicell',
-		  center: [tile_height/2, tile_width/2],
+		  center: [tile_height/2, -tile_width/2],
 		  zoom: min_zoom,
 		  maxZoom: max_zoom,
 		  minZoom: min_zoom,
@@ -1128,60 +1129,52 @@ function ClickmapTreeNode(map, module_name, id, cls, name, _positions, mapdata)
 		positions = [];
 		positions.push(_positions);
 	}
-
-	var styles = {
-			
-		// 'icon': new Style({
-		//   image: new Icon({
-		// 	anchor: [0.5, 1],
-		// 	src: 'data/icon.png',
-		//   }),
-		// }),
-
-		'marker_orange': new ol.style.Style({
-			image: new ol.style.Circle({
-			radius: 7,
-			fill: new ol.style.Fill({color: 'orange'}),
-			stroke: new ol.style.Stroke({
-				color: 'white',
-				width: 2,
-			}),
-			}),
-		})
-	};
+	
+	
 	
 	this.markers = [];
 	for (var nn = 0; nn < positions.length; ++nn) {
 		var pos = positions[nn];
 		
 		var marker = new ol.Feature({
-			type: 'marker_orange',
-			geometry: new ol.geom.Point([pos.x, 256-pos.y]), 
-			name: 'truc'
-		})
-		
-		var vector_source = new ol.source.Vector({
-			features: [marker]
-			
+			type: 'icon',
+			geometry: new ol.geom.Point([pos.x, -pos.y]), 
+			name: name + " (" + id + ")"
 		});
 		
-		window.vector_source = vector_source;
-		var vector_layer = new ol.layer.Vector({source: vector_source, style: function (feature) {
-			return styles[feature.get('type')];
-		}});
+		var vector_layer = new ol.layer.Vector({
+			source: new ol.source.Vector({
+				features: [marker]
+			}), 
+			style: new ol.style.Style({
+				image: new ol.style.Icon({
+					anchor: [0.5, 1],
+					src: '../../../map_icons/marker.png',
+					scale: 0.5
+				}),
+			})
+		});
+		
 		map.addLayer(vector_layer);
-		// marker.context = {map: map, mapdata: mapdata, module_name: module_name, id: id, bubble: null};
+		marker.setProperties({map: map, mapdata: mapdata, module_name: module_name, id: id, bubble: null, layer: vector_layer});
+		
+		map.on('click', function(evt) {
+			var feature = map.forEachFeatureAtPixel(evt.pixel,
+			  function(feature) {
+				return feature;
+			  }
+			);
+			if (feature === marker) {
+				bubble_toggle(marker);
+			}
+		});
 
-		// google.maps.event.addListener
-		// (
-		// 	marker, 'click', function()
-		// 	{
-		// 		bubble_toggle(this);
-		// 	}
-		// );
 
-		// this.markers.push(marker);
-		// marker_list.push(marker);
+	
+		this.markers.push(marker)
+
+		marker_list.push(marker);
+	
 	}
 }
 
