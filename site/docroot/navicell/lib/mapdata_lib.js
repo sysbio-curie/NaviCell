@@ -961,10 +961,12 @@ Mapdata.prototype = {
 
 	setBubbleContent: function(bubble, module_name, data_id) {
 		var bubble_content = this.getBubble(module_name, data_id);
+		
 		if (bubble_content) {
-			bubble.setContent("<div class=\"info_window\">" + bubble_content + "</div>");
+			document.getElementById('popup-content').innerHTML = "<div class=\"info_window\">" + bubble_content + "</div>";
 		} else {
-			bubble.setContent("Loading data...");
+			document.getElementById('popup-content').innerHTML = "Loading data...";
+		
 			if (!this.deferred_module_bubble[module_name][data_id]) {
 				this.deferred_module_bubble[module_name][data_id] = [];
 			}

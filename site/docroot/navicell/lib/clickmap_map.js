@@ -59,7 +59,7 @@ function CHECK_NO_JXTREE(fun) {
 function center_marker_position(map, marker_positions)
 {
 	if (marker_positions.length > 0) {
-		map.setCenter(marker_positions[0]);
+		map.getView().setCenter(marker_positions[0]);
 	}
 }
 
@@ -178,8 +178,7 @@ function make_marker_visible(marker)
 		if (!use_jxtree) {
 			marker.setIcon(marker.getIcon().new_icon);
 		}
-		marker.setVisible(true);
-		//marker.setAnimation(google.maps.Animation.DROP);
+		marker.getProperties().layer.setVisible(true);
 		marker.type = "new";
 		new_markers.push(marker);
 	}
@@ -190,7 +189,7 @@ function hide_old_markers()
 	for (var nn = 0; nn < marker_list.length; ++nn) {
 		var marker = marker_list[nn];
 		if (marker.type == "old") {
-			marker.setVisible(false);
+			marker.getProperties().layer.setVisible(false);
 		}
 	}
 }
@@ -199,7 +198,7 @@ function hide_all_markers()
 {
 	for (var nn = 0; nn < marker_list.length; ++nn) {
 		var marker = marker_list[nn];
-		marker.setVisible(false);
+		marker.getProperties().layer.setVisible(false);
 	}
 }
 
@@ -243,17 +242,20 @@ function extend(bounds, marker)
 	var marker_width = 20; // should calculate this from the shape
 	var marker_height = 33; // should calculate this from the shape
 	
-	var map = marker.getMap();
-	var scale = 1 << map.getZoom();
+	// var map = marker.getMap();
+	var map = marker.getProperties()['map']
+	var scale = 1 << map.getView().getZoom();
 	var xoffset = marker_width / 2 / scale
-	var proj = map.getProjection();
-	if (typeof proj !== 'undefined')
-	{
-		var point = proj.fromLatLngToPoint(marker.getPosition());
-		var height_in_world_coords = marker_height / scale;
-		bounds.extend(proj.fromPointToLatLng(new google.maps.Point(point.x - xoffset, point.y - height_in_world_coords)));
-		bounds.extend(proj.fromPointToLatLng(new google.maps.Point(point.x + xoffset, point.y)));
-	}
+	var proj = map.getView().getProjection();
+	
+	// TODO: Here I'm not sure what to do yet
+	// if (typeof proj !== 'undefined')
+	// {
+	// 	var point = proj.fromLatLngToPoint(marker.getPosition());
+	// 	var height_in_world_coords = marker_height / scale;
+	// 	bounds.extend(proj.fromPointToLatLng(new google.maps.Point(point.x - xoffset, point.y - height_in_world_coords)));
+	// 	bounds.extend(proj.fromPointToLatLng(new google.maps.Point(point.x + xoffset, point.y)));
+	// }
 }
 
 var check_node_inhibit = false;
@@ -454,9 +456,47 @@ function start_map(map_name, map_elementId, min_zoom, max_zoom, tile_width, tile
 	})
 	window.ol_layer = ol_layer;
 	
+	/**
+	 * Elements that make up the popup.
+	 */
+	var container = document.getElementById('popup');
+	var content = document.getElementById('popup-content');
+	var closer = document.getElementById('popup-closer');
+
+	/**
+	 * Create an overlay to anchor the popup to the map.
+	 */
+	var overlay = new ol.Overlay({
+	element: container,
+	autoPan: true,
+	autoPanAnimation: {
+		duration: 250,
+	},
+	});
+
+	overlay.setPosition(undefined);
+	closer.blur();
+	
+	window.bubble_overlay = overlay;
+	/**
+	 * Add a click handler to hide the popup.
+	 * @return {boolean} Don't follow the href.
+	 */
+	closer.onclick = function () {
+	overlay.setPosition(undefined);
+	closer.blur();
+	return false;
+	};
+
+	
+	
+	
+	
+	document.querySelector("#" + map_elementId).innerHTML = "";
 	var ol_map = new ol.Map({
 		layers: [ ol_layer ],
 		target: map_elementId,
+		overlays : [overlay],
 		view: new ol.View({
 		  projection: 'navicell',
 		  center: [tile_height/2, -tile_width/2],
@@ -493,7 +533,7 @@ function start_map(map_name, map_elementId, min_zoom, max_zoom, tile_width, tile
 
 	// map.setOptions({draggableCursor:'default', draggingCursor: 'move'});
 	var currZoom = ol_map.getView().getZoom();
-	var currCenter = ol_map.getView().getZoom();
+	// var currCenter = ol_map.getView().getZoom();
 	ol_map.on('moveend', function(e) {
 		var newZoom = ol_map.getView().getZoom();
 		if (currZoom != newZoom) {
@@ -1068,50 +1108,41 @@ function uncheck_all_entities(win)
 
 function bubble_open(marker)
 {
-	var context = marker.context;
-	var bubble;
-	if (context.bubble) {
-		bubble = context.bubble;
-	} else {
-		bubble = context.bubble = new google.maps.InfoWindow
-		(
-			{
-				content: "",
-				maxWidth: 350
-			}
-		);
-		context.mapdata.setBubbleContent(context.bubble, context.module_name, context.id);
-		bubble_list.push(bubble);
+	var context = marker.getProperties();
+	var coordinates = marker.getGeometry().getCoordinates();
+	window.bubble_overlay.setPosition([coordinates[0], coordinates[1]+5]);
+	context.mapdata.setBubbleContent(context.bubble, context.module_name, context.id);
 
-		bubble.is_opened = false;
-		bubble.addListener('closeclick', function () {
-			bubble.is_opened = false;
-		});
-	}
 
-	bubble.open(context.map, marker);
-	bubble.is_opened = true;
+	// 	bubble_list.push(bubble);
+		
+	// 	bubble.is_opened = false;
+	// 	bubble.addListener('closeclick', function () {
+	// 		bubble.is_opened = false;
+	// 	});
+	// }
+
+	// bubble.open(context.map, marker);
+	// bubble.is_opened = true;
 }
 
 function bubble_close(marker) {
-	var context = marker.context;
-	var bubble = context.bubble;
-	if (bubble) {
-		bubble.close();
-		bubble.is_opened = false;
-	}
+	window.bubble_overlay.setPosition(undefined)
+}
+
+function coords_equal(array1, array2) {
+	return array1.length === array2.length && array1.every(function(value, index) { return value === array2[index]})
 }
 
 function bubble_is_opened(marker) {
-	var context = marker.context;
-	var bubble = context.bubble;
-	return bubble && bubble.is_opened;
+	var shifted_coordinates = marker.getGeometry().getCoordinates();
+	shifted_coordinates[1] += 5;
+	
+	return window.bubble_overlay.getPosition() !== undefined && coords_equal(window.bubble_overlay.getPosition(),shifted_coordinates)
 }
 
 function bubble_toggle(marker)
 {
-	var context = marker.context;
-	var bubble = context.bubble;
 	if (bubble_is_opened(marker)) {
 		bubble_close(marker);
 	} else {
@@ -1218,10 +1249,10 @@ function tree_node_state_changed(tree_context, tree_node, checked) {
 				tree_context.marker_bounds.push(marker_bound);
 			}
 			if (tree_context.marker_positions) {
-				tree_context.marker_positions.push(this.getPosition());
+				tree_context.marker_positions.push(this.getGeometry().getCoordinates());
 			}
 		} else {
-			this.setVisible(false);
+			this.getProperties().layer.setVisible(false);
 		}
 	});
 }
