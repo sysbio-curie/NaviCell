@@ -96,6 +96,8 @@ EXPOSE 80
 FROM navicell-base AS navicell
 
 COPY . /var/navicell
+RUN rm -fr /var/navicell/site/docroot/navicell/maps/* \
+ && rm -fr /var/navicell/maps_src
 
 CMD service apache2 start && ./mvnw spring-boot:run
 
