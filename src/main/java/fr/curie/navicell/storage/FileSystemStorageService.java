@@ -26,6 +26,7 @@ public class FileSystemStorageService implements StorageService {
 
 	@Autowired
 	public FileSystemStorageService(StorageProperties properties) {
+		System.out.println("Root location : " + properties.getLocation());
 		this.rootLocation = Paths.get(properties.getLocation());
 	}
 

@@ -1,4 +1,4 @@
-package fr.curie.navicell;
+package fr.curie.navicell.sbgnrender;
 
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
@@ -15,7 +15,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import fr.curie.navicell.SBGNRendererException;
+// import fr.curie.navicell.SBGNRendererException;
 
 public class SBGNRenderer {
     

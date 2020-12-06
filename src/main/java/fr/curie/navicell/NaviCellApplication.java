@@ -15,17 +15,20 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 
+import fr.curie.navicell.NaviCellProperties;
 import fr.curie.navicell.storage.StorageProperties;
 import fr.curie.navicell.storage.StorageService;
 
 
 @SpringBootApplication
-@EnableConfigurationProperties(StorageProperties.class)
+@EnableConfigurationProperties({
+  StorageProperties.class
+})
 @RestController
-public class NavicellApplication {
+public class NaviCellApplication {
 
 	@Autowired
-  public NavicellApplication() {}
+  public NaviCellApplication() {}
   
   @RequestMapping("/api/")
   @ResponseStatus(value=HttpStatus.OK)
@@ -34,7 +37,7 @@ public class NavicellApplication {
   }
   
   public static void main(String[] args) {
-    SpringApplication.run(NavicellApplication.class, args);
+    SpringApplication.run(NaviCellApplication.class, args);
   }
 
   @Bean
