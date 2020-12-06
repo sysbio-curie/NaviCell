@@ -49,6 +49,11 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>6.0.16.Final</version>
+		</dependency>
+		<dependency>
 			<groupId>fr.curie</groupId>
 			<artifactId>BiNoM</artifactId>
 			<version>2.5</version>

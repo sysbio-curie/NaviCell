@@ -1,4 +1,4 @@
-package fr.curie.navicell;
+package fr.curie.navicell.database;
 
 import java.util.List;
 

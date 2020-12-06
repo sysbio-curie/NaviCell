@@ -8,7 +8,7 @@ public class StorageProperties {
 	/**
 	 * Folder location for storing files
 	 */
-	private String location = "/var/navicell/upload-dir/";
+	private String location;// = "/var/navicell/upload-dir/";
 
 	public String getLocation() {
 		return location;

@@ -20,12 +20,19 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import fr.curie.navicell.database.NaviCellMapRepository;
+import fr.curie.navicell.database.NaviCellMap;
+import fr.curie.navicell.database.NaviCellMapException;
+import fr.curie.navicell.database.NaviCellSpeciesRepository;
+import fr.curie.navicell.database.NaviCellSpecies;
+
 import fr.curie.navicell.storage.StorageProperties;
 import fr.curie.navicell.storage.StorageService;
 
 
+// @EnableConfigurationProperties(NaviCellProperties.class)
 @CrossOrigin(origins = "*", maxAge = 3600)
-@EnableConfigurationProperties(StorageProperties.class)
+// @EnableConfigurationProperties(StorageProperties.class)
 @RestController
 public class NaviCellMapController {
 
@@ -33,6 +40,9 @@ public class NaviCellMapController {
   
   @Autowired
   private NaviCellMapRepository repository;
+  
+  @Autowired
+  public NaviCellSpeciesRepository species_repository;
   
 	@Autowired
 	public NaviCellMapController(StorageService storageService) {
@@ -66,12 +76,17 @@ public class NaviCellMapController {
 	@ResponseStatus(value = HttpStatus.CREATED)
 	public void handleFileUpload(@RequestParam("name") String name, @RequestParam("network-file") MultipartFile network_file) {
     try{
-      NaviCellMap entry = new NaviCellMap(this.storageService, name, network_file);
+      NaviCellMap entry = new NaviCellMap(this.storageService, name, network_file, species_repository);
       repository.save(entry);
     }
     catch (NaviCellMapException e) {
       throw new NaviCellMapControllerException(e.getMessage());
     }
-    
-	}
+  }
+  
+  @GetMapping("api/species")
+  @ResponseStatus(value = HttpStatus.OK)
+  List<NaviCellSpecies> all_species() {
+    return species_repository.findAll();
+  }
 }

@@ -1,4 +1,4 @@
-package fr.curie.navicell;
+package fr.curie.navicell.database;
 
 import java.util.UUID;
 import java.util.Vector;
@@ -15,6 +15,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.Id;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -23,7 +24,8 @@ import fr.curie.BiNoM.pathways.utils.acsn.ACSNProcedures;
 import fr.curie.cd2sbgnml.Cd2SbgnmlScript;
 import fr.curie.navicell.storage.StorageException;
 import fr.curie.navicell.storage.StorageService;
-import fr.curie.navicell.SBGNRendererException;
+import fr.curie.navicell.sbgnrender.SBGNRenderer;
+import fr.curie.navicell.sbgnrender.SBGNRendererException;
 import org.apache.commons.io.FilenameUtils;
 import java.awt.image.BufferedImage;
 
@@ -39,6 +41,10 @@ public class NaviCellMap {
   public String imagePath;
   public String url;
   
+  // @Autowired
+  // public NaviCellSpeciesRepository species_repository;
+  
+  
   private boolean createFolder(StorageService storage) {
     this.folder = UUID.randomUUID().toString();
     try {
@@ -53,7 +59,7 @@ public class NaviCellMap {
     
   }
   
-  public NaviCellMap(StorageService storageService, String name, MultipartFile network_file) throws NaviCellMapException {
+  public NaviCellMap(StorageService storageService, String name, MultipartFile network_file, NaviCellSpeciesRepository speciesRepository) throws NaviCellMapException {
     
     if (network_file.isEmpty()) {
       throw new NaviCellMapException("Error : Empty file !");
@@ -78,14 +84,14 @@ public class NaviCellMap {
 
     }
   
-    
-  
     this.createSBGNML(storageService);
     this.createImage(storageService);
     this.createZooms(storageService);
     this.buildMap(storageService);
     
-    
+      
+      speciesRepository.save(new NaviCellSpecies("test_species", this));
+  
   }
   
   private void createSBGNML(StorageService storage) {
@@ -198,7 +204,6 @@ public class NaviCellMap {
     catch (Exception e) {
       throw new NaviCellMapException(e.getMessage());
     }
-    
     
   }
   
