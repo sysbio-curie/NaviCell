@@ -87,11 +87,7 @@ public class NaviCellMap {
     this.createSBGNML(storageService);
     this.createImage(storageService);
     this.createZooms(storageService);
-    this.buildMap(storageService);
-    
-      
-      speciesRepository.save(new NaviCellSpecies("test_species", this));
-  
+    this.buildMap(storageService);  
   }
   
   private void createSBGNML(StorageService storage) {

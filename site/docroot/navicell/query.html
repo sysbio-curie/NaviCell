@@ -1,0 +1,170 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>NaviCell</title>
+  <meta name="description" content="Data analysis, navigation, curation and maintenance of molecular interactions maps">
+  <meta name="author" content="Institut Curie">
+  <!-- CSS only -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="clickmap_map_v2.css">  
+  <!-- JS, Popper.js, and jQuery -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+  <!-- <meta name="msapplication-config" content="/docs/4.5/assets/img/favicons/browserconfig.xml">
+  <meta name="theme-color" content="#563d7c"> -->
+
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+    <!-- Custom styles for this template -->
+    <!-- <link href="starter-template.css" rel="stylesheet"> -->
+  </head>
+  <body>
+    <div id="header">
+      <div class="header-left">
+        <a href="/"><img src="map_icons/misc/map_top_panel_logo.png" height=36 border="0"></a></div>
+      <div class="header-centre">
+      Search
+      </div>
+      <div class="header-right">
+        <form class="" action="query.html"  method="GET">
+          <input id="query_text" type="text" placeholder="Search" aria-label="Search" name="search" style="line-height: 30px;">
+        </form>
+      </div>
+    </div>
+    
+  
+    <main role="main" class="container" style="margin-top: 100px">
+    
+      <div class="container">
+        <h1>Results</h1>
+        <br/>
+        <table id="table-results" class="table table-stripped"><tbody></tbody></table>
+      </div>
+    
+    </main><!-- /.container -->
+    
+      <script type="text/javascript">
+      
+      async function getMapInfos(mapIds) {
+        let map_infos = {}
+        await Promise.all(Array.from(mapIds).map(async value => {
+          try 
+          {
+            // send fetch along with cookies
+            let response = await fetch('/api/maps/' + value, {
+                method: 'GET',
+                credentials: 'same-origin',
+            });
+
+            // server responded with http response != 200
+            if(response.status != 200)
+              throw new Error('HTTP response code != 200');
+
+            // read json response from server
+            // success response example : {"error":0,"message":""}
+            // error response example : {"error":1,"message":"File type not allowed"}
+            let json_response = await response.json();
+              if(json_response.error == 1)
+                  throw new Error(json_response.message);	
+            map_infos[json_response.id] = json_response;
+            // console.log(map_infos);
+          }
+          catch(e) {
+            // catch rejected Promises and Error objects
+              return_data = { error: 1, message: e.message };
+          }
+        }));
+        // console.log(map_infos);
+        return map_infos;
+      
+        
+        
+      }
+      
+      
+      async function getByName(name) {
+
+        try {
+          
+          // send fetch along with cookies
+          let response = await fetch('/api/species/name/' + name, {
+              method: 'GET',
+              credentials: 'same-origin',
+          });
+
+          // server responded with http response != 200
+          if(response.status != 200)
+            throw new Error('HTTP response code != 200');
+
+          // read json response from server
+          // success response example : {"error":0,"message":""}
+          // error response example : {"error":1,"message":"File type not allowed"}
+          let json_response = await response.json();
+            if(json_response.error == 1)
+                throw new Error(json_response.message);	
+          
+          console.log(json_response.length);
+          if (json_response.length > 0) {
+                
+            let map_ids = new Set();
+            json_response.map((value) => {
+              map_ids.add(value.mapId)
+            });
+            
+            let map_info = await getMapInfos(map_ids);
+                  
+            // console.log(json_response);
+            table = document.querySelector("#table-results");
+            table.tBodies[0].innerHTML = "";
+            json_response.map((value) => {
+              
+              // console.log(value);
+              row = table.tBodies[0].insertRow();
+              name_cell = row.insertCell();
+              name_cell.innerText = value.name;
+              type_cell = row.insertCell();
+              type_cell.innerText = value.type;
+              map_cell = row.insertCell();
+              map_cell.innerHTML = "<a href=\"" + map_info[value.mapId].url + "\">" + map_info[value.mapId].name + "</a>";
+            });
+          }
+          else {
+            console.log("Couldnt be found");
+            table = document.querySelector("#table-results");
+            table.tBodies[0].innerHTML = "<b>" + name + "</b> couldn't be found.";
+          }
+        }
+        catch(e) {
+          // catch rejected Promises and Error objects
+            return_data = { error: 1, message: e.message };
+        }
+      }
+      document.addEventListener("DOMContentLoaded", async function () {
+        console.log(window.location.search);
+        const urlParams = new URLSearchParams(window.location.search);
+        await getByName(urlParams.get('search'));  
+      });
+      
+    </script>
+  </body>
+</html>

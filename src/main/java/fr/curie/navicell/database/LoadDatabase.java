@@ -23,7 +23,7 @@ class LoadDatabase {
   CommandLineRunner initDatabaseSpecies(NaviCellSpeciesRepository species_repository) {
 
     return args -> {
-      species_repository.deleteAll();
+      // species_repository.deleteAll();
       // log.info("Preloading " + species_repository.save(new NaviCellSpecies("Cell cycle")));
       // log.info("Preloading " + repository.save(new NaviCellMap("Ras-MAPK")));
     };

@@ -10,22 +10,25 @@ public class NaviCellSpecies {
   public String id;
 
   public String name;
-  public NaviCellMap map;
+  public String type;
+  public String mapId;
+  
   
   public NaviCellSpecies() {
     
   }
   
-  public NaviCellSpecies(String name, NaviCellMap map) {
+  public NaviCellSpecies(String name, String type, String mapId) {
     this.name = name;
-    this.map = map;
+    this.type = type;
+    this.mapId = mapId;
   }
 
   @Override
   public String toString() {
     return String.format(
-        "{'id': '%s', 'name': '%s', 'map': '%s'}",
-        id, name, map.name);
+        "{'id': '%s', 'name': '%s', 'type': '%s', 'map': '%s'}",
+        id, name, type, mapId);
   }
 
 }
