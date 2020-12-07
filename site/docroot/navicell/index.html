@@ -9,6 +9,7 @@
   <meta name="author" content="Institut Curie">
   <!-- CSS only -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="clickmap_map_v2.css">  
 
   <!-- JS, Popper.js, and jQuery -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
@@ -20,6 +21,9 @@
 
 
     <style>
+      body{
+        overflow: auto;
+      }
       .bd-placeholder-img {
         font-size: 1.125rem;
         text-anchor: middle;
@@ -39,24 +43,18 @@
     <!-- <link href="starter-template.css" rel="stylesheet"> -->
   </head>
   <body>
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-      <a class="navbar-brand" href="#">
-        <img src="navicell-logo.png" height="40px">
-      </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-  
-      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-        <ul class="navbar-nav mr-auto">
-         
-        </ul>
-        <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-          <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+    <div id="header">
+      <div class="header-left">
+      <a href="/"><img src="map_icons/misc/map_top_panel_logo.png" height=36 border="0"></a></div>
+      <div class="header-centre">
+      NaviCell Home
+      </div>
+      <div class="header-right">
+        <form class="" action="query.html"  method="GET">
+          <input id="query_text" type="text" placeholder="Search" aria-label="Search" name="search" style="line-height: 30px;">
         </form>
       </div>
-    </nav>
+    </div>
   
     <main role="main" class="container" style="margin-top: 100px">
     
