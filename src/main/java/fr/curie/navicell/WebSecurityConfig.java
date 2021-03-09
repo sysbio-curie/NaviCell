@@ -5,40 +5,87 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.authentication.AuthenticationManager;
+
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+// import fr.curie.navicell.security.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import fr.curie.navicell.security.UserRepository;
+// import fr.curie.navicell.security.UserDetailsService;
+
+import fr.curie.navicell.security.JwtTokenFilter;
+import java.util.Arrays;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.web.filter.CorsFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.http.HttpMethod;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
+	@Autowired
+    private final JwtTokenFilter jwtTokenFilter;
+
+    public WebSecurityConfig(JwtTokenFilter jwtTokenFilter ) {
+        this.jwtTokenFilter = jwtTokenFilter;
+    }
+
+	@Override
+	@Bean
+	public AuthenticationManager authenticationManagerBean() throws Exception {
+		return super.authenticationManagerBean();
+	}
+	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http
-			.authorizeRequests()
-      .anyRequest().permitAll();
- 	   	http.csrf().disable();
-            // .anyRequest().authenticated()
-			// 	.and()
-			// .formLogin()
-			// 	.loginPage("/login")
-			// 	.permitAll()
-			// 	.and()
-			// .logout()
-			// 	.permitAll();
+		// http = http.cors().and().csrf().disable();
+		http = http.csrf().disable();
+
+        // Set session management to stateless
+        http = http
+            .sessionManagement()
+            .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            .and();
+		
+		http.authorizeRequests()
+		.antMatchers("/api/auth/*").permitAll()
+		.antMatchers(HttpMethod.GET, "/api/maps/*").permitAll()
+		.anyRequest().authenticated();
+		
+		// Add JWT token filter
+		http.addFilterBefore(
+			jwtTokenFilter,
+			UsernamePasswordAuthenticationFilter.class
+		);
 	}
 
-	@Bean
-	@Override
-	public UserDetailsService userDetailsService() {
-		UserDetails user =
-			 User.withDefaultPasswordEncoder()
-				.username("user")
-				.password("password")
-				.roles("USER")
-				.build();
-
-		return new InMemoryUserDetailsManager(user);
-	}
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+	
+	//  // Used by spring security if CORS is enabled.
+	//  @Bean
+	//  public CorsFilter corsFilter() {
+	// 	 UrlBasedCorsConfigurationSource source =
+	// 		 new UrlBasedCorsConfigurationSource();
+	// 	 CorsConfiguration config = new CorsConfiguration();
+	// 	 config.setAllowCredentials(true);
+	// 	 config.addAllowedOrigin("*");
+	// 	 config.addAllowedHeader("*");
+	// 	 config.addAllowedMethod("*");
+	// 	 source.registerCorsConfiguration("/**", config);
+	// 	 return new CorsFilter(source);
+	//  }
+	
 }

@@ -28,6 +28,7 @@ import fr.curie.navicell.sbgnrender.SBGNRenderer;
 import fr.curie.navicell.sbgnrender.SBGNRendererException;
 import org.apache.commons.io.FilenameUtils;
 import java.awt.image.BufferedImage;
+import org.springframework.security.core.Authentication;
 
 public class NaviCellMap {
 
@@ -40,6 +41,8 @@ public class NaviCellMap {
   public String sbgnPath;
   public String imagePath;
   public String url;
+  public String username;
+  public boolean isPublic;
   
   // @Autowired
   // public NaviCellSpeciesRepository species_repository;
@@ -59,7 +62,11 @@ public class NaviCellMap {
     
   }
   
-  public NaviCellMap(StorageService storageService, String name, MultipartFile network_file, NaviCellSpeciesRepository speciesRepository) throws NaviCellMapException {
+  public NaviCellMap(Authentication authentication, StorageService storageService, String name, MultipartFile network_file, NaviCellSpeciesRepository speciesRepository) throws NaviCellMapException {
+    
+    
+    this.username = authentication.getName();
+    this.isPublic = false; 
     
     if (network_file.isEmpty()) {
       throw new NaviCellMapException("Error : Empty file !");

@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.security.core.Authentication;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -37,7 +38,7 @@ import org.json.JSONObject;
 import org.json.JSONException;
 import org.json.JSONArray;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
+// @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 public class NaviCellMapController {
 
@@ -62,8 +63,12 @@ public class NaviCellMapController {
   
   @GetMapping("/api/maps")
   @ResponseStatus(value = HttpStatus.OK)
-  List<NaviCellMap> all() {
-    return repository.findAll();
+  List<NaviCellMap> all(Authentication authentication) {
+    if (authentication != null)
+      return repository.findByUsername(authentication.getName());
+    
+    else
+      return repository.findByIsPublic(true);
   }
 
 
@@ -85,11 +90,25 @@ public class NaviCellMapController {
     }
   }
   
+  @PutMapping("/api/maps/{id}")
+  @ResponseStatus(value = HttpStatus.OK)
+  void modify(@PathVariable("id") String id, @RequestParam("is_public") boolean isPublic)  {
+    Optional<NaviCellMap> entry = repository.findById(id);
+    if (entry.isPresent()) {
+      NaviCellMap map = entry.get();
+      map.isPublic = isPublic;
+      repository.save(map);
+      // this.storageService.deleteByFolder(entry.get().folder);
+      // repository.deleteById(id);
+      // species_repository.deleteByMapId(id);
+    }
+  }
+  
   @PostMapping("/api/maps")
 	@ResponseStatus(value = HttpStatus.CREATED)
-	public void handleFileUpload(@RequestParam("name") String name, @RequestParam("network-file") MultipartFile network_file) {
+	public void handleFileUpload(Authentication authentication, @RequestParam("name") String name, @RequestParam("network-file") MultipartFile network_file) {
     try{
-      NaviCellMap entry = new NaviCellMap(this.storageService, name, network_file, species_repository);
+      NaviCellMap entry = new NaviCellMap(authentication, this.storageService, name, network_file, species_repository);
       repository.save(entry);
 
       String mapdata_path = this.storageService.getLocation() + "/" + entry.folder + "/_common/master_mapdata.json";
