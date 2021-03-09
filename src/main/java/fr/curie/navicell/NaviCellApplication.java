@@ -15,10 +15,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 
-import fr.curie.navicell.NaviCellProperties;
+// import fr.curie.navicell.NaviCellProperties;
 import fr.curie.navicell.storage.StorageProperties;
 import fr.curie.navicell.storage.StorageService;
-
 
 @SpringBootApplication
 @EnableConfigurationProperties({
@@ -28,19 +27,19 @@ import fr.curie.navicell.storage.StorageService;
 public class NaviCellApplication {
 
 	@Autowired
-  public NaviCellApplication() {}
-  
-  @RequestMapping("/api/")
-  @ResponseStatus(value=HttpStatus.OK)
-  public String home() {
-    return "Welcome to NaviCell v3 API";
-  }
-  
-  public static void main(String[] args) {
-    SpringApplication.run(NaviCellApplication.class, args);
-  }
+	public NaviCellApplication() {}
+	
+	@RequestMapping("/api/")
+	@ResponseStatus(value=HttpStatus.OK)
+	public String home() {
+		return "Welcome to NaviCell v3 API";
+	}
 
-  @Bean
+	public static void main(String[] args) {
+		SpringApplication.run(NaviCellApplication.class, args);
+	}
+
+	@Bean
 	CommandLineRunner init(StorageService storageService) {
 		return (args) -> {
 			storageService.init();

@@ -10,5 +10,6 @@ public interface NaviCellMapRepository extends MongoRepository<NaviCellMap, Stri
   public List<NaviCellMap> findByName(String name);
   public List<NaviCellMap> findByNetworkPath(String network_path);
   public List<NaviCellMap> findByImagePath(String image_path);
-  
+  public List<NaviCellMap> findByUsername(String username);
+  public List<NaviCellMap> findByIsPublic(boolean isPublic);
 }
