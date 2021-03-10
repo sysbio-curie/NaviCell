@@ -10,8 +10,8 @@
 # TAG | HREF template | ID regex | TAG pattern (default is TAG:) | TAG replacement (default is TAG:) | HREF target (default is _blank) | icon link?
 #
 
-PMID	http://www.ncbi.nlm.nih.gov/sites/entrez?Db=pubmed&amp;Cmd=ShowDetailView&amp;TermToSearch=%PMID%	[0-9]+
-HUGO	http://www.genenames.org/cgi-bin/quick_search.pl?.cgifields=type&type=equals&num=50&submit=Submit&search=%HUGO%	[A-Z0-9-_]+
+PMID	https://pubmed.ncbi.nlm.nih.gov/%PMID%	[0-9]+
+HUGO	https://www.genenames.org/tools/search/#!/all?query=%HUGO%	[A-Z0-9-_]+
 HGNC	http://www.genenames.org/data/hgnc_data.php?hgnc_id=%HGNC%	[0-9]+
 ENTREZ	http://www.ncbi.nlm.nih.gov/gene/%ENTREZ%	[0-9]+
 UNIPROT	http://www.expasy.org/uniprot/%UNIPROT%	[A-Z][A-Z0-9]{5}

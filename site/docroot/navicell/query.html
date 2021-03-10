@@ -65,15 +65,34 @@
     
       <script type="text/javascript">
       
+      let token;
+      let cookie = document.cookie;
+      console.log(cookie)
+      let cookie_values = cookie.split(";");
+      cookie_values.map(function (cookie) {
+        values = cookie.split("=")
+        if (values[0] == "jwtoken") {
+          token = values[1];
+        }
+      } );
+      
+      
       async function getMapInfos(mapIds) {
         let map_infos = {}
         await Promise.all(Array.from(mapIds).map(async value => {
           try 
           {
+            let httpHeaders = {};
+            
+            if (token !== undefined) {
+              httpHeaders['Authorization'] = `Bearer ${token}`;
+            }
+            
             // send fetch along with cookies
             let response = await fetch('/api/maps/' + value, {
                 method: 'GET',
                 credentials: 'same-origin',
+                headers: new Headers(httpHeaders)
             });
 
             // server responded with http response != 200
@@ -105,11 +124,17 @@
       async function getByName(name) {
 
         try {
-          
+          let httpHeaders = {};
+            
+            if (token !== undefined) {
+              httpHeaders['Authorization'] = `Bearer ${token}`;
+            }
+            
           // send fetch along with cookies
           let response = await fetch('/api/species/name/' + name, {
               method: 'GET',
               credentials: 'same-origin',
+              headers: new Headers(httpHeaders)
           });
 
           // server responded with http response != 200
@@ -159,9 +184,80 @@
             return_data = { error: 1, message: e.message };
         }
       }
+      
+      async function getByHugoName(name) {
+
+        try {
+          let httpHeaders = {};
+            
+            if (token !== undefined) {
+              httpHeaders['Authorization'] = `Bearer ${token}`;
+            }
+            
+          // send fetch along with cookies
+          let response = await fetch('/api/species/hugo/' + name, {
+              method: 'GET',
+              credentials: 'same-origin',
+              headers: new Headers(httpHeaders)
+          });
+
+          // server responded with http response != 200
+          if(response.status != 200)
+            throw new Error('HTTP response code != 200');
+
+          // read json response from server
+          // success response example : {"error":0,"message":""}
+          // error response example : {"error":1,"message":"File type not allowed"}
+          let json_response = await response.json();
+            if(json_response.error == 1)
+                throw new Error(json_response.message);	
+          
+          console.log(json_response.length);
+          if (json_response.length > 0) {
+                
+            let map_ids = new Set();
+            json_response.map((value) => {
+              map_ids.add(value.mapId)
+            });
+            
+            let map_info = await getMapInfos(map_ids);
+                  
+            // console.log(json_response);
+            table = document.querySelector("#table-results");
+            table.tBodies[0].innerHTML = "";
+            json_response.map((value) => {
+              
+              // console.log(value);
+              row = table.tBodies[0].insertRow();
+              name_cell = row.insertCell();
+              name_cell.innerText = value.name;
+              type_cell = row.insertCell();
+              type_cell.innerText = value.type;
+              map_cell = row.insertCell();
+              map_cell.innerHTML = "<a href=\"" + map_info[value.mapId].url + "\">" + map_info[value.mapId].name + "</a>";
+            });
+          }
+          else {
+            console.log("Couldnt be found");
+            table = document.querySelector("#table-results");
+            table.tBodies[0].innerHTML = "Hugo term <b>" + name + "</b> couldn't be found.";
+          }
+        }
+        catch(e) {
+          // catch rejected Promises and Error objects
+            return_data = { error: 1, message: e.message };
+        }
+      }
       document.addEventListener("DOMContentLoaded", async function () {
         console.log(window.location.search);
         const urlParams = new URLSearchParams(window.location.search);
+        let search = urlParams.get('search');
+        if (search.includes(":")) {
+          let terms = search.split(":");
+          if (terms[0].toLowerCase() === "hugo") {
+            await getByHugoName(terms[1]);
+          }
+        } else 
         await getByName(urlParams.get('search'));  
       });
       

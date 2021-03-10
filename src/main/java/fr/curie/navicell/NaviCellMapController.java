@@ -98,9 +98,6 @@ public class NaviCellMapController {
       NaviCellMap map = entry.get();
       map.isPublic = isPublic;
       repository.save(map);
-      // this.storageService.deleteByFolder(entry.get().folder);
-      // repository.deleteById(id);
-      // species_repository.deleteByMapId(id);
     }
   }
   
@@ -118,6 +115,7 @@ public class NaviCellMapController {
         JSONArray arr = new JSONArray(Files.readString(Paths.get(mapdata_path)));
         for (int i = 0; i < arr.length(); i++)
         {        
+          // System.out.println(arr.getJSONObject(i));
           String t_class = arr.getJSONObject(i).getString("class");
           if (
             t_class.equals("PROTEIN") ||
@@ -130,6 +128,11 @@ public class NaviCellMapController {
             for (int j=0; j < species.length(); j++) {
               String sname = species.getJSONObject(j).getString("name");
               NaviCellSpecies t_sp = new NaviCellSpecies(sname, t_class, entry.id);
+              JSONArray hugo = species.getJSONObject(j).getJSONArray("hugo");
+              if (hugo.length() > 0) {
+                System.out.println("New hugo : " + hugo.getString(0));
+                t_sp.hugo = hugo.getString(0);
+              }
               species_repository.save(t_sp);         
             }
           }
@@ -158,6 +161,12 @@ public class NaviCellMapController {
   @ResponseStatus(value = HttpStatus.OK)
   List<NaviCellSpecies> speciesByName(@PathVariable("name") String name) {
     return species_repository.findByName(name);
+  }
+  
+  @GetMapping("api/species/hugo/{hugo}")
+  @ResponseStatus(value = HttpStatus.OK)
+  List<NaviCellSpecies> speciesByHugo(@PathVariable("hugo") String hugo) {
+    return species_repository.findByHugo(hugo);
   }
   
   @GetMapping("api/species/type/{type}")

@@ -10,6 +10,7 @@ public interface NaviCellSpeciesRepository extends MongoRepository<NaviCellSpeci
   public List<NaviCellSpecies> findByType(String type);
   public List<NaviCellSpecies> findByMapId(String mapId);
   public List<NaviCellSpecies> findByTypeAndName(String type, String name);
+  public List<NaviCellSpecies> findByHugo(String hugo);
   
   public void deleteByMapId(String mapId);
 }
