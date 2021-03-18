@@ -731,7 +731,9 @@ USGSOverlay.prototype.onAdd = function() {
 			event_ckmap(e, 'mouseover', overlay);
 		}
 	});
-	this.setMap(this.map_);
+	// This cause onRemove to be called, while seemingly not doing anything
+	// Commenting it for now 
+	// this.setMap(this.map_);
 
 	var div = document.createElement('div');
 	div.id = "innermap";
