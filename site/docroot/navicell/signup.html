@@ -1,0 +1,128 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>NaviCell</title>
+  <meta name="description" content="Data analysis, navigation, curation and maintenance of molecular interactions maps">
+  <meta name="author" content="Institut Curie">
+  <!-- CSS only -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="clickmap_map_v2.css">  
+
+  <!-- JS, Popper.js, and jQuery -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+  <script src="lib/nv3_api/auth.js"></script>
+
+  <!-- <meta name="msapplication-config" content="/docs/4.5/assets/img/favicons/browserconfig.xml">
+  <meta name="theme-color" content="#563d7c"> -->
+
+
+    <style>
+      body{
+        overflow: auto;
+      }
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+    <!-- Custom styles for this template -->
+    <!-- <link href="starter-template.css" rel="stylesheet"> -->
+  </head>
+  <body>
+    <div id="header">
+      <div class="header-left">
+      <a href="/"><img src="map_icons/misc/map_top_panel_logo.png" height=36 border="0"></a></div>
+      <div class="header-centre">
+      NaviCell Sign up
+      </div>
+      <div class="header-right">
+        <form class="" action="query.html"  method="GET">
+          <input id="query_text" type="text" placeholder="Search" aria-label="Search" name="search" style="line-height: 30px;">
+          <a href="signin.html" class="logged_out" style="visibility: visible;">Sign in</a>        
+          <a onclick="signup.html" href="#" class="logged_out" style="visibility: visible;">Sign up</a>        
+          <a onclick="logout()" href="#" class="logged_in" style="visibility: hidden;">Logout</a>        
+        </form>
+      </div>
+      
+    </div>
+  
+    <main role="main" class="container" style="margin-top: 100px">
+      <form id="signup-form">
+      <table class="table" id="login_table">
+        <tbody>
+          <tr>
+            <td>Login:</td>
+            <td><input type="text" id="login" /></td>
+          </tr>
+          <tr>
+            <td>Password:</td>
+            <td><input type="password" id="password1" /></td>
+          </tr>
+          <tr>
+            <td>Repeat password:</td>
+            <td><input type="password" id="password2" /></td>
+          </tr>
+          
+          <tr>
+            <td></td>
+            
+            <td>
+              <div class="float-right">
+                <span id="error_message"></span>
+
+
+              <button type="submit" class="btn btn-primary float-right" id="signup-button">Sign up</button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </form>
+    </main><!-- /.container -->
+    
+    <script type="text/javascript">
+      
+      load_token();
+      show_logged_in(logged_in());
+      
+      if (logged_in()) {
+        window.location.href = "/";  
+      }
+      
+      document.querySelector("#signup-form").addEventListener('submit', async function(event) {
+        event.preventDefault();
+        
+        let login = document.querySelector("#login").value;
+        let password1 = document.querySelector("#password1").value;
+        let password2 = document.querySelector("#password2").value;
+        
+        if (
+          (login && login.length > 0)
+          && (password1 && password1.length > 0) 
+          && (password1 === password2)
+        )
+        {
+          await signup(login, password1);
+          window.location.href = "/signin.html";
+        }
+      });
+      
+    </script>
+  </body>
+</html>

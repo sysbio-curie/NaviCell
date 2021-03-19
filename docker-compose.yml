@@ -27,7 +27,7 @@ services:
       - "80:80"
     user: root
     volumes:
-      - data:/var/navicell
+      - maps:/var/navicell/docroot/site/maps
     
     depends_on:
       - navicell-db
@@ -45,6 +45,7 @@ services:
       
     volumes:
       - .:/var/navicell
+      - maps:/var/navicell/site/docroot/maps/
     user: root
     
     depends_on:
@@ -53,4 +54,4 @@ services:
 volumes:
   db:
   config-db:
-  data:
+  maps:

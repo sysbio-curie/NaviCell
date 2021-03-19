@@ -15,6 +15,8 @@
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 
+  <script src="lib/nv3_api/auth.js"></script>
+  <script src="lib/nv3_api/maps.js"></script>
   <!-- <meta name="msapplication-config" content="/docs/4.5/assets/img/favicons/browserconfig.xml">
   <meta name="theme-color" content="#563d7c"> -->
 
@@ -48,6 +50,11 @@
       <div class="header-right">
         <form class="" action="query.html"  method="GET">
           <input id="query_text" type="text" placeholder="Search" aria-label="Search" name="search" style="line-height: 30px;">
+          <span id="username"></span>
+          <a href="admin.html" class="logged_in" style="visibility: hidden;">Admin</a>        
+          <a href="signin.html" class="logged_out" style="visibility: visible;">Sign in</a>        
+          <a href="signup.html" class="logged_out" style="visibility: visible;">Sign up</a>        
+          <a id="logout_button" href="#" class="logged_in" style="visibility: hidden;">Logout</a>        
         </form>
       </div>
     </div>
@@ -65,17 +72,30 @@
     
       <script type="text/javascript">
       
-      let token;
-      let cookie = document.cookie;
-      console.log(cookie)
-      let cookie_values = cookie.split(";");
-      cookie_values.map(function (cookie) {
-        values = cookie.split("=")
-        if (values[0] == "jwtoken") {
-          token = values[1];
-        }
-      } );
+      // let token;
+      // let cookie = document.cookie;
+      // console.log(cookie)
+      // let cookie_values = cookie.split(";");
+      // cookie_values.map(function (cookie) {
+      //   values = cookie.split("=")
+      //   if (values[0] == "jwtoken") {
+      //     token = values[1];
+      //   }
+      // } );
       
+      // if (token) {
+      //   document.querySelector("#logout_div").style.visibility = "visible";           
+      // }
+      
+      // async function logout() {
+      //     token = undefined;
+      //     // document.querySelector("#login_table").style.visibility = "visible";  
+      //     document.querySelector("#logout_div").style.visibility = "hidden";  
+      //     // document.querySelector("#createmap_div").style.visibility = "hidden";  
+      //     document.cookie = "jwtoken= ; expires = Thu, 01 Jan 1970 00:00:00 GMT"
+
+      //     location.reload(); 
+      // }
       
       async function getMapInfos(mapIds) {
         let map_infos = {}
@@ -249,6 +269,9 @@
         }
       }
       document.addEventListener("DOMContentLoaded", async function () {
+        load_token();
+        show_logged_in(logged_in()); 
+        
         console.log(window.location.search);
         const urlParams = new URLSearchParams(window.location.search);
         let search = urlParams.get('search');

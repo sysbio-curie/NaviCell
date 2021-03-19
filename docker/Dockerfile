@@ -74,9 +74,7 @@ RUN cd /var/navicell/src/main/resources \
 
 RUN rm -r /var/www/html && ln -s /var/navicell/site/docroot/navicell /var/www/html
 COPY docker/apache_config.sh .
-RUN a2enmod php7.3 \
-   && a2enmod proxy \
-   && a2enmod proxy_http
+RUN a2enmod php7.3 proxy proxy_http cgi
    
 RUN /bin/sh ./apache_config.sh \
    && cat /etc/apache2/sites-available/navicell.conf 

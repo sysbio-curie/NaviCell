@@ -9,11 +9,16 @@ public class MongoUser {
     
     public String password;  
     
+    public boolean isRoot;
+    public boolean isActive;
+    
     public MongoUser() {}  
     
-    public MongoUser(String username, String password) {
+    public MongoUser(String username, String password, boolean isRoot) {
       this.username = username;
       this.password = password;
+      this.isRoot = isRoot;
+      this.isActive = isRoot;
     }  
     
     public void setPassword(String password) { this.password = password; }  
@@ -21,4 +26,11 @@ public class MongoUser {
     
     public void setUsername(String username) { this.username = username; }  
     public String getUsername() { return username; }
+    
+    @Override
+    public String toString() {
+      return String.format(
+          "{'id': '%s', 'name': '%s', 'isRoot': '%s', 'isActive': '%s'}",
+          id, username, isRoot, isActive);
+    }
   }
