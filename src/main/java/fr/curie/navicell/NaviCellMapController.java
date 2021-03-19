@@ -6,7 +6,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
-
+import java.util.ArrayList;
+import org.apache.commons.collections4.ListUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -159,14 +160,72 @@ public class NaviCellMapController {
   
   @GetMapping("api/species/name/{name}")
   @ResponseStatus(value = HttpStatus.OK)
-  List<NaviCellSpecies> speciesByName(@PathVariable("name") String name) {
-    return species_repository.findByName(name);
+  List<NaviCellSpecies> speciesByName(Authentication authentication, @PathVariable("name") String name) {
+    List<NaviCellMap> maps_allowed;
+
+    if (authentication != null) {
+      maps_allowed = ListUtils.union(
+        repository.findByUsername(authentication.getName()),
+        repository.findByIsPublic(true)
+      );
+    } else {
+      maps_allowed = repository.findByIsPublic(true);
+    }
+    
+    // System.out.println(maps_allowed.toString());
+    // System.out.println("Size of available maps : " + maps_allowed.size());
+    List<String> map_ids = new ArrayList<>();
+    for (int i=0; i < maps_allowed.size(); i++) {
+      map_ids.add(maps_allowed.get(i).id);
+    }
+    
+    
+    List<NaviCellSpecies> result = species_repository.findByName(name);
+    // System.out.println(result.toString());
+    // System.out.println(map_ids);
+    List<NaviCellSpecies> final_result = new ArrayList<>(result);
+    for (int i=0; i < result.size(); i++){
+      if (!map_ids.contains(result.get(i).mapId)) {
+        final_result.remove(result.get(i));
+      }
+    }
+    return final_result;
+  
   }
   
   @GetMapping("api/species/hugo/{hugo}")
   @ResponseStatus(value = HttpStatus.OK)
-  List<NaviCellSpecies> speciesByHugo(@PathVariable("hugo") String hugo) {
-    return species_repository.findByHugo(hugo);
+  List<NaviCellSpecies> speciesByHugo(Authentication authentication, @PathVariable("hugo") String hugo) {
+    List<NaviCellMap> maps_allowed;
+    
+    if (authentication != null) {
+      maps_allowed = ListUtils.union(
+        repository.findByUsername(authentication.getName()),
+        repository.findByIsPublic(true)
+      );
+    } else {
+      maps_allowed = repository.findByIsPublic(true);
+    }
+    // System.out.println("Size of available maps : " + maps_allowed.size());
+
+    List<String> map_ids = new ArrayList<>();
+    for (int i=0; i < maps_allowed.size(); i++) {
+      map_ids.add(maps_allowed.get(i).id);
+    }
+    
+    
+    List<NaviCellSpecies> result = species_repository.findByHugo(hugo);
+  
+    List<NaviCellSpecies> final_result = new ArrayList<>(result);
+    for (int i=0; i < result.size(); i++){
+      if (!map_ids.contains(result.get(i).mapId)) {
+        final_result.remove(result.get(i));
+      }
+    }
+    return final_result;
+  
+    
+    // return species_repository.findByHugo(hugo);
   }
   
   @GetMapping("api/species/type/{type}")
