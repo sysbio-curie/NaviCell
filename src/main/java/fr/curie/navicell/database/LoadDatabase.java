@@ -6,6 +6,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import fr.curie.navicell.database.maps.NaviCellMapRepository;
+import fr.curie.navicell.database.species.NaviCellSpeciesRepository;
 @Configuration
 class LoadDatabase {
 

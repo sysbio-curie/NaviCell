@@ -1,4 +1,4 @@
-package fr.curie.navicell;
+package fr.curie.navicell.security;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -30,13 +30,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import fr.curie.navicell.security.JwtTokenUtil;
+// import fr.curie.navicell.security.JwtTokenUtil;
 import org.springframework.security.core.userdetails.User;
 
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.security.core.context.SecurityContextHolder;
-import fr.curie.navicell.security.MongoUser;
-import fr.curie.navicell.security.UserRepository;
+// import fr.curie.navicell.security.MongoUser;
+// import fr.curie.navicell.security.UserRepository;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 @RestController 
 public class AuthController {

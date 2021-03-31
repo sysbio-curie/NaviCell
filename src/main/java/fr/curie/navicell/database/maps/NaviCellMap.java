@@ -1,4 +1,4 @@
-package fr.curie.navicell.database;
+package fr.curie.navicell.database.maps;
 
 import java.util.UUID;
 import java.util.Vector;
@@ -26,6 +26,7 @@ import fr.curie.navicell.storage.StorageException;
 import fr.curie.navicell.storage.StorageService;
 import fr.curie.navicell.sbgnrender.SBGNRenderer;
 import fr.curie.navicell.sbgnrender.SBGNRendererException;
+import fr.curie.navicell.database.species.NaviCellSpeciesRepository;
 import org.apache.commons.io.FilenameUtils;
 import java.awt.image.BufferedImage;
 import org.springframework.security.core.Authentication;
