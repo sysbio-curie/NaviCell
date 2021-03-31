@@ -1,4 +1,4 @@
-package fr.curie.navicell;
+package fr.curie.navicell.database.maps;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -27,11 +27,11 @@ import org.springframework.security.core.Authentication;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import fr.curie.navicell.database.NaviCellMapRepository;
-import fr.curie.navicell.database.NaviCellMap;
-import fr.curie.navicell.database.NaviCellMapException;
-import fr.curie.navicell.database.NaviCellSpeciesRepository;
-import fr.curie.navicell.database.NaviCellSpecies;
+// import fr.curie.navicell.database.NaviCellMapRepository;
+// import fr.curie.navicell.database.NaviCellMap;
+// import fr.curie.navicell.database.NaviCellMapException;
+import fr.curie.navicell.database.species.NaviCellSpeciesRepository;
+import fr.curie.navicell.database.species.NaviCellSpecies;
 
 import fr.curie.navicell.storage.StorageProperties;
 import fr.curie.navicell.storage.StorageService;
@@ -128,7 +128,8 @@ public class NaviCellMapController {
             JSONArray species = arr.getJSONObject(i).getJSONArray("entities");
             for (int j=0; j < species.length(); j++) {
               String sname = species.getJSONObject(j).getString("name");
-              NaviCellSpecies t_sp = new NaviCellSpecies(sname, t_class, entry.id);
+              String sid = species.getJSONObject(j).getString("id");
+              NaviCellSpecies t_sp = new NaviCellSpecies(sid, sname, t_class, entry.id);
               JSONArray hugo = species.getJSONObject(j).getJSONArray("hugo");
               if (hugo.length() > 0) {
                 System.out.println("New hugo : " + hugo.getString(0));
@@ -150,94 +151,6 @@ public class NaviCellMapController {
     catch (NaviCellMapException e) {
       throw new NaviCellMapControllerException(e.getMessage());
     }
-  }
-  
-  @GetMapping("api/species")
-  @ResponseStatus(value = HttpStatus.OK)
-  List<NaviCellSpecies> all_species() {
-    return species_repository.findAll();
-  }
-  
-  @GetMapping("api/species/name/{name}")
-  @ResponseStatus(value = HttpStatus.OK)
-  List<NaviCellSpecies> speciesByName(Authentication authentication, @PathVariable("name") String name) {
-    List<NaviCellMap> maps_allowed;
-
-    if (authentication != null) {
-      maps_allowed = ListUtils.union(
-        repository.findByUsername(authentication.getName()),
-        repository.findByIsPublic(true)
-      );
-    } else {
-      maps_allowed = repository.findByIsPublic(true);
-    }
-    
-    // System.out.println(maps_allowed.toString());
-    // System.out.println("Size of available maps : " + maps_allowed.size());
-    List<String> map_ids = new ArrayList<>();
-    for (int i=0; i < maps_allowed.size(); i++) {
-      map_ids.add(maps_allowed.get(i).id);
-    }
-    
-    
-    List<NaviCellSpecies> result = species_repository.findByName(name);
-    // System.out.println(result.toString());
-    // System.out.println(map_ids);
-    List<NaviCellSpecies> final_result = new ArrayList<>(result);
-    for (int i=0; i < result.size(); i++){
-      if (!map_ids.contains(result.get(i).mapId)) {
-        final_result.remove(result.get(i));
-      }
-    }
-    return final_result;
-  
-  }
-  
-  @GetMapping("api/species/hugo/{hugo}")
-  @ResponseStatus(value = HttpStatus.OK)
-  List<NaviCellSpecies> speciesByHugo(Authentication authentication, @PathVariable("hugo") String hugo) {
-    List<NaviCellMap> maps_allowed;
-    
-    if (authentication != null) {
-      maps_allowed = ListUtils.union(
-        repository.findByUsername(authentication.getName()),
-        repository.findByIsPublic(true)
-      );
-    } else {
-      maps_allowed = repository.findByIsPublic(true);
-    }
-    // System.out.println("Size of available maps : " + maps_allowed.size());
-
-    List<String> map_ids = new ArrayList<>();
-    for (int i=0; i < maps_allowed.size(); i++) {
-      map_ids.add(maps_allowed.get(i).id);
-    }
-    
-    
-    List<NaviCellSpecies> result = species_repository.findByHugo(hugo);
-  
-    List<NaviCellSpecies> final_result = new ArrayList<>(result);
-    for (int i=0; i < result.size(); i++){
-      if (!map_ids.contains(result.get(i).mapId)) {
-        final_result.remove(result.get(i));
-      }
-    }
-    return final_result;
-  
-    
-    // return species_repository.findByHugo(hugo);
-  }
-  
-  @GetMapping("api/species/type/{type}")
-  @ResponseStatus(value = HttpStatus.OK)
-  List<NaviCellSpecies> speciesByType(@PathVariable("type") String type) {
-    return species_repository.findByType(type);
-  }
-  
-  @GetMapping("api/species/type/{type}/name/{name}")
-  @ResponseStatus(value = HttpStatus.OK)
-  List<NaviCellSpecies> speciesByName(@PathVariable("type") String type, @PathVariable("name") String name) {
-    return species_repository.findByTypeAndName(type, name);
   }
   
 }

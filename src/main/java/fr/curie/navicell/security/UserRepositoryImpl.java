@@ -5,10 +5,10 @@ import java.util.List;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.core.MongoTemplate;
 
-import fr.curie.navicell.database.NaviCellMap;
-import fr.curie.navicell.database.NaviCellMapRepository;
-import fr.curie.navicell.database.NaviCellSpecies;
-import fr.curie.navicell.database.NaviCellSpeciesRepository;
+import fr.curie.navicell.database.maps.NaviCellMap;
+import fr.curie.navicell.database.maps.NaviCellMapRepository;
+import fr.curie.navicell.database.species.NaviCellSpecies;
+import fr.curie.navicell.database.species.NaviCellSpeciesRepository;
 import fr.curie.navicell.security.MongoUser;
 import fr.curie.navicell.storage.StorageService;
 
