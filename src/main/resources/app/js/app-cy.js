@@ -482,10 +482,11 @@ if (document.performLayout !== undefined) {
 
     var format = urlParams.format;
     var bg = urlParams.bg;
-    var scale = urlParams.scale;
-    var maxWidth = urlParams.max_width;
-    var maxHeight = urlParams.max_height;
-    var quality = urlParams.quality;
+    var scale = (urlParams.scale === undefined ? undefined : parseInt(urlParams.scale));
+    var maxWidth = (urlParams.max_width === undefined ? undefined : parseInt(urlParams.max_width));
+    var maxHeight = (urlParams.max_height === undefined ? undefined : parseInt(urlParams.max_height));
+    var quality = (urlParams.quality === undefined ? undefined : parseFloat(urlParams.quality));      
+    
     document.sbgnReady = true;
  
     if (format == "svg") {

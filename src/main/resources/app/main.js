@@ -57,7 +57,7 @@ libs.tippy = tippy;
 
 function registerRenderingEvents() {
   
-  console.log('init the sbgnviz template/page');
+  // console.log('init the sbgnviz template/page');
 
   $(document).on('sbgnvizLoadFileEnd sbgnvizLoadSampleEnd', function(event, filename, cy) {
 
@@ -75,13 +75,13 @@ function registerRenderingEvents() {
 
       var format = urlParams.format;
       var bg = urlParams.bg;
-      var scale = urlParams.scale;
-      var maxWidth = urlParams.max_width;
-      var maxHeight = urlParams.max_height;
-      var quality = urlParams.quality;
+      var scale = (urlParams.scale === undefined ? undefined : parseInt(urlParams.scale));
+      var maxWidth = (urlParams.max_width === undefined ? undefined : parseInt(urlParams.max_width));
+      var maxHeight = (urlParams.max_height === undefined ? undefined : parseInt(urlParams.max_height));
+      var quality = (urlParams.quality === undefined ? undefined : parseFloat(urlParams.quality));      
       
       if (format == "svg") {
-        chiseInstance.saveAsSvg("network.svg", scale=scale, bg=bg);
+        chiseInstance.saveAsSvg("network.svg", scale=scale, bg=bg, maxWidth=maxWidth, maxHeight=maxHeight);
         
       } else if (format == "jpg") {
         chiseInstance.saveAsJpg("network.jpg", scale=scale, bg=bg, maxWidth=maxWidth, maxHeight=maxHeight, quality=quality);
