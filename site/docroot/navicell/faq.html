@@ -1,0 +1,93 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>NaviCell</title>
+  <meta name="description" content="Data analysis, navigation, curation and maintenance of molecular interactions maps">
+  <meta name="author" content="Institut Curie">
+  <!-- CSS only -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="clickmap_map_v2.css">  
+  <link rel="stylesheet" type="text/css" href="n_v3.css">  
+
+  <!-- JS, Popper.js, and jQuery -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+  <style>
+  
+  </style>
+</head>
+<body>
+  
+  <header>
+    <nav class="navbar navbar-expand-md navbar-custom  fixed-top">
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="maps.html">Maps</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="guide.html">Guide</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="resources.html">Resources</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="faq.html">FAQ <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="about.html">About</a>
+          </li>
+          
+        </ul>
+        
+        <form class="form-inline mt-2 mt-md-0" action="query.html"  method="GET">
+          <input id="query_text" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+        </form>
+        <ul class="navbar-nav ml-auto">
+
+        <li class="nav-item">
+          <a href="profile.html" class="logged_in nav-link"><span id="username"></span></a>
+        </li>  
+        <li class="nav-item">
+          <a href="admin.html" id="admin_link" class="logged_in nav-link" style="display: none;">Admin</a>        
+        </li>
+        <li class="nav-item">
+          <a id="logout_button" href="#" class="logged_in nav-link" style="display: none;">Logout</a>        
+          <a href="signin.html" class="logged_out nav-link" style="display: block;">Sign in</a>        
+        </li>
+        <li class="nav-item">
+          <a href="signup.html" class="logged_out nav-link" style="display: block;">Sign up</a>        
+        </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+  
+  <main role="main" class="container" style="margin-top: 100px">
+    <div class="container-fluid">
+      
+    </div>
+    
+  </main><!-- /.container -->
+  <script type="text/javascript">
+    
+    async function local_refresh() { }
+    
+    document.addEventListener("DOMContentLoaded", async function () {
+      load_token();
+      await refresh();  
+    });
+  </script>
+  
+<script src="lib/nv3_api/auth.js"></script>
+
+</body>
+</html>

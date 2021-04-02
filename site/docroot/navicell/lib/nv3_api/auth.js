@@ -37,10 +37,10 @@ function logged_in() {
 
 function show_logged_in(status) {
     Array.from(document.getElementsByClassName("logged_in")).map(function (object) {
-        object.style.visibility = status ? "visible" : "hidden";
+        object.style.display = status ? "block" : "none";
     });
     Array.from(document.getElementsByClassName("logged_out")).map(function (object) {
-        object.style.visibility = status ? "hidden" : "visible";
+        object.style.display = status ? "none" : "block";
     });
 }
 
@@ -196,3 +196,37 @@ function addUserToTable(table, user_ind, user) {
         await delete_user(user.id);
     });
 }
+
+
+document.querySelector("#logout_button").addEventListener('click', async function() {
+    logout(); 
+    await refresh();
+  });
+  
+  
+  async function refresh() {
+    
+    show_logged_in(logged_in()); 
+
+    if (logged_in()) {
+      let t_username = await get_user();
+      console.log(t_username);
+      document.querySelector("#username").innerText = t_username;
+      
+      let t_isroot = await is_root();
+      if (t_isroot) {
+        console.log("User is root")
+        document.querySelector("#admin_link").style.display = "block";
+      } else {
+        document.querySelector("#admin_link").style.display = "none";
+      }
+    } else {
+      document.querySelector("#username").innerText = "";
+      document.querySelector("#admin_link").style.display = "none";
+
+    }
+    
+    local_refresh();
+   
+  }
+ 
