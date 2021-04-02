@@ -93,6 +93,13 @@ function registerRenderingEvents() {
     } else {
       // Layout... todo
       var currentLayoutProperties = appUtilities.getScratch(cy, 'currentLayoutProperties');
+      
+      var layoutQuality = urlParams.layout_quality;
+
+      if (urlParams.layout_quality !== undefined){
+        currentLayoutProperties.quality = urlParams.layout_quality
+      }
+      console.log(currentLayoutProperties);
       document.performLayout = true;
 
       var preferences;

@@ -469,37 +469,48 @@ module.exports = function (chiseInstance) {
         chiseInstance.elementUtilities.fitUnits(ele, locations); //Force fit
       }); */
 
-      cy.nodes("[?onLayout]").forEach(function(node){node.removeData("onLayout"); });
+    cy.nodes("[?onLayout]").forEach(function(node){node.removeData("onLayout"); });
       
+          
       
-  
-if (document.performLayout !== undefined) {    
-  var chiseInstance = appUtilities.getChiseInstance(cy);
-  var cyInstance = chiseInstance.getCy();
-  var urlParams = appUtilities.getScratch(cyInstance, 'urlParams');
+    if (document.performLayout !== undefined) {    
+      var chiseInstance = appUtilities.getChiseInstance(cy);
+      var cyInstance = chiseInstance.getCy();
+      var urlParams = appUtilities.getScratch(cyInstance, 'urlParams');
 
-  console.log(" layout finished")
+      console.log(" layout finished")
 
-    var format = urlParams.format;
-    var bg = urlParams.bg;
-    var scale = (urlParams.scale === undefined ? undefined : parseInt(urlParams.scale));
-    var maxWidth = (urlParams.max_width === undefined ? undefined : parseInt(urlParams.max_width));
-    var maxHeight = (urlParams.max_height === undefined ? undefined : parseInt(urlParams.max_height));
-    var quality = (urlParams.quality === undefined ? undefined : parseFloat(urlParams.quality));      
-    
-    document.sbgnReady = true;
- 
-    if (format == "svg") {
-      chiseInstance.saveAsSvg("network.svg", scale=scale, bg=bg);
-      
-    } else if (format == "jpg") {
-      chiseInstance.saveAsJpg("network.jpg", scale=scale, bg=bg, maxWidth=maxWidth, maxHeight=maxHeight, quality=quality);
-      
-    } else {
-      chiseInstance.saveAsPng("network.png", scale=scale, bg=bg, maxWidth=maxWidth, maxHeight=maxHeight); // the default filename is 'network.png'
+        var format = urlParams.format;
+        var bg = urlParams.bg;
+        var scale = (urlParams.scale === undefined ? undefined : parseInt(urlParams.scale));
+        var maxWidth = (urlParams.max_width === undefined ? undefined : parseInt(urlParams.max_width));
+        var maxHeight = (urlParams.max_height === undefined ? undefined : parseInt(urlParams.max_height));
+        var quality = (urlParams.quality === undefined ? undefined : parseFloat(urlParams.quality));      
         
-    } 
-  }
+        document.sbgnReady = true;
+        setTimeout(function () {
+          
+          if (format == "sbgn") {
+            // xml = chiseInstance.createSbgnml();
+            // file = new File([xml], "network.xml", {type: "text/plain;charset=utf-8"});
+            // saveAs(file);
+            chiseInstance.saveAsSbgnml("network.xml", "0.2");
+            
+          } else if (format == "svg") {
+            chiseInstance.saveAsSvg("network.svg", scale=scale, bg=bg);
+            
+          } else if (format == "jpg") {
+            chiseInstance.saveAsJpg("network.jpg", scale=scale, bg=bg, maxWidth=maxWidth, maxHeight=maxHeight, quality=quality);
+            
+          } else {
+            chiseInstance.saveAsPng("network.png", scale=scale, bg=bg, maxWidth=maxWidth, maxHeight=maxHeight); // the default filename is 'network.png'
+              
+          } 
+          
+        }, 5000);
+        
+        
+      }
     });
 
     // if the position of compound changes by repositioning its children
@@ -537,6 +548,10 @@ if (document.performLayout !== undefined) {
 
       node.style(opt);
     });
+    
+    // cy.on('style', 'node', function(event) {
+    //   console.log(event);
+    // });
   }
 
 };
