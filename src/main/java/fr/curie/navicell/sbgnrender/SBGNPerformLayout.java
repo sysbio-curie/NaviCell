@@ -1,7 +1,6 @@
 package fr.curie.navicell.sbgnrender;
 
 import java.util.HashMap;
-import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.JavascriptExecutor;
@@ -19,16 +18,11 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 // import fr.curie.navicell.SBGNRendererException;
 
-public class SBGNRenderer {
+public class SBGNPerformLayout {
     
-    public static void render(String input, String output, Path tmpdir, 
-        Optional<String> format, Optional<String> bg, Optional<String> scale, Optional<String> max_width, Optional<String> max_height, 
-        Optional<String> quality, Optional<String> layout, Optional<String> layout_quality, Optional<String> async
-    ) throws SBGNRendererException {
-            
+    public static void render(String input, String output, Path tmpDir) throws SBGNRendererException {
         HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
-        
-        chromePrefs.put("download.default_directory", tmpdir.toString());
+        chromePrefs.put("download.default_directory", tmpDir.toString());
         chromePrefs.put("download.prompt_for_download", false);
         chromePrefs.put("download.directory_upgrade", true);
         
@@ -45,18 +39,7 @@ public class SBGNRenderer {
         
         WebDriver driver = new ChromeDriver(options);
         
-        String format_str = format.isPresent() ? "&format=" + format.get() : "";
-        String scale_str = scale.isPresent() ? "&scale=" + scale.get() : "";
-        String bg_str = bg.isPresent() ? "&bg=" + bg.get() : "";
-        String max_width_str = max_width.isPresent() ? "&max_width=" + max_width.get() : "";
-        String max_height_str = max_height.isPresent() ? "&max_height=" + max_height.get() : "";
-        String quality_str = quality.isPresent() ? "&quality=" + quality.get() : "";
-        String layout_str = layout.isPresent() ? "&layout=" + layout.get() : "";
-        String layout_quality_str = layout_quality.isPresent() ? "&layout_quality=" + layout_quality.get() : "";
-        
-        String extension = format.isPresent() ? format.get() : "png";
-        // String driver_url = "file:///var/navicell/src/main/resources/index.html?url=/var/navicell/site/docroot/navicell/maps/" + input + format_str + scale_str + bg_str + max_width_str + max_height_str + quality_str + layout_str + layout_quality_str;
-        String driver_url = "file:///var/navicell/src/main/resources/index.html?url=" + input + format_str + scale_str + bg_str + max_width_str + max_height_str + quality_str + layout_str + layout_quality_str;
+        String driver_url = "file:///var/navicell/src/main/resources/index.html?url=/var/navicell/site/docroot/navicell/maps/" + input + "&layout=true&format=sbgn";
         System.out.println("Getting " + driver_url);
         driver.get(driver_url);
         
@@ -101,7 +84,7 @@ public class SBGNRenderer {
             throw new SBGNRendererException("Unknown SBGN Rendering error");
         } 
         
-        while( !Files.exists(Paths.get(tmpdir.toString(), "network." + extension)) ) {
+        while( !Files.exists(Paths.get(tmpDir.toString(), "network.xml")) ) {
             try {
                 System.out.println("Waiting for download");   
                 TimeUnit.SECONDS.sleep(1);
@@ -110,9 +93,8 @@ public class SBGNRenderer {
         }
         driver.quit();
             
-        File output_file = new File(Paths.get(tmpdir.toString(), output).toString());
-        new File(Paths.get(tmpdir.toString(), "network." + extension).toString()).renameTo(output_file);
-        System.out.println("returning from render");
+        File output_file = new File(Paths.get(tmpDir.toString(), output).toString());
+        new File(Paths.get(tmpDir.toString(), "network.xml").toString()).renameTo(output_file);
     }
     
 }

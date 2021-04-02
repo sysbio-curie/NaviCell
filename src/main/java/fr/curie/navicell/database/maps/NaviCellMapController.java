@@ -31,6 +31,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 // import fr.curie.navicell.database.NaviCellMap;
 // import fr.curie.navicell.database.NaviCellMapException;
 import fr.curie.navicell.database.species.NaviCellSpeciesRepository;
+import fr.curie.navicell.database.tags.NaviCellTag;
+import fr.curie.navicell.database.tags.NaviCellTagRepository;
 import fr.curie.navicell.database.species.NaviCellSpecies;
 
 import fr.curie.navicell.storage.StorageProperties;
@@ -50,6 +52,9 @@ public class NaviCellMapController {
   
   @Autowired
   public NaviCellSpeciesRepository species_repository;
+  
+  @Autowired
+  public NaviCellTagRepository tags_repository;
   
 	@Autowired
 	public NaviCellMapController(StorageService storageService) {
@@ -104,11 +109,19 @@ public class NaviCellMapController {
   
   @PostMapping("/api/maps")
 	@ResponseStatus(value = HttpStatus.CREATED)
-	public void handleFileUpload(Authentication authentication, @RequestParam("name") String name, @RequestParam("network-file") MultipartFile network_file) {
+	public void handleFileUpload(Authentication authentication, @RequestParam("name") String name, @RequestParam("network-file") MultipartFile network_file, @RequestParam("tags") String tags, @RequestParam("layout") String layout) {
     try{
-      NaviCellMap entry = new NaviCellMap(authentication, this.storageService, name, network_file, species_repository);
+      NaviCellMap entry = new NaviCellMap(authentication, this.storageService, name, network_file, layout);
       repository.save(entry);
 
+      if (tags.length() > 0) {
+        String[] tokens = tags.split(",");
+        for (int i=0; i < tokens.length; i++) {
+          NaviCellTag new_tag = new NaviCellTag(tokens[i].strip(), entry.id);
+          tags_repository.save(new_tag);
+        }
+      }
+      
       String mapdata_path = this.storageService.getLocation() + "/" + entry.folder + "/_common/master_mapdata.json";
       System.out.println("Mapdata path : " + mapdata_path);
       

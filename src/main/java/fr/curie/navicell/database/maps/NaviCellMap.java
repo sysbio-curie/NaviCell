@@ -1,5 +1,6 @@
 package fr.curie.navicell.database.maps;
 
+import java.util.Optional;
 import java.util.UUID;
 import java.util.Vector;
 
@@ -22,8 +23,10 @@ import org.springframework.web.multipart.MultipartFile;
 import fr.curie.BiNoM.pathways.navicell.ProduceClickableMap;
 import fr.curie.BiNoM.pathways.utils.acsn.ACSNProcedures;
 import fr.curie.cd2sbgnml.Cd2SbgnmlScript;
+import fr.curie.cd2sbgnml.Sbgnml2CdScript;
 import fr.curie.navicell.storage.StorageException;
 import fr.curie.navicell.storage.StorageService;
+import fr.curie.navicell.sbgnrender.SBGNPerformLayout;
 import fr.curie.navicell.sbgnrender.SBGNRenderer;
 import fr.curie.navicell.sbgnrender.SBGNRendererException;
 import fr.curie.navicell.database.species.NaviCellSpeciesRepository;
@@ -63,7 +66,7 @@ public class NaviCellMap {
     
   }
   
-  public NaviCellMap(Authentication authentication, StorageService storageService, String name, MultipartFile network_file, NaviCellSpeciesRepository speciesRepository) throws NaviCellMapException {
+  public NaviCellMap(Authentication authentication, StorageService storageService, String name, MultipartFile network_file, String layout) throws NaviCellMapException {
     
     
     this.username = authentication.getName();
@@ -91,22 +94,79 @@ public class NaviCellMap {
       throw new NaviCellMapException("Unknown file type : " + extension);
 
     }
-  
-    this.createSBGNML(storageService);
-    this.createImage(storageService);
-    this.createZooms(storageService);
-    this.buildMap(storageService);  
-  }
-  
-  private void createSBGNML(StorageService storage) {
-        // Creating SBGN-ML file    
-        Cd2SbgnmlScript.convert(this.networkPath, "temp_sbgnml.xml");
+    Path tmpDir = null;
+    try {
+      System.out.println("Creating temp dir");
+      tmpDir = Files.createTempDirectory(null);
+      
+
     
-        // Here I'm storing it to make it accessible via the API webserver
-        Path sbgnml_path = storage.store(new File("temp_sbgnml.xml"), this.folder, "sbgnml.xml");
-        this.sbgnPath = sbgnml_path.toString();
+      if (layout.length() > 0 && Boolean.parseBoolean(layout)) { 
+        System.out.println("We want a layout");
+        this.performLayout(storageService, tmpDir);
+        // this.createSBGNML(storageService);
+      
+      }
+      System.out.println("Creating sbgn");
+      this.createSBGNML(storageService, tmpDir);
+      System.out.println("Starting rendering");
+      this.createImage(storageService, tmpDir);
+      System.out.println("Creating zooms");
+      this.createZooms(storageService, tmpDir);
+      System.out.println("Creating map");
+      this.buildMap(storageService);  
+
+      tmpDir.toFile().deleteOnExit();
+
+    }
+    catch (IOException e) {
+      System.err.print(e); 
+      System.out.println("ERROR IN CONSTRUCTOR");
+
+      throw new NaviCellMapException("Map Creation Error : " + e);
+
+      // if (tmpDir != null) {
+        // tmpDir.toFile().deleteOnExit();
+      // }
+    }
+    
   }
-  private void createImage(StorageService storage) throws NaviCellMapException {
+  
+  private void performLayout(StorageService storageService, Path tmpDir) throws NaviCellMapException {
+    try{
+    
+      this.createSBGNML(storageService,tmpDir);
+      SBGNPerformLayout.render(this.folder + File.separatorChar + FilenameUtils.getBaseName(this.sbgnPath) + ".xml", "sbgnml_layout.xml", tmpDir);
+      
+      Sbgnml2CdScript.convert(
+        Paths.get(tmpDir.toString(), "sbgnml_layout.xml").toString(), 
+        Paths.get(tmpDir.toString(), "temp_cd2.xml").toString()
+      );
+      // ProduceClickableMap.setPositions(Paths.get(this.sbgnPath).toFile(), Paths.get(tmpDir.toString(), "temp_cd2.xml").toFile());
+      Path network_path = storageService.store(Paths.get(tmpDir.toString(), "temp_cd2.xml").toFile(), this.folder, "master.xml");
+      this.networkPath = network_path.toString();
+    }
+    catch (SBGNRendererException e) {
+      System.out.println("ERROR IN PERFORM LAYOUT");
+      // System.err.println(e);
+      throw new NaviCellMapException("SBGNPerformLayout Error : " + e);
+
+    }
+    
+  }
+  
+  private void createSBGNML(StorageService storage, Path tmpdir) {
+    // Creating SBGN-ML file    
+    
+    Path tmpSBGN = Paths.get(tmpdir.toString(), "temp_sbgnml.xml");
+    Cd2SbgnmlScript.convert(this.networkPath, tmpSBGN.toString());
+
+    // Here I'm storing it to make it accessible via the API webserver
+    Path sbgnml_path = storage.store(new File(tmpSBGN.toString()), this.folder, "sbgnml.xml");
+    this.sbgnPath = sbgnml_path.toString();
+  }
+  
+  private void createImage(StorageService storage, Path tmpDir) throws NaviCellMapException {
     // Creating the PNG rendered file
     // Here we call the rendering API with the link to the sbgn-ml file
     // System.out.println(this.folder + File.separatorChar + FilenameUtils.getBaseName(sbgnml_path.toString()) + ".xml");
@@ -116,10 +176,12 @@ public class NaviCellMap {
     
       System.out.println("Borders : " + borders[0] + " -> " + borders[2] + ", " + borders[1] + " -> " + borders[3]);
       
-      
-      SBGNRenderer.render(this.folder + File.separatorChar + FilenameUtils.getBaseName(this.sbgnPath) + ".xml", "temp_sbgnml.png");
+      SBGNRenderer.render(
+        storage.getLocation().toString() + File.separatorChar + this.folder + File.separatorChar + FilenameUtils.getBaseName(this.sbgnPath) + ".xml", "temp_sbgnml.png", tmpDir,
+        Optional.ofNullable("png"),  Optional.ofNullable("#fff"), Optional.ofNullable("1"), Optional.empty(),  Optional.empty(), Optional.empty(), Optional.empty(),  Optional.empty(), Optional.empty()
+      );
 
-      BufferedImage map1 = ImageIO.read(new File("temp_sbgnml.png"));
+      BufferedImage map1 = ImageIO.read(new File(Paths.get(tmpDir.toString(), "temp_sbgnml.png").toString()));
       int full_width = map1.getWidth() + (int) (borders[0] + borders[2] - 20.0);
       int full_height = map1.getHeight() + (int) (borders[1] + borders[3] - 20);
       System.out.println("Map created with dimensions : " + map1.getWidth() + ", " + map1.getHeight());
@@ -129,7 +191,7 @@ public class NaviCellMap {
       g.fillRect(0, 0, full_width, full_height);
       g.drawImage(map1, (int) borders[0]-10, (int)borders[1]-10, new Color(255,255,255), null);
       g.dispose();
-      ImageIO.write(imageBuff, "PNG", new File("temp_sbgnml_rescaled.png"));
+      ImageIO.write(imageBuff, "PNG", new File(Paths.get(tmpDir.toString(), "temp_sbgnml_rescaled.png").toString()));
   
     }
     catch (SBGNRendererException e) {
@@ -139,20 +201,20 @@ public class NaviCellMap {
       throw new NaviCellMapException("IOException Error : " + e);
     }
     
-    Path image_path = storage.store(new File("temp_sbgnml_rescaled.png"), this.folder, "sbgnml.png");
+    Path image_path = storage.store(new File(Paths.get(tmpDir.toString(), "temp_sbgnml_rescaled.png").toString()), this.folder, "sbgnml.png");
     this.imagePath = image_path.toString();
     
-    try {
-      Files.delete(Paths.get("temp_sbgnml.xml"));
-      Files.delete(Paths.get("temp_sbgnml.png"));
-      Files.delete(Paths.get("temp_sbgnml_rescaled.png"));
-    }
-    catch (IOException e) {
-      throw new NaviCellMapException("File cannot be deleted : " + e);
-    }
+    // try {
+    //   Files.delete(Paths.get("temp_sbgnml.xml"));
+    //   Files.delete(Paths.get("temp_sbgnml.png"));
+    //   Files.delete(Paths.get("temp_sbgnml_rescaled.png"));
+    // }
+    // catch (IOException e) {
+    //   throw new NaviCellMapException("File cannot be deleted : " + e);
+    // }
   }
 
-  private void createZooms(StorageService storage) throws NaviCellMapException {
+  private void createZooms(StorageService storage, Path tmpDir) throws NaviCellMapException {
     
     try {
       String path = FilenameUtils.getPath(this.imagePath);
@@ -229,6 +291,7 @@ public class NaviCellMap {
         false, true, false
       );
       
+      System.out.println("Returning from running the map creation");
       this.url = "maps/" + this.folder + "/master/index.html";
     }
     catch (IOException e) {
