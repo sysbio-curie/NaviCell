@@ -13,103 +13,105 @@ async function toggle_public(index, map_id) {
         getMaps();        
     }
 }
-  
-  // async function managing upload operation
-  async function uploadMap() {
-    // function return value
-    document.querySelector("#error_message").innerHTML = "";
 
-    let return_data = { error: 0, message: '' };
+// async function managing upload operation
+async function uploadMap() {
+  // function return value
+  document.querySelector("#error_message").innerHTML = "";
 
-    try {
-      // no file selected
-      if(document.querySelector("#map-name").value === "") {
-        throw new Error('No name given');
-        
-      } else if(document.querySelector("#map-network").files.length == 0) {
-        throw new Error('No network file selected');
-        
-      } else {
-        // formdata
-        let data = new FormData();
-        data.append('name', document.querySelector("#map-name").value);
-        data.append('network-file', document.querySelector("#map-network").files[0]);
-        
-        document.querySelector("#creating_status").style.visibility = "visible";
-        // send fetch along with cookies
-        
-        let response = await nv3_request(
-            '/api/maps/', 'POST', data
-        );
-        
-        if(response.status !== 201){
-          throw new Error('HTTP response code != 201');
-        }
-    
-        // let json_response = await response.json();
-        // if(json_response.error == 1)
-        //     throw new Error(json_response.message);	
-      
-        document.querySelector("#creating_status").style.visibility = "hidden";
-        getMaps();
-        // read json response from server
-        // success response example : {"error":0,"message":""}
-        // error response example : {"error":1,"message":"File type not allowed"}
-        // let json_response = await response.json();
-        //   if(json_response.error == 1)
-        //       throw new Error(json_response.message);	
-      }
-    }
-    catch(e) {
-      // catch rejected Promises and Error objects
-        return_data = { error: 1, message: e.message };
-      }
+  let return_data = { error: 0, message: '' };
 
-    return return_data;
-  }
-  
-  async function deleteMap(id) {
-    
-    let response = await nv3_request(
-        '/api/maps/' + id, 'DELETE', null
-    );
+  try {
+    // no file selected
+    if(document.querySelector("#map-name").value === "") {
+      throw new Error('No name given');
       
-    if (response.status != 200) 
-        throw new Error('HTTP response code != 200')
-    
-    getMaps();
+    } else if(document.querySelector("#map-network").files.length == 0) {
+      throw new Error('No network file selected');
       
-  }
-  async function getMaps() {
-
-    try {
+    } else {
+      // formdata
+      let data = new FormData();
+      data.append('name', document.querySelector("#map-name").value);
+      data.append('network-file', document.querySelector("#map-network").files[0]);
+      data.append('layout', document.querySelector("#map-layout").checked);
+      data.append('tags', document.querySelector("#map-tags").checked);
       
+      document.querySelector("#creating_status").style.visibility = "visible";
       // send fetch along with cookies
-      let response = await nv3_request('/api/maps/', 'GET', null);
+      
+      let response = await nv3_request(
+          '/api/maps/', 'POST', data
+      );
+      
+      if(response.status !== 201){
+        throw new Error('HTTP response code != 201');
+      }
+  
+      // let json_response = await response.json();
+      // if(json_response.error == 1)
+      //     throw new Error(json_response.message);	
     
-      // server responded with http response != 200
-      if(response.status != 200)
-        throw new Error('HTTP response code != 200');
-
+      document.querySelector("#creating_status").style.visibility = "hidden";
+      getMaps();
       // read json response from server
       // success response example : {"error":0,"message":""}
       // error response example : {"error":1,"message":"File type not allowed"}
-      let json_response = await response.json();
-        if(json_response.error == 1)
-            throw new Error(json_response.message);	
-      
-      table = document.querySelector("#table-maps");
-      clearTable(table);
-      json_response.map((value, key) => {
-        addMapToTable(table, key, value);
-        
-      });
+      // let json_response = await response.json();
+      //   if(json_response.error == 1)
+      //       throw new Error(json_response.message);	
     }
-    catch(e) {
-      // catch rejected Promises and Error objects
-        return_data = { error: 1, message: e.message };
-      }
   }
+  catch(e) {
+    // catch rejected Promises and Error objects
+      return_data = { error: 1, message: e.message };
+    }
+
+  return return_data;
+}
+
+async function deleteMap(id) {
+  
+  let response = await nv3_request(
+      '/api/maps/' + id, 'DELETE', null
+  );
+    
+  if (response.status != 200) 
+      throw new Error('HTTP response code != 200')
+  
+  getMaps();
+    
+}
+async function getMaps() {
+
+  try {
+    
+    // send fetch along with cookies
+    let response = await nv3_request('/api/maps/', 'GET', null);
+  
+    // server responded with http response != 200
+    if(response.status != 200)
+      throw new Error('HTTP response code != 200');
+
+    // read json response from server
+    // success response example : {"error":0,"message":""}
+    // error response example : {"error":1,"message":"File type not allowed"}
+    let json_response = await response.json();
+      if(json_response.error == 1)
+          throw new Error(json_response.message);	
+    
+    table = document.querySelector("#table-maps");
+    clearTable(table);
+    json_response.map((value, key) => {
+      addMapToTable(table, key, value);
+      
+    });
+  }
+  catch(e) {
+    // catch rejected Promises and Error objects
+      return_data = { error: 1, message: e.message };
+    }
+}
 
   
 function clearTable(table) {

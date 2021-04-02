@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+  <head>
+      <meta charset="utf-8">
+      <title>A simple SBGN-ML rendering API</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+      <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
+  </head>
+
+  <body style="margin-top: 50px; margin-bottom: 50px">
+    <div class="container">
+      <div class="container">
+        <h1>Render an SBGN-ML file</h1>
+        <br/>
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="general-tab" data-toggle="tab" href="#general" role="tab" aria-controls="general" aria-selected="true">General</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="size-tab" data-toggle="tab" href="#size" role="tab" aria-controls="size" aria-selected="false">Size</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="misc-tab" data-toggle="tab" href="#misc" role="tab" aria-controls="misc" aria-selected="false">Misc</a>
+          </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+          <div class="tab-pane fade show active" id="general" role="tabpanel" aria-labelledby="general-tab">
+            <table class="table">
+              <tbody>
+                <tr>
+                  <td>Network file:</td>
+                  <td>
+                    <div class="input-group">
+                      <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="input_network" style="width:50px">
+                        <label class="custom-file-label" for="input_network" id="input_network_label">Choose file</label>
+                      </div>
+                    </div>
+                  </td>  
+                </tr>
+                <tr>
+                  <td>Format:</td>
+                  <td>
+                    <div class="dropdown float-right" id="file-format-dropdown" >
+                      <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        PNG
+                      </button>
+                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#">PNG</a>
+                        <a class="dropdown-item" href="#">SVG</a>
+                        <a class="dropdown-item" href="#">JPG</a>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>  
+          </div>
+          <div class="tab-pane fade" id="size" role="tabpanel" aria-labelledby="size-tab">
+            <table class="table">
+              <tbody>
+                <tr>
+                  <td>Scale:</td>
+                  <td>
+                    <div class="float-right" >
+                      <input type="text" id="scale_input" value="" style="width: 100px; text-align: right" placeholder="1">
+                      </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Maximum width:</td>
+                  <td>
+                    <div class="float-right" >
+                      <input type="text" id="max_width_input" style="width: 100px; text-align: right" value="">
+                      </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Maximum height:</td>
+                  <td>
+                    <div class="float-right" >
+                      <input type="text" id="max_height_input" style="width: 100px; text-align: right" value="">
+                      </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="tab-pane fade" id="misc" role="tabpanel" aria-labelledby="misc-tab">
+            <table class="table">
+              <tbody>
+                <tr>
+                  <td>Automatic layout:</td>
+                  <td>
+                    <div class="float-right" >
+                      <input type="checkbox" data-toggle="toggle" id="layout">
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Background color:</td>
+                  <td>
+                    <div class="float-right" >
+                    <input type="checkbox" data-toggle="toggle" id="bg">                
+                    </div>
+                    <div class="float-right mr-2" >
+                      <input type="color" id="bgcolorpicker" value="#ffffff" style="visibility: hidden;width:70px; height:38px; padding: 0px" disabled>
+                      </div>
+                  </td>
+                </tr> 
+              </tbody> 
+            </table>
+          </div>
+        </div>
+        <table class="table">
+          <tbody>
+            <tr>
+              <td></td>
+              <td>
+                <div class="float-right">
+                    <div class="spinner-border mr-3" role="status" style="visibility:hidden" id="creating_status">
+                    <span class="sr-only">Creating the map...</span>
+                    </div>
+                    <button class="btn btn-primary float-right" id="map-create-button">Render</button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="alert alert-danger alert-dismissible fade" id="error_alert" role="alert">
+          <strong>Error : </strong><span id="error_message"></span>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <img id="map-image" style="width: 100%">
+      </div>
+    </div>
+    
+    <!-- JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+
+    <script type="text/javascript">
+      
+      var server = "http://localhost/api/";
+      var file_format = "png"; // default file format
+      var default_async = "False"; // default request type
+      
+      
+      async function renderSBGN() {     
+
+          document.querySelector("#map-image").src = "";
+          $('#error_alert').removeClass("show");
+          let data = new FormData();
+          
+          if (file_format !== "png") {
+            data.append('format', file_format);
+          }
+          
+          data.append('async', default_async);
+          
+          if (document.querySelector("#layout").checked)
+            data.append('layout', document.querySelector("#layout").checked)
+          
+          if (document.querySelector("#bg").checked) {
+            data.append('bg', document.querySelector("#bgcolorpicker").value)
+          }
+          
+          if (document.querySelector("#scale_input").value !== "")
+            data.append('scale', document.querySelector("#scale_input").value);
+          
+          if (document.querySelector("#max_width_input").value !== "")
+            data.append('max_width', document.querySelector("#max_width_input").value);
+          
+          if (document.querySelector("#max_height_input").value !== "")
+            data.append('max_height', document.querySelector("#max_height_input").value);
+          
+          data.append('file', document.querySelector("#input_network").files[0]);
+          document.querySelector("#creating_status").style.visibility = "visible";
+          if (default_async !== "True") {                
+            // send fetch along with cookies
+            let response = await fetch(server + 'render', {
+                method: 'POST',
+                mode: 'cors',
+                // credentials: '',
+                body: data
+            })
+            .then(response => {
+              if (response.status == 200) {
+                return response.blob()
+                
+              } else if (response.status == 400) {
+                response.json().then((data) => {
+                  document.querySelector("#creating_status").style.visibility = "hidden";
+                  document.querySelector("#error_message").innerHTML = data['error'];
+                  $('#error_alert').addClass("show");
+                });
+                throw new Error("Empty error");
+              } else  {
+                throw new Error("API Endpoint is not available");
+              } 
+            })
+            .then(images => {
+                document.querySelector("#creating_status").style.visibility = "hidden";
+                document.querySelector("#map-image").src = URL.createObjectURL(images);
+            });
+          }
+          else {
+            let rendering_id;
+            let response = await fetch(server + 'render', {
+                method: 'POST',
+                mode: 'cors',
+                // credentials: '',
+                body: data
+            })
+            .then(response => {
+              if (response.status == 200) {
+                return response.json()
+                
+              } else if (response.status == 400) {
+                // response.json().then((data) => {
+                //   document.querySelector("#creating_status").style.visibility = "hidden";
+                //   document.querySelector("#error_message").innerHTML = data['error'];
+                //   $('#error_alert').addClass("show");
+                // });
+                throw new Error("Empty error");
+              } else  {
+                throw new Error("API Endpoint is not available");
+              } 
+            })
+            .then(json_data => {
+              console.log("json data");
+                rendering_id = json_data['id'];
+            });
+            
+            let rendering_status;
+            while (rendering_status != 'ready') {
+              response = await fetch(server + 'status/' + rendering_id, {
+                method: 'GET',
+                mode: 'cors',
+              })
+              .then(response => {
+                if (response.status == 200) {
+                  return response.json();
+                } else {
+                  throw new Error("Could not get status");
+                }
+              }
+              ).then(json_status => {
+                rendering_status = json_status['status']
+                
+              });
+              if (rendering_status !== 'ready') {
+                await new Promise(resolve => setTimeout(resolve, 1000));
+              }
+            }
+            
+            response = await fetch(server + 'rendered/' + rendering_id , {
+                method: 'GET',
+                mode: 'cors',
+            })
+            .then(response => {
+              if (response.status == 200) {
+                return response.blob()
+                
+              } else if (response.status == 400) {
+                response.json().then((data) => {
+                  document.querySelector("#creating_status").style.visibility = "hidden";
+                  document.querySelector("#error_message").innerHTML = data['error'];
+                  $('#error_alert').addClass("show");
+                });
+                throw new Error("Empty error");
+              } else  {
+                throw new Error("API Endpoint is not available");
+              } 
+            })
+            .then(images => {
+                document.querySelector("#creating_status").style.visibility = "hidden";
+                document.querySelector("#map-image").src = URL.createObjectURL(images);
+            });
+          
+          }
+      }
+      
+      $( document ).ready(function() {
+        $('.dropdown').each(function (key, dropdown) {
+          var $dropdown = $(dropdown);
+          $dropdown.find('.dropdown-menu a').on('click', function () {
+              file_format = $(this).text().toLowerCase();
+              $dropdown.find('button').text($(this).text()).append(' <span class="caret"></span>');
+          });
+        });
+        $("#input_network").on('change', (e) => {$("#input_network_label")[0].innerHTML = e.target.value.split(/(\\|\/)/g).pop()})
+
+      });
+      
+      $(function() {
+        $('#bg').change(function(e) {
+          document.querySelector('#bgcolorpicker').style.visibility = e.target.checked ? "visible" : "hidden";
+          document.querySelector('#bgcolorpicker').disabled = !e.target.checked;
+        })
+      });
+      
+      window.addEventListener("unhandledrejection", event => {
+        console.error("Error rejected : ");
+          document.querySelector("#error_message").innerHTML = "Could not contact the rendering server (Rejected promise)";
+            $('#error_alert').addClass("show");
+        event.preventDefault();
+      }, false);
+      
+      // Event triggered when launching a rendering
+      document.querySelector("#map-create-button").addEventListener('click', async function() {
+        try{
+
+          if(document.querySelector("#input_network").files.length == 0) {
+              throw new Error('No network file selected');
+              
+          } else {
+            await renderSBGN();
+          }
+        }
+        catch (error) {
+          document.querySelector("#creating_status").style.visibility = "hidden";
+          document.querySelector("#error_message").innerHTML = error.message;
+          $('#error_alert').addClass("show");
+    
+        }
+      });
+    </script>
+  </body>
+</html>
