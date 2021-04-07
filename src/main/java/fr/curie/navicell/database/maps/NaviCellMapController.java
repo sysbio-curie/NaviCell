@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.ArrayList;
 import org.apache.commons.collections4.ListUtils;
@@ -40,6 +41,7 @@ import fr.curie.navicell.storage.StorageService;
 import org.json.JSONObject;
 import org.json.JSONException;
 import org.json.JSONArray;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 // @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -70,40 +72,52 @@ public class NaviCellMapController {
   @GetMapping("/api/maps")
   @ResponseStatus(value = HttpStatus.OK)
   List<NaviCellMap> all(Authentication authentication) {
-    if (authentication != null)
-      return repository.findByUsername(authentication.getName());
+    if (authentication != null){
     
+      List result = new ArrayList<>();
+      for (NaviCellMap map: repository.findAll()) {
+        if (map.username.equals(authentication.getName()) || map.isPublic) {
+          result.add(map);
+        }
+      }
+      return result;
+    }
     else
       return repository.findByIsPublic(true);
   }
 
 
-  @DeleteMapping("/api/maps")
-  @ResponseStatus(value = HttpStatus.OK)
-  void deleteAll() {
-    this.storageService.deleteAll();
-    repository.deleteAll();
-  }
+  // @DeleteMapping("/api/maps")
+  // @ResponseStatus(value = HttpStatus.OK)
+  // void deleteAll() {
+  //   this.storageService.deleteAll();
+  //   repository.deleteAll();
+  // }
   
   @DeleteMapping("/api/maps/{id}")
   @ResponseStatus(value = HttpStatus.OK)
-  void delete(@PathVariable("id") String id)  {
-    Optional<NaviCellMap> entry = repository.findById(id);
-    if (entry.isPresent()) {
-      this.storageService.deleteByFolder(entry.get().folder);
-      repository.deleteById(id);
-      species_repository.deleteByMapId(id);
-    }
+  void delete(Authentication authentication, @PathVariable("id") String id)  {
+    if (authentication != null) {
+      SimpleGrantedAuthority authority = (SimpleGrantedAuthority) authentication.getAuthorities().toArray()[0];
+      Optional<NaviCellMap> entry = repository.findById(id);
+      if (entry.isPresent() && (entry.get().username.equals(authentication.getName()) || authority.getAuthority().equals("admin"))) {
+        this.storageService.deleteByFolder(entry.get().folder);
+        repository.deleteById(id);
+        species_repository.deleteByMapId(id);
+    }}
   }
   
   @PutMapping("/api/maps/{id}")
   @ResponseStatus(value = HttpStatus.OK)
-  void modify(@PathVariable("id") String id, @RequestParam("is_public") boolean isPublic)  {
-    Optional<NaviCellMap> entry = repository.findById(id);
-    if (entry.isPresent()) {
-      NaviCellMap map = entry.get();
-      map.isPublic = isPublic;
-      repository.save(map);
+  void modify(Authentication authentication, @PathVariable("id") String id, @RequestParam("is_public") boolean isPublic)  {
+    if (authentication != null) {
+      SimpleGrantedAuthority authority = (SimpleGrantedAuthority) authentication.getAuthorities().toArray()[0];
+      Optional<NaviCellMap> entry = repository.findById(id);
+      if (entry.isPresent() && (entry.get().username.equals(authentication.getName()) || authority.getAuthority().equals("admin"))) {
+        NaviCellMap map = entry.get();
+        map.isPublic = isPublic;
+        repository.save(map);
+      }
     }
   }
   

@@ -71,7 +71,7 @@
           </ul>
           
           <form class="form-inline mt-2 mt-md-0" action="query.html"  method="GET">
-            <input id="query_text" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+            <input id="query_text" class="form-control mr-sm-2" type="text" name="search" placeholder="Search" aria-label="Search">
           </form>
           <ul class="navbar-nav ml-auto">
 
@@ -83,8 +83,7 @@
           </li>
           <li class="nav-item">
             <a id="logout_button" href="#" class="logged_in nav-link" style="display: none;">Logout</a>        
-            <a href="signin.html" class="logged_out nav-link" style="display: block;">Sign in</a>        
-          </li>
+            <a href="signin.html" class="logged_out nav-link" style="display: block;">Log in</a>                  </li>
           <li class="nav-item">
             <a href="signup.html" class="logged_out nav-link" style="display: block;">Sign up</a>        
           </li>
@@ -94,37 +93,42 @@
     </header>
     
     <main role="main" class="container" style="margin-top: 100px">
-      <form id="signup-form">
-      <table class="table" id="login_table">
-        <tbody>
-          <tr>
-            <td>Login:</td>
-            <td><input type="text" id="login" /></td>
-          </tr>
-          <tr>
-            <td>Password:</td>
-            <td><input type="password" id="password1" /></td>
-          </tr>
-          <tr>
-            <td>Repeat password:</td>
-            <td><input type="password" id="password2" /></td>
-          </tr>
-          
-          <tr>
-            <td></td>
-            
-            <td>
-              <div class="float-right">
-                <span id="error_message"></span>
-
-
-              <button type="submit" class="btn btn-primary float-right" id="signup-button">Sign up</button>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </form>
+      <div class="container">
+        <h1>Signin up</h1>
+        <br/>
+        <form id="signup-form">
+          <table class="table" id="login_table">
+            <tbody>
+              <tr>
+                <td>Login:</td>
+                <td><input type="text" id="login" /></td>
+              </tr>
+              <tr>
+                <td>Password:</td>
+                <td><input type="password" id="password1" /></td>
+              </tr>
+              <tr>
+                <td>Repeat password:</td>
+                <td><input type="password" id="password2" /></td>
+              </tr>
+              
+              <tr>
+                <td></td>
+                
+                <td>
+                  <div class="float-right">
+                    <span id="error_message"></span>
+    
+    
+                  <button type="submit" class="btn btn-primary float-right" id="signup-button">Sign up</button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </form>
+      </div>
+      
     </main><!-- /.container -->
     
     <script type="text/javascript">

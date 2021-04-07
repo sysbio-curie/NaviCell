@@ -100,7 +100,7 @@ body > .container {
           </ul>
           
           <form class="form-inline mt-2 mt-md-0" action="query.html"  method="GET">
-            <input id="query_text" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+            <input id="query_text" class="form-control mr-sm-2" type="text" name="search" placeholder="Search" aria-label="Search">
           </form>
           <ul class="navbar-nav ml-auto">
 
@@ -112,8 +112,7 @@ body > .container {
           </li>
           <li class="nav-item">
             <a id="logout_button" href="#" class="logged_in nav-link" style="display: none;">Logout</a>        
-            <a href="signin.html" class="logged_out nav-link" style="display: block;">Sign in</a>        
-          </li>
+            <a href="signin.html" class="logged_out nav-link" style="display: block;">Log in</a>                  </li>
           <li class="nav-item">
             <a href="signup.html" class="logged_out nav-link" style="display: block;">Sign up</a>        
           </li>
@@ -126,14 +125,42 @@ body > .container {
       <div class="container-fluid">
         <div class="row">
           <div class="col-4">
-            <img src="navicell-logo.png" width=200/>
+            <img src="navicell-logo.png" width="250px"/>
           </div>
           <div class="col-8">
             <h1>NaviCell</h1>
             <h3>A web tool for exploring large maps of molecular interactions</h3>
           </div>
         </div>
+        <br/><br/>
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="card" style="width: 18rem;">
+              <div class="card-body">
+                <h5 class="card-title">Map browsing by Google™ Map engine</h5>
+                <p class="card-text">Easy map navigation and its annotations using Google maps™ engine. The logic of navigation as scrolling and zooming; features as markers, pop-up bubbles and zoom bar are adapted from the Google map.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="card" style="width: 18rem;">
+              <div class="card-body">
+                <h5 class="card-title">Semantic zoom for viewing different levels of details on the map</h5>
+                <p class="card-text">NaviCell semantic zooming provides possibility for map exploring from detailed toward a top-level view achieved by gradual exclusion of details while zooming out.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="card" style="width: 18rem;">
+              <div class="card-body">
+                <h5 class="card-title">Data Visualization Web Service</h5>
+                <p class="card-text">NaviCell now includes a powerful module for data visualization. Users can map and visualize different types of "omics" data on the NaviCell maps. There is also a Python API for computational biologist who would like to automate tasks and communicate with the NaviCell web server.</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
+          
       
     </main><!-- /.container -->
     <footer class="footer">

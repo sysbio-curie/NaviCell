@@ -97,10 +97,12 @@ public class NaviCellSpeciesController {
     List<NaviCellMap> maps_allowed;
     
     if (authentication != null) {
-      maps_allowed = ListUtils.union(
-        repository.findByUsername(authentication.getName()),
-        repository.findByIsPublic(true)
-      );
+      maps_allowed = new ArrayList<>();
+      for (NaviCellMap map: repository.findAll()) {
+        if (map.username.equals(authentication.getName()) || map.isPublic) {
+          maps_allowed.add(map);
+        }
+      }
     } else {
       maps_allowed = repository.findByIsPublic(true);
     }

@@ -187,7 +187,9 @@ function addUserToTable(table, user_ind, user) {
     name_cell = row.insertCell();
     name_cell.innerText = user.name;
     active_cell = row.insertCell();
-    active_cell.innerHTML = "<input type=\"checkbox\" id=\"active_" + user_ind + "\" onclick=\"toggle_active(" + user_ind + ", '" + user.id + "')\"" + (user.isActive == "true" ? " checked" : "") + ">"
+    active_cell.innerHTML = "<label class=\"switch\"><input type=\"checkbox\"/ id=\"active_" + user_ind + "\" onclick=\"toggle_active(" + user_ind + ", '" + user.id + "')\"" + (user.isActive == "true" ? " checked" : "") + "><span class=\"slider round\"></span></label>"
+    active_cell = row.insertCell();
+    active_cell.innerHTML = "<label class=\"switch\"><input type=\"checkbox\"/ id=\"admin_" + user_ind + "\" onclick=\"toggle_admin(" + user_ind + ", '" + user.id + "')\"" + (user.isRoot == "true" ? " checked" : "") + "><span class=\"slider round\"></span></label>"
     delete_cell = row.insertCell();
     delete_cell.style = "padding: 0.25rem";
     delete_cell.innerHTML = "<div class=\"float-right\"><button type=\"button\" class=\"btn btn-danger\" id=\"delete_" + user.id + "\">Delete</button></div>"
@@ -200,7 +202,7 @@ function addUserToTable(table, user_ind, user) {
 
 document.querySelector("#logout_button").addEventListener('click', async function() {
     logout(); 
-    await refresh();
+    window.location.href = "/";  
   });
   
   
