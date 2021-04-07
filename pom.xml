@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>fr.curie</groupId>
 	<artifactId>navicell</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>navicell</name>
 	<description>Demo project for Spring Boot</description>
  
@@ -154,6 +154,12 @@
 			<version>4.2</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -176,5 +182,5 @@
 		</resources>
 		
 	</build>
-
+    <packaging>war</packaging>
 </project>

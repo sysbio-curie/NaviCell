@@ -42,6 +42,7 @@ services:
     container_name: navicell
     ports:
       - "80:80"
+      - "8080:8080"
       
     volumes:
       - .:/var/navicell

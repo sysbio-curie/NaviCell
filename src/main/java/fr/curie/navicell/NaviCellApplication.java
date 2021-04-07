@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+
 // import fr.curie.navicell.NaviCellProperties;
 import fr.curie.navicell.storage.StorageProperties;
 import fr.curie.navicell.storage.StorageService;
@@ -24,7 +26,7 @@ import fr.curie.navicell.storage.StorageService;
   StorageProperties.class
 })
 @RestController
-public class NaviCellApplication {
+public class NaviCellApplication  extends SpringBootServletInitializer {
 
 	@Autowired
 	public NaviCellApplication() {}

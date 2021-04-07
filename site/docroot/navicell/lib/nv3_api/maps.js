@@ -125,7 +125,7 @@ function addMapToTable(table, map_ind, map) {
     link_cell = row.insertCell();
     link_cell.innerHTML = "<a href=\"" + map.url + "\">Access map</a>";
     public_cell = row.insertCell();
-    public_cell.innerHTML = "<input type=\"checkbox\" id=\"public_" + map_ind + "\" onclick=\"toggle_public(" + map_ind + ", '" + map.id + "')\"" + (map.isPublic ? " checked" : "") + ">"
+    public_cell.innerHTML = "<label class=\"switch\"><input type=\"checkbox\"/ id=\"public_" + map_ind + "\" onclick=\"toggle_public(" + map_ind + ", '" + map.id + "')\"" + (map.isPublic ? " checked" : "") + "><span class=\"slider round\"></span></label>"
     delete_cell = row.insertCell();
     delete_cell.style = "padding: 0.25rem";
     delete_cell.innerHTML = "<div class=\"float-right\"><button type=\"button\" class=\"btn btn-danger\" id=\"delete_" + map.id + "\">Delete</button></div>"

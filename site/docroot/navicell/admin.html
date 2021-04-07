@@ -70,7 +70,7 @@
           </ul>
           
           <form class="form-inline mt-2 mt-md-0" action="query.html"  method="GET">
-            <input id="query_text" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+            <input id="query_text" class="form-control mr-sm-2" type="text" name="search" placeholder="Search" aria-label="Search">
           </form>
           <ul class="navbar-nav ml-auto">
   
@@ -82,8 +82,7 @@
           </li>
           <li class="nav-item">
             <a id="logout_button" href="#" class="logged_in nav-link" style="display: none;">Logout</a>        
-            <a href="signin.html" class="logged_out nav-link" style="display: block;">Sign in</a>        
-          </li>
+            <a href="signin.html" class="logged_out nav-link" style="display: block;">Log in</a>                  </li>
           <li class="nav-item">
             <a href="signup.html" class="logged_out nav-link" style="display: block;">Sign up</a>        
           </li>
@@ -96,7 +95,16 @@
     
       <div class="container">
         <h1>Users</h1>
-        <table id="table-users" class="table table-stripped"><tbody></tbody></table>
+        <br/>
+        <table id="table-users" class="table table-stripped">
+          <thead>
+            <th style="border-top: 0"></th>
+            <th style="border-top: 0">Active</th>
+            <th style="border-top: 0">Admin</th>
+            <th style="border-top: 0"></th>
+          </thead>
+          <tbody></tbody>
+        </table>
         <br/><br/>
         
       </div>
