@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.ArrayList;
+import java.util.Arrays;
+
 import org.apache.commons.collections4.ListUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -81,9 +83,55 @@ public class NaviCellMapController {
         }
       }
       return result;
+    } else return new ArrayList<>();
+    // else
+    //   return repository.findByIsPublic(true);
+  }
+
+  boolean tagIntersect(List<String> tags1, List<String> tags2) {
+    for (int i=0; i < tags1.size(); i++) {
+      if (tags2.contains(tags1.get(i))) {
+        return true;
+      }
     }
-    else
+    return false;
+  }
+  
+  @GetMapping("/api/maps/public")
+  @ResponseStatus(value = HttpStatus.OK)
+  List<NaviCellMap> publicMaps(Authentication authentication) {
+    // if (tags.isPresent()) {
+    //   String[] tokens = tags.get().split(",");
+    //   for (int i=0; i < tokens.length; i++) {
+    //     tokens[i] = tokens[i].strip().toLowerCase();
+    //   }
+    //   List<NaviCellMap> filtered_maps = new ArrayList<>();
+    //   for (NaviCellMap map : repository.findAll()) {
+    //     if (map.isPublic && tagIntersect(map.tags, Arrays.asList(tokens))) {
+    //       filtered_maps.add(map);
+    //     }
+    //   }
+    //   return filtered_maps;
+    //   // for     
+    // } else
       return repository.findByIsPublic(true);
+  }
+
+  @PostMapping("/api/maps/public")
+  @ResponseStatus(value = HttpStatus.OK)
+  List<NaviCellMap> publicMapsByTags(Authentication authentication, @RequestParam("tags") String tags) {
+    String[] tokens = tags.split(",");
+    for (int i=0; i < tokens.length; i++) {
+      tokens[i] = tokens[i].strip().toLowerCase();
+    }
+    List<NaviCellMap> filtered_maps = new ArrayList<>();
+    for (NaviCellMap map : repository.findAll()) {
+      if (map.isPublic && tagIntersect(map.tags, Arrays.asList(tokens))) {
+        filtered_maps.add(map);
+      }
+    }
+    return filtered_maps;
+  
   }
 
 
@@ -128,12 +176,21 @@ public class NaviCellMapController {
       NaviCellMap entry = new NaviCellMap(authentication, this.storageService, name, network_file, layout);
       repository.save(entry);
 
+      String[] tokens = new String[0];
       if (tags.length() > 0) {
-        String[] tokens = tags.split(",");
+        tokens = tags.split(",");
         for (int i=0; i < tokens.length; i++) {
-          NaviCellTag new_tag = new NaviCellTag(tokens[i].strip(), entry.id);
+          tokens[i] = tokens[i].strip().toLowerCase();
+          NaviCellTag new_tag = new NaviCellTag(tokens[i], entry.id);
           tags_repository.save(new_tag);
         }
+      }
+
+      entry.tags = Arrays.asList(tokens);
+      repository.save(entry);
+      System.out.println("Saved with the tags : ");
+      for (int i=0; i < entry.tags.size(); i++) {
+        System.out.println(entry.tags.get(i));
       }
       
       String mapdata_path = this.storageService.getLocation() + "/" + entry.folder + "/_common/master_mapdata.json";

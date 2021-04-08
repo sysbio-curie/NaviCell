@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 
 import fr.curie.navicell.database.maps.NaviCellMapRepository;
 import fr.curie.navicell.database.species.NaviCellSpeciesRepository;
+import fr.curie.navicell.database.tags.NaviCellTagRepository;
 @Configuration
 class LoadDatabase {
 
@@ -25,6 +26,16 @@ class LoadDatabase {
   CommandLineRunner initDatabaseSpecies(NaviCellSpeciesRepository species_repository) {
 
     return args -> {
+      // species_repository.deleteAll();
+      // log.info("Preloading " + species_repository.save(new NaviCellSpecies("Cell cycle")));
+      // log.info("Preloading " + repository.save(new NaviCellMap("Ras-MAPK")));
+    };
+  }
+  @Bean
+  CommandLineRunner initDatabaseTags(NaviCellTagRepository tags_repository) {
+
+    return args -> {
+      // tags_repository.deleteAll();
       // species_repository.deleteAll();
       // log.info("Preloading " + species_repository.save(new NaviCellSpecies("Cell cycle")));
       // log.info("Preloading " + repository.save(new NaviCellMap("Ras-MAPK")));
