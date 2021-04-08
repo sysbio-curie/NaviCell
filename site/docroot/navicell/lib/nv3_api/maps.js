@@ -10,7 +10,8 @@ async function toggle_public(index, map_id) {
     // server responded with http response != 200
     if(response.status === 200){
         document.querySelector("#creating_status").style.visibility = "hidden";
-        getMaps();        
+        getMaps();   
+        // getPublicMaps();     
     }
 }
 
@@ -35,7 +36,7 @@ async function uploadMap() {
       data.append('name', document.querySelector("#map-name").value);
       data.append('network-file', document.querySelector("#map-network").files[0]);
       data.append('layout', document.querySelector("#map-layout").checked);
-      data.append('tags', document.querySelector("#map-tags").checked);
+      data.append('tags', document.querySelector("#map-tags").value);
       
       document.querySelector("#creating_status").style.visibility = "visible";
       // send fetch along with cookies
@@ -80,7 +81,7 @@ async function deleteMap(id) {
       throw new Error('HTTP response code != 200')
   
   getMaps();
-    
+  // getPublicMaps();
 }
 async function getMaps() {
 
@@ -113,7 +114,95 @@ async function getMaps() {
     }
 }
 
+async function getPublicMaps() {
+
+  try {
+    
+    // send fetch along with cookies
+    let response = await nv3_request('/api/maps/public', 'GET', null);
   
+    // server responded with http response != 200
+    if(response.status != 200)
+      throw new Error('HTTP response code != 200');
+
+    // read json response from server
+    // success response example : {"error":0,"message":""}
+    // error response example : {"error":1,"message":"File type not allowed"}
+    let json_response = await response.json();
+      if(json_response.error == 1)
+          throw new Error(json_response.message);	
+    
+    table = document.querySelector("#table-public-maps");
+    clearTable(table);
+    json_response.map((value, key) => {
+      addPublicMapToTable(table, key, value);
+      
+    });
+  }
+  catch(e) {
+    // catch rejected Promises and Error objects
+      return_data = { error: 1, message: e.message };
+    }
+}
+
+
+async function getPublicMapsByTags(tags) {
+  console.log(tags)
+  try {
+    let data = new FormData();
+    data.append('tags', tags.join());
+
+    console.log(data)
+    // send fetch along with cookies
+    let response = await nv3_request('/api/maps/public', 'POST', data);
+  
+    // server responded with http response != 200
+    if(response.status != 200)
+      throw new Error('HTTP response code != 200');
+    console.log(response);
+    // read json response from server
+    // success response example : {"error":0,"message":""}
+    // error response example : {"error":1,"message":"File type not allowed"}
+    let json_response = await response.json();
+      if(json_response.error == 1)
+          throw new Error(json_response.message);	
+    
+    table = document.querySelector("#table-public-maps");
+    clearTable(table);
+    json_response.map((value, key) => {
+      addPublicMapToTable(table, key, value);
+      
+    });
+  }
+  catch(e) {
+    // catch rejected Promises and Error objects
+      console.log(e);
+    }
+}
+
+async function getTags() {
+  try{
+   // send fetch along with cookies
+   let response = await nv3_request('/api/tags', 'GET', null);
+  
+   // server responded with http response != 200
+   if(response.status != 200)
+     throw new Error('HTTP response code != 200');
+
+   // read json response from server
+   // success response example : {"error":0,"message":""}
+   // error response example : {"error":1,"message":"File type not allowed"}
+   let json_response = await response.json();
+     if(json_response.error == 1)
+         throw new Error(json_response.message);	
+   
+   return json_response;
+ }
+ catch(e) {
+   // catch rejected Promises and Error objects
+     return_data = { error: 1, message: e.message };
+   }
+}
 function clearTable(table) {
     table.tBodies[0].innerHTML = "";
 }
@@ -133,4 +222,16 @@ function addMapToTable(table, map_ind, map) {
     document.querySelector("#delete_" + map.id).addEventListener('click', async function() {
         await deleteMap(map.id);
     });
+}
+function addPublicMapToTable(table, map_ind, map) {
+  row = table.tBodies[0].insertRow();
+  name_cell = row.insertCell();
+  name_cell.innerText = map.name;
+  link_cell = row.insertCell();
+  link_cell.innerHTML = "<a href=\"" + map.url + "\">Access map</a>";
+  tags_cell = row.insertCell();
+  map.tags.map(function (value, key) {
+    tags_cell.innerHTML += "<a href=\"#\" class=\"btn btn-primary btn-sm mr-1\" style=\"opacity:1\">" + value + "</a>"  
+  })
+  
 }

@@ -6,7 +6,9 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.ArrayList;
+import java.util.HashSet;
 import org.apache.commons.collections4.ListUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -52,43 +54,38 @@ public class NaviCellTagController {
 	
   @GetMapping("api/tags")
   @ResponseStatus(value = HttpStatus.OK)
-  List<NaviCellTag> all_tags() {
-    return tags_repository.findAll();
+  List<String> all_tags() {
+    
+    Set<String> public_tags = new HashSet<>();
+    for (NaviCellMap public_map : repository.findByIsPublic(true)) {
+      public_tags.addAll(new HashSet<>(public_map.tags));
+    }
+    return new ArrayList<>(public_tags);
   }
   
   @GetMapping("api/tags/name/{name}")
   @ResponseStatus(value = HttpStatus.OK)
-  List<NaviCellTag> tagsByName(Authentication authentication, @PathVariable("name") String name) {
+  List<NaviCellMap> mapsByTag(Authentication authentication, @PathVariable("name") String name) {
     List<NaviCellMap> maps_allowed;
-
-    if (authentication != null) {
-      maps_allowed = ListUtils.union(
-        repository.findByUsername(authentication.getName()),
-        repository.findByIsPublic(true)
-      );
-    } else {
-      maps_allowed = repository.findByIsPublic(true);
-    }
-    
-    // System.out.println(maps_allowed.toString());
-    // System.out.println("Size of available maps : " + maps_allowed.size());
-    List<String> map_ids = new ArrayList<>();
-    for (int i=0; i < maps_allowed.size(); i++) {
-      map_ids.add(maps_allowed.get(i).id);
-    }
-    
     
     List<NaviCellTag> result = tags_repository.findByName(name);
-    // System.out.println(result.toString());
-    // System.out.println(map_ids);
-    List<NaviCellTag> final_result = new ArrayList<>(result);
-    for (int i=0; i < result.size(); i++){
-      if (!map_ids.contains(result.get(i).mapId)) {
-        final_result.remove(result.get(i));
+
+    List<String> map_ids = new ArrayList<>();
+    for (int i=0; i < result.size(); i++) {
+      map_ids.add(result.get(i).mapId);
+    }
+    
+    maps_allowed = new ArrayList<>();
+    for (NaviCellMap map: repository.findAll()) {
+      if (map_ids.contains(map.id)) {
+        if ( map.isPublic || (authentication != null && map.username.equals(authentication.getName()))) {
+          maps_allowed.add(map);
+        }
       }
     }
-    return final_result;
-  
+    
+    
+    return maps_allowed;
   }
   
   

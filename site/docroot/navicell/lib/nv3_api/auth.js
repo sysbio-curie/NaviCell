@@ -133,8 +133,6 @@ async function is_root() {
             
     if(response.status === 200){
         let isroot = await response.text();
-        console.log(isroot)
-        console.log(isroot === "true")
         return isroot === "true";
     }
     return false;

@@ -50,14 +50,19 @@
           <li class="nav-item">
             <a class="nav-link" href="maps.html">Maps</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="guide.html">Guide</a>
+          <li class="nav-item logged_in" style="display:none">
+            <a class="nav-link" href="factory.html">Factory</a>
           </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="resources.html">Resources <span class="sr-only">(current)</span></a>
+          <li class="nav-item logged_in" style="display:none">
+            <a class="nav-link" href="data.html">Data</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="faq.html">FAQ</a>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Help</a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="guide.html">Guide</a>
+              <a class="dropdown-item" href="resources.html">Resources</a>
+              <a class="dropdown-item" href="faq.html">FAQ</a>
+            </div>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="about.html">About</a>
@@ -100,177 +105,7 @@
     
       <script type="text/javascript">
       
-      async function getMapInfos(mapIds) {
-        let map_infos = {}
-        await Promise.all(Array.from(mapIds).map(async value => {
-          try 
-          {
-            let httpHeaders = {};
-            
-            if (token !== undefined) {
-              httpHeaders['Authorization'] = `Bearer ${token}`;
-            }
-            
-            // send fetch along with cookies
-            let response = await fetch('/api/maps/' + value, {
-                method: 'GET',
-                credentials: 'same-origin',
-                headers: new Headers(httpHeaders)
-            });
-
-            // server responded with http response != 200
-            if(response.status != 200)
-              throw new Error('HTTP response code != 200');
-
-            // read json response from server
-            // success response example : {"error":0,"message":""}
-            // error response example : {"error":1,"message":"File type not allowed"}
-            let json_response = await response.json();
-              if(json_response.error == 1)
-                  throw new Error(json_response.message);	
-            map_infos[json_response.id] = json_response;
-            // console.log(map_infos);
-          }
-          catch(e) {
-            // catch rejected Promises and Error objects
-              return_data = { error: 1, message: e.message };
-          }
-        }));
-        // console.log(map_infos);
-        return map_infos;
-      
-        
-        
-      }
-      
-      
-      async function getByName(name) {
-
-        try {
-          let httpHeaders = {};
-            
-            if (token !== undefined) {
-              httpHeaders['Authorization'] = `Bearer ${token}`;
-            }
-            
-          // send fetch along with cookies
-          let response = await fetch('/api/species/name/' + name, {
-              method: 'GET',
-              credentials: 'same-origin',
-              headers: new Headers(httpHeaders)
-          });
-
-          // server responded with http response != 200
-          if(response.status != 200)
-            throw new Error('HTTP response code != 200');
-
-          // read json response from server
-          // success response example : {"error":0,"message":""}
-          // error response example : {"error":1,"message":"File type not allowed"}
-          let json_response = await response.json();
-            if(json_response.error == 1)
-                throw new Error(json_response.message);	
-          
-          console.log(json_response.length);
-          if (json_response.length > 0) {
-                
-            let map_ids = new Set();
-            json_response.map((value) => {
-              map_ids.add(value.mapId)
-            });
-            
-            let map_info = await getMapInfos(map_ids);
-                  
-            // console.log(json_response);
-            table = document.querySelector("#table-results");
-            table.tBodies[0].innerHTML = "";
-            json_response.map((value) => {
-              
-              // console.log(value);
-              row = table.tBodies[0].insertRow();
-              name_cell = row.insertCell();
-              name_cell.innerText = value.name;
-              type_cell = row.insertCell();
-              type_cell.innerText = value.type;
-              map_cell = row.insertCell();
-              map_cell.innerHTML = "<a href=\"" + map_info[value.mapId].url + "\">" + map_info[value.mapId].name + "</a>";
-            });
-          }
-          else {
-            console.log("Couldnt be found");
-            table = document.querySelector("#table-results");
-            table.tBodies[0].innerHTML = "<b>" + name + "</b> couldn't be found.";
-          }
-        }
-        catch(e) {
-          // catch rejected Promises and Error objects
-            return_data = { error: 1, message: e.message };
-        }
-      }
-      
-      async function getByHugoName(name) {
-
-        try {
-          let httpHeaders = {};
-            
-            if (token !== undefined) {
-              httpHeaders['Authorization'] = `Bearer ${token}`;
-            }
-            
-          // send fetch along with cookies
-          let response = await fetch('/api/species/hugo/' + name, {
-              method: 'GET',
-              credentials: 'same-origin',
-              headers: new Headers(httpHeaders)
-          });
-
-          // server responded with http response != 200
-          if(response.status != 200)
-            throw new Error('HTTP response code != 200');
-
-          // read json response from server
-          // success response example : {"error":0,"message":""}
-          // error response example : {"error":1,"message":"File type not allowed"}
-          let json_response = await response.json();
-            if(json_response.error == 1)
-                throw new Error(json_response.message);	
-          
-          console.log(json_response.length);
-          if (json_response.length > 0) {
-                
-            let map_ids = new Set();
-            json_response.map((value) => {
-              map_ids.add(value.mapId)
-            });
-            
-            let map_info = await getMapInfos(map_ids);
-                  
-            // console.log(json_response);
-            table = document.querySelector("#table-results");
-            table.tBodies[0].innerHTML = "";
-            json_response.map((value) => {
-              
-              // console.log(value);
-              row = table.tBodies[0].insertRow();
-              name_cell = row.insertCell();
-              name_cell.innerText = value.name;
-              type_cell = row.insertCell();
-              type_cell.innerText = value.type;
-              map_cell = row.insertCell();
-              map_cell.innerHTML = "<a href=\"" + map_info[value.mapId].url + "\">" + map_info[value.mapId].name + "</a>";
-            });
-          }
-          else {
-            console.log("Couldnt be found");
-            table = document.querySelector("#table-results");
-            table.tBodies[0].innerHTML = "Hugo term <b>" + name + "</b> couldn't be found.";
-          }
-        }
-        catch(e) {
-          // catch rejected Promises and Error objects
-            return_data = { error: 1, message: e.message };
-        }
-      }
+     
        
       async function local_refresh() {
         console.log(window.location.search);
@@ -280,6 +115,8 @@
           let terms = search.split(":");
           if (terms[0].toLowerCase() === "hugo") {
             await getByHugoName(terms[1]);
+          } else if (terms[0].toLowerCase() === "tag") {
+            await getByTag(terms[1]);
           }
         } else { 
           await getByName(urlParams.get('search'));  
@@ -294,8 +131,9 @@
       
     </script>
     
-  <script src="lib/nv3_api/auth.js"></script>
-  <script src="lib/nv3_api/maps.js"></script>
+    <script src="lib/nv3_api/auth.js"></script>
+    <script src="lib/nv3_api/maps.js"></script>
+    <script src="lib/nv3_api/query.js"></script>
 
   </body>
 </html>

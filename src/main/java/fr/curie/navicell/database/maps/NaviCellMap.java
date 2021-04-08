@@ -15,7 +15,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-
+import java.util.List;
+import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.Id;
 import org.springframework.web.multipart.MultipartFile;
@@ -47,6 +48,7 @@ public class NaviCellMap {
   public String url;
   public String username;
   public boolean isPublic;
+  public List<String> tags;
   
   // @Autowired
   // public NaviCellSpeciesRepository species_repository;
@@ -82,7 +84,8 @@ public class NaviCellMap {
     }
   
     this.name = name;
-  
+    this.tags = new ArrayList<>();
+    
     String extension = FilenameUtils.getExtension(network_file.getOriginalFilename());
     if (extension.equals("xml")) {
       
