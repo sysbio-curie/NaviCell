@@ -9,6 +9,8 @@ import org.springframework.context.annotation.Configuration;
 import fr.curie.navicell.database.maps.NaviCellMapRepository;
 import fr.curie.navicell.database.species.NaviCellSpeciesRepository;
 import fr.curie.navicell.database.tags.NaviCellTagRepository;
+import fr.curie.navicell.database.sessions.NaviCellSessionRepository;
+import fr.curie.navicell.database.sessions.NaviCellSessionCommandsRepository;
 @Configuration
 class LoadDatabase {
 
@@ -18,8 +20,7 @@ class LoadDatabase {
   CommandLineRunner initDatabase(NaviCellMapRepository repository) {
 
     return args -> {
-      // log.info("Preloading " + repository.save(new NaviCellMap("Cell cycle")));
-      // log.info("Preloading " + repository.save(new NaviCellMap("Ras-MAPK")));
+      // repository.deleteAll();
     };
   }
   @Bean
@@ -27,8 +28,6 @@ class LoadDatabase {
 
     return args -> {
       // species_repository.deleteAll();
-      // log.info("Preloading " + species_repository.save(new NaviCellSpecies("Cell cycle")));
-      // log.info("Preloading " + repository.save(new NaviCellMap("Ras-MAPK")));
     };
   }
   @Bean
@@ -36,9 +35,21 @@ class LoadDatabase {
 
     return args -> {
       // tags_repository.deleteAll();
-      // species_repository.deleteAll();
-      // log.info("Preloading " + species_repository.save(new NaviCellSpecies("Cell cycle")));
-      // log.info("Preloading " + repository.save(new NaviCellMap("Ras-MAPK")));
+    };
+  }
+  
+  @Bean
+  CommandLineRunner initDatabaseSessions(NaviCellSessionRepository sessions_repository) {
+
+    return args -> {
+      // sessions_repository.deleteAll();
+    };
+  }
+  @Bean
+  CommandLineRunner initDatabaseSessionsCmds(NaviCellSessionCommandsRepository sessions_cmds_repository) {
+
+    return args -> {
+      // sessions_cmds_repository.deleteAll();
     };
   }
 }

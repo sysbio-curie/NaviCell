@@ -63,8 +63,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		// .antMatchers(HttpMethod.GET, "/api/render/**").permitAll()
 		.antMatchers(HttpMethod.GET, "/api/tags").permitAll()
 		.antMatchers(HttpMethod.GET, "/api/maps/*").permitAll()
+		.antMatchers(HttpMethod.GET, "/api/data").permitAll()
 		.antMatchers(HttpMethod.POST, "/api/maps/public").permitAll()
+		.antMatchers(HttpMethod.POST, "/api/data").permitAll()
 		.antMatchers(HttpMethod.GET, "/api/species/**").permitAll()
+		.antMatchers(HttpMethod.GET, "/api/sessions/**").permitAll()
 		.anyRequest().authenticated();
 		
 		// Add JWT token filter

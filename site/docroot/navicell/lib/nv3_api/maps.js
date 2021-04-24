@@ -9,66 +9,45 @@ async function toggle_public(index, map_id) {
 
     // server responded with http response != 200
     if(response.status === 200){
-        document.querySelector("#creating_status").style.visibility = "hidden";
         getMaps();   
-        // getPublicMaps();     
     }
 }
 
 // async function managing upload operation
 async function uploadMap() {
-  // function return value
-  document.querySelector("#error_message").innerHTML = "";
-
-  let return_data = { error: 0, message: '' };
-
-  try {
-    // no file selected
-    if(document.querySelector("#map-name").value === "") {
-      throw new Error('No name given');
-      
-    } else if(document.querySelector("#map-network").files.length == 0) {
-      throw new Error('No network file selected');
-      
-    } else {
-      // formdata
-      let data = new FormData();
-      data.append('name', document.querySelector("#map-name").value);
-      data.append('network-file', document.querySelector("#map-network").files[0]);
-      data.append('layout', document.querySelector("#map-layout").checked);
-      data.append('tags', document.querySelector("#map-tags").value);
-      
-      document.querySelector("#creating_status").style.visibility = "visible";
-      // send fetch along with cookies
-      
-      let response = await nv3_request(
-          '/api/maps/', 'POST', data
-      );
-      
-      if(response.status !== 201){
-        throw new Error('HTTP response code != 201');
-      }
+  document.querySelector("#new_map_error_message").innerHTML = "";
+  // document.querySelector("#new_map_spinner").style.visibility = "visible";
   
-      // let json_response = await response.json();
-      // if(json_response.error == 1)
-      //     throw new Error(json_response.message);	
+  // no file selected
+  if(document.querySelector("#map-name").value === "") {
+    throw new Error('No name given');
     
-      document.querySelector("#creating_status").style.visibility = "hidden";
-      getMaps();
-      // read json response from server
-      // success response example : {"error":0,"message":""}
-      // error response example : {"error":1,"message":"File type not allowed"}
-      // let json_response = await response.json();
-      //   if(json_response.error == 1)
-      //       throw new Error(json_response.message);	
-    }
-  }
-  catch(e) {
-    // catch rejected Promises and Error objects
-      return_data = { error: 1, message: e.message };
+  } else if(document.querySelector("#map-network").files.length == 0) {
+    throw new Error('No network file selected');
+    
+  } else {
+    // formdata
+    let data = new FormData();
+    data.append('name', document.querySelector("#map-name").value);
+    data.append('network-file', document.querySelector("#map-network").files[0]);
+    data.append('layout', document.querySelector("#map-layout").checked);
+    data.append('tags', document.querySelector("#map-tags").value);
+    data.append('async', true);
+    
+    // send fetch along with cookies    
+    let response = await nv3_request(
+        '/api/maps/', 'POST', data
+    );
+    
+    if(response.status !== 201){
+      throw new Error('HTTP response code != 201');
+      
     }
 
-  return return_data;
+    maps = await getMaps();
+    // document.querySelector("#new_map_spinner").style.visibility = "hidden";
+    return maps;
+  }
 }
 
 async function deleteMap(id) {
@@ -80,38 +59,33 @@ async function deleteMap(id) {
   if (response.status != 200) 
       throw new Error('HTTP response code != 200')
   
-  getMaps();
-  // getPublicMaps();
+  return await getMaps();
 }
+
 async function getMaps() {
+  // send fetch along with cookies
+  let response = await nv3_request('/api/maps/', 'GET', null);
 
-  try {
-    
-    // send fetch along with cookies
-    let response = await nv3_request('/api/maps/', 'GET', null);
+  // server responded with http response != 200
+  if(response.status != 200)
+    throw new Error('HTTP response code != 200');
+
+  // read json response from server
+  // success response example : {"error":0,"message":""}
+  // error response example : {"error":1,"message":"File type not allowed"}
+  let json_response = await response.json();
+    if(json_response.error == 1)
+        throw new Error(json_response.message);	
   
-    // server responded with http response != 200
-    if(response.status != 200)
-      throw new Error('HTTP response code != 200');
-
-    // read json response from server
-    // success response example : {"error":0,"message":""}
-    // error response example : {"error":1,"message":"File type not allowed"}
-    let json_response = await response.json();
-      if(json_response.error == 1)
-          throw new Error(json_response.message);	
+  table = document.querySelector("#table-maps");
+  clearTable(table);
+  json_response.map((value, key) => {
+    addMapToTable(table, key, value);
     
-    table = document.querySelector("#table-maps");
-    clearTable(table);
-    json_response.map((value, key) => {
-      addMapToTable(table, key, value);
-      
-    });
-  }
-  catch(e) {
-    // catch rejected Promises and Error objects
-      return_data = { error: 1, message: e.message };
-    }
+  });
+  
+  return json_response;
+  
 }
 
 async function getPublicMaps() {
@@ -211,27 +185,65 @@ function addMapToTable(table, map_ind, map) {
     row = table.tBodies[0].insertRow();
     name_cell = row.insertCell();
     name_cell.innerText = map.name;
-    link_cell = row.insertCell();
-    link_cell.innerHTML = "<a href=\"" + map.url + "\">Access map</a>";
     public_cell = row.insertCell();
-    public_cell.innerHTML = "<label class=\"switch\"><input type=\"checkbox\"/ id=\"public_" + map_ind + "\" onclick=\"toggle_public(" + map_ind + ", '" + map.id + "')\"" + (map.isPublic ? " checked" : "") + "><span class=\"slider round\"></span></label>"
+    if (!map.isBuilding) {
+      public_cell.innerHTML = "<label class=\"switch\"><input type=\"checkbox\"/ id=\"public_" + map_ind + "\" onclick=\"toggle_public(" + map_ind + ", '" + map.id + "')\"" + (map.isPublic ? " checked" : "") + "><span class=\"slider round\"></span></label>"
+    }
+    public_cell.style = "padding: 0.5rem";
+
     delete_cell = row.insertCell();
-    delete_cell.style = "padding: 0.25rem";
-    delete_cell.innerHTML = "<div class=\"float-right\"><button type=\"button\" class=\"btn btn-danger\" id=\"delete_" + map.id + "\">Delete</button></div>"
     
-    document.querySelector("#delete_" + map.id).addEventListener('click', async function() {
+    if (!map.isBuilding){
+      delete_cell.style = "padding: 0.25rem";  
+      delete_cell.innerHTML = "<div class=\"float-right\"><button type=\"button\" class=\"btn btn-danger btn-md\" id=\"delete_" + map.id + "\"><i class=\"bi-trash\"></i></button></div>"
+      delete_cell.innerHTML += "<button class=\"btn btn-md mr-1 btn-light float-right\" type=\"button\" data-toggle=\"collapse\" data-target=\"#collapse-map-" + map_ind + "\" aria-expanded=\"false\" aria-controls=\"collapse-map-" + map_ind + "\"><i class=\"bi-info-circle\"></i></button>";
+      delete_cell.innerHTML += "<a href=\"session.php?map=" + map.folder + "\"><button class=\"btn btn-md mr-1 btn-light float-right\"><i class=\"bi-record-fill\"></i></button></a>";
+      delete_cell.innerHTML += "<a href=\"" + map.url + "\"><button class=\"btn btn-md mr-1 btn-light float-right\"><i class=\"bi-eye\"></i></button></a>";
+      
+      document.querySelector("#delete_" + map.id).addEventListener('click', async function() {
+          await deleteMap(map.id);
+      });
+    } else {
+      delete_cell.style = "padding: 0.25rem";
+      delete_cell.innerHTML = "<div class=\"float-right\"><button type=\"button\" class=\"btn btn-danger btn-md\" id=\"delete_" + map.id + "\"><i class=\"bi-trash\"></i></button></div>"
+      delete_cell.innerHTML += "<div class=\"spinner-border float-right\" role=\"status\" style=\"margin: 0.5rem; width: 1.5rem; height: 1.5rem\"></div>";
+      document.querySelector("#delete_" + map.id).addEventListener('click', async function() {
         await deleteMap(map.id);
     });
+    }
 }
+
+
+
 function addPublicMapToTable(table, map_ind, map) {
   row = table.tBodies[0].insertRow();
   name_cell = row.insertCell();
   name_cell.innerText = map.name;
-  link_cell = row.insertCell();
-  link_cell.innerHTML = "<a href=\"" + map.url + "\">Access map</a>";
   tags_cell = row.insertCell();
   map.tags.map(function (value, key) {
     tags_cell.innerHTML += "<a href=\"#\" class=\"btn btn-primary btn-sm mr-1\" style=\"opacity:1\">" + value + "</a>"  
   })
   
+  link_info = row.insertCell();
+  link_info.style = "padding: 0.25rem";
+  link_info.innerHTML = "<button class=\"btn btn-md mr-1 btn-light float-right\" type=\"button\" data-toggle=\"collapse\" data-target=\"#collapse-map-" + map_ind + "\" aria-expanded=\"false\" aria-controls=\"collapse-map-" + map_ind + "\"><i class=\"bi-info-circle\"></i></button>";
+  link_info.innerHTML += "<a href=\"session.php?map=" + map.folder + "\"><button class=\"btn btn-md mr-1 btn-light float-right\"><i class=\"bi-record-circle-fill\"></i></button></a>";
+  link_info.innerHTML += "<a href=\"" + map.url + "\"><button class=\"btn btn-md mr-1 btn-light float-right\"><i class=\"bi-eye\"></i></button></a>";
+  
+  tr_info = table.tBodies[0].insertRow();
+  tr_info.classList.add("collapse");
+  tr_info.id = "collapse-map-" + map_ind;
+  td_info = tr_info.insertCell();
+  td_info.colSpan = 3;
+  
+  div_info = document.createElement("div");
+  div_info.classList.add("map_info");
+  
+  div_info.innerHTML = "<a class=\"button\" href=\"maps/" + map.networkPath + "\">CellDesigner file<i class=\"bi bi-cloud-arrow-down\"></i></a>";
+  div_info.innerHTML += "<a href=\"maps/" + map.sbgnPath + "\">SBGN file<i class=\"bi bi-cloud-arrow-down\"></i></a>"; 
+  div_info.innerHTML += "<a href=\"maps/" + map.imagePath + "\">PNG file<i class=\"bi bi-cloud-arrow-down\"></i></a>";
+  
+  
+  
+  td_info.appendChild(div_info);
 }

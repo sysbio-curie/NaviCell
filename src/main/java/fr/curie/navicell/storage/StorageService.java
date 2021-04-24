@@ -12,21 +12,27 @@ public interface StorageService {
 
 	void init();
 
-	Path store(MultipartFile file, String folder, String filename);
-	Path store(File file, String folder, String filename);
+	Path storeMapFile(byte[] file, String folder, String filename);
+	Path storeMapFile(MultipartFile file, String folder, String filename);
+	Path storeMapFile(File file, String folder, String filename);
 
-	void createFolder(String folder);
+	Path storeDataFile(MultipartFile file, String folder, String filename);
 	
-	Stream<Path> loadAll();
+	void createMapFolder(String folder);
+	void createDataFolder(String folder);
 	
-	Path load(String filename);
+	// Stream<Path> loadAll();
+	
+	// Path load(String filename);
 
-	Resource loadAsResource(String filename);
+	// Resource loadAsResource(String filename);
 
 	void deleteAll();
 	
-	void deleteByFolder(String folder);
+	void deleteMapByFolder(String folder);
+	void deleteDataByFolder(String folder);
 	
-	Path getLocation();
+	Path getMapsLocation();
+	Path getDataLocation();
 
 }

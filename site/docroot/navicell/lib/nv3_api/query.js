@@ -33,14 +33,21 @@ async function getMapInfos(mapIds) {
     
   }
   
-  function addSpeciesSearchResult(table, value, map_info) {
+  function addSpeciesSearchResult(table, value, key, map_info) {
     row = table.tBodies[0].insertRow();
     name_cell = row.insertCell();
     name_cell.innerText = value.name;
     type_cell = row.insertCell();
     type_cell.innerText = value.type;
     map_cell = row.insertCell();
-    map_cell.innerHTML = "<a href=\"" + map_info[value.mapId].url + "\">" + map_info[value.mapId].name + "</a>";
+    map_cell.innerHTML = "<a href=\"javascript_required.html\" id=\"link_" + key + "\">" + map_info[value.mapId].name + "</a>"
+    
+    document.querySelector("#link_" + key).addEventListener('click', function (e) {
+      e.preventDefault();
+      map = window.open(map_info[value.mapId].url);
+      console.log(value.speciesId);
+      map.to_open = [value.speciesId];
+    });
   }
   
   function clearSpeciesSearchResults(table) {
@@ -118,8 +125,8 @@ async function getMapInfos(mapIds) {
         table = document.querySelector("#table-results");
 
         clearSpeciesSearchResults(table);
-        json_response.map((value) => {
-          addSpeciesSearchResult(table, value, map_info);
+        json_response.map((value, key) => {
+          addSpeciesSearchResult(table, value, key, map_info);
       
         });
       }
@@ -167,8 +174,8 @@ async function getMapInfos(mapIds) {
         // console.log(json_response);
         table = document.querySelector("#table-results");
         clearSpeciesSearchResults();
-        json_response.map((value) => {
-            addSpeciesSearchResult(table, value, map_info);
+        json_response.map((value, key) => {
+            addSpeciesSearchResult(table, value, key, map_info);
         });
       }
       else {

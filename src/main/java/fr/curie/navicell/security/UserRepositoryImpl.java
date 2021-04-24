@@ -36,7 +36,7 @@ public class UserRepositoryImpl implements UserRepositoryCustom  {
         for (NaviCellMap result : results) {
         
             this.species_repository.deleteByMapId(result.id);
-            this.storage.deleteByFolder(result.folder);
+            this.storage.deleteMapByFolder(result.folder);
         }
 
         this.map_repository.deleteAll(results);

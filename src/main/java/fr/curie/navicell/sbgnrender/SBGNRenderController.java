@@ -43,6 +43,14 @@ import org.springframework.util.StringUtils;
 @RestController
 public class SBGNRenderController {
   
+  private SBGNRenderer sbgn_render;
+  
+  @Autowired
+	public SBGNRenderController(SBGNRenderer sbgn_render) {
+		this.sbgn_render = sbgn_render;
+  }
+  
+  
   @PostMapping("api/render")
   // @ResponseStatus(value = HttpStatus.CREATED)
   public @ResponseBody byte[] render(
@@ -81,7 +89,7 @@ public class SBGNRenderController {
                         StandardCopyOption.REPLACE_EXISTING);
           }
           
-          SBGNRenderer.render(
+          this.sbgn_render.render(
             Paths.get(tmpDir.toString(), filename).toString(), "temp_sbgnml." + image_extension, tmpDir,
             format, bg, scale, max_width, max_height, quality, layout, layout_quality, async
           );

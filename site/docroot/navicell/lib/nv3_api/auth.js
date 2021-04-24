@@ -151,7 +151,21 @@ async function toggle_active(index, user_id) {
     if(response.status === 200){
     }
 }
-  
+ 
+
+async function toggle_admin(index, user_id) {
+        
+    let data = new FormData();
+    data.append('is_admin', document.querySelector("#admin_" + index).checked);
+
+    let response = await nv3_request(
+        '/api/auth/users/' + user_id, 'PUT', data
+    )
+
+    // server responded with http response != 200
+    if(response.status === 200){
+    }
+}
 
 async function delete_user(id) {
     
@@ -210,12 +224,10 @@ document.querySelector("#logout_button").addEventListener('click', async functio
 
     if (logged_in()) {
       let t_username = await get_user();
-      console.log(t_username);
       document.querySelector("#username").innerText = t_username;
       
       let t_isroot = await is_root();
       if (t_isroot) {
-        console.log("User is root")
         document.querySelector("#admin_link").style.display = "block";
       } else {
         document.querySelector("#admin_link").style.display = "none";
