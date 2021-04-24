@@ -97,12 +97,14 @@ FROM navicell-base AS navicell
 COPY site /var/navicell/site
 COPY src /var/navicell/src
 COPY .mvn /var/navicell/.mvn
-COPY mvnw mvnw.cmd xrefs.txt pom.xml /var/navicell
+COPY mvnw mvnw.cmd pom.xml /var/navicell
 
 RUN rm -fr /var/navicell/site/docroot/navicell/maps/* \
  && rm -fr /var/navicell/maps_src
 
 VOLUME /var/navicell/site/docroot/navicell/maps
+VOLUME /var/navicell/site/docroot/navicell/data
+CMD service apache2 start && ./mvnw spring-boot:run
 
 FROM navicell-base AS navicell-dev
 

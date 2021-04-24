@@ -8,14 +8,23 @@ public class StorageProperties {
 	/**
 	 * Folder location for storing files
 	 */
-	private String location;// = "/var/navicell/upload-dir/";
+	private String mapsLocation;// = "/var/navicell/upload-dir/";
+	private String dataLocation;// = "/var/navicell/upload-dir/";
 
-	public String getLocation() {
-		return location;
+	public String getMapsLocation() {
+		return mapsLocation;
 	}
 
-	public void setLocation(String location) {
-		this.location = location;
+	public void setMapsLocation(String location) {
+		this.mapsLocation = location;
+	}
+	
+	public String getDataLocation() {
+		return dataLocation;
+	}
+
+	public void setDataLocation(String location) {
+		this.dataLocation = location;
 	}
 
 }

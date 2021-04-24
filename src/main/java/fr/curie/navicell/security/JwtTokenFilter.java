@@ -44,19 +44,13 @@ public class JwtTokenFilter extends OncePerRequestFilter {
             chain.doFilter(request, response);
             return;
         }
-
-        System.out.println("Token present");
-        
         // Get jwt token and validate
         final String token = header.split(" ")[1].trim();
         if (!jwtTokenUtil.validate(token)) {
             chain.doFilter(request, response);
             return;
         }
-        
-        System.out.println("Token valid");
 
-        System.out.println("User : " + jwtTokenUtil.getUsername(token));
         // Get user identity and set it on the spring security context
         UserDetails userDetails = userDetailsService
                 .loadUserByUsername(jwtTokenUtil.getUsername(token));

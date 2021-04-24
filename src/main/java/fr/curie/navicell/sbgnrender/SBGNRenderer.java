@@ -2,6 +2,7 @@ package fr.curie.navicell.sbgnrender;
 
 import java.util.HashMap;
 import java.util.Optional;
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.JavascriptExecutor;
@@ -18,10 +19,21 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 // import fr.curie.navicell.SBGNRendererException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class SBGNRenderer {
     
-    public static void render(String input, String output, Path tmpdir, 
+    // @Autowired
+    private SBGNRenderProperties properties;
+    
+    @Autowired
+    public SBGNRenderer(SBGNRenderProperties properties) {
+        this.properties = properties;
+    }
+    
+    public void render(String input, String output, Path tmpdir, 
         Optional<String> format, Optional<String> bg, Optional<String> scale, Optional<String> max_width, Optional<String> max_height, 
         Optional<String> quality, Optional<String> layout, Optional<String> layout_quality, Optional<String> async
     ) throws SBGNRendererException {
@@ -32,7 +44,7 @@ public class SBGNRenderer {
         chromePrefs.put("download.prompt_for_download", false);
         chromePrefs.put("download.directory_upgrade", true);
         
-        System.setProperty("webdriver.chrome.whitelistedIps", "");
+        System.setProperty("webdriver.chrome.whitelistedIps", properties.getWhiteListedIps());
         
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless");
@@ -56,7 +68,8 @@ public class SBGNRenderer {
         
         String extension = format.isPresent() ? format.get() : "png";
         // String driver_url = "file:///var/navicell/src/main/resources/index.html?url=/var/navicell/site/docroot/navicell/maps/" + input + format_str + scale_str + bg_str + max_width_str + max_height_str + quality_str + layout_str + layout_quality_str;
-        String driver_url = "file:///var/navicell/src/main/resources/index.html?url=" + input + format_str + scale_str + bg_str + max_width_str + max_height_str + quality_str + layout_str + layout_quality_str;
+        String driver_url = "file://" + this.properties.getLocation() + "?url=" + input + format_str + scale_str + bg_str + max_width_str + max_height_str + quality_str + layout_str + layout_quality_str;
+        // String driver_url = "file:///var/navicell/src/main/resources/index.html?url=" + input + format_str + scale_str + bg_str + max_width_str + max_height_str + quality_str + layout_str + layout_quality_str;
         System.out.println("Getting " + driver_url);
         driver.get(driver_url);
         

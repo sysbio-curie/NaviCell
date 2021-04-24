@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.Optional;
+import java.lang.Boolean;
 
 import javax.naming.AuthenticationException;
 
@@ -81,18 +82,8 @@ public class AuthController {
     public ResponseEntity<String> signup(@RequestParam("login") String name, @RequestParam("password") String password) {
 
         try {
-            System.out.println(this.repository.count());
-            
             MongoUser t_user = new MongoUser(name, passwordEncoder.encode(password), this.repository.count() == 0);
             this.repository.save(t_user);
-            // List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-            // authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
-            
-            // UserDetails user = new User("user@example.com", passwordEncoder.encode("s3cr3t"), authorities);
-        //     Authentication authenticate = authenticationManager
-        //             .authenticate(new UsernamePasswordAuthenticationToken(name, password));
-
-        //     User user = (User) authenticate.getPrincipal();
             
             return ResponseEntity.ok().build();
         } catch (Exception ex) {
@@ -134,15 +125,20 @@ public class AuthController {
     }
     
     @PutMapping("/api/auth/users/{id}")
-    public ResponseEntity<String> modify(Authentication authentication, @PathVariable("id") String id, @RequestParam("is_active") boolean isActive)  {
+    public ResponseEntity<String> modify(Authentication authentication, @PathVariable("id") String id, @RequestParam("is_active") Optional<String> isActive, @RequestParam("is_admin") Optional<String> isAdmin)  {
         if (authentication != null) {
             SimpleGrantedAuthority authority = (SimpleGrantedAuthority) authentication.getAuthorities().toArray()[0];
             if (authority.getAuthority() == "admin") {
                 Optional<MongoUser> entry = this.repository.findById(id);
                 if (entry.isPresent()) {
-                    System.out.println("Found user to modify");
                     MongoUser user = entry.get();
-                    user.isActive = isActive;
+                    if (isActive.isPresent()) {
+                        user.isActive = Boolean.parseBoolean(isActive.get());
+                    }
+                    if (isAdmin.isPresent()) {
+                        user.isRoot = Boolean.parseBoolean(isAdmin.get());
+                    }
+                    
                     this.repository.save(user);
                     return ResponseEntity.ok().build();
                 }

@@ -9,7 +9,7 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.ArrayList;
 import java.util.Arrays;
-
+import java.lang.Boolean;
 import org.apache.commons.collections4.ListUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.apache.commons.io.FilenameUtils;
 
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -36,6 +37,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import fr.curie.navicell.database.species.NaviCellSpeciesRepository;
 import fr.curie.navicell.database.tags.NaviCellTag;
 import fr.curie.navicell.database.tags.NaviCellTagRepository;
+import fr.curie.navicell.sbgnrender.SBGNRenderer;
 import fr.curie.navicell.database.species.NaviCellSpecies;
 
 import fr.curie.navicell.storage.StorageProperties;
@@ -50,6 +52,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 public class NaviCellMapController {
 
   private final StorageService storageService;
+  private final SBGNRenderer sbgn_renderer;
   
   @Autowired
   private NaviCellMapRepository repository;
@@ -60,9 +63,11 @@ public class NaviCellMapController {
   @Autowired
   public NaviCellTagRepository tags_repository;
   
+  
 	@Autowired
-	public NaviCellMapController(StorageService storageService) {
+	public NaviCellMapController(StorageService storageService, SBGNRenderer sbgn_render) {
 		this.storageService = storageService;
+    this.sbgn_renderer = sbgn_render;
 	}
     
   @GetMapping("/api/maps/{id}")
@@ -127,7 +132,7 @@ public class NaviCellMapController {
     List<NaviCellMap> filtered_maps = new ArrayList<>();
     for (NaviCellMap map : repository.findAll()) {
       if (map.isPublic && tagIntersect(map.tags, Arrays.asList(tokens))) {
-        filtered_maps.add(map);
+        filtered_maps.add(map); 
       }
     }
     return filtered_maps;
@@ -149,7 +154,7 @@ public class NaviCellMapController {
       SimpleGrantedAuthority authority = (SimpleGrantedAuthority) authentication.getAuthorities().toArray()[0];
       Optional<NaviCellMap> entry = repository.findById(id);
       if (entry.isPresent() && (entry.get().username.equals(authentication.getName()) || authority.getAuthority().equals("admin"))) {
-        this.storageService.deleteByFolder(entry.get().folder);
+        this.storageService.deleteMapByFolder(entry.get().folder);
         repository.deleteById(id);
         species_repository.deleteByMapId(id);
     }}
@@ -169,11 +174,12 @@ public class NaviCellMapController {
     }
   }
   
-  @PostMapping("/api/maps")
-	@ResponseStatus(value = HttpStatus.CREATED)
-	public void handleFileUpload(Authentication authentication, @RequestParam("name") String name, @RequestParam("network-file") MultipartFile network_file, @RequestParam("tags") String tags, @RequestParam("layout") String layout) {
+  public void createMap(String username, String name, byte[] network_file, String extension, String tags, String layout) {
     try{
-      NaviCellMap entry = new NaviCellMap(authentication, this.storageService, name, network_file, layout);
+      NaviCellMap entry = new NaviCellMap(name, username);
+      repository.save(entry);
+      NaviCellMapCreator.createMap(entry, this.storageService, this.sbgn_renderer, network_file, extension, layout);
+      entry.isBuilding = false;
       repository.save(entry);
 
       String[] tokens = new String[0];
@@ -193,7 +199,7 @@ public class NaviCellMapController {
         System.out.println(entry.tags.get(i));
       }
       
-      String mapdata_path = this.storageService.getLocation() + "/" + entry.folder + "/_common/master_mapdata.json";
+      String mapdata_path = this.storageService.getMapsLocation() + "/" + entry.folder + "/_common/master_mapdata.json";
       System.out.println("Mapdata path : " + mapdata_path);
       
       try{
@@ -212,7 +218,7 @@ public class NaviCellMapController {
             JSONArray species = arr.getJSONObject(i).getJSONArray("entities");
             for (int j=0; j < species.length(); j++) {
               String sname = species.getJSONObject(j).getString("name");
-              String sid = species.getJSONObject(j).getString("id");
+              String sid = species.getJSONObject(j).getJSONArray("modifs").getJSONObject(0).getString("id");
               NaviCellSpecies t_sp = new NaviCellSpecies(sid, sname, t_class, entry.id);
               JSONArray hugo = species.getJSONObject(j).getJSONArray("hugo");
               if (hugo.length() > 0) {
@@ -235,6 +241,39 @@ public class NaviCellMapController {
     catch (NaviCellMapException e) {
       throw new NaviCellMapControllerException(e.getMessage());
     }
+  }
+  
+  
+  @PostMapping("/api/maps")
+	@ResponseStatus(value = HttpStatus.CREATED)
+	public void handleFileUpload(Authentication authentication, @RequestParam("name") String name, @RequestParam("network-file") MultipartFile network_file, @RequestParam("tags") String tags, @RequestParam("layout") String layout, @RequestParam(name="async", required=false) Optional<String> async) {
+    if (async.isPresent() && Boolean.parseBoolean(async.get())) {
+      
+      try
+      {
+        // System.out.println("Size of file beginning of upload : " + network_file.getSize());
+      NaviCellMap entry = new NaviCellMap(name, authentication.getName());
+      repository.save(entry);
+     
+        NaviCellMapCreatorThread thread = new NaviCellMapCreatorThread(entry, storageService, sbgn_renderer, repository, tags_repository, species_repository, network_file.getBytes(), FilenameUtils.getExtension(network_file.getOriginalFilename()) , tags, layout);
+        // System.out.println("Size of file after thread creation : " + network_file.getSize());
+
+        thread.start();
+      }
+      catch (IOException e) {
+        
+      }
+    } else {
+      try{
+        createMap(authentication.getName(), name, network_file.getBytes(), FilenameUtils.getExtension(network_file.getOriginalFilename()), tags, layout);  
+      }
+      catch (IOException e) {
+        
+      }
+    }
+    
+    
+    
   }
   
 }

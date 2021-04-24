@@ -17,13 +17,15 @@ import org.springframework.http.HttpStatus;
 
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
+import fr.curie.navicell.sbgnrender.SBGNRenderer;
 // import fr.curie.navicell.NaviCellProperties;
 import fr.curie.navicell.storage.StorageProperties;
 import fr.curie.navicell.storage.StorageService;
-
+import fr.curie.navicell.sbgnrender.SBGNRenderProperties;
 @SpringBootApplication
 @EnableConfigurationProperties({
-  StorageProperties.class
+  StorageProperties.class,
+  SBGNRenderProperties.class
 })
 @RestController
 public class NaviCellApplication  extends SpringBootServletInitializer {
