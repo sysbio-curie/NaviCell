@@ -46,7 +46,7 @@ public class NaviCellData {
   public String path;
   public String username;
   public boolean isPublic;
-  
+  public String sessionId;
   
   private boolean createFolder(StorageService storage) {
     this.folder = UUID.randomUUID().toString();
@@ -62,14 +62,23 @@ public class NaviCellData {
     
   }
   
-  public NaviCellData(Authentication authentication, StorageService storageService, String name, MultipartFile file, int type) throws NaviCellDataException {
+  public NaviCellData(Authentication authentication, StorageService storageService, String name, Optional<MultipartFile> file, Optional<String> file_url, int type, Optional<String> session_id) throws NaviCellDataException {
     
-    
-    this.username = authentication.getName();
     this.isPublic = false; 
     
-    if (file.isEmpty()) {
+    if (authentication != null)
+      this.username = authentication.getName();
+    
+    if (file.isPresent() && file.get().isEmpty()) {
       throw new NaviCellDataException("Error : Empty file !");
+    }
+    
+    if (file_url.isPresent() && file_url.get().length() == 0) {
+      throw new NaviCellDataException("Error : Empty url !");
+    }
+    
+    if (!file.isPresent() && !file_url.isPresent()) {
+      throw new NaviCellDataException("Error : No file nor url given");
     }
     
     boolean folder_created = this.createFolder(storageService);
@@ -80,11 +89,21 @@ public class NaviCellData {
     this.name = name;
     this.type = type;
     
-    Path path = storageService.storeDataFile(file, this.folder, file.getOriginalFilename());
-    this.path = path.toString();
+    if (session_id.isPresent()) {
+      this.sessionId = session_id.get();
+    }
+    
+    if (file.isPresent()) {
+      Path path = storageService.storeDataFile(file.get(), this.folder, file.get().getOriginalFilename());
+      this.path = storageService.getDataLocation().relativize(path).toString();
+      
+    } else if (file_url.isPresent()) {
+      Path path = storageService.storeDataFileFromURL(file_url.get(), this.folder, null);
+      this.path = storageService.getDataLocation().relativize(path).toString();
+    }
+      
   }
   
-
   @Override
   public String toString() {
     return String.format(

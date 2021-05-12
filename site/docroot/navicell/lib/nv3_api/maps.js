@@ -30,7 +30,13 @@ async function uploadMap() {
     let data = new FormData();
     data.append('name', document.querySelector("#map-name").value);
     data.append('network-file', document.querySelector("#map-network").files[0]);
+    
+    if (!document.querySelector("#map-rendering").checked) {
+      data.append('image-file', document.querySelector("#map-image").files[0]);
+    } //else {
+     
     data.append('layout', document.querySelector("#map-layout").checked);
+    // }
     data.append('tags', document.querySelector("#map-tags").value);
     data.append('async', true);
     
@@ -44,9 +50,7 @@ async function uploadMap() {
       
     }
 
-    maps = await getMaps();
-    // document.querySelector("#new_map_spinner").style.visibility = "hidden";
-    return maps;
+    refresh();
   }
 }
 
@@ -226,9 +230,9 @@ function addPublicMapToTable(table, map_ind, map) {
   
   link_info = row.insertCell();
   link_info.style = "padding: 0.25rem";
-  link_info.innerHTML = "<button class=\"btn btn-md mr-1 btn-light float-right\" type=\"button\" data-toggle=\"collapse\" data-target=\"#collapse-map-" + map_ind + "\" aria-expanded=\"false\" aria-controls=\"collapse-map-" + map_ind + "\"><i class=\"bi-info-circle\"></i></button>";
-  link_info.innerHTML += "<a href=\"session.php?map=" + map.folder + "\"><button class=\"btn btn-md mr-1 btn-light float-right\"><i class=\"bi-record-circle-fill\"></i></button></a>";
-  link_info.innerHTML += "<a href=\"" + map.url + "\"><button class=\"btn btn-md mr-1 btn-light float-right\"><i class=\"bi-eye\"></i></button></a>";
+  link_info.innerHTML = "<button class=\"btn btn-md mr-1 btn-light float-right\" type=\"button\" data-toggle=\"collapse\" data-target=\"#collapse-map-" + map_ind + "\" aria-expanded=\"false\" aria-controls=\"collapse-map-" + map_ind + "\"><span data-toggle=\"tooltip\" title=\"View map info\"><i class=\"bi-info-circle\"></i></span></button>";
+  link_info.innerHTML += "<a href=\"session.php?map=" + map.folder + "\"><button class=\"btn btn-md mr-1 btn-light float-right\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Start session\"><i class=\"bi-record-circle-fill\"></i></button></a>";
+  link_info.innerHTML += "<a href=\"" + map.url + "\"><button class=\"btn btn-md mr-1 btn-light float-right\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"View map\"><i class=\"bi-eye\"></i></button></a>";
   
   tr_info = table.tBodies[0].insertRow();
   tr_info.classList.add("collapse");

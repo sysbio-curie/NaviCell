@@ -41,6 +41,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import fr.curie.navicell.database.maps.NaviCellMapRepository;
 import fr.curie.navicell.database.maps.NaviCellMap;
 import fr.curie.navicell.database.maps.NaviCellMapException;
+import fr.curie.navicell.database.data.NaviCellData;
+import fr.curie.navicell.database.data.NaviCellDataRepository;
 // import fr.curie.navicell.database.maps.NaviCellSpeciesRepository;
 // import fr.curie.navicell.database.species.NaviCellSpecies;
 
@@ -63,6 +65,9 @@ public class NaviCellSessionController {
   
   @Autowired
   public NaviCellSessionRepository sessions_repository;
+  
+  @Autowired
+  public NaviCellDataRepository data_repository;
   
 	@Autowired
   public NaviCellSessionCommandsRepository sessions_cmds_repository;
@@ -137,6 +142,11 @@ public class NaviCellSessionController {
         Optional<NaviCellSessionCommands> cmds = sessions_cmds_repository.findById(entry.get().commandsId);
         if (cmds.isPresent()) {
           sessions_cmds_repository.deleteById(cmds.get().id);
+        }
+        
+        List<NaviCellData> datas = data_repository.findBySessionId(entry.get().id);
+        for (NaviCellData data : datas) {
+          data_repository.deleteById(data.id);
         }
         
         sessions_repository.deleteById(id);

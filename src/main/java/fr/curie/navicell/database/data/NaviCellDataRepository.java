@@ -12,4 +12,5 @@ public interface NaviCellDataRepository extends MongoRepository<NaviCellData, St
   public List<NaviCellData> findByType(int type);
   public List<NaviCellData> findByUsername(String username);
   public List<NaviCellData> findByIsPublic(boolean isPublic);
+  public List<NaviCellData> findBySessionId(String sessionId);
 }

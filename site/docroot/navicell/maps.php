@@ -14,9 +14,9 @@
            
           <div class="container-fluid">
             <div class="row">
-              <div class="col-10"><h1>Collection of Maps</h1></div>
-              <div class="col-2"><button class="btn btn-primary float-right" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                <i class="bi-filter"></i>
+              <div class="col-8"><h1>Collection of Maps</h1></div>
+              <div class="col-4"><button class="btn btn-primary float-right" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                <i class="bi-filter"></i>&nbsp;Filter
               </button></div>
             </div>
             

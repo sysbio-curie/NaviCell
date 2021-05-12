@@ -17,6 +17,7 @@ public interface StorageService {
 	Path storeMapFile(File file, String folder, String filename);
 
 	Path storeDataFile(MultipartFile file, String folder, String filename);
+	Path storeDataFileFromURL(String file_url, String folder, String filename);
 	
 	void createMapFolder(String folder);
 	void createDataFolder(String folder);

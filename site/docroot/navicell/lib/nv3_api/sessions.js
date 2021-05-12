@@ -53,15 +53,17 @@ function addSessionToTable(table, session_ind, session) {
     row = table.tBodies[0].insertRow();
     name_cell = row.insertCell();
     name_cell.innerText = session.name;
-    resume_cell = row.insertCell();
-    resume_cell.innerHTML = "<a href=\"session.php?session=" + session.id + "&map=" + session.mapId + "\">Resume</a>";
+    // resume_cell = row.insertCell();
+    // resume_cell.innerHTML = "<a href=\"session.php?session=" + session.id + "&map=" + session.mapId + "\">Resume</a>";
     
     
-    download_cell = row.insertCell();
-    download_cell.innerHTML = "<a href=\"/api/sessions/" + session.id + ".nvc\">Download</a>";
+    // download_cell = row.insertCell();
+    // download_cell.innerHTML = "<a href=\"/api/sessions/" + session.id + ".nvc\">Download</a>";
     delete_cell = row.insertCell();
-    delete_cell.style = "padding: 0.25rem";
-    delete_cell.innerHTML = "<div class=\"float-right\"><button type=\"button\" class=\"btn btn-danger\" id=\"delete_" + session_ind + "\">Delete</button></div>"
+    delete_cell.style = "padding: 0.25rem; float: right";
+    delete_cell.innerHTML = "<a href=\"session.php?session=" + session.id + "&map=" + session.mapId + "\"><button type=\"button\" class=\"btn btn-light mr-1\"><i class=\"bi-play\"></i></button></a>"
+    delete_cell.innerHTML += "<a href=\"/api/sessions/" + session.id + ".nvc\"><button type=\"button\" class=\"btn btn-light mr-1\"><i class=\"bi-cloud-arrow-down\"></i></button></a>"
+    delete_cell.innerHTML += "<button type=\"button\" class=\"btn btn-danger\" id=\"delete_" + session_ind + "\"><i class=\"bi-trash\"></i></button>"
     
     document.querySelector("#delete_" + session_ind).addEventListener('click', async function() {
         await deleteSession(session.id);

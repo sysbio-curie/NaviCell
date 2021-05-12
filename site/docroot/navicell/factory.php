@@ -9,10 +9,10 @@
   
     <main role="main" class="container" style="margin-top: 100px">
         <div class="row">
-          <div class="col-10"><h1>My Maps</h1></div>
-          <div class="col-2">
+          <div class="col-4"><h1>My Maps</h1></div>
+          <div class="col-8">
             <button class="btn btn-primary float-right mr-1" type="button" data-toggle="modal" data-target="#newMapModal">
-              <i class="bi-plus-circle-fill"></i>
+              <i class="bi-plus-circle-fill"></i>&nbsp;Create new map
             </button>
           </div>
         </div>  
@@ -40,7 +40,7 @@
     
      
     <div class="modal fade" id="newMapModal" tabindex="-1" role="dialog" aria-labelledby="newMapModalLabel" aria-hidden="true">     
-      <div class="modal-dialog" role="document">
+      <div class="modal-dialog modal-lg" role="document">
         <form id="create_map_form">
         <div class="modal-content">
           <div class="modal-header">
@@ -61,9 +61,22 @@
                   <td><input type="file" id="map-network" /></td>
                 </tr>
                 <tr>
-                  <td>Layout</td>
-                  <td><input type="checkbox" id="map-layout"/></td>
+                  <td>Automatic rendering</td>
+                  <td>
+                    <label class="switch"><input type="checkbox" id="map-rendering" checked><span class="slider round"></span></label>
+                  </td>
                 </tr>
+                <tr class="collapse" id="map-image-tr">
+                  <td>Image file:</td>
+                  <td><input type="file" id="map-image" /></td>
+                </tr>
+                <tr class="collapse.show" id="map-layout-tr">
+                  <td>Layout</td>
+                  <td>
+                    <label class="switch"><input type="checkbox" id="map-layout"><span class="slider round"></span></label>
+                  </td>
+                </tr>
+                
                 <tr>
                   <td>Tags:</td>
                   <td><input type="text" id="map-tags" /></td>
@@ -82,7 +95,7 @@
                 <span class="sr-only">Creating the map...</span>
               </div>
             </div>
-            <button type="submit" class="btn btn-primary">Load data</button>
+            <button type="submit" class="btn btn-primary">Create Map</button>
           </div>
         </div>
         </form>
@@ -90,10 +103,25 @@
     </div>
     
     <script type="text/javascript">
+      document.querySelector("#map-rendering").addEventListener('change', async function(e) {
+        if (document.querySelector("#map-rendering").checked) {
+          document.querySelector("#map-image-tr").classList.add("collapse");
+          document.querySelector("#map-image-tr").classList.remove("collapse.show");
+          document.querySelector("#map-layout-tr").classList.remove("collapse");
+          document.querySelector("#map-layout-tr").classList.add("collapse.show");
+        } else {
+          document.querySelector("#map-image-tr").classList.remove("collapse");
+          document.querySelector("#map-image-tr").classList.add("collapse.show");
+          document.querySelector("#map-layout-tr").classList.add("collapse");
+          document.querySelector("#map-layout-tr").classList.remove("collapse.show");
+        }
+        
+      });
+      
       document.querySelector("#create_map_form").addEventListener('submit', async function(e) {
         e.preventDefault();
         try {
-          let upload = await uploadMap();
+          await uploadMap();
           $("#newMapModal").modal('hide');
         }
         catch (e) {
@@ -108,7 +136,17 @@
         if (logged_in()) {
           document.querySelector("#createmap_div").style.display = "block";
         }
-        await getMaps();
+        maps = await getMaps();
+        nb_building = 0;
+        
+        maps.map(function (map) {
+          if (map.isBuilding) {
+            nb_building += 1;
+          }
+        })
+        if (nb_building > 0) {
+          setTimeout(function(){ refresh() }, 10000);
+        }
       }
      
       document.addEventListener("DOMContentLoaded", async function () {

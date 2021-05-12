@@ -204,7 +204,7 @@ function addUserToTable(table, user_ind, user) {
     active_cell.innerHTML = "<label class=\"switch\"><input type=\"checkbox\"/ id=\"admin_" + user_ind + "\" onclick=\"toggle_admin(" + user_ind + ", '" + user.id + "')\"" + (user.isRoot == "true" ? " checked" : "") + "><span class=\"slider round\"></span></label>"
     delete_cell = row.insertCell();
     delete_cell.style = "padding: 0.25rem";
-    delete_cell.innerHTML = "<div class=\"float-right\"><button type=\"button\" class=\"btn btn-danger\" id=\"delete_" + user.id + "\">Delete</button></div>"
+    delete_cell.innerHTML = "<div class=\"float-right\"><button type=\"button\" class=\"btn btn-danger\" id=\"delete_" + user.id + "\"><i class=\"bi-trash\"></i></button></div>"
     
     document.querySelector("#delete_" + user.id).addEventListener('click', async function() {
         await delete_user(user.id);
@@ -220,6 +220,8 @@ document.querySelector("#logout_button").addEventListener('click', async functio
   
   async function refresh() {
     
+    local_refresh();
+
     show_logged_in(logged_in()); 
 
     if (logged_in()) {
@@ -238,7 +240,6 @@ document.querySelector("#logout_button").addEventListener('click', async functio
 
     }
     
-    local_refresh();
    
   }
  

@@ -24,7 +24,8 @@ async function startSession(map) {
   let map_window = window.open(url)
   // await sleep(1000);
   let timerUpdateSession = setInterval(async function () { await updateSession(session.sessionId);}, 5000);
-
+  await sleep(1000);
+  await waitForReady();
 }
 
 async function sendCommandToSession(command) {
@@ -114,13 +115,39 @@ let data_biotypes = [
   "Discrete Copy number data", "Continuous copy number data", "Mutation data", "Gene list"
 ]
 
-async function addDataToSession(t_data) {
+async function addDataToSession(name, t_data, t_data_url, t_data_type) {
   console.log(t_data);
   document.querySelector("#data_modal_error_message").innerHTML = "";
   document.querySelector("#data_modal_spinner").style.visibility = "visible";
-
-  path_data = t_data.path.split("/var/navicell/site/docroot/navicell")[1]
-  let cmd = "@COMMAND{\"action\":\"nv_import_datatables\",\"args\":[\"" + data_biotypes[t_data.type] + "\", \"" + t_data.name + "\", \"\", \"" + path_data + "\"]}";
+  
+  let path_data;
+  if (t_data !== undefined) {
+    path_data = t_data.path;//.split("/var/navicell/site/docroot/navicell")[1]
+  } else if (t_data_url !== undefined) {
+    // path_data = t_data_url;
+    let form_data = new FormData();
+    form_data.append('name', name);
+    form_data.append('session_id', session.sessionId);
+    form_data.append('file-url', t_data_url);
+    form_data.append('type', 0);    
+    let response = await nv3_request("/api/data", "POST", form_data);
+    
+    if (response.status != 201) {
+      console.log("ERROR : Could not upload temp data");
+    }
+    let json_response = await response.json();
+  
+    console.log(json_response);
+    path_data = json_response.path;//.split("/var/navicell/site/docroot/navicell")[1];  
+    
+    
+    
+  } else {
+    console.log("ERROR : No data to load !");
+  }
+  
+  
+  let cmd = "@COMMAND{\"action\":\"nv_import_datatables\",\"args\":[\"" + data_biotypes[t_data_type] + "\", \"" + name + "\", \"\", \"../../../data/" + path_data + "\"]}";
   let url = "/cgi-bin/nv_proxy.php/?id=" + session.sessionId + "&data=" + cmd;
   let response = await fetch(url, {method: "GET"});
 
@@ -135,8 +162,9 @@ async function addDataToSession(t_data) {
   await sleep(1000);
   await waitForDataLoaded();
   // document.querySelector("#data_model_error_message").innerHTML = "";
-  document.querySelector("#data_modal_spinner").style.visibility = "hidden";
   await updateSession();
+  document.querySelector("#data_modal_spinner").style.visibility = "hidden";
+
 } 
 
 filter = [
@@ -153,16 +181,17 @@ filter = [
 
 function filterOutGetCommandHistory(command_history) {
   filtered_commands = [];
-  commands = command_history.split("\n\n");
-  commands.map(function (value, key) {
-    t_command = JSON.parse(value.split("@COMMAND")[1])
-  
-    if (!filter.includes(t_command.action)
-    ) {
-      filtered_commands.push(value);
-    }
-  });
-  
+  if (command_history.length > 0){
+    commands = command_history.split("\n\n");
+    commands.map(function (value, key) {
+      t_command = JSON.parse(value.split("@COMMAND")[1])
+    
+      if (!filter.includes(t_command.action)
+      ) {
+        filtered_commands.push(value);
+      }
+    });
+  }
   doublons_filtered_commands = [];
   filtered_commands.map(function (value, key) {
     if (key == 0) {
@@ -175,6 +204,8 @@ function filterOutGetCommandHistory(command_history) {
       } 
     }
   });
+
+  
 
   return doublons_filtered_commands.join("\n\n");
 }

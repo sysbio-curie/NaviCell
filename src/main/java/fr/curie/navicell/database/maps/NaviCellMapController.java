@@ -174,11 +174,11 @@ public class NaviCellMapController {
     }
   }
   
-  public void createMap(String username, String name, byte[] network_file, String extension, String tags, String layout) {
+  public void createMap(String username, String name, byte[] network_file, byte[] image_file, String extension, String tags, String layout) {
     try{
       NaviCellMap entry = new NaviCellMap(name, username);
       repository.save(entry);
-      NaviCellMapCreator.createMap(entry, this.storageService, this.sbgn_renderer, network_file, extension, layout);
+      NaviCellMapCreator.createMap(entry, this.storageService, this.sbgn_renderer, network_file, image_file, extension, layout);
       entry.isBuilding = false;
       repository.save(entry);
 
@@ -246,16 +246,21 @@ public class NaviCellMapController {
   
   @PostMapping("/api/maps")
 	@ResponseStatus(value = HttpStatus.CREATED)
-	public void handleFileUpload(Authentication authentication, @RequestParam("name") String name, @RequestParam("network-file") MultipartFile network_file, @RequestParam("tags") String tags, @RequestParam("layout") String layout, @RequestParam(name="async", required=false) Optional<String> async) {
+	public void handleFileUpload(Authentication authentication, @RequestParam("name") String name, @RequestParam("network-file") MultipartFile network_file, @RequestParam(name="image-file", required=false) Optional<MultipartFile> image_file, @RequestParam("tags") String tags, @RequestParam("layout") String layout, @RequestParam(name="async", required=false) Optional<String> async) {
     if (async.isPresent() && Boolean.parseBoolean(async.get())) {
       
       try
       {
         // System.out.println("Size of file beginning of upload : " + network_file.getSize());
-      NaviCellMap entry = new NaviCellMap(name, authentication.getName());
-      repository.save(entry);
+        NaviCellMap entry = new NaviCellMap(name, authentication.getName());
+        repository.save(entry);
      
-        NaviCellMapCreatorThread thread = new NaviCellMapCreatorThread(entry, storageService, sbgn_renderer, repository, tags_repository, species_repository, network_file.getBytes(), FilenameUtils.getExtension(network_file.getOriginalFilename()) , tags, layout);
+        System.out.println("Given image : " + (image_file.isPresent() ? "Present" : "Absent"));
+        NaviCellMapCreatorThread thread = new NaviCellMapCreatorThread(
+          entry, storageService, sbgn_renderer, repository, tags_repository, species_repository, 
+          network_file.getBytes(), image_file.isPresent() ? image_file.get().getBytes() : new byte[0], 
+          FilenameUtils.getExtension(network_file.getOriginalFilename()) , tags, layout
+        );
         // System.out.println("Size of file after thread creation : " + network_file.getSize());
 
         thread.start();
@@ -265,7 +270,10 @@ public class NaviCellMapController {
       }
     } else {
       try{
-        createMap(authentication.getName(), name, network_file.getBytes(), FilenameUtils.getExtension(network_file.getOriginalFilename()), tags, layout);  
+        createMap(authentication.getName(), name, 
+          network_file.getBytes(), image_file.isPresent() ? image_file.get().getBytes() : new byte[0], 
+          FilenameUtils.getExtension(network_file.getOriginalFilename()), tags, layout
+        );  
       }
       catch (IOException e) {
         

@@ -69,7 +69,7 @@ public class NaviCellDataController {
     
       List result = new ArrayList<>();
       for (NaviCellData datum: repository.findAll()) {
-        if (datum.username.equals(authentication.getName()) || datum.isPublic) {
+        if (datum.username != null && datum.username.equals(authentication.getName()) || datum.isPublic) {
           result.add(datum);
         }
       }
@@ -80,16 +80,19 @@ public class NaviCellDataController {
 
   @PostMapping("/api/data")
 	@ResponseStatus(value = HttpStatus.CREATED)
-  void uploadData(Authentication authentication, @RequestParam("name") String name, @RequestParam("file") MultipartFile file, @RequestParam("type") int type) {
+  NaviCellData uploadData(Authentication authentication, @RequestParam("name") String name, @RequestParam(name="file", required=false) Optional<MultipartFile> file, @RequestParam(name="file-url", required=false) Optional<String> file_url, @RequestParam("type") int type, @RequestParam(name="session_id", required=false) Optional<String> session_id) {
     
     try{
-      NaviCellData entry = new NaviCellData(authentication, this.storageService, name, file, type);
-      repository.save(entry);
+        NaviCellData entry = new NaviCellData(authentication, this.storageService, name, file, file_url, type, session_id);  
+        repository.save(entry);
+        return entry;
     }
     
     catch (NaviCellDataException e) {
       throw new NaviCellDataControllerException(e.getMessage());
     }
+    
+    
   }
  
   @DeleteMapping("/api/data/{id}")
