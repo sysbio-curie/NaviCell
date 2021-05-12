@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.FileOutputStream;
+import java.io.BufferedInputStream;
+import java.net.URL;
+
 import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -19,6 +22,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.FileSystemUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
+import org.apache.commons.io.FilenameUtils;
+
 
 @Service
 public class FileSystemStorageService implements StorageService {
@@ -157,6 +162,37 @@ public class FileSystemStorageService implements StorageService {
 		}
 	}
 
+
+	@Override
+	public Path storeDataFileFromURL(String file_url, String folder, String name) {
+		
+		String filename;
+		if (name == null) { 
+			filename = FilenameUtils.getName(file_url); 
+		} else {
+			filename = name;
+		}
+		
+		try {
+			if (file_url.length() == 0) {
+				throw new StorageException("Failed to load empty url");
+			}
+			if (filename.contains("..")) {
+				// This is a security check
+				throw new StorageException(
+						"Cannot store file with relative path outside current directory "
+								+ filename);
+			}
+			try (BufferedInputStream inputStream = new BufferedInputStream(new URL(file_url).openStream())) {
+				Files.copy(inputStream, this.dataLocation.resolve(folder + File.separatorChar + filename),
+                    StandardCopyOption.REPLACE_EXISTING);
+                return this.dataLocation.resolve(folder + File.separatorChar + filename);
+			}
+		}
+		catch (IOException e) {
+			throw new StorageException("Failed to store file " + filename, e);
+		}
+	}
 	
 	
 	@Override

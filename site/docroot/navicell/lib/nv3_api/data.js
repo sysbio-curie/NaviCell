@@ -9,40 +9,37 @@ async function toggle_data_public(index, data_id) {
 
   // server responded with http response != 200
   if(response.status === 200){
-      document.querySelector("#creating_status").style.visibility = "hidden";
       refresh();   
-      // getPublicMaps();     
   }
 }
 
 
-async function uploadData() {
+async function uploadData(name, file, file_url, data_type) {
   
-  try {
-    
+    document.querySelector("#new_data_spinner").style.visibility = "visible";
+
     let data = new FormData();
-    data.append('name', document.querySelector("#data-name").value);
-    data.append('file', document.querySelector("#data-file").files[0]);
-    data.append('type', document.querySelector("#data-type").options.selectedIndex);
+    data.append('name', name);
+    if (file !== undefined)
+      data.append('file', file);
+      
+    if (file_url !== undefined)
+      data.append('file-url', file_url);
+      
+    data.append('type', data_type);
     // send fetch along with cookies
     let response = await nv3_request('/api/data', 'POST', data);
   
     // server responded with http response != 200
-    if(response.status != 201)
-      throw new Error('HTTP response code != 200');
-    console.log(response);
-    // read json response from server
-    // success response example : {"error":0,"message":""}
-    // error response example : {"error":1,"message":"File type not allowed"}
-    // let json_response = await response.json();
-    //   if(json_response.error == 1)
-    //       throw new Error(json_response.message);	
-    refresh();
-  }
-  catch(e) {
-    // catch rejected Promises and Error objects
-      console.log(e);
+    if(response.status != 201){
+      document.querySelector("#new_data_spinner").style.visibility = "hidden";
+      throw new Error('Data not uploaded !');
     }
+    
+    refresh();
+    
+    document.querySelector("#new_data_spinner").style.visibility = "hidden";
+
 }
 
 
@@ -97,6 +94,7 @@ function clearTable(table) {
 }
 
 function addDataToTable(table, data_ind, data) {
+  if (data.sessionId === null && data.username !== null) {
     row = table.tBodies[0].insertRow();
     name_cell = row.insertCell();
     name_cell.innerText = data.name;
@@ -109,4 +107,5 @@ function addDataToTable(table, data_ind, data) {
     document.querySelector("#delete_" + data.id).addEventListener('click', async function() {
         await deleteData(data.id);
     });
+  }
 }

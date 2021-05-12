@@ -13,11 +13,11 @@
         <div class="row">
           <div class="col-4"><h1>Active session</h1></div>
           <div class="col-8">
-            <button class="btn btn-primary float-right mr-1" type="button" id="session-save-button">
+            <button class="btn btn-primary float-right mr-1 session-loaded logged_in" type="button" id="session-save-button">
               <i class="bi-save"></i>&nbsp;<span id="session-save-action">Save</span> session
             </button>
-            <button class="btn btn-primary float-right mr-1" type="button" data-toggle="modal" data-target="#dataModal">
-              <i class="bi-file-earmark-spreadsheet"></i>&nbsp;Load data
+            <button class="btn btn-primary float-right mr-1 session-loaded" type="button" data-toggle="modal" data-target="#dataModal">
+              <i class="bi-file-earmark-spreadsheet"></i>&nbsp;Load dataset
             </button>
           </div>
         </div>  
@@ -38,13 +38,20 @@
           
         
         <br/>
-        <table id="table-active-session" class="table table-stripped">
-          <thead>
-            <th style="border-top: 0"></th>
-            <th style="border-top: 0"></th>
-          </thead>
-          <tbody></tbody>
-        </table>
+        <div class="session-loaded" style="display: none">
+          <table id="table-active-session" class="table table-stripped">
+            <thead>
+              <th style="border-top: 0"></th>
+              <th style="border-top: 0"></th>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <div class="session-loading text-center" style="display: block">
+          <div class="spinner-border mr-3" role="status">
+            <span class="sr-only">Loading session...</span>
+          </div>
+        </div>
         <br/><br/>    
       </div>   
       
@@ -81,21 +88,55 @@
       <form id="data-load-form">  
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Load data into session</h5>
+            <h5 class="modal-title">Load dataset into session</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
-            <div class="dropdown text-center">
-              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width: 80%; overflow-x: hidden; text-overflow: ellipsis;">
-                Choose data...
-              </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="data-list"  style="width: 80%; overflow-x: hidden; text-overflow: ellipsis;">
-                
-              </div>
             
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link active" id="local-tab" data-toggle="tab" href="#local" role="tab" aria-controls="home" aria-selected="true">Local</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="remote-tab" data-toggle="tab" href="#remote" role="tab" aria-controls="remote" aria-selected="false">Remote</a>
+              </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+              <br/>
+              <div class="tab-pane fade show active" id="local" role="tabpanel" aria-labelledby="local-tab">
+                <div class="dropdown text-center">
+                  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width: 80%; overflow-x: hidden; text-overflow: ellipsis;">
+                    Choose data...
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="data-list"  style="width: 80%; overflow-x: hidden; text-overflow: ellipsis;">
+                    
+                  </div>
+                
+                </div>
+              </div>
+              <div class="tab-pane fade" id="remote" role="tabpanel" aria-labelledby="remote-tab">
+                <table class="table" style="margin-bottom: 0px">
+                  <tbody>
+                   <tr>
+                      <td width="100px">Name:</td>
+                      <td><input type="text" id="data-name" /></td>
+                    </tr>
+                    <tr>
+                      <td width="100px">File url:</td>
+                      <td><input type="text" id="data-url" /></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
+          
+          
+          
+          
+          
+            
             
           </div>
   
@@ -119,6 +160,7 @@
     <script type="text/javascript">
       let session;
       let resumed = false;
+      let loading = true;
       let data;
       let selected_data = -1;
       let command_history = [];
@@ -128,6 +170,13 @@
         } else {
           document.querySelector("#session-save-action").innerHTML = "Save";
         }
+        Array.from(document.getElementsByClassName("session-loading")).map(function (object) {
+            object.style.display = loading ? "block" : "none";
+        });
+        Array.from(document.getElementsByClassName("session-loaded")).map(function (object) {
+            object.style.display = loading ? "none" : "block";
+        });
+          
       }
 
       document.addEventListener("DOMContentLoaded", async function () {
@@ -137,12 +186,18 @@
 
         const urlParams = new URLSearchParams(window.location.search);
         if (urlParams.get('map') && urlParams.get('session')) {
+          
           await resumeSession(urlParams.get('session'), urlParams.get('map'));
+          loading = false;
+          await refresh(); 
         }
         else if (urlParams.get('map')) {
           await startSession(urlParams.get('map'));  
-          
+          loading = false;
+          await refresh();
         }
+        
+        
         let data = await getData();
         data.map(function (value, key) {
           document.querySelector("#data-list").innerHTML += "<a class=\"dropdown-item\" href=\"#\">" + value.name + "</a>"
@@ -154,10 +209,18 @@
         });
         document.querySelector("#data-load-form").addEventListener('submit', async function (e) {
           e.preventDefault();
-          if (selected_data >= 0) {
+          
+          is_local = document.querySelector("#local-tab").classList.contains("active");
+          
+          if (!is_local || selected_data >= 0) {
             let datum = data[selected_data];
             console.log(datum)
-            await addDataToSession(datum)
+            await addDataToSession(
+              is_local ? datum.name : document.querySelector("#data-name").value,
+              is_local ? datum : undefined,
+              !is_local ? document.querySelector("#data-url").value : undefined,
+              is_local ? datum.type : 0
+            );
           }
           $("#dataModal").modal('hide');
         });

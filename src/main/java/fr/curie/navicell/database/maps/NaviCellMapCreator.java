@@ -62,7 +62,7 @@ import java.awt.Color;
 
 public class NaviCellMapCreator {
 
-  public static void createMap(NaviCellMap map, StorageService storageService, SBGNRenderer sbgn_render, byte[] network_file, String extension, String layout) throws NaviCellMapException 
+  public static void createMap(NaviCellMap map, StorageService storageService, SBGNRenderer sbgn_render, byte[] network_file, byte[] image_file, String extension, String layout) throws NaviCellMapException 
   {
     
     if (network_file.length == 0) {
@@ -90,19 +90,25 @@ public class NaviCellMapCreator {
     try {
       System.out.println("Creating temp dir");
       tmpDir = Files.createTempDirectory(null);
-      
+      System.out.println(image_file.length);
+      System.out.println(image_file);
+      if (image_file.length == 0) {
 
-    
-      if (layout.length() > 0 && Boolean.parseBoolean(layout)) { 
-        System.out.println("We want a layout");
-        map.networkPath = performLayout(storageService, tmpDir, map.folder, map.networkPath);
-        // this.createSBGNML(storageService);
-      
+        if (layout.length() > 0 && Boolean.parseBoolean(layout)) { 
+          System.out.println("We want a layout");
+          map.networkPath = performLayout(storageService, tmpDir, map.folder, map.networkPath);
+          // this.createSBGNML(storageService);
+        
+        }
+        System.out.println("Creating sbgn");
+        map.sbgnPath = createSBGNML(storageService, tmpDir, map.folder, map.networkPath);
+        System.out.println("Starting rendering");
+        map.imagePath = createImage(storageService, sbgn_render, tmpDir, map.folder, map.networkPath, map.sbgnPath);
+      } else {
+        Path image_path = storageService.storeMapFile(image_file, map.folder, "master.png");
+        map.imagePath = storageService.getMapsLocation().relativize(image_path).toString();
       }
-      System.out.println("Creating sbgn");
-      map.sbgnPath = createSBGNML(storageService, tmpDir, map.folder, map.networkPath);
-      System.out.println("Starting rendering");
-      map.imagePath = createImage(storageService, sbgn_render, tmpDir, map.folder, map.networkPath, map.sbgnPath);
+      
       System.out.println("Creating zooms");
       createZooms(storageService, tmpDir, map.imagePath);
       System.out.println("Creating map");
@@ -279,7 +285,7 @@ public class NaviCellMapCreator {
       throw new NaviCellMapException("IO Error : " + e.getMessage());
     }
     catch (Exception e) {
-      throw new NaviCellMapException(e.getMessage());
+      throw new NaviCellMapException("Error creating zooms : " + e.getMessage());
     }
     
   }
@@ -309,7 +315,7 @@ public class NaviCellMapCreator {
       throw new NaviCellMapException("IO Error : " + e);
     }
     catch (Exception e) {
-      throw new NaviCellMapException(e.getMessage());
+      throw new NaviCellMapException(" Error producing map : " + e.getMessage());
     }
     
   }

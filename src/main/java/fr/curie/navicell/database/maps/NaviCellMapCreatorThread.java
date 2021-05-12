@@ -53,11 +53,12 @@ class NaviCellMapCreatorThread extends Thread {
 
 
     byte[] network_file;
+    byte[] image_file;
     String extension;
     String tags;
     String layout;
     NaviCellMap entry;
-    public NaviCellMapCreatorThread(NaviCellMap entry, StorageService storageService, SBGNRenderer sbgn_render, NaviCellMapRepository repository, NaviCellTagRepository tags_repository, NaviCellSpeciesRepository species_repository, byte[] network_file, String extension, String tags, String layout) {
+    public NaviCellMapCreatorThread(NaviCellMap entry, StorageService storageService, SBGNRenderer sbgn_render, NaviCellMapRepository repository, NaviCellTagRepository tags_repository, NaviCellSpeciesRepository species_repository, byte[] network_file, byte[] image_file, String extension, String tags, String layout) {
         super("MyThread");
         this.entry = entry;
         this.storageService = storageService;
@@ -66,16 +67,17 @@ class NaviCellMapCreatorThread extends Thread {
         this.tags_repository = tags_repository;
         this.species_repository = species_repository;
         this.network_file = network_file;
+        this.image_file = image_file;
         this.extension = extension;
         this.tags = tags;
         this.layout = layout;
     }
 
 
-  public void createMap(NaviCellMap entry, StorageService storageService, SBGNRenderer sbgn_render, NaviCellMapRepository repository, NaviCellTagRepository tags_repository, NaviCellSpeciesRepository species_repository, byte []network_file, String extension, String tags, String layout) {
+  public void createMap(NaviCellMap entry, StorageService storageService, SBGNRenderer sbgn_render, NaviCellMapRepository repository, NaviCellTagRepository tags_repository, NaviCellSpeciesRepository species_repository, byte []network_file, byte[] image_file, String extension, String tags, String layout) {
     try{
       
-      NaviCellMapCreator.createMap(entry, storageService, sbgn_render, network_file, extension, layout);
+      NaviCellMapCreator.createMap(entry, storageService, sbgn_render, network_file, image_file, extension, layout);
       entry.isBuilding = false;
       
       // NaviCellMap entry = new NaviCellMap(username, storageService, sbgn_render, name, network_file, extension, layout);
@@ -143,7 +145,7 @@ class NaviCellMapCreatorThread extends Thread {
   }
   
     public void run() {
-        createMap(this.entry, this.storageService, this.sbgn_render, this.repository, this.tags_repository, this.species_repository, this.network_file, this.extension, this.tags, this.layout);
+        createMap(this.entry, this.storageService, this.sbgn_render, this.repository, this.tags_repository, this.species_repository, this.network_file, this.image_file, this.extension, this.tags, this.layout);
     }
 }
 
