@@ -83,7 +83,7 @@ public class NaviCellMapController {
     
       List result = new ArrayList<>();
       for (NaviCellMap map: repository.findAllByOrderByName()) {
-        if (map.username.equals(authentication.getName()) || map.isPublic) {
+        if (map.username.equals(authentication.getName())){// || map.isPublic) {
           result.add(map);
         }
       }
@@ -249,7 +249,7 @@ public class NaviCellMapController {
   
   @PostMapping("/api/maps")
 	@ResponseStatus(value = HttpStatus.CREATED)
-	public void handleFileUpload(Authentication authentication, @RequestParam("name") String name, @RequestParam("network-file") MultipartFile network_file, @RequestParam(name="image-file", required=false) Optional<MultipartFile> image_file, @RequestParam("tags") String tags, @RequestParam("layout") String layout, @RequestParam(name="async", required=false) Optional<String> async) {
+	public Optional<NaviCellMap> handleFileUpload(Authentication authentication, @RequestParam("name") String name, @RequestParam("network-file") MultipartFile network_file, @RequestParam(name="image-file", required=false) Optional<MultipartFile> image_file, @RequestParam("tags") String tags, @RequestParam("layout") String layout, @RequestParam(name="async", required=false) Optional<String> async) {
     if (async.isPresent() && Boolean.parseBoolean(async.get())) {
       
       try

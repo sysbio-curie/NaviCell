@@ -7,6 +7,10 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.LinkedHashMap;
+import java.util.Collections;
 import java.util.ArrayList;
 import java.util.HashSet;
 import org.apache.commons.collections4.ListUtils;
@@ -40,7 +44,8 @@ import fr.curie.navicell.storage.StorageService;
 import org.json.JSONObject;
 import org.json.JSONException;
 import org.json.JSONArray;
-
+import static java.util.stream.Collectors.*;
+import static java.util.Map.Entry.*;
 // @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 public class NaviCellTagController {
@@ -54,13 +59,23 @@ public class NaviCellTagController {
 	
   @GetMapping("api/tags")
   @ResponseStatus(value = HttpStatus.OK)
-  List<String> all_tags() {
+  HashMap<String, Integer> all_tags() {
     
-    Set<String> public_tags = new HashSet<>();
+    HashMap<String, Integer> public_tags = new HashMap<String, Integer>();
     for (NaviCellMap public_map : repository.findByIsPublicOrderByName(true)) {
-      public_tags.addAll(new HashSet<>(public_map.tags));
+      for (String tag : public_map.tags) {
+        public_tags.put(tag, (public_tags.containsKey(tag) ? public_tags.get(tag) + 1: 1));
+      }
     }
-    return new ArrayList<>(public_tags);
+    
+    return public_tags
+        .entrySet()
+        .stream()
+        .sorted(Collections.reverseOrder(Map.Entry.comparingByValue()))
+        .collect(
+            toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e2,
+                LinkedHashMap::new));
+    // return public_tags;
   }
   
   @GetMapping("api/tags/name/{name}")

@@ -225,7 +225,7 @@ function addPublicMapToTable(table, map_ind, map) {
   name_cell.innerText = map.name;
   tags_cell = row.insertCell();
   map.tags.map(function (value, key) {
-    tags_cell.innerHTML += "<a href=\"#\" class=\"btn btn-primary btn-sm mr-1\" style=\"opacity:1\">" + value + "</a>"  
+    tags_cell.innerHTML += "<a href=\"#\" class=\"btn btn-primary btn-sm mr-1\" style=\"opacity:1;margin-bottom: 0.2em\">" + value + "</a>"  
   })
   
   link_info = row.insertCell();
