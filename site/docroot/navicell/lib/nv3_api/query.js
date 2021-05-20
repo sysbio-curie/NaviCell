@@ -126,6 +126,7 @@ async function getMapInfos(mapIds) {
 
         clearSpeciesSearchResults(table);
         json_response.map((value, key) => {
+          
           addSpeciesSearchResult(table, value, key, map_info);
       
         });
@@ -171,9 +172,10 @@ async function getMapInfos(mapIds) {
         
         let map_info = await getMapInfos(map_ids);
               
+        
         // console.log(json_response);
         table = document.querySelector("#table-results");
-        clearSpeciesSearchResults();
+        clearSpeciesSearchResults(table);
         json_response.map((value, key) => {
             addSpeciesSearchResult(table, value, key, map_info);
         });

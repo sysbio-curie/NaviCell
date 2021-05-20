@@ -7,9 +7,10 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 public interface NaviCellMapRepository extends MongoRepository<NaviCellMap, String> {
 
   // public List<NaviCellMap> findById(String id);
-  public List<NaviCellMap> findByName(String name);
-  public List<NaviCellMap> findByNetworkPath(String network_path);
-  public List<NaviCellMap> findByImagePath(String image_path);
-  public List<NaviCellMap> findByUsername(String username);
-  public List<NaviCellMap> findByIsPublic(boolean isPublic);
+  public List<NaviCellMap> findAllByOrderByName();
+  public List<NaviCellMap> findByNameOrderByName(String name);
+  public List<NaviCellMap> findByNetworkPathOrderByName(String network_path);
+  public List<NaviCellMap> findByImagePathOrderByName(String image_path);
+  public List<NaviCellMap> findByUsernameOrderByName(String username);
+  public List<NaviCellMap> findByIsPublicOrderByName(boolean isPublic);
 }

@@ -33,7 +33,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 // import fr.curie.navicell.security.JwtTokenUtil;
 import org.springframework.security.core.userdetails.User;
-
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.security.core.context.SecurityContextHolder;
 // import fr.curie.navicell.security.MongoUser;
@@ -68,13 +68,18 @@ public class AuthController {
                     .header(HttpHeaders.AUTHORIZATION, jwtTokenUtil.generateAccessToken(user))
                     .build();
             } else {
-                System.out.println("AUTH : Inactive user");
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+                // System.out.println("AUTH : Inactive user");
+                return new ResponseEntity<String>("User hasn't beed activated yet", HttpStatus.UNAUTHORIZED);
             }
         } catch (BadCredentialsException ex) {
-            System.out.println("AUTH : Bad credentials");
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            // System.out.println("AUTH : Bad credentials");
+            return new ResponseEntity<String>("Bad credentials", HttpStatus.UNAUTHORIZED);
             
+        } catch (UsernameNotFoundException e) {
+            return new ResponseEntity<String>("User not found", HttpStatus.UNAUTHORIZED);
+        
+        } catch (Exception e) {
+            return new ResponseEntity<String>("Exception: " + e.getMessage(), HttpStatus.UNAUTHORIZED);
         }
     }
     
@@ -82,14 +87,16 @@ public class AuthController {
     public ResponseEntity<String> signup(@RequestParam("login") String name, @RequestParam("password") String password) {
 
         try {
-            MongoUser t_user = new MongoUser(name, passwordEncoder.encode(password), this.repository.count() == 0);
-            this.repository.save(t_user);
-            
-            return ResponseEntity.ok().build();
+            if (this.repository.findByUsername(name) == null) {
+                MongoUser t_user = new MongoUser(name, passwordEncoder.encode(password), this.repository.count() == 0);
+                this.repository.save(t_user);
+                
+                return ResponseEntity.ok().build();
+            } else {
+                return new ResponseEntity<String>("Account already exists", HttpStatus.UNAUTHORIZED);
+            }
         } catch (Exception ex) {
-            System.out.println("AUTH : Bad credentials");
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-            
+            return new ResponseEntity<String>("Account creation failed", HttpStatus.UNAUTHORIZED);
         }
     }
     

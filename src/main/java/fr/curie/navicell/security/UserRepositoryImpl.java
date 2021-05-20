@@ -31,7 +31,7 @@ public class UserRepositoryImpl implements UserRepositoryCustom  {
     public void deleteUserData(MongoUser user) {
         System.out.println("Using the override of deleteById");
      
-        List<NaviCellMap> results = this.map_repository.findByUsername(user.getUsername());
+        List<NaviCellMap> results = this.map_repository.findByUsernameOrderByName(user.getUsername());
         
         for (NaviCellMap result : results) {
         

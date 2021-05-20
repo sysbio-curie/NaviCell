@@ -63,11 +63,11 @@ public class NaviCellSpeciesController {
 
     if (authentication != null) {
       maps_allowed = ListUtils.union(
-        repository.findByUsername(authentication.getName()),
-        repository.findByIsPublic(true)
+        repository.findByUsernameOrderByName(authentication.getName()),
+        repository.findByIsPublicOrderByName(true)
       );
     } else {
-      maps_allowed = repository.findByIsPublic(true);
+      maps_allowed = repository.findByIsPublicOrderByName(true);
     }
     
     // System.out.println(maps_allowed.toString());
@@ -104,7 +104,7 @@ public class NaviCellSpeciesController {
         }
       }
     } else {
-      maps_allowed = repository.findByIsPublic(true);
+      maps_allowed = repository.findByIsPublicOrderByName(true);
     }
     // System.out.println("Size of available maps : " + maps_allowed.size());
 

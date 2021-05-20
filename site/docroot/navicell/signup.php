@@ -11,6 +11,12 @@
       <div class="text-center">
         <form class="form-signin" id="signup-form">
           <img class="mb-4" src="navicell-logo.png" alt="" width="250px">
+          <div class="alert alert-danger alert-dismissible fade show" role="alert" id="error_alert" style="display: none">
+            <strong>Error !</strong> <span id="error_message"></span>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
           <h1 class="h3 mb-3 font-weight-normal">Signing up</h1>
           <label for="login" class="sr-only">Login</label>
           <input type="text" id="login" class="form-control" placeholder="Login" required autofocus>
@@ -45,15 +51,34 @@
         let login = document.querySelector("#login").value;
         let password1 = document.querySelector("#password1").value;
         let password2 = document.querySelector("#password2").value;
-        
+        error();
         if (
           (login && login.length > 0)
           && (password1 && password1.length > 0) 
           && (password1 === password2)
         )
         {
-          await signup(login, password1);
-          window.location.href = "/signin.html";
+          
+          let res = await signup(login, password1);
+          console.log(res)
+          if (res.length == 0) {
+            window.location.href = "/signin.php";  
+          } else {
+            // console.log(res)
+            error(res);
+            
+          }
+          
+        } else {
+          if (login.length == 0) {
+            error("Please choose an username");
+          } else if (password1.length == 0){
+            error("Please choose a password");
+          } else if (password2.length == 0) {
+            error("Please confirm your password")
+          } else if (password1 !== password2) {
+            error("Your password confirmation doesn't match")
+          }
         }
       });
       
