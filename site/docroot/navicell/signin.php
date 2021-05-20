@@ -12,6 +12,12 @@
       <div class="text-center">
         <form class="form-signin" id="nv3_login">
           <img class="mb-4" src="navicell-logo.png" alt="" width="250px">
+          <div class="alert alert-danger alert-dismissible fade show" role="alert" id="error_alert" style="display: none">
+            <strong>Error !</strong> <span id="error_message"></span>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
           <h1 class="h3 mb-3 font-weight-normal">Please log in</h1>
           <label for="login" class="sr-only">Login</label>
           <input type="text" id="login" class="form-control" placeholder="Login" required autofocus>
@@ -49,12 +55,17 @@
  
       document.querySelector("#nv3_login").addEventListener('submit', async function(event) {
         event.preventDefault();
+        error();
         let t_login = document.querySelector("#login").value;
         let password = document.querySelector("#password").value;
         if ((t_login && t_login.length > 0) && (password && password.length > 0)){
-          await login(t_login, password);
-          
-          refresh(); 
+          res = await login(t_login, password);
+          console.log(res);
+          if (res.length > 0) {
+            error(res);
+          } else {
+            refresh(); 
+          }
         }
         
       });

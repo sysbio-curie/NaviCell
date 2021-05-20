@@ -82,7 +82,7 @@ public class NaviCellMapController {
     if (authentication != null){
     
       List result = new ArrayList<>();
-      for (NaviCellMap map: repository.findAll()) {
+      for (NaviCellMap map: repository.findAllByOrderByName()) {
         if (map.username.equals(authentication.getName()) || map.isPublic) {
           result.add(map);
         }
@@ -108,7 +108,7 @@ public class NaviCellMapController {
     // if (tags.isPresent()) {
     //   String[] tokens = tags.get().split(",");
     //   for (int i=0; i < tokens.length; i++) {
-    //     tokens[i] = tokens[i].strip().toLowerCase();
+    //     tokens[i] = tokens[i].strip();
     //   }
     //   List<NaviCellMap> filtered_maps = new ArrayList<>();
     //   for (NaviCellMap map : repository.findAll()) {
@@ -119,7 +119,7 @@ public class NaviCellMapController {
     //   return filtered_maps;
     //   // for     
     // } else
-      return repository.findByIsPublic(true);
+      return repository.findByIsPublicOrderByName(true);
   }
 
   @PostMapping("/api/maps/public")
@@ -127,7 +127,7 @@ public class NaviCellMapController {
   List<NaviCellMap> publicMapsByTags(Authentication authentication, @RequestParam("tags") String tags) {
     String[] tokens = tags.split(",");
     for (int i=0; i < tokens.length; i++) {
-      tokens[i] = tokens[i].strip().toLowerCase();
+      tokens[i] = tokens[i].strip();
     }
     List<NaviCellMap> filtered_maps = new ArrayList<>();
     for (NaviCellMap map : repository.findAll()) {
@@ -174,7 +174,7 @@ public class NaviCellMapController {
     }
   }
   
-  public void createMap(String username, String name, byte[] network_file, byte[] image_file, String extension, String tags, String layout) {
+  public Optional<NaviCellMap> createMap(String username, String name, byte[] network_file, byte[] image_file, String extension, String tags, String layout) {
     try{
       NaviCellMap entry = new NaviCellMap(name, username);
       repository.save(entry);
@@ -186,7 +186,7 @@ public class NaviCellMapController {
       if (tags.length() > 0) {
         tokens = tags.split(",");
         for (int i=0; i < tokens.length; i++) {
-          tokens[i] = tokens[i].strip().toLowerCase();
+          tokens[i] = tokens[i].strip();
           NaviCellTag new_tag = new NaviCellTag(tokens[i], entry.id);
           tags_repository.save(new_tag);
         }
@@ -206,37 +206,40 @@ public class NaviCellMapController {
         JSONArray arr = new JSONArray(Files.readString(Paths.get(mapdata_path)));
         for (int i = 0; i < arr.length(); i++)
         {        
-          // System.out.println(arr.getJSONObject(i));
-          String t_class = arr.getJSONObject(i).getString("class");
-          if (
-            t_class.equals("PROTEIN") ||
-            t_class.equals("GENE") ||
-            t_class.equals("RNA") ||
-            t_class.equals("ANTISENSE_RNA") ||
-            t_class.equals("PHENOTYPE")
-          ) {
-            JSONArray species = arr.getJSONObject(i).getJSONArray("entities");
-            for (int j=0; j < species.length(); j++) {
-              String sname = species.getJSONObject(j).getString("name");
-              String sid = species.getJSONObject(j).getJSONArray("modifs").getJSONObject(0).getString("id");
-              NaviCellSpecies t_sp = new NaviCellSpecies(sid, sname, t_class, entry.id);
-              JSONArray hugo = species.getJSONObject(j).getJSONArray("hugo");
-              if (hugo.length() > 0) {
-                System.out.println("New hugo : " + hugo.getString(0));
-                t_sp.hugo = hugo.getString(0);
+          if (arr.getJSONObject(i).has("class")) {
+            String t_class = arr.getJSONObject(i).getString("class");
+            if (
+              t_class.equals("PROTEIN") ||
+              t_class.equals("GENE") ||
+              t_class.equals("RNA") ||
+              t_class.equals("ANTISENSE_RNA") ||
+              t_class.equals("PHENOTYPE")
+            ) {
+              JSONArray species = arr.getJSONObject(i).getJSONArray("entities");
+              for (int j=0; j < species.length(); j++) {
+                String sname = species.getJSONObject(j).getString("name");
+                String sid = species.getJSONObject(j).getJSONArray("modifs").getJSONObject(0).getString("id");
+                NaviCellSpecies t_sp = new NaviCellSpecies(sid, sname, t_class, entry.id);
+                JSONArray hugo = species.getJSONObject(j).getJSONArray("hugo");
+                if (hugo.length() > 0) {
+                  System.out.println("New hugo : " + hugo.getString(0));
+                  t_sp.hugo = hugo.getString(0);
+                }
+                species_repository.save(t_sp);         
               }
-              species_repository.save(t_sp);         
             }
           }
         }
       }
       catch (IOException e) {
         System.out.println(e.getMessage());
+        return Optional.empty();
       }
       catch (JSONException e){
         System.out.println(e.getMessage());
+        return Optional.empty();
       }
-      
+      return Optional.of(entry);
     }
     catch (NaviCellMapException e) {
       throw new NaviCellMapControllerException(e.getMessage());
@@ -264,13 +267,15 @@ public class NaviCellMapController {
         // System.out.println("Size of file after thread creation : " + network_file.getSize());
 
         thread.start();
+        
+        return Optional.of(entry);
       }
       catch (IOException e) {
         
       }
     } else {
       try{
-        createMap(authentication.getName(), name, 
+        return createMap(authentication.getName(), name, 
           network_file.getBytes(), image_file.isPresent() ? image_file.get().getBytes() : new byte[0], 
           FilenameUtils.getExtension(network_file.getOriginalFilename()), tags, layout
         );  
@@ -280,8 +285,7 @@ public class NaviCellMapController {
       }
     }
     
-    
-    
+    return Optional.empty();
   }
   
 }

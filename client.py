@@ -50,12 +50,19 @@ class Client:
             return requests.get(self.url + "/api/" + path, headers={
                 'Authorization':  ('Bearer ' + self.authorization)
             })
+        elif method == "put":
+            return requests.put(self.url + "/api/" + path, headers={
+                'Authorization':  ('Bearer ' + self.authorization)
+            }, data=data)
+            
         elif method == "post":
             return requests.post(self.url + "/api/" + path, 
-                headers={'Authorization':  ('Bearer ' + self.authorization)},
+                headers={
+                    'Authorization':  ('Bearer ' + self.authorization), 
+                },
                 data=data, files=files
             )
-
+        
         
     def getMaps(self):
         
@@ -81,7 +88,15 @@ class Client:
 
         res = self._identified_request("maps", "post", data, files)
         
+        if res.status_code != 201:
+            print("Error : couldn't create map !")
+            return
+            
         if len(res.text) > 0:
             return json.loads(res.text)
     
-    
+    def publishMap(self, map, value=True):
+        
+        res = self._identified_request("maps/" + map['id'], "put", {'is_public' : "true" if value else "false"})
+        if res.status_code != 200:
+            print("Error : couldn't " + ("un" if not value else "") + "publish the map")

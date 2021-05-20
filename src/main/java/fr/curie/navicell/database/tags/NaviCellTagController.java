@@ -57,7 +57,7 @@ public class NaviCellTagController {
   List<String> all_tags() {
     
     Set<String> public_tags = new HashSet<>();
-    for (NaviCellMap public_map : repository.findByIsPublic(true)) {
+    for (NaviCellMap public_map : repository.findByIsPublicOrderByName(true)) {
       public_tags.addAll(new HashSet<>(public_map.tags));
     }
     return new ArrayList<>(public_tags);

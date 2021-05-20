@@ -87,7 +87,7 @@ class NaviCellMapCreatorThread extends Thread {
       if (tags.length() > 0) {
         tokens = tags.split(",");
         for (int i=0; i < tokens.length; i++) {
-          tokens[i] = tokens[i].strip().toLowerCase();
+          tokens[i] = tokens[i].strip();
           NaviCellTag new_tag = new NaviCellTag(tokens[i], entry.id);
           tags_repository.save(new_tag);
         }
@@ -108,25 +108,27 @@ class NaviCellMapCreatorThread extends Thread {
         for (int i = 0; i < arr.length(); i++)
         {        
           // System.out.println(arr.getJSONObject(i));
-          String t_class = arr.getJSONObject(i).getString("class");
-          if (
-            t_class.equals("PROTEIN") ||
-            t_class.equals("GENE") ||
-            t_class.equals("RNA") ||
-            t_class.equals("ANTISENSE_RNA") ||
-            t_class.equals("PHENOTYPE")
-          ) {
-            JSONArray species = arr.getJSONObject(i).getJSONArray("entities");
-            for (int j=0; j < species.length(); j++) {
-              String sname = species.getJSONObject(j).getString("name");
-              String sid = species.getJSONObject(j).getJSONArray("modifs").getJSONObject(0).getString("id");
-              NaviCellSpecies t_sp = new NaviCellSpecies(sid, sname, t_class, entry.id);
-              JSONArray hugo = species.getJSONObject(j).getJSONArray("hugo");
-              if (hugo.length() > 0) {
-                System.out.println("New hugo : " + hugo.getString(0));
-                t_sp.hugo = hugo.getString(0);
+          if (arr.getJSONObject(i).has("class")){
+            String t_class = arr.getJSONObject(i).getString("class");
+            if (
+              t_class.equals("PROTEIN") ||
+              t_class.equals("GENE") ||
+              t_class.equals("RNA") ||
+              t_class.equals("ANTISENSE_RNA") ||
+              t_class.equals("PHENOTYPE")
+            ) {
+              JSONArray species = arr.getJSONObject(i).getJSONArray("entities");
+              for (int j=0; j < species.length(); j++) {
+                String sname = species.getJSONObject(j).getString("name");
+                String sid = species.getJSONObject(j).getJSONArray("modifs").getJSONObject(0).getString("id");
+                NaviCellSpecies t_sp = new NaviCellSpecies(sid, sname, t_class, entry.id);
+                JSONArray hugo = species.getJSONObject(j).getJSONArray("hugo");
+                if (hugo.length() > 0) {
+                  System.out.println("New hugo : " + hugo.getString(0));
+                  t_sp.hugo = hugo.getString(0);
+                }
+                species_repository.save(t_sp);         
               }
-              species_repository.save(t_sp);         
             }
           }
         }

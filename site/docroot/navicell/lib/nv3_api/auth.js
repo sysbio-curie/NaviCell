@@ -59,7 +59,9 @@ async function signup(login, password) {
     });
     
     if(response.status === 200){
-        
+        return "";    
+    } else {
+        return await response.text();
     }
     
 }
@@ -79,8 +81,11 @@ async function login(login, password) {
 
     if(response.status === 200){
         token = response.headers.get("Authorization")
-    set_token(token);
-    // return response.headers.get("Authorization");  
+        set_token(token);
+        return "";
+        // return response.headers.get("Authorization");  
+    } else {
+        return await response.text();
     }
       
 }
@@ -243,3 +248,13 @@ document.querySelector("#logout_button").addEventListener('click', async functio
    
   }
  
+  function error(message) {
+    if (message !== undefined && message.length > 0) {
+      document.querySelector("#error_alert").style.display = "block";
+      document.querySelector("#error_message").innerText = message;
+    } else {
+      document.querySelector("#error_alert").style.display = "none";
+      document.querySelector("#error_message").innerText = "";  
+    }
+  }
+  
