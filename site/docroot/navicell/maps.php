@@ -22,7 +22,15 @@
             
             <br/><br/>
           <div class="collapse" id="collapseExample">
-            <div id="list_tags"></div>
+            <div class="row">
+              <div class="col-10">
+                <div id="list_tags"></div>
+                </div>
+              <div class="col-2">
+              <a href="#" class="btn btn-primary btn-sm mr-1 float-right" style="opacity:1" role="button" id="tag_all"><i class="bi-check-all"></i></a>
+              </div>
+            </div>
+            
           </div>
             
             
@@ -56,6 +64,23 @@
             });
         return list_tags;
       }
+      
+      document.querySelector("#tag_all").addEventListener('click', async function(e) {
+        
+        e.target.style.opacity = e.target.style.opacity > 0.8 ? .65 : 1;
+          // let tags = await getTags();
+        Array.from(document.querySelector("#list_tags").children).map(function (child, key) {
+          child.style.opacity = e.target.style.opacity;
+        });
+        
+        await getPublicMapsByTags(get_active_tags());
+
+        
+        // console.log(child)
+        // console.log(key)
+      });
+      
+      
       
       async function local_refresh() {
         // if (logged_in()) {
