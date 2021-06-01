@@ -5,7 +5,8 @@
 ### Getting started
 - [Collection of Maps](Public_Maps.md)
 - [Browsing NaviCell maps](Browsing.md)
-- [Plotting data on top of NaviCell maps](Plot_data.md)
+- [Plotting data on top of NaviCell maps](Plot_Data.md)
+- [Creating user account](User_Account.md)
 
 ### Building NaviCell Maps
 
@@ -16,4 +17,4 @@
 ### NaviCell Sessions
 
 - [Lauching browsing session](Session.md)
-- [Saving/Resuming browsing session](Resuming_session.md)
+- [Saving/Resuming browsing session](Resuming_Session.md)
