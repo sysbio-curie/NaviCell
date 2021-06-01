@@ -68,12 +68,12 @@
         list_tags = []
         Array.from(document.querySelector("#list_first_tags").children).map(function (child, key) {
           if (child.style.opacity > 0.8) {
-            list_tags.push(child.innerText.split(" ")[0]);
+            list_tags.push(child.innerText.split(" ").slice(0, -1).join(" "));
           }
         });
         Array.from(document.querySelector("#list_tags").children).map(function (child, key) {
               if (child.style.opacity > 0.8) {
-                list_tags.push(child.innerText.split(" ")[0]);
+                list_tags.push(child.innerText.split(" ").slice(0, -1).join(" "));
               }
             });
         return list_tags;

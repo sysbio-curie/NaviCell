@@ -89,8 +89,6 @@ public class NaviCellMapController {
       }
       return result;
     } else return new ArrayList<>();
-    // else
-    //   return repository.findByIsPublic(true);
   }
 
   boolean tagIntersect(List<String> tags1, List<String> tags2) {
@@ -174,11 +172,11 @@ public class NaviCellMapController {
     }
   }
   
-  public Optional<NaviCellMap> createMap(String username, String name, byte[] network_file, byte[] image_file, String extension, String tags, String layout) {
+  public Optional<NaviCellMap> createMap(String username, String name, byte[] network_file, byte[] image_file, String extension, String tags, String layout, List<byte[]> layers, List<byte[]> layers_nobg) {
     try{
       NaviCellMap entry = new NaviCellMap(name, username);
       repository.save(entry);
-      NaviCellMapCreator.createMap(entry, this.storageService, this.sbgn_renderer, network_file, image_file, extension, layout);
+      NaviCellMapCreator.createMap(entry, this.storageService, this.sbgn_renderer, network_file, image_file, extension, layout, layers, layers_nobg);
       entry.isBuilding = false;
       repository.save(entry);
 
@@ -249,11 +247,30 @@ public class NaviCellMapController {
   
   @PostMapping("/api/maps")
 	@ResponseStatus(value = HttpStatus.CREATED)
-	public Optional<NaviCellMap> handleFileUpload(Authentication authentication, @RequestParam("name") String name, @RequestParam("network-file") MultipartFile network_file, @RequestParam(name="image-file", required=false) Optional<MultipartFile> image_file, @RequestParam("tags") String tags, @RequestParam("layout") String layout, @RequestParam(name="async", required=false) Optional<String> async) {
-    if (async.isPresent() && Boolean.parseBoolean(async.get())) {
-      
-      try
-      {
+	public Optional<NaviCellMap> handleFileUpload(Authentication authentication, 
+    @RequestParam("name") String name, 
+    @RequestParam("network-file") MultipartFile network_file, 
+    @RequestParam(name="image-file", required=false) Optional<MultipartFile> image_file, 
+    @RequestParam("tags") String tags, 
+    @RequestParam(name="layout", required=false) Optional<String> layout, 
+    @RequestParam(name="list-layers") List<MultipartFile> list_layers, 
+    @RequestParam(name="list-layers-nobg") List<MultipartFile> list_layers_nobg, 
+    @RequestParam(name="async", required=false) Optional<String> async) {
+    try { 
+      List<byte[]> layers = new ArrayList<byte[]>();
+      List<byte[]> layers_nobg = new ArrayList<byte[]>();
+      for (MultipartFile t_file: list_layers) {
+        layers.add(t_file.getBytes());
+      }
+      for (MultipartFile t_file: list_layers_nobg) {
+        layers_nobg.add(t_file.getBytes());
+      }
+        
+      if (async.isPresent() && Boolean.parseBoolean(async.get())) {
+        
+        System.out.println("Layers : " + list_layers.size());
+          
+          
         // System.out.println("Size of file beginning of upload : " + network_file.getSize());
         NaviCellMap entry = new NaviCellMap(name, authentication.getName());
         repository.save(entry);
@@ -262,30 +279,30 @@ public class NaviCellMapController {
         NaviCellMapCreatorThread thread = new NaviCellMapCreatorThread(
           entry, storageService, sbgn_renderer, repository, tags_repository, species_repository, 
           network_file.getBytes(), image_file.isPresent() ? image_file.get().getBytes() : new byte[0], 
-          FilenameUtils.getExtension(network_file.getOriginalFilename()) , tags, layout
+          FilenameUtils.getExtension(network_file.getOriginalFilename()) , tags, layout.isPresent() ? layout.get() : "false",
+          layers, layers_nobg
         );
         // System.out.println("Size of file after thread creation : " + network_file.getSize());
 
         thread.start();
         
         return Optional.of(entry);
-      }
-      catch (IOException e) {
+      
+      } else {
+          return createMap(authentication.getName(), name, 
+            network_file.getBytes(), image_file.isPresent() ? image_file.get().getBytes() : new byte[0], 
+            FilenameUtils.getExtension(network_file.getOriginalFilename()), tags, layout.isPresent() ? layout.get() : "false", layers, layers_nobg
+          );  
         
       }
-    } else {
-      try{
-        return createMap(authentication.getName(), name, 
-          network_file.getBytes(), image_file.isPresent() ? image_file.get().getBytes() : new byte[0], 
-          FilenameUtils.getExtension(network_file.getOriginalFilename()), tags, layout
-        );  
-      }
-      catch (IOException e) {
-        
-      }
+      
+    
+      // return Optional.empty();
     }
     
-    return Optional.empty();
+      catch (IOException e) {
+        return Optional.empty();
+      }
   }
   
 }

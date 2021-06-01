@@ -14,44 +14,97 @@ async function toggle_public(index, map_id) {
 }
 
 // async function managing upload operation
-async function uploadMap() {
+async function uploadMap(form_type) {
   document.querySelector("#new_map_error_message").innerHTML = "";
   // document.querySelector("#new_map_spinner").style.visibility = "visible";
-  
+  console.log(form_type)
   // no file selected
-  if(document.querySelector("#map-name").value === "") {
-    throw new Error('No name given');
-    
-  } else if(document.querySelector("#map-network").files.length == 0) {
-    throw new Error('No network file selected');
-    
-  } else {
-    // formdata
-    let data = new FormData();
-    data.append('name', document.querySelector("#map-name").value);
-    data.append('network-file', document.querySelector("#map-network").files[0]);
-    
-    if (!document.querySelector("#map-rendering").checked) {
-      data.append('image-file', document.querySelector("#map-image").files[0]);
-    } //else {
-     
-    data.append('layout', document.querySelector("#map-layout").checked);
-    // }
-    data.append('tags', document.querySelector("#map-tags").value);
-    data.append('async', true);
-    
-    // send fetch along with cookies    
-    let response = await nv3_request(
-        '/api/maps/', 'POST', data
-    );
-    
-    if(response.status !== 201){
-      throw new Error('HTTP response code != 201');
+  let data = null;
+  if (form_type === 0) {
+    if(document.querySelector("#map-name").value === "") {
+      throw new Error('No name given');
       
+    } else if(document.querySelector("#map-network").files.length == 0) {
+      throw new Error('No network file selected');
+      
+    } else {
+      // formdata
+      data = new FormData();
+      data.append('name', document.querySelector("#map-name").value);
+      data.append('network-file', document.querySelector("#map-network").files[0]);
+      
+      if (!document.querySelector("#map-rendering").checked) {
+        data.append('image-file', document.querySelector("#map-image").files[0]);
+      } //else {
+      
+      data.append('layout', document.querySelector("#map-layout").checked);
+      // }
+      data.append('tags', document.querySelector("#map-tags").value);
+      data.append('async', true);
+      data.append('list-layers', []);
+      data.append('list-layers-nobg', []);
     }
+  } else if (form_type === 1) {
+    console.log("TYPE 1")
+    if(document.querySelector("#layered-map-name").value === "") {
+      throw new Error('No name given');
+      
+    } else if(document.querySelector("#layered-map-network").files.length === 0) {
+      throw new Error('No network file selected');
+      
+    } else if (document.querySelector("#layered-map-image-0").files.length === 0) {
+      throw new Error('No level 0 image given')
+      
+    
+      
+      
+    } else {
+      
+      if (max_levels > 1) { 
+        for (i=1; i < max_levels; i++) {
+          if (document.querySelector("#layered-map-image-" + i.toString()).files.length === 0) {
+            throw new Error('No level ' + i.toString() + " given");
+          }
+        }
+      }
+      console.log("No errors")
+      data = new FormData();
+      data.append('name', document.querySelector("#layered-map-name").value);
+      data.append('network-file', document.querySelector("#layered-map-network").files[0]);
+      
+      for (i=0; i < max_levels; i++) {
+        data.append('list-layers', document.querySelector("#layered-map-image-" + i.toString()).files[0], 'layer-' + i.toString());
+      }
+      
+      if (document.querySelector("#layered-map-nobg").checked) {
+        for(i=0; i < max_levels; i++) {
+          data.append('list-layers-nobg', document.querySelector("#layered-map-nobg-image-" + i.toString()).files[0], 'layer-' + i.toString());
+          console.log("Added no-bg " + i.toString());
+        }
+        
+      } else {
+        data.append('list-layers-nobg', []);
 
-    refresh();
+      }
+      data.append('tags', document.querySelector("#layered-map-tags").value);
+      data.append('async', true);
+      
+      console.log(data)
+    }
   }
+  console.log(data);
+  // send fetch along with cookies    
+  let response = await nv3_request(
+      '/api/maps/', 'POST', data
+  );
+  
+  if(response.status !== 201){
+    throw new Error('HTTP response code != 201');
+    
+  }
+
+  refresh();
+  
 }
 
 async function deleteMap(id) {
@@ -103,9 +156,6 @@ async function getPublicMaps() {
     if(response.status != 200)
       throw new Error('HTTP response code != 200');
 
-    // read json response from server
-    // success response example : {"error":0,"message":""}
-    // error response example : {"error":1,"message":"File type not allowed"}
     let json_response = await response.json();
       if(json_response.error == 1)
           throw new Error(json_response.message);	
@@ -113,32 +163,34 @@ async function getPublicMaps() {
     table = document.querySelector("#table-public-maps");
     clearTable(table);
     json_response.map((value, key) => {
+      
       addPublicMapToTable(table, key, value);
       
     });
   }
+  
   catch(e) {
     // catch rejected Promises and Error objects
       return_data = { error: 1, message: e.message };
     }
+    
 }
 
 
 async function getPublicMapsByTags(tags) {
-  console.log(tags)
+  
   try {
     let data = new FormData();
     data.append('tags', tags.join());
 
-    console.log(data)
     // send fetch along with cookies
     let response = await nv3_request('/api/maps/public', 'POST', data);
   
     // server responded with http response != 200
     if(response.status != 200)
       throw new Error('HTTP response code != 200');
-    console.log(response);
-    // read json response from server
+
+      // read json response from server
     // success response example : {"error":0,"message":""}
     // error response example : {"error":1,"message":"File type not allowed"}
     let json_response = await response.json();
