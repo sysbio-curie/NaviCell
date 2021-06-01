@@ -16,4 +16,4 @@
 ### NaviCell Sessions
 
 - [Lauching browsing session](Session.md)
-- [Resuming browsing session](Resuming_session.md)
+- [Saving/Resuming browsing session](Resuming_session.md)
