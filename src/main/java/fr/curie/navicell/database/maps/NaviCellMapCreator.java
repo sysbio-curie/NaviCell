@@ -5,7 +5,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-// import java.util.List;
+import java.util.List;
 // import java.util.HashSet;
 import java.util.Optional;
 import java.util.Vector;
@@ -62,7 +62,7 @@ import java.awt.Color;
 
 public class NaviCellMapCreator {
 
-  public static void createMap(NaviCellMap map, StorageService storageService, SBGNRenderer sbgn_render, byte[] network_file, byte[] image_file, String extension, String layout) throws NaviCellMapException 
+  public static void createMap(NaviCellMap map, StorageService storageService, SBGNRenderer sbgn_render, byte[] network_file, byte[] image_file, String extension, String layout, List<byte[]> layers, List<byte[]> layers_nobg) throws NaviCellMapException 
   {
     
     if (network_file.length == 0) {
@@ -90,27 +90,53 @@ public class NaviCellMapCreator {
     try {
       System.out.println("Creating temp dir");
       tmpDir = Files.createTempDirectory(null);
-      System.out.println(image_file.length);
-      System.out.println(image_file);
-      if (image_file.length == 0) {
-
-        if (layout.length() > 0 && Boolean.parseBoolean(layout)) { 
-          System.out.println("We want a layout");
-          map.networkPath = performLayout(storageService, tmpDir, map.folder, map.networkPath);
-          // this.createSBGNML(storageService);
+      
+      if (layers.size() > 0) {
+        System.out.println("We already have the images");
         
-        }
-        System.out.println("Creating sbgn");
-        map.sbgnPath = createSBGNML(storageService, tmpDir, map.folder, map.networkPath);
-        System.out.println("Starting rendering");
-        map.imagePath = createImage(storageService, sbgn_render, tmpDir, map.folder, map.networkPath, map.sbgnPath);
-      } else {
-        Path image_path = storageService.storeMapFile(image_file, map.folder, "master.png");
+        Path image_path = storageService.storeMapFile(layers.get(layers.size()-1), map.folder, "master.png");
         map.imagePath = storageService.getMapsLocation().relativize(image_path).toString();
+        for (int i=0; i < layers.size(); i++) {
+          image_path = storageService.storeMapFile(layers.get(i), map.folder, "master-" + i + ".png");
+          
+        }
+        
+        if (layers_nobg.size() > 0) {
+          System.out.println("And with have nobg version");
+          for (int i=0; i < layers_nobg.size(); i++) {
+            image_path = storageService.storeMapFile(layers_nobg.get(i), map.folder, "master_nobg-" + i + ".png");
+          }
+          
+        }
+      
+      
+      } else {
+        
+        System.out.println(image_file.length);
+        System.out.println(image_file);
+        if (image_file.length == 0) {
+
+          if (layout.length() > 0 && Boolean.parseBoolean(layout)) { 
+            System.out.println("We want a layout");
+            map.networkPath = performLayout(storageService, tmpDir, map.folder, map.networkPath);
+            // this.createSBGNML(storageService);
+          
+          }
+          System.out.println("Creating sbgn");
+          map.sbgnPath = createSBGNML(storageService, tmpDir, map.folder, map.networkPath);
+          System.out.println("Starting rendering");
+          map.imagePath = createImage(storageService, sbgn_render, tmpDir, map.folder, map.networkPath, map.sbgnPath);
+        } else {
+          Path image_path = storageService.storeMapFile(image_file, map.folder, "master.png");
+          map.imagePath = storageService.getMapsLocation().relativize(image_path).toString();
+        }
+        
+        System.out.println("Creating zooms");
+        createZooms(storageService, tmpDir, map.imagePath);  
+        
       }
       
-      System.out.println("Creating zooms");
-      createZooms(storageService, tmpDir, map.imagePath);
+      
       System.out.println("Creating map");
       map.url = buildMap(storageService, map.name, map.folder, map.imagePath);  
 
@@ -300,7 +326,9 @@ public class NaviCellMapCreator {
       xrefs = load_xrefs(xref_stream);      
       
       Files.createDirectories(Paths.get(storage.getMapsLocation().toString(), folder));
-      
+      System.out.println("Producing the map");
+      System.out.println(prefix + path);
+      // System.out.println()
       ProduceClickableMap.run(
         "", new File(prefix+path), true, false, name.replace(" ", ""), null, xrefs, true, 
         null, null, null, null, false, false, // Wordpress

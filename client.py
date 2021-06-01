@@ -1,4 +1,4 @@
-import requests, json
+import requests, json, time
 
 class Client:
     
@@ -94,6 +94,44 @@ class Client:
             
         if len(res.text) > 0:
             return json.loads(res.text)
+    
+    def uploadLayeredMap(self, name, cd_filename, layers=[], layers_nobg=[], tags=[], is_async=True):
+        
+        data = {
+            'name': name,
+            'tags': ",".join(tags),
+            'async': is_async
+        }
+        
+        files = [('network-file', open(cd_filename, 'rb'))]
+        files += [('list-layers', open(image_layer, 'rb')) for image_layer in layers]
+        files += [('list-layers-nobg', open(image_layer, 'rb')) for image_layer in layers_nobg]
+
+        res = self._identified_request("maps", "post", data, files)
+        
+        if res.status_code != 201:
+            print("Error : couldn't create map !")
+            return
+            
+        if is_async:
+            if len(res.text) > 0:
+                t_map = json.loads(res.text)
+        
+                while self.checkIsBuilding(t_map):
+                    time.sleep(10)
+                    # print("Building...")
+                    
+                return t_map
+                
+        else:
+            if len(res.text) > 0:
+                return json.loads(res.text)
+        
+    
+    def checkIsBuilding(self, map):
+        
+        res = self._identified_request("maps/" + map['id'], "get")
+        return json.loads(res.text)['isBuilding']
     
     def publishMap(self, map, value=True):
         
