@@ -1,4 +1,21 @@
-# NaviCell
+# NaviCell  
+
+![NaviCell Logo](https://github.com/sysbio-curie/NaviCell/raw/feat/v3/site/docroot/navicell/navicell-logo.png)
+
+
+NaviCell platform supports easy molecular maps navigation and exploration using Google maps™ engine. The logic of navigation as scrolling and zooming; features as markers, pop-up bubbles and zoom bar are adapted from the Google map.
+NaviCell’s semantic zooming feature provides possibility for map exploring from detail toward a top-level view achieved by gradual exclusion of details while zooming out.
+NaviCell includes a powerful module for data visualization. Users can integrate and visualize different types of "omics" data on the NaviCell maps. There is also a Python API to automate tasks and communicate with the NaviCell web server.
+### NaviCell Web Server
+
+The extended NaviCell 3.0 web-server allows users to easily create their own maps, superimposed with data, regrouped and share with the community, save the produced annotated maps to retrieve them later. This activity is possible from the webpage interface, but also in order to create large number of maps (e.g., from network-based omics data analysis), we developed a python client which allows to create maps in a programmatic fashion.
+
+This new NaviCell 3.0 web-server is available at https://navicell.curie.fr.
+
+This work was funded as a part of the project iPC which has received funding from the European Union’s Horizon 2020 research and innovation programme under grant agreement No 826121.
+
+
+### NaviCell Factory
 
 Before using <b>NaviCell Factory</b>, CellDesigner maps should be prepared in a specific manner to be most compatible with NaviCell. Here is the [procedure for construction of maps](map_construction_procedures/NaviCell_Maps_Preparation_Procedure.pdf) in CellDesigner and preparation of modular hierarchical map structure. The procedure contains instructions for generation of semantic zoom levels for maps using a [set of scripts](map_construction_procedures/procedure_scripts).
 
