@@ -1,0 +1,147 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<title>Maps</title>
+<link rel="icon" type="image/ico" href="../images/favicon.ico"/>
+
+<link href="../styles/style.css" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+	<div id="wrapper"><div id="header"><div id="img">
+			<div id="img_left"><img class="left_img" alt="logoNaviCell" src="../images/navicelllogo1.png"/>
+				
+			</div><div id="img_center">
+				
+				<img class="img_center" alt="" src="../images/detailed.png"/>
+				</div>
+			
+			<div id="img_right">
+				
+				<a href="http://www.curie.fr" target="_blank"><img class="img_right" alt="" src="../images/logo_curie.gif" style="border:0px"/></a>
+			</div>
+		
+			
+			<div id="header_text">Data analysis, navigation, curation and maintenance of molecular interactions maps</div>
+						
+				
+		</div>	
+		
+		
+	</div><div id="wrapper2"><div id="grey_line"></div>
+			
+			<div id="orange_line"></div>
+			
+			
+			
+			<div id="main"><div id="left_column"><div id="container_left"><ul class="list_left1">
+						<li><a href="../index.html">Home</a></li>
+						<li><a href="maps.html">Maps</a></li>
+						<li><a href="features.html">Features</a></li>
+						<li><a href="guide.html">User Guides</a></li>
+						
+						<li><a href="nav_web_service.html">NaviCell Web Service</a></li>
+						
+						<li><a href="faq.html">FAQ</a></li>
+					</ul>
+					
+					<ul class="list_left">
+						<li><a href="contact.html">Contacts</a></li>
+						<li><a href="publications.html">Publications</a></li>
+						<li style="padding-top:-10px; font-size: 70%; line-height: normal; font: serif; word-spacing: 20%;"><a href="citation.html">How to cite us</a></li>
+						<li><a href="team.html">People</a></li>
+						<li>
+						<a href="acknowledgements.html" style="font-size: 90%;">Acknowledgement</a></li>
+					</ul>
+					</div></div><div id="right_column"><div id="contain_right"><ul class="list_right">
+							<h4 class="right_column">Resources</h4>
+							<li class="list_long"><a href="http://acsn.curie.fr" target="_blank">ACSN <span style="font-size:65%">Atlas of Cancer Signaling Networks</span></a></li>
+							<li class="list_long2"><a href="http://www.celldesigner.org" target="_blank">CellDesigner</a></li>
+							<li class="list_long"><a href="http://www.sbgn.org" target="_blank">SBGN<span style="font-size:80%">
+									Systems Biology Graphical Notation</span></a></li>
+							<li><a href="http://www.cytoscape.org" target="_blank">Cytoscape</a></li>
+							<li><a href="http://bioinfo-out.curie.fr/projects/binom/" target="_blank">BiNoM</a></li>
+							<li><a href="publications2.html" target="_blank">Literature</a></li>
+						</ul>
+					
+					
+						
+						<ul class="list_right">
+							<h4 class="right_column">Databases</h4>
+							<li><a href="http://www.cellsignal.com" target="_blank">Cell Signaling</a></li>
+							<li><a href="http://www.genome.jp/kegg/pathway.html" target="_blank">KEGG</a></li>
+							<li><a href="http://www.pantherdb.org" target="_blank">Panther</a></li>
+							<li><a href="http://www.reactome.org" target="_blank">Reactome</a></li>
+														<li><a href="http://www.cs.tau.ac.il/~spike/" target="_blank">SPIKE</a></li>
+							<li><a href="http://www.wikipathways.org" target="_blank">WikiPathways</a></li>
+						</ul>
+					</div>
+				</div>
+				
+				<div id="center_column"><p><h3>Institut Curie Collection</h3></p>
+				 <ul class="list_center">
+				 	
+				 	<li><b><a href="http://navicell.curie.fr/navicell/newtest/maps/wikiproteinmap/master/index.html" style="text-decoration:underline">Access to: Map of communities of hidden protein connections in Wikipedia network</a></b></li>
+
+				<p>English Wikipedia, containing more than five millions articles, has approximately 
+				eleven thousands web pages devoted to proteins or genes most of which were generated 
+				by the <a href="https://en.wikipedia.org/wiki/Gene_Wiki">Gene Wiki project</a>.  
+
+				These pages contain information about interactions between proteins and their functional 
+				relationships. At the same time, they are interconnected with other Wikipedia pages describing 
+				biological functions, diseases, drugs and other topics curated by independent, not coordinated 
+				collective efforts. 
+
+				Therefore, Wikipedia contains a directed network of protein functional relations or physical 
+				interactions embedded into the global network of the encyclopedia terms, 
+				which defines hidden (indirect) functional proximity between proteins. 
+				</p>
+
+				<p>We applied the recently developed <a href="https://arxiv.org/abs/1602.02394">reduced Google Matrix (REGOMAX)</a> 
+				algorithm in order to extract the network of hidden functional connections between proteins 
+				in Wikipedia. Using this approach, we discovered tight communities which clearly 
+				reflect areas of interest in molecular biology or medicine. These communities were labeled
+				by the title of the Wikipedia page associated with the community by the connector links, 
+				having the strongest internal connectivity.</p>
+
+				<p>Here we provide the hidden protein connection community map in an interactive form.
+				The size of the nodes reflect the number of proteins in the community. 
+				Square nodes signify those communities identified in the 2017 Wikipedia network 
+				which do not have a match in the 2013 Wikipedia network. 
+				The width of the line reflects the number of oriented links between the communities.
+				The network can be queried for a protein name or a part of the Wikipedia page title. 
+				All community node annotations are hyperlinked to the corresponding Wikipedia pages. 
+				Therefore, the interactive map serves as a convenient portal to the set of Wikipedia 
+				pages related to proteins and associated pages.
+				</p>
+
+				<p>Accompanying web-site: <br>
+				<a href="http://www.quantware.ups-tlse.fr/QWLIB/wikiproteinnets/">http://www.quantware.ups-tlse.fr/QWLIB/wikiproteinnets/</a>
+				</p>
+
+				<p><b>References:</b>
+				</p>
+				<p>
+
+				Arxiv preprint: <a href="">A.Zinovyev, U.Czerwinska, L.Cantini, K.M.Frahm and D.L.Shepelyansky. Revealing biological functions from Wikipedia network using reduced Google matrix. 2019. arXiv:1904.xxxxx[cs.SI].</a>
+				<br><br>
+				<a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0190812">Lages J, Shepelyansky D, Zinovyev A. Inferring hidden causal relations between pathway members using reduced Google matrix of directed biological networks. 2018. PLoS One 13(1):e0190812.</a>
+
+				</p>
+
+
+
+				</ul>
+        
+				</div></div><div id="footer">Web design by NaviCell team
+
+			</div>
+		</div>
+	</div>
+
+</body>
+
+</html>

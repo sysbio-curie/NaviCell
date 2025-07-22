@@ -1,0 +1,115 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<title>Publications</title>
+<link rel="icon" type="image/ico" href="../images/favicon.ico"/>
+
+<link href="../styles/style2.css" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+	<div id="wrapper"><div id="header"><div id="img">
+			<div id="img_left"><img class="left_img" alt="logoNaviCell" src="../images/navicelllogo1.png"/>
+				
+			</div><div id="img_center">
+				
+				<img class="img_center" alt="" src="../images/detailed.png"/>
+				</div>
+			
+			<div id="img_right">
+				
+				<a href="http://www.curie.fr" target="_blank"><img class="img_right" alt="" src="../images/logo_curie.gif"/></a>
+			</div>
+		
+			
+			<div id="header_text">Data analysis, navigation, curation and maintenance of molecular interactions maps</div>
+						
+				
+		</div>	
+		
+		
+	</div><div id="wrapper2"><div id="grey_line"></div>
+			
+			<div id="orange_line"></div>
+			
+			
+			
+			<div id="main">
+				<div id="left_column">
+					<div id="container_left">
+						<ul class="list_left1">
+							<li><a href="../index.html">Home</a></li>
+							<li><a href="maps.html">Maps</a></li>
+							<li><a href="features.html">Features</a></li>
+							<li><a href="guide.html">User Guides</a></li>
+							
+							<li><a href="nav_web_service.html">NaviCell Web Service</a></li>
+							
+							<li><a href="faq.html">FAQ</a></li>
+						</ul>
+						<ul class="list_left">
+							<li><a href="contact.html">Contacts</a></li>
+							<li><a href="publications.html">Publications</a></li>
+							<li style="padding-top:-10px; font-size: 70%; line-height: normal; font: serif; word-spacing: 20%;"><a href="citation.html">How to cite us</a></li>
+							<li><a href="team.html">People</a></li>
+							<li>
+							<a href="acknowledgements.html" style="font-size: 90%;">Acknowledgement</a></li>
+						</ul>
+					</div>
+				</div><!--
+					<div id="right_column">
+						<div id="contain_right">
+							<ul class="list_right">
+								<h4 class="right_column">Resources</h4>
+								<li class="list_long"><a href="http://acsn.curie.fr" target="_blank">ACSN <span style="font-size:65%">Atlas of Cancer Signaling Networks</span></a></li>
+								<li class="list_long2"><a href="http://www.celldesigner.org" target="_blank">CellDesigner</a></li>
+								<li class="list_long"><a href="http://www.sbgn.org" target="_blank">SBGN<span style="font-size:80%">
+									Systems Biology Graphical Notation</span></a></li>
+									
+								<li><a href="http://www.cytoscape.org" target="_blank">Cytoscape</a></li>
+								<li><a href="http://bioinfo-out.curie.fr/projects/binom/" target="_blank">BiNoM</a></li>
+								<li><a href="publications2.html" target="_blank">Literature</a></li>
+							</ul>
+							<ul class="list_right">
+								<h4 class="right_column">Databases</h4>
+								<li><a href="http://www.cellsignal.com" target="_blank">Cell Signaling</a></li>
+								<li><a href="http://www.genome.jp/kegg/pathway.html" target="_blank">KEGG</a></li>
+								<li><a href="http://www.pantherdb.org" target="_blank">Panther</a></li>
+								<li><a href="http://www.reactome.org" target="_blank">Reactome</a></li>
+														<li><a href="http://www.cs.tau.ac.il/~spike/" target="_blank">SPIKE</a></li>
+								<li><a href="http://www.wikipathways.org" target="_blank">WikiPathways</a></li>
+							</ul>
+						</div>-->
+					</div>
+				
+				<div id="center_column">
+					<p class="lit">Allocati, N., C. Di Ilio, and V. De Laurenzi. 2012. <b>p63/p73 in the control of cell cycle and cell death.</b> <i>Exp Cell Res</i>. 318:1285-1290.<a href="http://www.ncbi.nlm.nih.gov/pubmed/22326462" target="_blank" style="text-decoration:underline"> PMID:22326462</a></p>
+					<p class="lit">Angers, S., C.J. Thorpe, T.L. Biechele, S.J. Goldenberg, N. Zheng, M.J. MacCoss, and R.T. Moon. 2006. <b>The KLHL12-Cullin-3 ubiquitin ligase negatively regulates the Wnt-beta-catenin pathway by targeting Dishevelled for degradation</b>. <i>Nat Cell Biol</i>. 8:348-357. <a href="http://www.ncbi.nlm.nih.gov/pubmed/16547521" target="_blank" style="text-decoration:underline"> PMID:16547521</a></p>
+					<p class="lit">Bachman, K.E., and B.H. Park. 2005. <b>Duel nature of TGF-beta signaling: tumor suppressor vs. tumor promoter</b>. <i>Curr Opin Oncol</i>. 17:49-54. <a href="http://www.ncbi.nlm.nih.gov/pubmed/15608513" target="_blank" style="text-decoration:underline"> PMID:15608513</a></p>
+					<p class="lit">Balakumar, P., and G. Jagadeesh. 2011. <b>Potential cross-talk between (pro)renin receptors and Wnt/frizzled receptors in cardiovascular and renal disorders</b>. <i>Hypertens Res</i>. 34:1161-1170. <a href="http://www.ncbi.nlm.nih.gov/pubmed/21796133" target="_blank" style="text-decoration:underline"> PMID:21796133</a></p>
+					<p class="lit">Bao, B., A.S. Azmi, S. Ali, A. Ahmad, Y. Li, S. Banerjee, D. Kong, and F.H. Sarkar. 2012. <b>The biological kinship of hypoxia with CSC and EMT and their relationship with deregulated expression of miRNAs and tumor aggressiveness</b>. <i>Biochim Biophys Acta</i>. 1826:272-296. <a href="http://www.ncbi.nlm.nih.gov/pubmed/22579961" target="_blank" style="text-decoration:underline"> PMID:22579961</a></p> 
+					<p class="lit">Benahmed, F., I. Gross, D. Guenot, F. Jehan, E. Martin, C. Domon-Dell, T. Brabletz, M. Kedinger, J.N. Freund, and I. Duluc. 2007. <b>The microenvironment controls CDX2 homeobox gene expression in colorectal cancer cells</b>. <i>Am J Pathol</i>. 170:733-744. <a href="http://www.ncbi.nlm.nih.gov/pubmed/17255339" target="_blank" style="text-decoration:underline"> PMID:17255339</a></p> 
+					<p class="lit">Benard, J., S. Douc-Rasy, and J.C. Ahomadegbe. 2003. <b>TP53 family members and human cancers</b>. <i>Hum Mutat</i>. 21:182-191. <a href="http://www.ncbi.nlm.nih.gov/pubmed/12619104" target="_blank" style="text-decoration:underline"> PMID:12619104</a></p>  
+					<p class="lit">Berdiel-Acer, M., M.E. Bohem, A. Lopez-Doriga, A. Vidal, R. Salazar, M. Martinez-Iniesta, C. Santos, X. Sanjuan, A. Villanueva, and D.G. Mollevi. 2011. <b>Hepatic carcinoma-associated fibroblasts promote an adaptative response in colorectal cancer cells that inhibit proliferation and apoptosis: nonresistant cells die by nonapoptotic cell death</b>. <i>Neoplasia</i>. 13:931-946. <a href="http://www.ncbi.nlm.nih.gov/pubmed/22028619" target="_blank" style="text-decoration:underline"> PMID:22028619</a></p> 
+					<p class="lit">Bollen, M., W. Peti, M.J. Ragusa, and M. Beullens. 2010. <b>The extended PP1 toolkit: designed to create specificity</b>. <i>Trends Biochem Sci</i>. 35:450-458. <a href="http://www.ncbi.nlm.nih.gov/pubmed/20399103" target="_blank" style="text-decoration:underline"> PMID:20399103</a></p>   
+					<p class="lit">Boominathan, L. 2010a. <b>The guardians of the genome (p53, TA-p73, and TA-p63) are regulators of tumor suppressor miRNAs network</b>. <i>Cancer Metastasis Rev</i>. 29:613-639. <a href="http://www.ncbi.nlm.nih.gov/pubmed/20922462" target="_blank" style="text-decoration:underline"> PMID:20922462</a></p>  
+					<p class="lit">Boominathan, L. 2010b. <b>The tumor suppressors p53, p63, and p73 are regulators of microRNA processing complex</b>. <i>PLoS One</i>. 5:e10615. <a href="http://www.ncbi.nlm.nih.gov/pubmed/20485546" target="_blank" style="text-decoration:underline"> PMID:20485546</a></p>  
+					<p class="lit">Boutet, A., G. Comai, and A. Schedl. 2010. <b>The WTX/AMER1 gene family: evolution, signature and function<b>. <i>BMC Evol Biol</i>. 10:280. <a href="http://www.ncbi.nlm.nih.gov/pubmed/20843316" target="_blank" style="text-decoration:underline"> PMID:20843316</a></p>  
+					<p class="lit">Bozkulak, E.C., and G. Weinmaster. 2009. <b>Selective use of ADAM10 and ADAM17 in activation of Notch1 signaling</b>. <i>Mol Cell Biol</i>. 29:5679-5695. <a href="http://www.ncbi.nlm.nih.gov/pubmed/19704010" target="_blank" style="text-decoration:underline"> PMID:19704010</a></p>  
+					<p class="lit">Brabletz, S., K. Bajdak, S. Meidhof, U. Burk, G. Niedermann, E. Firat, U. Wellner, A. Dimmler, G. Faller, J. Schubert, and T. Brabletz. 2011. <b>The ZEB1/miR-200 feedback loop controls Notch signalling in cancer cells</b>. <i>EMBO J</i>. 30:770-782. <a href="http://www.ncbi.nlm.nih.gov/pubmed/21224848" target="_blank" style="text-decoration:underline"> PMID:21224848</a></p>  
+					<p class="lit">Bridges, R.S., D. Kass, K. Loh, C. Glackin, A.C. Borczuk, and S. Greenberg. 2009. <b>Gene expression profiling of pulmonary fibrosis identifies Twist1 as an antiapoptotic molecular "rectifier" of growth factor signaling</b. <i>Am J Pathol</i>. 175:2351-2361 <a href="http://www.ncbi.nlm.nih.gov/pubmed/19893041" target="_blank" style="text-decoration:underline"> PMID:19893041</a></p>  
+					<p class="lit">Browne, G., A.E. Sayan, and E. Tulchinsky. 2011. <b>ZEB proteins link cell motility with cell cycle control and cell survival in cancer</b>. <i>Cell Cycle</i>. 9:886-891. <a href="http://www.ncbi.nlm.nih.gov/pubmed/20160487" target="_blank" style="text-decoration:underline"> PMID:20160487</a></p>  
+					
+					
+				</div></div><div id="footer">Web design by NaviCell team
+
+			</div>
+		</div>
+	</div>
+
+</body>
+
+</html>

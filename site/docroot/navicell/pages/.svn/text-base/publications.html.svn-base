@@ -1,0 +1,169 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<title>Publications</title>
+<link rel="icon" type="image/ico" href="../images/favicon.ico"/>
+
+<link href="../styles/style.css" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+	<div id="wrapper"><div id="header"><div id="img">
+			<div id="img_left"><img class="left_img" alt="logoNaviCell" src="../images/navicelllogo1.png"/>
+				
+			</div><div id="img_center">
+				
+				<img class="img_center" alt="" src="../images/detailed.png"/>
+				</div>
+			
+			<div id="img_right">
+				
+				<img class="img_right" alt="" src="../images/logo_curie.gif"/>
+			</div>
+		
+			
+			<div id="header_text">Data analysis, navigation, curation and maintenance of molecular interactions maps</div>
+						
+				
+		</div>	
+		
+		
+	</div><div id="wrapper2"><div id="grey_line"></div>
+			
+			<div id="orange_line"></div>
+			
+			
+			
+			<div id="main"><div id="left_column"><div id="container_left"><ul class="list_left1">
+						<li><a href="../index.html">Home</a></li>
+						<li><a href="maps.html">Maps</a></li>
+						<li><a href="features.html">Features</a></li>
+						<li><a href="guide.html">User Guides</a></li>
+						
+						<li><a href="nav_web_service.html">NaviCell Web Service</a></li>
+						
+						<li><a href="faq.html">FAQ</a></li>
+					</ul>
+					
+					<ul class="list_left">
+						<li><a href="contact.html">Contacts</a></li>
+						<li><a href="publications.html">Publications</a></li>
+						<li style="padding-top:-10px; font-size: 70%; line-height: normal; font: serif; word-spacing: 20%;"><a href="citation.html">How to cite us</a></li>
+						<li><a href="team.html">People</a></li>
+						<li>
+						<a href="acknowledgements.html" style="font-size: 90%;">Acknowledgement</a></li>
+					</ul>
+					</div></div><div id="right_column"><div id="contain_right"><ul class="list_right">
+							<h4 class="right_column">Resources</h4>
+							<li class="list_long"><a href="http://acsn.curie.fr" target="_blank">ACSN <span style="font-size:65%">Atlas of Cancer Signaling Networks</span></a></li>
+							<li class="list_long2"><a href="http://www.celldesigner.org" target="_blank">CellDesigner</a></li>
+							<li class="list_long"><a href="http://www.sbgn.org" target="_blank">SBGN<span style="font-size:80%">
+									Systems Biology Graphical Notation</span></a></li>
+									
+							<li><a href="http://www.cytoscape.org" target="_blank">Cytoscape</a></li>
+							<li><a href="http://bioinfo-out.curie.fr/projects/binom/" target="_blank">BiNoM</a></li>
+							<li><a href="publications2.html" target="_blank">Literature</a></li>
+						</ul>
+					
+					
+						
+						<ul class="list_right">
+							<h4 class="right_column">Databases</h4>
+							<li><a href="http://www.cellsignal.com" target="_blank">Cell Signaling</a></li>
+							<li><a href="http://www.genome.jp/kegg/pathway.html" target="_blank">KEGG</a></li>
+							<li><a href="http://www.pantherdb.org" target="_blank">Panther</a></li>
+							<li><a href="http://www.reactome.org" target="_blank">Reactome</a></li>
+														<li><a href="http://www.cs.tau.ac.il/~spike/" target="_blank">SPIKE</a></li>
+							<li><a href="http://www.wikipathways.org" target="_blank">WikiPathways</a></li>
+						</ul>
+					</div>
+				</div>
+				
+				<div id="center_column">
+        
+        <p><h3>Publications</h3></p>
+              <p class="lit" style="font-size:medium">Bonnet E, Viara E, Kuperstein I, Calzone L, Cohen D, Barillot E and Zinovyev A<br/><b>NaviCell Web
+              Service for network-based data visualization</b> Nucleic Acids Research (2015)<a
+              href="http://nar.oxfordjournals.org/content/early/2015/05/09/nar.gkv450.full"
+              target="_blank" style="text-decoration:underline">
+              doi: 10.1093/nar/gkv450</a></p>
+ 				
+          <p class="lit" style="font-size:medium">Kuperstein I, Cohen DPA, Pook
+          S, Viara E, Calzone L, Barillot E and Zinovyev A <br/><b>NaviCell: a
+          web-based environment for navigation, curation and maintenance of
+          large molecular interaction maps.</b> <a
+          href="http://www.biomedcentral.com/1752-0509/7/100" target="_blank"
+          style="text-decoration:underline">doi:10.1186/1752-0509-7-100</a></p>
+          
+          <p class="lit" style="font-size:medium">Calzone L, Gelay A, Zinovyev
+          A, Radvanyi F, Barillot E<br/><b>A comprehensive modular map of
+          molecular interactions in RB/E2F pathway.</b><br/>Mol Syst Biol
+          (2008) 4: 173. <a
+          href="http://www.ncbi.nlm.nih.gov/pubmed?term=18319725"
+          style="text-decoration:underline">PMID:18319725</a></p> 
+          <p
+          class="lit" style="font-size:medium">Zinovyev A, Viara E, Calzone L,
+          Barillot E <br/><b>BiNoM: a Cytoscape plugin for manipulating and
+          analyzing biological networks.<br/></b>Bioinformatics. 2008 24(6):87.
+          <a href="http://www.ncbi.nlm.nih.gov/pubmed?term=18024474"
+          style="text-decoration:underline">PMID:18024474</a></p> 
+          
+          <p
+          class="lit" style="font-size:medium">Pook S, Vaysseix G, Barillot E
+          <br/><b>Zomit:biological data visualization and
+          browsing.<br/></b>Bioinformatics. 1998 4:807. <a
+          href="http://www.ncbi.nlm.nih.gov/pubmed?term=9918951"
+          style="text-decoration:underline">PMID:9918951</a></p> 
+        
+        <p><h3>Publications using NaviCell</h3></p>
+
+          <p class="lit" style="font-size:medium"> Niarakis A, Bounab Y, Grieco L, Roncagalli R, Hesse AM, Garin J, Malissen B, Daeron M, Thieffry D.
+          <br/><b>Computational modeling of the main signaling pathways involved in mast cell activation.<br/></b>Curr Top Microbiol Immunol. 2014;382:69-93. 
+          <a href="http://www.ncbi.nlm.nih.gov/pubmed/25116096" style="text-decoration:underline">PMID:25116096</a>.</p>
+          
+          <p class="lit" style="font-size:medium"> Chanrion M, Kuperstein I,
+          Barri&egrave;re C, El Marjou F, Cohen D, Vignjevic D, Stimmer L,
+          Paul-Gilloteaux P, Bi&egrave;che I, Dos Reis Tavares S, Boccia GF,
+          Cacheux W, Meseure D, Fre S, Martignetti L, Legoix-N&eacute; P,
+          Girard E, Fetler L, Barillot E, Louvard D, Zinovyev A, Robine S
+          <br/><b>Concomitant Notch activation and p53 deletion trigger
+          epithelial-to-mesenchymal transition and metastasis in mouse
+          gut.<br/></b>Nature Communications. 2014 Oct 8;5:5005. doi:
+          10.1038/ncomms6005  <a href="http://www.ncbi.nlm.nih.gov/pubmed?term=18024474"
+                    style="text-decoration:underline">PMID: 25295490</a> </p>
+
+          <p class="lit" style="font-size:medium">  Kuperstein I, Grieco L,
+          Cohen D, Thieffry D, Zinovyev A, Barillot E. <b>The shortest path is
+          not the one you know: application of biological network resources in
+          precision oncology research.</b> Mutagenesis,  2015
+          Mar;30(2):191-204. doi: 10.1093/mutage/geu078. <a
+          href="http://www.ncbi.nlm.nih.gov/pubmed?term=25688112"
+          style="text-decoration:underline">PMID: 25688112</a> </p>
+           
+          <p class="lit" style="font-size:medium"> Cohen D, Kuperstein I,
+          Barillot E, Zinovyev A, Calzone L. <b>From a biological hypothesis to
+          the construction of a mathematical model.</b>  Methods Mol Biol.
+          2013;1021:107-25. doi: 10.1007/978-1-62703-450-0_6.  <a
+          href="http://www.ncbi.nlm.nih.gov/pubmed?term=23715982"
+          style="text-decoration:underline">PMID: 23715982.</a></p> 
+
+          <p class="lit" style="font-size:medium"> Calzone L, Kuperstein I,
+          Cohen D, Grieco L, Bonnet E, Servant N, Hupé P, Zinovyev A, Barillot
+          E. <b>Biological network modelling and precision medicine in
+          oncology.</b>  Bull Cancer. 2014 Jun;101 Suppl 1:S18-21. doi:
+          10.1684/bdc.2014.1973.  <a
+          href="http://www.ncbi.nlm.nih.gov/pubmed?term=24966078"
+          style="text-decoration:underline">PMID: 24966078</a></p>
+        
+        </div></div><div id="footer">Web design by NaviCell team
+
+			</div>
+		</div>
+	</div>
+
+</body>
+
+</html>

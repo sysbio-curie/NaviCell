@@ -1,0 +1,204 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<script type="text/javascript">
+function toggle_visibility(id) {
+    	var more = document.getElementsByClassName("less");
+    	for (var i = 0; i < more.length; i++) {
+    		more[i].style.display = 'none';
+    	}
+    	var e = document.getElementById(id);
+    	if(e.style.display == 'block') {
+    		e.style.display = 'none';
+    	} else {
+    		e.style.display = 'block';
+    	}
+    }
+</script>
+<title>Maps</title>
+<link rel="icon" type="image/ico" href="../images/favicon.ico"/>
+
+<link href="../styles/style3.css" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+	<div id="wrapper"><div id="header"><div id="img">
+			<div id="img_left"><img class="left_img" alt="logoNaviCell" src="../images/navicelllogo1.png"/>
+				
+			</div><div id="img_center">
+				
+				<img class="img_center" alt="" src="../images/detailed.png"/>
+				</div>
+			
+			<div id="img_right">
+				
+				<a href="http://www.curie.fr" target="_blank"><img class="img_right" alt="" src="../images/logo_curie.gif" style="border:0px"/></a>
+			</div>
+		
+			
+			<div id="header_text">Data analysis, navigation, curation and maintenance of molecular interactions maps</div>
+						
+				
+		</div>	
+		
+		
+	</div><div id="wrapper2"><div id="grey_line"></div>
+			
+			<div id="orange_line"></div>
+			
+			
+			
+			<div id="main"><div id="left_column"><div id="container_left"><ul class="list_left1">
+						<li><a href="../index.html">Home</a></li>
+						<li><a href="maps.html">Maps</a></li>
+						<li><a href="features.html">Features</a></li>
+						<li><a href="guide.html">User Guides</a></li>
+						
+						<li><a href="nav_web_service.html">NaviCell Web Service</a></li>
+						
+						<li><a href="faq.html">FAQ</a></li>
+					</ul>
+					
+					<ul class="list_left">
+						<li><a href="contact.html">Contacts</a></li>
+						<li><a href="publications.html">Publications</a></li>
+						<li style="padding-top:-10px; font-size: 70%; line-height: normal; font: serif; word-spacing: 20%;"><a href="citation.html">How to cite us</a></li>
+						<li><a href="team.html">People</a></li>
+						<li>
+						<a href="acknowledgements.html" style="font-size: 90%;">Acknowledgement</a></li>
+					</ul>
+					</div></div><div id="right_column"><div id="contain_right"><ul class="list_right">
+							<h4 class="right_column">Resources</h4>
+							<li class="list_long"><a href="http://acsn.curie.fr" target="_blank">ACSN <span style="font-size:65%">Atlas of Cancer Signaling Networks</span></a></li>
+							<li class="list_long2"><a href="http://www.celldesigner.org" target="_blank">CellDesigner</a></li>
+							<li class="list_long"><a href="http://www.sbgn.org" target="_blank">SBGN<span style="font-size:80%">
+									Systems Biology Graphical Notation</span></a></li>
+							<li><a href="http://www.cytoscape.org" target="_blank">Cytoscape</a></li>
+							<li><a href="http://bioinfo-out.curie.fr/projects/binom/" target="_blank">BiNoM</a></li>
+							<li><a href="publications2.html" target="_blank">Literature</a></li>
+						</ul>
+					
+					
+						
+						<ul class="list_right">
+							<h4 class="right_column">Databases</h4>
+							<li><a href="http://www.cellsignal.com" target="_blank">Cell Signaling</a></li>
+							<li><a href="http://www.genome.jp/kegg/pathway.html" target="_blank">KEGG</a></li>
+							<li><a href="http://www.pantherdb.org" target="_blank">Panther</a></li>
+							<li><a href="http://www.reactome.org" target="_blank">Reactome</a></li>
+														<li><a href="http://www.cs.tau.ac.il/~spike/" target="_blank">SPIKE</a></li>
+							<li><a href="http://www.wikipathways.org" target="_blank">WikiPathways</a></li>
+						</ul>
+					</div>
+				</div>
+				
+				<div id="center_column">
+				
+				
+					<!--<button type="button" class="myButton">
+						<a href="../navicell/maps/signallingnetworkofemtregulation/master/index.html" target="_blank">Access to map</a>
+					</button>-->	
+				
+				
+				 <ul class="list_center">
+				 	
+				 	
+				 	<p style="text-align:left;">
+						<table>
+							<tr>
+								<td><b>Map description</b></td>
+								<td>
+								<form method="get" action="http://navicell.curie.fr/navicell/maps/signallingnetworkofemtregulation/master/index.html"><button type="submit">Acces to map</button></form>
+								</td>
+							</tr>
+						</table></p>	
+					<p>The signalling network of EMT regulation was manually constructed in CellDesigner (www.celldesigner.org), based on information extracted from 135 scientific papers 
+					after critical curation of the literature...
+					<a style="color:orange;" href="#" onClick="toggle_visibility('more1');"><i>read more</i> </a></p>
+					<div id="more1" class="less" style="display:none"><p>
+					It contains about 400 chemical species representing proteins and their modifications, molecular complexes, RNAs, miRNAs, 
+					genes, phenotypes and regulatory influences formed by approximately 400 biochemical reactions. The network contains regulatory circuits connected to a number of 
+					phenotypes such as proliferation, apoptosis, EMT and others. The content of the network has been confirmed by comparison with protein-protein interaction signaling 
+					network derived from Ingenuity database.</p>
+					<a style="color:orange" href="javascript:;" onClick="document.getElementById('more1').style.display='none';"><i>hide</i></a>
+					</div>
+					
+					<p style="text-align:left;"><b>EMT</b></p>
+					<p>The signalling network contains major inducers of EMT and detailed regulatory circuits that control the EMT-like program...
+					<a style="color:orange;" href="#" onClick="toggle_visibility('more2');"><i>read more</i></a></p>
+					<div id="more2" class="less" style="display:none"><p>
+						SNAIL, SLUG, TWIST, ZEB1, and ZEB2 are major transcription factors or key inducers that can activate the EMT-like program. These key inducers are under the control of several upstream mechanisms. In healthy 
+						cells, these EMT regulators are inhibited by the p53 family via a variety of microRNAs, including miR200, miR203, miR34, and miR192. These bind to the mRNAs of EMT 
+						inducers(Kim et al., 2011a; Kim et al., 2011c; Knouf et al., 2011; Schubert and Brabletz, 2011a) and trigger their degradation. The p53 family regulates the EMT-marker, Vimentin, 
+						by the same mechanism. Interestingly, three of the aforementioned EMT-inducers can inhibit microRNAs(Brabletz et al., 2011; Moes et al., 2012; Mongroo and Rustgi, 2010; Siemens et al., 2011). 
+						This means they can inhibit their own negative regulation, thereby amplifying the signal and sustaining their own activity in the situations when EMT program is on.</p>
+					<p><a style="color:orange"href="#" onClick="toggle_visibility('more3');">[<i>go to next page</i>]</a></p>
+					</div>
+					<div id="more3" class="less" style="display:none">
+					<p>Our signalling network analysis shows that all EMT-inducers should be activated to ensure induction the EMT-like program. It has been shown that the different EMT inducers have only partially overlapping functions and that their collective induction gives the appropriate full set of EMT genes on one hand(Kurrey et al., 2005b; Moreno-Bueno et al., 2006b; Olmeda et al., 2008; Smit and Peeper, 2011) and inhibition of the maximal number of miRNAs on the other. Together it results in the increased stability of EMT inducers and maximal coverage of targeted EMT genes.</p>
+					<p><a style="color:orange" href="#" onClick="toggle_visibility('more4');">[<i>go to next page</i>]</a></p>
+					</div>
+					<div id="more4" class="less" style="display:none">
+					<p>After activation by specific ligands, Notch is cleaved by PSEN1&2 (presenillins). This active cleavage product of Notch (NICD) translocates to the nucleus and activate the transcription of the EMT inducers SNAIL, SLUG, TWIST, ZEB1, and ZEB2 (Katoh, 2009; Maier et al., 2010; Sahlgren et al., 2008; Taylor et al., 2010), and consequently triggers an EMT-like program. The Notch pathway is also able to induce the canonical WNT pathway. In turn, SNAIL and TWIST stabilize β-catenin (Li and Zhou, 2011; Stemmer et al., 2008) the main Wnt pathway player, suggesting that the canonical WNT pathway is not per se the inducer of EMT, but rather the reverse: EMT activates the Wnt pathway. Moreover the WNT pathway can induce the expression of other genes in the Notch pathway, such as NOTCH2, JAG1 and HES1 (Katoh, 2006; Peignon et al., 2011). The WNT pathway therefore sustains a positive feedback loop by promoting NICD activation, it subsequently sustains the activity of its own pathway. 
+					Important components of the Wnt and Notch pathways are negatively regulated by miRNAs induced by members of the p53-family (P53, P63 and P73)(Du et al., 2012; Kim et al., 2011a; Pang et al., 2010).
+					The balance between positive (Notch, Wnt) and negative (P53, P63, P73, miRNAs) regulatory circuits on EMT inducers will dictate the resulting phenotype.</p>
+					<a style="color:orange" href="javascript:;" onClick="document.getElementById('more4').style.display='none';"><i>hide</i></a>
+					</div>
+					
+					<p style="text-align:left;"><b>Proliferation and Apoptosis</b></p>
+					<p>Proliferative signals are represented in the network by cell cycle components such as Cyclins and cell cycle inhibitors such as p21 and p27...
+					<a style="color:orange;" href="#" onClick="toggle_visibility('more5');"><i>read more</i></a></p>
+					<div id="more5" class="less" style="display:none">
+					<p>Under conditions of stress (e.g. DNA damage), P53 induces P21 expression (Dotto, 2009a) to ensure cell cycle arrest and the activation of apoptosis (Maddika et al., 2
+					007), which is represented on the network by major apoptosis regulators BAK, BAX, BCL2 family and caspases. In addition, P53 indirectly inhibits major pro-proliferation 
+					players as c-MYC (Vigneron et al., 2006) and AKT (Escriva et al., 2008). Proliferation can be induced by both Wnt and Notch pathways via activation of c-MYC, CCND1 and 
+					AKT (Dotto, 2009a; Rohrs et al., 2009). Proliferation will be faster when both Wnt and Notch pathways are active.</p>
+					<p><a style="color:orange" href="#" onClick="toggle_visibility('more6');">[<i>go to next page</i>]</a></p>
+					</div>
+					<div id="more6" class="less" style="display:none">
+					<p>Interestingly, EMT–inducers have various influences on proliferation. For example, SNAIL reduces (Vega et al., 2004), but TWIST (Foubert et al., 2010; Zhu et al., 
+					2012) activates, proliferation via the regulation of P21. In addition, SNAIL, SLUG and ZEB2 inhibit CCND (Liu et al., 2010; Mejlvang et al., 2007; Vega et al., 2004). 
+					Moreover, EMT inducers also negatively regulate apoptosis by ensuring escape from anoikis. For example, SLUG has an inhibiting effect on apoptosis by directly regulating 
+					the transcription of Puma(Wu et al., 2005). TWIST, SNAIL and ZEB1 have anti-apoptopic properties (Bridges et al., 2009; Smit and Peeper, 2011). The EMT program as a whole can 
+					therefore be seen as a negative regulator of proliferation and apoptosis, allowing the cell-signalling network to be rewired towards a configuration that transforms cell fate 
+					to an EMT-like state for further detachment and migration. The tightly woven balance between the anti-proliferative, pro-apoptotic p53 signalling family opposing AKT, 
+					c-MYC, Wnt and Notch signalling and EMT inducers that play pro-proliferation and anti-apoptotic roles, will finally determine the proliferative and apoptotic fates of 
+					cells.</p><a style="color:orange" href="javascript:;" onClick="document.getElementById('more6').style.display='none';"><i>hide</i></a>
+					</div>
+					<p><b>References...</b>&nbsp;
+					<a style="color:orange;" href="#" onClick="toggle_visibility('more7');"><i>read more</i></a></p>
+					<div id="more7" class="less" style="display:none">
+					<p>The complete list of all references can be downloaded <a href="https://navicell.curie.fr/doc/signalnetworkemtregulation/References_list.pdf"> <span style="text-decoration:underline">here</span></a> or can be viewed on line:</p>
+					<p><table style="width:100%">
+						<tr><td colspan="9" style="text-align:center">authors last name starting with</td></tr>
+						<tr>
+							<td><a href="references_map_ab.html" style="color:orange" target="_blank"><b>a-b</b></a></td>
+							<td><a href="references_map_cf.html" style="color:orange" target="_blank"><b>c-f</b></a></td>
+							<td><a href="references_map_gh.html" style="color:orange" target="_blank"><b>g-h</b></a></td>
+							<td><a href="references_map_ik.html" style="color:orange" target="_blank"><b>i-k</b></a></td>
+							<td><a href="references_map_lm.html" style="color:orange" target="_blank"><b>l-m</b></a></td>
+							<td><a href="references_map_nr.html" style="color:orange" target="_blank"><b>n-r</b></a></td>
+							<td><a href="references_map_s.html" style="color:orange" target="_blank"><b>s-s</b></a></td>
+							<td><a href="references_map_tw.html" style="color:orange" target="_blank"><b>t-w</b></a></td>
+							<td><a href="references_map_yz.html" style="color:orange" target="_blank"><b>y-z</b></a></td>
+						</tr>
+					</table></p>
+					</div>
+					<p></p>
+				<!--	<li><b><a href="../navicell/maps/signallingnetworkofemtregulation/master/index.html" style="text-decoration:underline">Access to: Signalling network of EMT regulation</a></b></li>   -->
+					<p>Charion M. et al. <b>Notch activation and p53 deletion induce EMT-like and metastasis in mouse gut cancer. Manuscript in preparation.</b> </p> 
+				 
+				 </ul>
+					
+				</div></div><div id="footer">Web design by NaviCell team
+
+			</div>
+		</div>
+	</div>
+
+</body>
+
+</html>

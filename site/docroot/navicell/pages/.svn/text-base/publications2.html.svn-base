@@ -1,0 +1,112 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<title>Publications</title>
+<link rel="icon" type="image/ico" href="../images/favicon.ico"/>
+
+<link href="../styles/style3.css" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+	<div id="wrapper"><div id="header"><div id="img">
+			<div id="img_left"><img class="left_img" alt="logoNaviCell" src="../images/navicelllogo1.png"/>
+				
+			</div><div id="img_center">
+				
+				<img class="img_center" alt="" src="../images/detailed.png"/>
+				</div>
+			
+			<div id="img_right">
+				
+				<a href="http://www.curie.fr" target="_blank"><img class="img_right" alt="" src="../images/logo_curie.gif"/></a>
+			</div>
+		
+			
+			<div id="header_text">Data analysis, navigation, curation and maintenance of molecular interactions maps</div>
+						
+				
+		</div>	
+		
+		
+	</div><div id="wrapper2"><div id="grey_line"></div>
+			
+			<div id="orange_line"></div>
+			
+			
+			
+			<div id="main"><div id="left_column"><div id="container_left"><ul class="list_left1">
+						<li><a href="../index.html">Home</a></li>
+						<li><a href="maps.html">Maps</a></li>
+						<li><a href="features.html">Features</a></li>
+						<li><a href="guide.html">User Guides</a></li>
+						
+						<li><a href="nav_web_service.html">NaviCell Web Service</a></li>
+						
+						<li><a href="faq.html">FAQ</a></li>
+					</ul>
+					
+					<ul class="list_left">
+						<li><a href="contact.html">Contacts</a></li>
+						<li><a href="publications.html">Publications</a></li>
+						<li style="padding-top:-10px; font-size: 70%; line-height: normal; font: serif; word-spacing: 20%;"><a href="citation.html">How to cite us</a></li>
+						<li><a href="team.html">People</a></li>
+						<li>
+						<a href="acknowledgements.html" style="font-size: 90%;">Acknowledgement</a></li>
+					</ul>
+					</div></div><div id="right_column"><div id="contain_right"><ul class="list_right">
+							<h4 class="right_column">Resources</h4>
+							<li class="list_long"><a href="http://acsn.curie.fr" target="_blank">ACSN <span style="font-size:65%">Atlas of Cancer Signaling Networks</span></a></li>
+							<li class="list_long2"><a href="http://www.celldesigner.org" target="_blank">CellDesigner</a></li>
+							<li class="list_long"><a href="http://www.sbgn.org" target="_blank">SBGN<span style="font-size:80%">
+									Systems Biology Graphical Notation</span></a></li>
+									
+							<li><a href="http://www.cytoscape.org" target="_blank">Cytoscape</a></li>
+							<li><a href="http://bioinfo-out.curie.fr/projects/binom/" target="_blank">BiNoM</a></li>
+							<li><a href="publications2.html" target="_blank">Literature</a></li>
+						</ul>
+					
+					
+						
+						<ul class="list_right">
+							<h4 class="right_column">Databases</h4>
+							<li><a href="http://www.cellsignal.com" target="_blank">Cell Signaling</a></li>
+							<li><a href="http://www.genome.jp/kegg/pathway.html" target="_blank">KEGG</a></li>
+							<li><a href="http://www.pantherdb.org" target="_blank">Panther</a></li>
+							<li><a href="http://www.reactome.org" target="_blank">Reactome</a></li>
+														<li><a href="http://www.cs.tau.ac.il/~spike/" target="_blank">SPIKE</a></li>
+							<li><a href="http://www.wikipathways.org" target="_blank">WikiPathways</a></li>
+						</ul>
+					</div>
+				</div>
+				
+				<div id="center_column">
+					<p class="lit">Bauer-Mehren, A., Furlong, L.I. and Sanz, F. <b> Pathway databases and tools for their exploitation: benefits, current limitations and challenges.</b> Mol Syst Biol. 2009 5: 290. <a href="http://www.ncbi.nlm.nih.gov/pubmed?term=19638971" target="
+					    " style="text-decoration:underline">PMID:196389</a></p>
+					<p class="lit">Czauderna, T., Klukas, C. and Schreiber, F. <b> Editing, validating and translating of SBGN maps.</b> Bioinformatics 2010 26: 2340-2341. <a href="http://www.ncbi.nlm.nih.gov/pubmed?term=20628075" target="_blank" style="text-decoration:underline">PMID:20628075</a></p>
+					<p class="lit">Elkon R, Vesterman R, Amit N, Ulitsky I, Zohar I, et al. <b> SPIKE--a database, visualization and analysis tool of cellular signaling pathways.</b> BMC Bioinformatics 2008 9: 110. <a href="http://www.ncbi.nlm.nih.gov/pubmed?term=18289391" target="_blank" style="text-decoration:underline">PMID:8289391</a></p>
+					<p class="lit">Florez, L.A., Lammers, C.R., Michna, R. and Stulke, J.<b> CellPublisher: a web platform for the intuitive visualization and sharing of metabolic, signalling and regulatory pathways.</b> Bioinformatics. 2010 26: 2997-2999. <a href="http://www.ncbi.nlm.nih.gov/pubmed?term=20947526" target="_blank" style="text-decoration:underline">PMID:20947526</a></p>
+					<p class="lit">Ghosh, S., Matsuoka, Y. and Kitano, H.<b> Connecting the dots: role of standardization and technology sharing in biological simulation.</b> Drug Discov Today 2010 15: 1024-1031. <a href="http://www.ncbi.nlm.nih.gov/pubmed?term=20934535" target="_blank" style="text-decoration:underline">PMID:20934535</a></p>
+					<p class="lit">Joshi-Tope G, Gillespie M, Vastrik I, D'Eustachio P, Schmidt E, et al.<b> Reactome: a knowledgebase of biological pathways.</b> Nucleic Acids Res 2005 33: D428-432. <a href="http://www.ncbi.nlm.nih.gov/pubmed?term=15608231" target="_blank" style="text-decoration:underline">PMID:15608231</a></p>
+					<p class="lit">Kanehisa M.<b> The KEGG database.</b> Novartis Found Symp 2002 247: 91-101. <a href="http://www.ncbi.nlm.nih.gov/pubmed?term=12539951" target="_blank" style="text-decoration:underline">PMID:12539951</a></p>
+					<p class="lit">Kitano, H., Funahashi, A., Matsuoka, Y. and Oda, K.<b> Using process diagrams for the graphical representation of biological networks.</b> Nat Biotechnol 2005 23: 961-966. <a href="http://www.ncbi.nlm.nih.gov/pubmed?term=16082367" target="_blank" style="text-decoration:underline">PMID:16082367</a></p>
+					<p class="lit">Kitano, H., Ghosh, S. and Matsuoka, Y.<b> Social engineering for virtual 'big science' in systems biology.</b> Nat Chem Biol 2010 7: 323-326. <a href="http://www.ncbi.nlm.nih.gov/pubmed?term=21587248" target="_blank" style="text-decoration:underline">PMID:21587248</a></p>
+					<p class="lit">Le Novere, N., Hucka, M., Mi, H., Moodie, S., Schreiber, F., Sorokin, A., Demir, E., Wegner, K., Aladjem, M.I., Wimalaratne, S.M., Bergman, F.T., Gauges, R., Ghazal, P., Kawaji, H., Li, L., Matsuoka, Y., Villeger, A., Boyd, S.E., Calzone, L., Courtot, M., Dogrusoz, U., Freeman, T.C., Funahashi, A., Ghosh, S., Jouraku, A., Kim, S., 
+					    Kolpakov, F., Luna, A., Sahle, S., Schmidt, E., Watterson, S., Wu, G., Goryanin, I., Kell, D.B., Sander, C., Sauro, H., Snoep, J.L., Kohn, K. and Kitano, H.<b> The Systems Biology Graphical Notation.</b> Nat Biotechnol 2010 27: 735-741. <a href="http://www.ncbi.nlm.nih.gov/pubmed?term=19668183" target="_blank" style="text-decoration:underline">PMID:19668183</a></p>
+					<p class="lit">Matsuoka, Y., Ghosh, S., Kikuchi, N. and Kitano, H.<b> Payao: a community platform for SBML pathway model curation.</b> Bioinformatics 2010 26: 1381-1383. <a href="http://www.ncbi.nlm.nih.gov/pubmed?term=20371497" target="_blank" style="text-decoration:underline">PMID:20371497</a></p>
+					<p class="lit">Ooi, H.S., Schneider, G., Lim, T.T., Chan, Y.L., Eisenhaber, B. and Eisenhaber, F.<b> Biomolecular pathway databases.</b> Methods Mol Biol 2010 609: 129-144. <a href="http://www.ncbi.nlm.nih.gov/pubmed?term=20221917" target="_blank" style="text-decoration:underline">PMID:20221917</a></p>
+					<p class="lit">Pico AR, Kelder T, van Iersel MP, Hanspers K, Conklin BR, et al. <b>WikiPathways: pathway editing for the people.</b> PLoS Biol 2008 6: e184. <a href="http://www.ncbi.nlm.nih.gov/pubmed?term=18651794" target="_blank" style="text-decoration:underline">PMID:18651794</a></p>
+					<p class="lit">Thomas PD, Kejariwal A, Campbell MJ, Mi H, Diemer K, et al. <b>PANTHER: a browsable database of gene products organized by biological function, using curated protein family and subfamily classification.</b> Nucleic Acids Res 2003 31: 334-341. <a href="http://www.ncbi.nlm.nih.gov/pubmed?term=12520017" target="_blank" style="text-decoration:underline">PMID:12520017</a></p>
+				
+				
+				</div></div><div id="footer">Web design by NaviCell team
+
+			</div>
+		</div>
+	</div>
+
+</body>
+
+</html>

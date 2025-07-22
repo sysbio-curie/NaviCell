@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<title>Maps</title>
+<link rel="icon" type="image/ico" href="../images/favicon.ico"/>
+<!--navicell-->
+<link href="../styles/style.css" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+	<div id="wrapper"><div id="header"><div id="img">
+			<div id="img_left"><img class="left_img" alt="logoNaviCell" src="../images/navicelllogo1.png"/>
+				
+			</div><div id="img_center">
+				
+				<img class="img_center" alt="" src="../images/detailed.png"/>
+				</div>
+			
+			<div id="img_right">
+				
+				<a href="http://www.curie.fr" target="_blank"><img class="img_right" alt="" src="../images/logo_curie.gif" style="border:0px"/></a>
+			</div>
+		
+			
+			<div id="header_text">Navigation, curation and maintenance of molecular interactions maps</div>
+						
+				
+		</div>	
+		
+		
+	</div><div id="wrapper2"><div id="grey_line"></div>
+			
+			<div id="orange_line"></div>
+			
+			
+			
+			<div id="main"><div id="left_column"><div id="container_left"><ul class="list_left1">
+						<li><a href="../index.html">Home</a></li>
+						<li><a href="maps.html">Maps</a></li>
+						<li><a href="features.html">Features</a></li>
+						<li><a href="guide.html">User&#39;s Guide</a></li>
+						<li><a href="tutorial.html">Video Tutorial</a></li>
+						<li><a href="install.html">Install NaviCell</a></li>
+						<li style="font-size:93%;"><a href="uploading.html">Upload Your Map</a></li>
+						<li><a href="faq.html">FAQ</a></li>
+					</ul>
+					
+					<ul class="list_left">
+						<li><a href="contact.html">Contacts</a></li>
+						<li><a href="publications.html">Publications</a></li>
+						<li style="padding-top:-10px; font-size: 70%; line-height: normal; font: serif; word-spacing: 20%;"><a href="citation.html">How to cite us</a></li>
+						<li><a href="team.html">People</a></li>
+						<li>
+						<a href="acknowledgements.html" style="font-size: 90%;">Acknowledgement</a></li>
+					</ul>
+					</div></div><div id="right_column"><div id="contain_right"><ul class="list_right">
+							<h4 class="right_column">Resources</h4>
+							<li class="list_long"><a href="http://acsn.curie.fr" target="_blank">ACSN <span style="font-size:65%">Atlas of Cancer Signaling Networks</span></a></li>
+							<li class="list_long2"><a href="http://www.celldesigner.org" target="_blank">CellDesigner</a></li>
+							<li class="list_long"><a href="http://www.sbgn.org" target="_blank">SBGN<span style="font-size:80%">
+									Systems Biology Graphical Notation</span></a></li>
+							<li><a href="http://www.cytoscape.org" target="_blank">Cytoscape</a></li>
+							<li><a href="http://bioinfo-out.curie.fr/projects/binom/" target="_blank">BiNoM</a></li>
+							<li><a href="publications2.html" target="_blank">Literature</a></li>
+						</ul>
+					
+					
+						
+						<ul class="list_right">
+							<h4 class="right_column">Databases</h4>
+							<li><a href="http://www.cellsignal.com" target="_blank">Cell Signaling</a></li>
+							<li><a href="http://www.genome.jp/kegg/pathway.html" target="_blank">KEGG</a></li>
+							<li><a href="http://www.pantherdb.org" target="_blank">Panther</a></li>
+							<li><a href="http://www.reactome.org" target="_blank">Reactome</a></li>
+							<li><a href="http://repairtoire.genesilico.pl/" target="_blank">REPAIRtoire</a></li>
+							<li><a href="http://www.cs.tau.ac.il/~spike/" target="_blank">SPIKE</a></li>
+							<li><a href="http://www.wikipathways.org" target="_blank">WikiPathways</a></li>
+						</ul>
+					</div>
+				</div>
+				
+				<div id="center_column"><p><h3>Collection of Maps</h3></p>
+				 <p><span style="color:orange"><b>Institut Curie Collection</b></span></p>
+				 <ul class="list_center">
+				 	
+<<<<<<< .mine
+				 	<li><b><a href="maps_rbe2f.html" style="text-decoration:underline">Cell Cycle (RB-E2F) molecular interaction map</a></b></li>
+					<li style="margin-top:1em"><b><a href="maps_notchp53.html" style="text-decoration:underline">Cross-talk Notch/p53</a></b></li>
+					<li style="margin-top:1em"><b><a href="http://navicell.curie.fr/navicell/maps/dnarepair/master/index.html" style="text-decoration:underline">DNA Repair</a></b></li>
+					<li style="margin-top:1em"><b><a href="http://navicell.curie.fr/navicell/maps/aktmtor/master/index.html" style="text-decoration:underline">Cell Survival</a></b></li>
+					<li style="margin-top:1em"><b><a href="http://navicell.curie.fr/navicell/maps/emtcellmotility/master/index.html" style="text-decoration:underline">EMT and Cell Motility</a></b></li>
+					<li style="margin-top:1em"><b><a href="http://navicell.curie.fr/navicell/maps/mapk/master/index.html" style="text-decoration:underline">MapK pathway</a></b></li>
+				 </ul>
+=======
+						<li><b><a href="maps_rbe2f.html" style="text-decoration:underline">Cell Cycle (RB-E2F) molecular interaction map</a></b></li>
+						<li style="margin-top:1em"><b><a href="maps_notchp53.html" style="text-decoration:underline">Cross-talk Notch/p53</a></b></li>
+						<li>fFor other maps, please have a look at the following web site: <b><a href="http://www.acsn.curie.fr" target="_blank">www.acsn.curie.fr</a></b></li>
+					
+					</ul>
+>>>>>>> .r17957
+					<p><b>External Collection</b></p>
+						<ul class="list_center">
+							<li><b><a href="maps_mtor.html" style="text-decoration:underline">mTOR signalling network</a></b></li>
+							<li style="margin-top:1em"><b><a href="maps_tlr.html" style="text-decoration:underline">Toll-like receptor signalling network</a></b></li>
+							<li style="margin-top:1em"><b><a href="maps_egfr.html" style="text-decoration:underline">EGFR signalling network</a></b></li>
+							<li style="margin-top:1em"><b><a href="maps_dc.html" style="text-decoration:underline">Dendritic cells signalling network</a></b></li>
+							<li style="margin-top:1em"><b><a href="maps_alzheimer.html" style="text-decoration:underline">Signaling pathways of Alzheimer's disease</a></b></li>
+						</ul>
+					<p><b>Sample examples</b></p>
+						<ul class="list_center">
+							<li><b><a href="http://navicell.curie.fr/navicell/maps/MPhase_light/master/index.html" style="text-decoration:underline">MPhase map from CellDesigner sample set</a></b></li>
+						</ul>
+
+				</div></div><div id="footer">Web design by NaviCell team
+
+			</div>
+		</div>
+	</div>
+
+</body>
+
+</html>

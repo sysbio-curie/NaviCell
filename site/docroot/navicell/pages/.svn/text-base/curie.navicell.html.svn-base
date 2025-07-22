@@ -1,0 +1,1117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module curie.navicell</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#ffffff">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#ff8500">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a><font color="#ffffff">curie</font></a>.navicell</strong></big></big> (version 1.3)</font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href="."></a><br><a href="file:/bioinfo/users/eviara/workspace/BiNoM2011/src/python_api/curie/navicell.py"></a></font></td></tr></table>
+    <p><tt>This&nbsp;module&nbsp;implements&nbsp;the&nbsp;Python&nbsp;Binding&nbsp;for&nbsp;<a href="#NaviCell">NaviCell</a>.<br>
+&nbsp;<br>
+It&nbsp;can&nbsp;be&nbsp;used&nbsp;as&nbsp;a&nbsp;module&nbsp;or&nbsp;by&nbsp;using&nbsp;the&nbsp;"nvpy"&nbsp;python&nbsp;companion&nbsp;script.<br>
+&nbsp;<br>
+As&nbsp;a&nbsp;module,&nbsp;for&nbsp;instance:<br>
+&nbsp;<br>
+from&nbsp;curie.navicell&nbsp;import&nbsp;<a href="#NaviCell">NaviCell</a>,&nbsp;<a href="#Options">Options</a><br>
+&nbsp;<br>
+#&nbsp;1.&nbsp;Instantiate&nbsp;and&nbsp;set&nbsp;<a href="#Options">Options</a>:<br>
+options&nbsp;=&nbsp;<a href="#Options">Options</a>()<br>
+options.proxy_url&nbsp;=&nbsp;'https://navicell.curie.fr/cgi-bin/nv_proxy.php'<br>
+options.map_url&nbsp;=&nbsp;'https://navicell.curie.fr/navicell/maps/cellcycle/master/index.php'<br>
+&nbsp;<br>
+#&nbsp;If&nbsp;you&nbsp;want&nbsp;to&nbsp;specify&nbsp;a&nbsp;particular&nbsp;Web&nbsp;Browser,&nbsp;you&nbsp;have&nbsp;to&nbsp;set&nbsp;options.browser_command,&nbsp;otherwise&nbsp;the&nbsp;default&nbsp;browser&nbsp;will&nbsp;be&nbsp;used.<br>
+#&nbsp;For&nbsp;instance,&nbsp;to&nbsp;use&nbsp;firefox&nbsp;on&nbsp;MacOS:<br>
+options.browser_command&nbsp;=&nbsp;'open&nbsp;-a&nbsp;Firefox&nbsp;%s'<br>
+#&nbsp;To&nbsp;use&nbsp;google&nbsp;chrome&nbsp;on&nbsp;Linux:<br>
+options.browser_command&nbsp;=&nbsp;'/usr/bin/google-chrome&nbsp;%s'<br>
+&nbsp;<br>
+#&nbsp;2.&nbsp;Instantiate&nbsp;a&nbsp;<a href="#NaviCell">NaviCell</a>&nbsp;client&nbsp;handle<br>
+nv&nbsp;=&nbsp;<a href="#NaviCell">NaviCell</a>(options)<br>
+&nbsp;<br>
+#&nbsp;3.&nbsp;Launch&nbsp;browser<br>
+nv.launchBrowser()<br>
+&nbsp;<br>
+#&nbsp;4.&nbsp;Command&nbsp;interaction&nbsp;examples:<br>
+nv.setZoom('',&nbsp;10)<br>
+nv.getHugoList()<br>
+nv.getBiotypeList()<br>
+&nbsp;<br>
+At&nbsp;the&nbsp;command&nbsp;line,&nbsp;using&nbsp;nvpy:<br>
+nvpy&nbsp;--browser-command&nbsp;'open&nbsp;-a&nbsp;Firefox&nbsp;%s'&nbsp;--proxy-url&nbsp;'https://navicell.curie.fr/cgi-bin/nv_proxy.php'&nbsp;--map-url&nbsp;'https://navicell.curie.fr/navicell/maps/cellcycle/master/index.php'&nbsp;--launch-browser<br>
+or:<br>
+python3&nbsp;-i&nbsp;nvpy&nbsp;...<br>
+&nbsp;<br>
+To&nbsp;make&nbsp;things&nbsp;easier,&nbsp;the&nbsp;proxy&nbsp;URL,&nbsp;the&nbsp;map&nbsp;URL&nbsp;and&nbsp;the&nbsp;browser&nbsp;command&nbsp;can&nbsp;be&nbsp;put&nbsp;in&nbsp;environment&nbsp;variables&nbsp;as&nbsp;follows:<br>
+export&nbsp;NV_PROXY_URL='https://navicell.curie.fr/cgi-bin/nv_proxy.php'<br>
+export&nbsp;NV_MAP_URL='https://navicell.curie.fr/navicell/maps/cellcycle/master/index.php'<br>
+export&nbsp;NV_BROWSER_COMMAND='open&nbsp;-a&nbsp;Firefox&nbsp;%s'&nbsp;#&nbsp;on&nbsp;MacOS<br>
+&nbsp;<br>
+Then:<br>
+nvpy&nbsp;--launch-browser<br>
+&nbsp;<br>
+What&nbsp;is&nbsp;displayed:<br>
+===================================<br>
+&nbsp;Welcome&nbsp;in&nbsp;<a href="#NaviCell">NaviCell</a>&nbsp;python&nbsp;client<br>
+===================================<br>
+&nbsp;<br>
+Use&nbsp;python&nbsp;variable&nbsp;'nv'&nbsp;as&nbsp;the&nbsp;<a href="#NaviCell">NaviCell</a>&nbsp;<a href="builtins.html#object">object</a><br>
+Type&nbsp;'nv.examples()'&nbsp;to&nbsp;get&nbsp;examples<br>
+&gt;&gt;&gt;&nbsp;#&nbsp;then,&nbsp;you&nbsp;can&nbsp;type&nbsp;interaction&nbsp;commands:<br>
+&gt;&gt;&gt;&nbsp;nv.setZoom('',&nbsp;10)<br>
+&gt;&gt;&gt;&nbsp;nv.getHugoList()</tt></p>
+<!--
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="datetime.html">datetime</a><br>
+<a href="http.html">http</a><br>
+<a href="json.html">json</a><br>
+</td><td width="25%" valign=top><a href="os.html">os</a><br>
+<a href="subprocess.html">subprocess</a><br>
+<a href="sys.html">sys</a><br>
+</td><td width="25%" valign=top><a href="time.html">time</a><br>
+<a href="urllib.html">urllib</a><br>
+<a href="webbrowser.html">webbrowser</a><br>
+</td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ff8500">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ff8500"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="builtins.html#object">builtins.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="curie.navicell.html#BrowserLauncher">BrowserLauncher</a>
+</font></dt><dt><font face="helvetica, arial"><a href="curie.navicell.html#NaviCell">NaviCell</a>
+</font></dt><dt><font face="helvetica, arial"><a href="curie.navicell.html#Options">Options</a>
+</font></dt><dt><font face="helvetica, arial"><a href="curie.navicell.html#Proxy">Proxy</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+-->
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#f3efeb">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="BrowserLauncher">class <strong>BrowserLauncher</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr bgcolor="#f3efeb"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Utility&nbsp;class&nbsp;to&nbsp;launch&nbsp;a&nbsp;browser&nbsp;and&nbsp;display&nbsp;a&nbsp;given&nbsp;<a href="#NaviCell">NaviCell</a>&nbsp;map.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="BrowserLauncher-__init__"><strong>__init__</strong></a>(self, browser_command, map_url)</dt><dd><tt>Instantiate&nbsp;a&nbsp;<a href="#BrowserLauncher">BrowserLauncher</a>.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;browser_command&nbsp;(string):&nbsp;the&nbsp;full&nbsp;browser&nbsp;command<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;map_url&nbsp;(string):&nbsp;the&nbsp;URL&nbsp;of&nbsp;the&nbsp;<a href="#NaviCell">NaviCell</a>&nbsp;map</tt></dd></dl>
+
+<dl><dt><a name="BrowserLauncher-launch"><strong>launch</strong></a>(self, session_id)</dt><dd><tt>Launchs&nbsp;the&nbsp;browser&nbsp;with&nbsp;the&nbsp;given&nbsp;session&nbsp;ID.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;session_id&nbsp;(string):&nbsp;the&nbsp;<a href="#NaviCell">NaviCell</a>&nbsp;session&nbsp;ID</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#f3efeb">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="NaviCell">class <strong>NaviCell</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr bgcolor="#f3efeb"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#NaviCell">NaviCell</a>&nbsp;handle&nbsp;used&nbsp;to&nbsp;communicate&nbsp;with&nbsp;the&nbsp;<a href="#NaviCell">NaviCell</a>&nbsp;Web&nbsp;Service.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="NaviCell-__init__"><strong>__init__</strong></a>(self, options)</dt><dd><tt>Instantiate&nbsp;a&nbsp;<a href="#NaviCell">NaviCell</a>&nbsp;handle.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;options(curie.navicell.<a href="#Options">Options</a>):&nbsp;browser_commmand,&nbsp;proxy_url&nbsp;and&nbsp;map_url&nbsp;to&nbsp;be&nbsp;used.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Notices:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;options.map_url&nbsp;has&nbsp;to&nbsp;be&nbsp;set.&nbsp;options.browser_command&nbsp;and&nbsp;options.map_url&nbsp;can&nbsp;be&nbsp;set&nbsp;(respectively)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;False&nbsp;and&nbsp;empty&nbsp;string.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;options&nbsp;can&nbsp;be&nbsp;an&nbsp;instance&nbsp;of&nbsp;any&nbsp;class&nbsp;as&nbsp;soon&nbsp;as&nbsp;browser_commmand,&nbsp;proxy_url&nbsp;and<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;map_url&nbsp;attributes&nbsp;are&nbsp;provided.&nbsp;For&nbsp;instance,&nbsp;when&nbsp;used&nbsp;with&nbsp;nvpy,&nbsp;options&nbsp;is&nbsp;actually<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;an&nbsp;instance&nbsp;of&nbsp;optparse.Values.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-attachLastSession"><strong>attachLastSession</strong></a>(self)</dt><dd><tt>Attach&nbsp;<a href="#NaviCell">NaviCell</a>&nbsp;handle&nbsp;to&nbsp;the&nbsp;last&nbsp;existing&nbsp;<a href="#NaviCell">NaviCell</a>&nbsp;Web&nbsp;Service&nbsp;session.<br>
+Action&nbsp;granted&nbsp;according&nbsp;to&nbsp;security&nbsp;conditions&nbsp;defined&nbsp;in&nbsp;the&nbsp;Web&nbsp;Service&nbsp;configuration.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-attachRefererSession"><strong>attachRefererSession</strong></a>(self, referer)</dt><dd><tt>Attach&nbsp;<a href="#NaviCell">NaviCell</a>&nbsp;handle&nbsp;to&nbsp;the&nbsp;last&nbsp;existing&nbsp;<a href="#NaviCell">NaviCell</a>&nbsp;Web&nbsp;Service&nbsp;session&nbsp;launched&nbsp;from<br>
+a&nbsp;given&nbsp;referer&nbsp;(IP&nbsp;client).<br>
+Action&nbsp;granted&nbsp;according&nbsp;to&nbsp;security&nbsp;conditions&nbsp;defined&nbsp;in&nbsp;the&nbsp;Web&nbsp;Service&nbsp;configuration.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;referer(string):&nbsp;IP&nbsp;client&nbsp;address&nbsp;of&nbsp;the&nbsp;referer</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-attachSession"><strong>attachSession</strong></a>(self, session_id)</dt><dd><tt>Attach&nbsp;<a href="#NaviCell">NaviCell</a>&nbsp;handle&nbsp;to&nbsp;an&nbsp;existing&nbsp;<a href="#NaviCell">NaviCell</a>&nbsp;Web&nbsp;Service&nbsp;session.<br>
+Action&nbsp;granted&nbsp;according&nbsp;to&nbsp;security&nbsp;conditions&nbsp;defined&nbsp;in&nbsp;the&nbsp;Web&nbsp;Service&nbsp;configuration.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;session_id(string):&nbsp;session&nbsp;ID&nbsp;to&nbsp;which&nbsp;<a href="#NaviCell">NaviCell</a>&nbsp;handle&nbsp;must&nbsp;be&nbsp;attached</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-barplotEditorAllGroups"><strong>barplotEditorAllGroups</strong></a>(self, module)</dt><dd><tt>Select&nbsp;all&nbsp;groups&nbsp;in&nbsp;the&nbsp;barplot&nbsp;editor.<br>
+Similar&nbsp;to&nbsp;a&nbsp;click&nbsp;on&nbsp;the&nbsp;'All&nbsp;Groups'&nbsp;button&nbsp;of&nbsp;the&nbsp;barplot&nbsp;editor.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-barplotEditorAllSamples"><strong>barplotEditorAllSamples</strong></a>(self, module)</dt><dd><tt>Select&nbsp;all&nbsp;samples&nbsp;in&nbsp;the&nbsp;barplot&nbsp;editor.<br>
+Similar&nbsp;to&nbsp;a&nbsp;click&nbsp;on&nbsp;the&nbsp;'All&nbsp;Samples'&nbsp;button&nbsp;of&nbsp;the&nbsp;barplot&nbsp;editor.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-barplotEditorApply"><strong>barplotEditorApply</strong></a>(self, module)</dt><dd><tt>Apply&nbsp;the&nbsp;changes&nbsp;in&nbsp;the&nbsp;barplot&nbsp;editor.<br>
+Similar&nbsp;to&nbsp;a&nbsp;click&nbsp;on&nbsp;the&nbsp;'Apply'&nbsp;button&nbsp;of&nbsp;the&nbsp;barplot&nbsp;editor.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-barplotEditorApplyAndClose"><strong>barplotEditorApplyAndClose</strong></a>(self, module)</dt><dd><tt>Apply&nbsp;the&nbsp;changes&nbsp;in&nbsp;the&nbsp;barplot&nbsp;editor&nbsp;and&nbsp;close&nbsp;the&nbsp;window.<br>
+Similar&nbsp;to&nbsp;a&nbsp;click&nbsp;on&nbsp;the&nbsp;'OK'&nbsp;button&nbsp;of&nbsp;the&nbsp;barplot&nbsp;editor.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-barplotEditorCancel"><strong>barplotEditorCancel</strong></a>(self, module)</dt><dd><tt>Cancel&nbsp;the&nbsp;changes&nbsp;in&nbsp;the&nbsp;barplot&nbsp;editor&nbsp;and&nbsp;close&nbsp;the&nbsp;window.<br>
+Similar&nbsp;to&nbsp;a&nbsp;click&nbsp;on&nbsp;the&nbsp;'Cancel'&nbsp;button&nbsp;of&nbsp;the&nbsp;barplot&nbsp;editor.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-barplotEditorClearSamples"><strong>barplotEditorClearSamples</strong></a>(self, module)</dt><dd><tt>Clear&nbsp;all&nbsp;samples&nbsp;and&nbsp;groups&nbsp;in&nbsp;the&nbsp;barplot&nbsp;editor.<br>
+Similar&nbsp;to&nbsp;a&nbsp;click&nbsp;on&nbsp;the&nbsp;'Clear&nbsp;Samples'&nbsp;button&nbsp;of&nbsp;the&nbsp;barplot&nbsp;editor.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-barplotEditorClose"><strong>barplotEditorClose</strong></a>(self, module)</dt><dd><tt>Close&nbsp;the&nbsp;barplot&nbsp;editor.<br>
+Similar&nbsp;to&nbsp;a&nbsp;click&nbsp;on&nbsp;the&nbsp;'Close'&nbsp;button&nbsp;of&nbsp;the&nbsp;barplot&nbsp;editor.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-barplotEditorFromHeatmap"><strong>barplotEditorFromHeatmap</strong></a>(self, module)</dt><dd><tt>Report&nbsp;samples&nbsp;and&nbsp;groups&nbsp;selected&nbsp;in&nbsp;the&nbsp;heatmap&nbsp;editor&nbsp;to&nbsp;the&nbsp;barplot&nbsp;editor.<br>
+Similar&nbsp;to&nbsp;a&nbsp;click&nbsp;on&nbsp;the&nbsp;'From&nbsp;Heatmap'&nbsp;button&nbsp;of&nbsp;the&nbsp;barplot&nbsp;editor.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-barplotEditorOpen"><strong>barplotEditorOpen</strong></a>(self, module)</dt><dd><tt>Open&nbsp;the&nbsp;barplot&nbsp;editor.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-barplotEditorSelectDatatable"><strong>barplotEditorSelectDatatable</strong></a>(self, module, datatable)</dt><dd><tt>Select&nbsp;the&nbsp;datatable&nbsp;in&nbsp;the&nbsp;barplot&nbsp;editor.<br>
+Similar&nbsp;to&nbsp;a&nbsp;selection&nbsp;in&nbsp;the&nbsp;'Select&nbsp;a&nbsp;datatable'&nbsp;list&nbsp;of&nbsp;the&nbsp;barplot&nbsp;editor.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;datatable&nbsp;(string):&nbsp;datatable&nbsp;name&nbsp;to&nbsp;be&nbsp;selected.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-barplotEditorSelectSample"><strong>barplotEditorSelectSample</strong></a>(self, module, where, sample)</dt><dd><tt>Select&nbsp;a&nbsp;sample&nbsp;in&nbsp;the&nbsp;barplot&nbsp;editor.<br>
+Similar&nbsp;to&nbsp;a&nbsp;selection&nbsp;in&nbsp;a&nbsp;'Select&nbsp;a&nbsp;sample'&nbsp;list&nbsp;of&nbsp;the&nbsp;barplot&nbsp;editor.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;where&nbsp;(int):&nbsp;0-based&nbsp;sample&nbsp;position&nbsp;in&nbsp;the&nbsp;barplot.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;sample&nbsp;(string):&nbsp;sample&nbsp;name&nbsp;to&nbsp;be&nbsp;selected.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-barplotEditorSetTransparency"><strong>barplotEditorSetTransparency</strong></a>(self, module, value)</dt><dd><tt>Set&nbsp;the&nbsp;transparency&nbsp;in&nbsp;the&nbsp;barplot&nbsp;editor.<br>
+Similar&nbsp;to&nbsp;a&nbsp;change&nbsp;of&nbsp;the&nbsp;transparency&nbsp;slider&nbsp;of&nbsp;the&nbsp;barplot&nbsp;editor.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;value&nbsp;(double):&nbsp;transparency&nbsp;value.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-clearSessions"><strong>clearSessions</strong></a>(self)</dt><dd><tt>Clear&nbsp;all&nbsp;active&nbsp;<a href="#NaviCell">NaviCell</a>&nbsp;Web&nbsp;Service&nbsp;sessions.<br>
+Action&nbsp;granted&nbsp;according&nbsp;to&nbsp;security&nbsp;conditions&nbsp;defined&nbsp;in&nbsp;the&nbsp;Web&nbsp;Service&nbsp;configuration.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-datatableConfigApply"><strong>datatableConfigApply</strong></a>(self, module, datatable, config_type)</dt><dd><tt>Apply&nbsp;changes&nbsp;the&nbsp;datatable&nbsp;configuration&nbsp;dialog&nbsp;for&nbsp;the&nbsp;given&nbsp;type.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;datatable&nbsp;(string):&nbsp;datatable&nbsp;name<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;config_type&nbsp;(string):&nbsp;configuration&nbsp;type;&nbsp;must&nbsp;be&nbsp;<a href="#NaviCell">NaviCell</a>.CONFIG_COLOR,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#NaviCell">NaviCell</a>.CONFIG_SHAPE,&nbsp;<a href="#NaviCell">NaviCell</a>.CONFIG_SIZE&nbsp;or&nbsp;<a href="#NaviCell">NaviCell</a>.CONFIG_COLOR_SIZE</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-datatableConfigApplyAndClose"><strong>datatableConfigApplyAndClose</strong></a>(self, module, datatable, config_type)</dt><dd><tt>Apply&nbsp;changes&nbsp;and&nbsp;close&nbsp;the&nbsp;datatable&nbsp;configuration&nbsp;dialog&nbsp;for&nbsp;the&nbsp;given&nbsp;type.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;datatable&nbsp;(string):&nbsp;datatable&nbsp;name<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;config_type&nbsp;(string):&nbsp;configuration&nbsp;type;&nbsp;must&nbsp;be&nbsp;<a href="#NaviCell">NaviCell</a>.CONFIG_COLOR,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#NaviCell">NaviCell</a>.CONFIG_SHAPE,&nbsp;<a href="#NaviCell">NaviCell</a>.CONFIG_SIZE&nbsp;or&nbsp;<a href="#NaviCell">NaviCell</a>.CONFIG_COLOR_SIZE</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-datatableConfigCancel"><strong>datatableConfigCancel</strong></a>(self, module, datatable, config_type)</dt><dd><tt>Cancel&nbsp;changes&nbsp;and&nbsp;close&nbsp;the&nbsp;datatable&nbsp;configuration&nbsp;dialog&nbsp;for&nbsp;the&nbsp;given&nbsp;type.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;datatable&nbsp;(string):&nbsp;datatable&nbsp;name<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;config_type&nbsp;(string):&nbsp;configuration&nbsp;type;&nbsp;must&nbsp;be&nbsp;<a href="#NaviCell">NaviCell</a>.CONFIG_COLOR,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#NaviCell">NaviCell</a>.CONFIG_SHAPE,&nbsp;<a href="#NaviCell">NaviCell</a>.CONFIG_SIZE&nbsp;or&nbsp;<a href="#NaviCell">NaviCell</a>.CONFIG_COLOR_SIZE</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-datatableConfigClose"><strong>datatableConfigClose</strong></a>(self, module, datatable, config_type)</dt><dd><tt>Close&nbsp;the&nbsp;datatable&nbsp;configuration&nbsp;dialog&nbsp;for&nbsp;the&nbsp;given&nbsp;type.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;datatable&nbsp;(string):&nbsp;datatable&nbsp;name<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;config_type&nbsp;(string):&nbsp;configuration&nbsp;type;&nbsp;must&nbsp;be&nbsp;<a href="#NaviCell">NaviCell</a>.CONFIG_COLOR,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#NaviCell">NaviCell</a>.CONFIG_SHAPE,&nbsp;<a href="#NaviCell">NaviCell</a>.CONFIG_SIZE&nbsp;or&nbsp;<a href="#NaviCell">NaviCell</a>.CONFIG_COLOR_SIZE</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-datatableConfigOpen"><strong>datatableConfigOpen</strong></a>(self, module, datatable, config_type)</dt><dd><tt>Open&nbsp;the&nbsp;datatable&nbsp;configuration&nbsp;dialog&nbsp;for&nbsp;the&nbsp;given&nbsp;type.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;datatable&nbsp;(string):&nbsp;datatable&nbsp;name<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;config_type&nbsp;(string):&nbsp;configuration&nbsp;type;&nbsp;must&nbsp;be&nbsp;<a href="#NaviCell">NaviCell</a>.CONFIG_COLOR,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#NaviCell">NaviCell</a>.CONFIG_SHAPE,&nbsp;<a href="#NaviCell">NaviCell</a>.CONFIG_SIZE&nbsp;or&nbsp;<a href="#NaviCell">NaviCell</a>.CONFIG_COLOR_SIZE</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-datatableConfigSetColorAt"><strong>datatableConfigSetColorAt</strong></a>(self, module, datatable, config_type, tabname, idx, color)</dt><dd><tt>Set&nbsp;color&nbsp;at&nbsp;a&nbsp;specified&nbsp;index&nbsp;in&nbsp;the&nbsp;datatable&nbsp;configuration&nbsp;dialog&nbsp;for&nbsp;the&nbsp;given&nbsp;type.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;datatable&nbsp;(string):&nbsp;datatable&nbsp;name<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;config_type&nbsp;(string):&nbsp;configuration&nbsp;type;&nbsp;must&nbsp;be&nbsp;<a href="#NaviCell">NaviCell</a>.CONFIG_COLOR,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#NaviCell">NaviCell</a>.CONFIG_SHAPE,&nbsp;<a href="#NaviCell">NaviCell</a>.CONFIG_SIZE&nbsp;or&nbsp;<a href="#NaviCell">NaviCell</a>.CONFIG_COLOR_SIZE<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;tabname&nbsp;(string):&nbsp;tab&nbsp;name&nbsp;in&nbsp;the&nbsp;configuration&nbsp;dialog;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;must&nbsp;be&nbsp;<a href="#NaviCell">NaviCell</a>.TABNAME_SAMPLES&nbsp;or&nbsp;<a href="#NaviCell">NaviCell</a>.TABNAME_GROUPS<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;idx&nbsp;(int):&nbsp;color&nbsp;index<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;color&nbsp;(string):&nbsp;hexa&nbsp;RGB&nbsp;color</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-datatableConfigSetCondAt"><strong>datatableConfigSetCondAt</strong></a>(self, module, datatable, config_type, tabname, idx, cond)</dt><dd><tt>Set&nbsp;condition&nbsp;at&nbsp;a&nbsp;specified&nbsp;index&nbsp;in&nbsp;the&nbsp;datatable&nbsp;configuration&nbsp;dialog&nbsp;for&nbsp;the&nbsp;given&nbsp;type.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;datatable&nbsp;(string):&nbsp;datatable&nbsp;name<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;config_type&nbsp;(string):&nbsp;configuration&nbsp;type;&nbsp;must&nbsp;be&nbsp;<a href="#NaviCell">NaviCell</a>.CONFIG_COLOR,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#NaviCell">NaviCell</a>.CONFIG_SHAPE,&nbsp;<a href="#NaviCell">NaviCell</a>.CONFIG_SIZE&nbsp;or&nbsp;<a href="#NaviCell">NaviCell</a>.CONFIG_COLOR_SIZE<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;tabname&nbsp;(string):&nbsp;tab&nbsp;name&nbsp;in&nbsp;the&nbsp;configuration&nbsp;dialog;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;must&nbsp;be&nbsp;<a href="#NaviCell">NaviCell</a>.TABNAME_SAMPLES&nbsp;or&nbsp;<a href="#NaviCell">NaviCell</a>.TABNAME_GROUPS<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;idx&nbsp;(int):&nbsp;condition&nbsp;index<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;shape&nbsp;(int):&nbsp;condition;&nbsp;must&nbsp;be&nbsp;<a href="#NaviCell">NaviCell</a>.COND_DISCRETE_IGNORE,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#NaviCell">NaviCell</a>.COND_DISCRETE_NO_ELEMENT,&nbsp;<a href="#NaviCell">NaviCell</a>.COND_DISCRETE_AT_LEAST_ONE_ELEMENT,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#NaviCell">NaviCell</a>.COND_DISCRETE_ALL_ELEMENTS&nbsp;or&nbsp;<a href="#NaviCell">NaviCell</a>.COND_DISCRETE_VALUE</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-datatableConfigSetGroupAdvancedConfiguration"><strong>datatableConfigSetGroupAdvancedConfiguration</strong></a>(self, module, datatable, config_type, checked)</dt><dd><tt>Set&nbsp;group&nbsp;advanced&nbsp;configuration&nbsp;in&nbsp;the&nbsp;datatable&nbsp;configuration&nbsp;dialog&nbsp;for&nbsp;the&nbsp;given&nbsp;type.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;datatable&nbsp;(string):&nbsp;datatable&nbsp;name<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;config_type&nbsp;(string):&nbsp;configuration&nbsp;type;&nbsp;must&nbsp;be&nbsp;<a href="#NaviCell">NaviCell</a>.CONFIG_COLOR,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#NaviCell">NaviCell</a>.CONFIG_SHAPE,&nbsp;<a href="#NaviCell">NaviCell</a>.CONFIG_SIZE&nbsp;or&nbsp;<a href="#NaviCell">NaviCell</a>.CONFIG_COLOR_SIZE<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;checked&nbsp;(boolean):&nbsp;set/unset&nbsp;advanced&nbsp;configuration</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-datatableConfigSetGroupMethod"><strong>datatableConfigSetGroupMethod</strong></a>(self, module, datatable, config_type, method)</dt><dd><tt>Set&nbsp;the&nbsp;group&nbsp;method&nbsp;of&nbsp;the&nbsp;datatable&nbsp;configuration&nbsp;dialog&nbsp;for&nbsp;the&nbsp;given&nbsp;type.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;datatable&nbsp;(string):&nbsp;datatable&nbsp;name<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;config_type&nbsp;(string):&nbsp;configuration&nbsp;type;&nbsp;must&nbsp;be&nbsp;<a href="#NaviCell">NaviCell</a>.CONFIG_COLOR,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#NaviCell">NaviCell</a>.CONFIG_SHAPE,&nbsp;<a href="#NaviCell">NaviCell</a>.CONFIG_SIZE&nbsp;or&nbsp;<a href="#NaviCell">NaviCell</a>.CONFIG_COLOR_SIZE<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;method&nbsp;(int):&nbsp;method&nbsp;name;&nbsp;must&nbsp;be&nbsp;<a href="#NaviCell">NaviCell</a>.METHOD_CONTINUOUS_AVERAGE,&nbsp;<a href="#NaviCell">NaviCell</a>.METHOD_CONTINUOUS_MEDIAN,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#NaviCell">NaviCell</a>.METHOD_CONTINUOUS_MINVAL,&nbsp;<a href="#NaviCell">NaviCell</a>.METHOD_CONTINUOUS_MAXVAL,&nbsp;<a href="#NaviCell">NaviCell</a>.METHOD_CONTINUOUS_ABS_AVERAGE,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#NaviCell">NaviCell</a>.METHOD_CONTINUOUS_ABS_MINVAL&nbsp;or&nbsp;<a href="#NaviCell">NaviCell</a>.METHOD_CONTINUOUS_ABS_MAXVAL</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-datatableConfigSetSampleAbsoluteValue"><strong>datatableConfigSetSampleAbsoluteValue</strong></a>(self, module, datatable, config_type, checked)</dt><dd><tt>Set&nbsp;the&nbsp;sample&nbsp;absolute&nbsp;value&nbsp;mode&nbsp;of&nbsp;the&nbsp;datatable&nbsp;configuration&nbsp;dialog&nbsp;for&nbsp;the&nbsp;given&nbsp;type.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;datatable&nbsp;(string):&nbsp;datatable&nbsp;name<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;config_type&nbsp;(string):&nbsp;configuration&nbsp;type;&nbsp;must&nbsp;be&nbsp;<a href="#NaviCell">NaviCell</a>.CONFIG_COLOR,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#NaviCell">NaviCell</a>.CONFIG_SHAPE,&nbsp;<a href="#NaviCell">NaviCell</a>.CONFIG_SIZE&nbsp;or&nbsp;<a href="#NaviCell">NaviCell</a>.CONFIG_COLOR_SIZE<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;checked&nbsp;(boolean):&nbsp;set/unset&nbsp;sample&nbsp;absolute&nbsp;value&nbsp;mode</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-datatableConfigSetSampleMethod"><strong>datatableConfigSetSampleMethod</strong></a>(self, module, datatable, config_type, method)</dt><dd><tt>Set&nbsp;the&nbsp;sample&nbsp;method&nbsp;of&nbsp;the&nbsp;datatable&nbsp;configuration&nbsp;dialog&nbsp;for&nbsp;the&nbsp;given&nbsp;type.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;datatable&nbsp;(string):&nbsp;datatable&nbsp;name<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;config_type&nbsp;(string):&nbsp;configuration&nbsp;type;&nbsp;must&nbsp;be&nbsp;<a href="#NaviCell">NaviCell</a>.CONFIG_COLOR,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#NaviCell">NaviCell</a>.CONFIG_SHAPE,&nbsp;<a href="#NaviCell">NaviCell</a>.CONFIG_SIZE&nbsp;or&nbsp;<a href="#NaviCell">NaviCell</a>.CONFIG_COLOR_SIZE<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;method&nbsp;(int):&nbsp;method&nbsp;name;&nbsp;must&nbsp;be&nbsp;<a href="#NaviCell">NaviCell</a>.METHOD_CONTINUOUS_AVERAGE,&nbsp;<a href="#NaviCell">NaviCell</a>.METHOD_CONTINUOUS_MEDIAN,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#NaviCell">NaviCell</a>.METHOD_CONTINUOUS_MINVAL,&nbsp;<a href="#NaviCell">NaviCell</a>.METHOD_CONTINUOUS_MAXVAL,&nbsp;<a href="#NaviCell">NaviCell</a>.METHOD_CONTINUOUS_ABS_AVERAGE,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#NaviCell">NaviCell</a>.METHOD_CONTINUOUS_ABS_MINVAL&nbsp;or&nbsp;<a href="#NaviCell">NaviCell</a>.METHOD_CONTINUOUS_ABS_MAXVAL</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-datatableConfigSetShapeAt"><strong>datatableConfigSetShapeAt</strong></a>(self, module, datatable, config_type, tabname, idx, shape)</dt><dd><tt>Set&nbsp;shape&nbsp;at&nbsp;a&nbsp;specified&nbsp;index&nbsp;in&nbsp;the&nbsp;datatable&nbsp;configuration&nbsp;dialog&nbsp;for&nbsp;the&nbsp;given&nbsp;type.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;datatable&nbsp;(string):&nbsp;datatable&nbsp;name<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;config_type&nbsp;(string):&nbsp;configuration&nbsp;type;&nbsp;must&nbsp;be&nbsp;<a href="#NaviCell">NaviCell</a>.CONFIG_COLOR,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#NaviCell">NaviCell</a>.CONFIG_SHAPE,&nbsp;<a href="#NaviCell">NaviCell</a>.CONFIG_SIZE&nbsp;or&nbsp;<a href="#NaviCell">NaviCell</a>.CONFIG_COLOR_SIZE<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;tabname&nbsp;(string):&nbsp;tab&nbsp;name&nbsp;in&nbsp;the&nbsp;configuration&nbsp;dialog;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;must&nbsp;be&nbsp;<a href="#NaviCell">NaviCell</a>.TABNAME_SAMPLES&nbsp;or&nbsp;<a href="#NaviCell">NaviCell</a>.TABNAME_GROUPS<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;idx&nbsp;(int):&nbsp;shape&nbsp;index<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;shape&nbsp;(int):&nbsp;shape;&nbsp;must&nbsp;be&nbsp;<a href="#NaviCell">NaviCell</a>.SHAPE_TRIANGLE,&nbsp;<a href="#NaviCell">NaviCell</a>.SHAPE_SQUARE,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#NaviCell">NaviCell</a>.SHAPE_RECTANGLE,&nbsp;<a href="#NaviCell">NaviCell</a>.SHAPE_DIAMOND,&nbsp;<a href="#NaviCell">NaviCell</a>.SHAPE_HEXAGON&nbsp;or<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#NaviCell">NaviCell</a>.SHAPE_CIRCLE</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-datatableConfigSetSizeAt"><strong>datatableConfigSetSizeAt</strong></a>(self, module, datatable, config_type, tabname, idx, size)</dt><dd><tt>Set&nbsp;size&nbsp;at&nbsp;a&nbsp;specified&nbsp;index&nbsp;in&nbsp;the&nbsp;datatable&nbsp;configuration&nbsp;dialog&nbsp;for&nbsp;the&nbsp;given&nbsp;type.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;datatable&nbsp;(string):&nbsp;datatable&nbsp;name<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;config_type&nbsp;(string):&nbsp;configuration&nbsp;type;&nbsp;must&nbsp;be&nbsp;<a href="#NaviCell">NaviCell</a>.CONFIG_COLOR,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#NaviCell">NaviCell</a>.CONFIG_SHAPE,&nbsp;<a href="#NaviCell">NaviCell</a>.CONFIG_SIZE&nbsp;or&nbsp;<a href="#NaviCell">NaviCell</a>.CONFIG_COLOR_SIZE<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;tabname&nbsp;(string):&nbsp;tab&nbsp;name&nbsp;in&nbsp;the&nbsp;configuration&nbsp;dialog;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;must&nbsp;be&nbsp;<a href="#NaviCell">NaviCell</a>.TABNAME_SAMPLES&nbsp;or&nbsp;<a href="#NaviCell">NaviCell</a>.TABNAME_GROUPS<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;idx&nbsp;(int):&nbsp;size&nbsp;index<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;size&nbsp;(int):&nbsp;size&nbsp;value</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-datatableConfigSetStepCount"><strong>datatableConfigSetStepCount</strong></a>(self, module, datatable, config_type, tabname, step_count)</dt><dd><tt>Set&nbsp;the&nbsp;step&nbsp;count&nbsp;of&nbsp;the&nbsp;datatable&nbsp;configuration&nbsp;dialog&nbsp;for&nbsp;the&nbsp;given&nbsp;type.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;datatable&nbsp;(string):&nbsp;datatable&nbsp;name<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;config_type&nbsp;(string):&nbsp;configuration&nbsp;type;&nbsp;must&nbsp;be&nbsp;<a href="#NaviCell">NaviCell</a>.CONFIG_COLOR,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#NaviCell">NaviCell</a>.CONFIG_SHAPE,&nbsp;<a href="#NaviCell">NaviCell</a>.CONFIG_SIZE&nbsp;or&nbsp;<a href="#NaviCell">NaviCell</a>.CONFIG_COLOR_SIZE<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;tabname&nbsp;(string):&nbsp;tab&nbsp;name&nbsp;in&nbsp;the&nbsp;configuration&nbsp;dialog;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;must&nbsp;be&nbsp;<a href="#NaviCell">NaviCell</a>.TABNAME_SAMPLES&nbsp;or&nbsp;<a href="#NaviCell">NaviCell</a>.TABNAME_GROUPS<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;step_count&nbsp;(int):&nbsp;step&nbsp;count</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-datatableConfigSetValueAt"><strong>datatableConfigSetValueAt</strong></a>(self, module, datatable, config_type, tabname, idx, value)</dt><dd><tt>Set&nbsp;value&nbsp;at&nbsp;a&nbsp;specified&nbsp;index&nbsp;in&nbsp;the&nbsp;datatable&nbsp;configuration&nbsp;dialog&nbsp;for&nbsp;the&nbsp;given&nbsp;type.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;datatable&nbsp;(string):&nbsp;datatable&nbsp;name<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;config_type&nbsp;(string):&nbsp;configuration&nbsp;type;&nbsp;must&nbsp;be&nbsp;<a href="#NaviCell">NaviCell</a>.CONFIG_COLOR,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#NaviCell">NaviCell</a>.CONFIG_SHAPE,&nbsp;<a href="#NaviCell">NaviCell</a>.CONFIG_SIZE&nbsp;or&nbsp;<a href="#NaviCell">NaviCell</a>.CONFIG_COLOR_SIZE<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;tabname&nbsp;(string):&nbsp;tab&nbsp;name&nbsp;in&nbsp;the&nbsp;configuration&nbsp;dialog;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;must&nbsp;be&nbsp;<a href="#NaviCell">NaviCell</a>.TABNAME_SAMPLES&nbsp;or&nbsp;<a href="#NaviCell">NaviCell</a>.TABNAME_GROUPS<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;idx&nbsp;(int):&nbsp;value&nbsp;index<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;value&nbsp;(double):&nbsp;value</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-datatableConfigSwitchGroupTab"><strong>datatableConfigSwitchGroupTab</strong></a>(self, module, datatable, config_type)</dt><dd><tt>Switch&nbsp;the&nbsp;datatable&nbsp;configuration&nbsp;dialog&nbsp;for&nbsp;the&nbsp;given&nbsp;type&nbsp;to&nbsp;the&nbsp;Groups&nbsp;tab.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;datatable&nbsp;(string):&nbsp;datatable&nbsp;name<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;config_type&nbsp;(string):&nbsp;configuration&nbsp;type;&nbsp;must&nbsp;be&nbsp;<a href="#NaviCell">NaviCell</a>.CONFIG_COLOR,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#NaviCell">NaviCell</a>.CONFIG_SHAPE,&nbsp;<a href="#NaviCell">NaviCell</a>.CONFIG_SIZE&nbsp;or&nbsp;<a href="#NaviCell">NaviCell</a>.CONFIG_COLOR_SIZE</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-datatableConfigSwitchSampleTab"><strong>datatableConfigSwitchSampleTab</strong></a>(self, module, datatable, config_type)</dt><dd><tt>Switch&nbsp;the&nbsp;datatable&nbsp;configuration&nbsp;dialog&nbsp;for&nbsp;the&nbsp;given&nbsp;type&nbsp;to&nbsp;the&nbsp;Samples&nbsp;tab.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;datatable&nbsp;(string):&nbsp;datatable&nbsp;name<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;config_type&nbsp;(string):&nbsp;configuration&nbsp;type;&nbsp;must&nbsp;be&nbsp;<a href="#NaviCell">NaviCell</a>.CONFIG_COLOR,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#NaviCell">NaviCell</a>.CONFIG_SHAPE,&nbsp;<a href="#NaviCell">NaviCell</a>.CONFIG_SIZE&nbsp;or&nbsp;<a href="#NaviCell">NaviCell</a>.CONFIG_COLOR_SIZE</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-drawingConfigApply"><strong>drawingConfigApply</strong></a>(self, module)</dt><dd><tt>Apply&nbsp;the&nbsp;changes&nbsp;in&nbsp;the&nbsp;drawing&nbsp;configuration&nbsp;dialog.<br>
+Similar&nbsp;to&nbsp;a&nbsp;click&nbsp;on&nbsp;the&nbsp;'Apply'&nbsp;button&nbsp;of&nbsp;the&nbsp;drawing&nbsp;configuration&nbsp;dialog.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-drawingConfigApplyAndClose"><strong>drawingConfigApplyAndClose</strong></a>(self, module)</dt><dd><tt>Apply&nbsp;the&nbsp;changes&nbsp;in&nbsp;the&nbsp;drawing&nbsp;configuration&nbsp;dialog&nbsp;and&nbsp;close&nbsp;the&nbsp;window.<br>
+Similar&nbsp;to&nbsp;a&nbsp;click&nbsp;on&nbsp;the&nbsp;'OK'&nbsp;button&nbsp;of&nbsp;the&nbsp;drawing&nbsp;configuration&nbsp;dialog.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-drawingConfigCancel"><strong>drawingConfigCancel</strong></a>(self, module)</dt><dd><tt>Cancel&nbsp;the&nbsp;changes&nbsp;in&nbsp;the&nbsp;drawing&nbsp;configuration&nbsp;dialog&nbsp;and&nbsp;close&nbsp;the&nbsp;window.<br>
+Similar&nbsp;to&nbsp;a&nbsp;click&nbsp;on&nbsp;the&nbsp;'Cancel'&nbsp;button&nbsp;of&nbsp;the&nbsp;drawing&nbsp;configuration&nbsp;dialog.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-drawingConfigClose"><strong>drawingConfigClose</strong></a>(self, module)</dt><dd><tt>Close&nbsp;the&nbsp;drawing&nbsp;configuration&nbsp;dialog.<br>
+Similar&nbsp;to&nbsp;a&nbsp;click&nbsp;on&nbsp;the&nbsp;'Close'&nbsp;button&nbsp;of&nbsp;the&nbsp;drawing&nbsp;configuration&nbsp;dialog.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-drawingConfigDisplayAllGenes"><strong>drawingConfigDisplayAllGenes</strong></a>(self, module)</dt><dd><tt>Will&nbsp;display&nbsp;DLOs&nbsp;for&nbsp;all&nbsp;genes.<br>
+Similar&nbsp;to&nbsp;the&nbsp;selection&nbsp;of&nbsp;the&nbsp;'All&nbsp;Genes'&nbsp;checkbox&nbsp;in&nbsp;the&nbsp;'Display&nbsp;DLOs'&nbsp;section<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-drawingConfigDisplaySelectedGenes"><strong>drawingConfigDisplaySelectedGenes</strong></a>(self, module)</dt><dd><tt>Will&nbsp;display&nbsp;DLOs&nbsp;for&nbsp;selected&nbsp;genes&nbsp;only.<br>
+Similar&nbsp;to&nbsp;the&nbsp;selection&nbsp;of&nbsp;the&nbsp;'Selected&nbsp;Genes'&nbsp;checkbox&nbsp;in&nbsp;the&nbsp;'Display&nbsp;DLOs'&nbsp;section.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-drawingConfigOpen"><strong>drawingConfigOpen</strong></a>(self, module)</dt><dd><tt>Open&nbsp;the&nbsp;drawing&nbsp;configuration&nbsp;dialog.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-drawingConfigSelectBarplot"><strong>drawingConfigSelectBarplot</strong></a>(self, module, select<font color="#909090">=True</font>)</dt><dd><tt>Select/unselect&nbsp;a&nbsp;barplot&nbsp;chart.<br>
+Similar&nbsp;to:<br>
+-&nbsp;a&nbsp;selection/unselection&nbsp;of&nbsp;the&nbsp;'Display'&nbsp;checkbox&nbsp;in&nbsp;the&nbsp;'Chart'&nbsp;section,&nbsp;and:<br>
+-&nbsp;a&nbsp;'Barplot'&nbsp;selection/unselection&nbsp;in&nbsp;the&nbsp;'Chart&nbsp;Type'&nbsp;list<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;select&nbsp;(boolean):&nbsp;select&nbsp;Barplot&nbsp;if&nbsp;True,&nbsp;unselect&nbsp;otherwise</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-drawingConfigSelectGlyph"><strong>drawingConfigSelectGlyph</strong></a>(self, module, num, select<font color="#909090">=True</font>)</dt><dd><tt>Select/unselect&nbsp;a&nbsp;given&nbsp;glyph.<br>
+Similar&nbsp;to&nbsp;a&nbsp;selection/unselection&nbsp;of&nbsp;one&nbsp;of&nbsp;the&nbsp;'Display'&nbsp;checkbox&nbsp;in&nbsp;the&nbsp;'Glyphs'&nbsp;section<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;num&nbsp;(int):&nbsp;glyph&nbsp;number;&nbsp;valid&nbsp;values&nbsp;are&nbsp;1&nbsp;to&nbsp;5.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;select&nbsp;(boolean):&nbsp;select&nbsp;the&nbsp;Glyph&nbsp;if&nbsp;True,&nbsp;unselect&nbsp;otherwise</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-drawingConfigSelectHeatmap"><strong>drawingConfigSelectHeatmap</strong></a>(self, module, select<font color="#909090">=True</font>)</dt><dd><tt>Select/unselect&nbsp;a&nbsp;heatmap&nbsp;chart.<br>
+Similar&nbsp;to:<br>
+-&nbsp;a&nbsp;selection/unselection&nbsp;of&nbsp;the&nbsp;'Display'&nbsp;checkbox&nbsp;in&nbsp;the&nbsp;'Chart'&nbsp;section,&nbsp;and:<br>
+&nbsp;-&nbsp;a&nbsp;'Heatmap'&nbsp;selection/unselection&nbsp;in&nbsp;the&nbsp;'Chart&nbsp;Type'&nbsp;list<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;select&nbsp;(boolean):&nbsp;select&nbsp;Heatmap&nbsp;if&nbsp;True,&nbsp;unselect&nbsp;otherwise</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-drawingConfigSelectMapStaining"><strong>drawingConfigSelectMapStaining</strong></a>(self, module, select<font color="#909090">=True</font>)</dt><dd><tt>Select/unselect&nbsp;the&nbsp;map&nbsp;staining.<br>
+Similar&nbsp;to&nbsp;a&nbsp;selection/unselection&nbsp;of&nbsp;the&nbsp;'Display'&nbsp;checkbox&nbsp;in&nbsp;the&nbsp;'Map&nbsp;Staining'&nbsp;section<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;select&nbsp;(boolean):&nbsp;select&nbsp;Map&nbsp;Staining&nbsp;if&nbsp;True,&nbsp;unselect&nbsp;otherwise</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-examples"><strong>examples</strong></a>(self)</dt><dd><tt>Display&nbsp;some&nbsp;examples.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-executeCommands"><strong>executeCommands</strong></a>(self, module, commands)</dt><dd><tt>Execute&nbsp;a&nbsp;set&nbsp;of&nbsp;commands&nbsp;encoded&nbsp;in&nbsp;the&nbsp;<a href="#NaviCell">NaviCell</a>&nbsp;WS&nbsp;protocol.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-findEntities"><strong>findEntities</strong></a>(self, module, pattern, hints<font color="#909090">={}</font>, open_bubble<font color="#909090">=False</font>)</dt><dd><tt>Find&nbsp;and&nbsp;select&nbsp;entities&nbsp;in&nbsp;the&nbsp;map.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;pattern&nbsp;(string):&nbsp;search&nbsp;pattern.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;hints&nbsp;(map):&nbsp;hint&nbsp;modifier.&nbsp;Valid&nbsp;keys&nbsp;are&nbsp;in,&nbsp;class,&nbsp;op,&nbsp;token.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;open_bubble&nbsp;(boolean):&nbsp;if&nbsp;True&nbsp;open&nbsp;associated&nbsp;bubbles,&nbsp;otherwise&nbsp;don't.<br>
+&nbsp;<br>
+For&nbsp;instance:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#NaviCell-findEntities">findEntities</a>('',&nbsp;'rbx',&nbsp;{'token'&nbsp;:&nbsp;'regex',&nbsp;'in':&nbsp;'label,tag,annot'},&nbsp;True)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;which&nbsp;is&nbsp;equivalent&nbsp;to:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#NaviCell-findEntities">findEntities</a>('',&nbsp;'rbx&nbsp;/token=regex;in=label,tag,annot',&nbsp;True)<br>
+&nbsp;<br>
+Complete&nbsp;search&nbsp;syntax&nbsp;is&nbsp;as&nbsp;follows:<br>
+&nbsp;<br>
+PATTERN&nbsp;[/MOD]<br>
+&nbsp;<br>
+where&nbsp;PATTERN&nbsp;is&nbsp;a&nbsp;sequence&nbsp;of&nbsp;regular&nbsp;expressions<br>
+-&nbsp;if&nbsp;regex&nbsp;are&nbsp;separated&nbsp;by&nbsp;comma,&nbsp;OR&nbsp;search&nbsp;is&nbsp;performed<br>
+-&nbsp;if&nbsp;regex&nbsp;are&nbsp;separated&nbsp;by&nbsp;space,&nbsp;AND&nbsp;search&nbsp;is&nbsp;performed<br>
+&nbsp;<br>
+where&nbsp;MOD&nbsp;is&nbsp;a&nbsp;semi-colon&nbsp;separated&nbsp;list&nbsp;of&nbsp;MOD_ITEM<br>
+&nbsp;<br>
+where&nbsp;MOD_ITEM&nbsp;is&nbsp;under&nbsp;the&nbsp;form<br>
+&nbsp;<br>
+in=label<br>
+in=tag<br>
+in=annot<br>
+in=all<br>
+&nbsp;<br>
+token=word<br>
+token=regex<br>
+&nbsp;<br>
+op=eq<br>
+op=neq<br>
+&nbsp;<br>
+class=all<br>
+class=all_included<br>
+class=all_but_included<br>
+class=class_name,class_name,...<br>
+class!=class_name,class_name,...<br>
+&nbsp;<br>
+Default&nbsp;is:&nbsp;/in=label;in=tag;token=word;op=eq;class=all_but_included<br>
+&nbsp;<br>
+Examples:<br>
+rbx<br>
+xp&nbsp;rbx<br>
+xp,rbx<br>
+xp&nbsp;rbx&nbsp;/in=label<br>
+xp&nbsp;rbx&nbsp;/in=label;class=protein<br>
+xp&nbsp;rbx&nbsp;/class=protein,gene<br>
+xp&nbsp;rbx&nbsp;/class!=protein,gene<br>
+xp&nbsp;rbx&nbsp;/op=neq;in=label;class=protein,gene<br>
+xp&nbsp;rxb&nbsp;/token=regex;in=all</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-getBiotypeList"><strong>getBiotypeList</strong></a>(self)</dt><dd><tt>Return&nbsp;the&nbsp;list&nbsp;of&nbsp;biotypes&nbsp;understood&nbsp;by&nbsp;<a href="#NaviCell">NaviCell</a>&nbsp;Web&nbsp;Service.<br>
+&nbsp;<br>
+In&nbsp;the&nbsp;current&nbsp;version,&nbsp;the&nbsp;returned&nbsp;biotype&nbsp;list&nbsp;is&nbsp;as&nbsp;follows:<br>
+[{'name':&nbsp;'mRNA&nbsp;expression&nbsp;data',&nbsp;'subtype':&nbsp;'CONTINUOUS',&nbsp;'type':&nbsp;'EXPRESSION'},<br>
+{'name':&nbsp;'microRNA&nbsp;expression&nbsp;data',&nbsp;'subtype':&nbsp;'CONTINUOUS',&nbsp;'type':&nbsp;'EXPRESSION'},<br>
+{'name':&nbsp;'Protein&nbsp;expression&nbsp;data',&nbsp;'subtype':&nbsp;'CONTINUOUS',&nbsp;'type':&nbsp;'EXPRESSION'},<br>
+{'name':&nbsp;'Discrete&nbsp;Copy&nbsp;number&nbsp;data',&nbsp;'subtype':&nbsp;'ORDERED_DISCRETE',&nbsp;'type':&nbsp;'COPYNUMBER'},<br>
+{'name':&nbsp;'Continuous&nbsp;copy&nbsp;number&nbsp;data',&nbsp;'subtype':&nbsp;'CONTINUOUS',&nbsp;'type':&nbsp;'COPYNUMBER'},<br>
+{'name':&nbsp;'Mutation&nbsp;data',&nbsp;'subtype':&nbsp;'UNORDERED_DISCRETE',&nbsp;'type':&nbsp;'MUTATION'},<br>
+{'name':&nbsp;'Gene&nbsp;list',&nbsp;'subtype':&nbsp;'SET',&nbsp;'type':&nbsp;'GENELIST'}]</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-getCommandHistory"><strong>getCommandHistory</strong></a>(self, module)</dt><dd><tt>Get&nbsp;the&nbsp;command&nbsp;history&nbsp;of&nbsp;the&nbsp;<a href="#NaviCell">NaviCell</a>&nbsp;Web&nbsp;Service.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-getDatatableGeneList"><strong>getDatatableGeneList</strong></a>(self)</dt><dd><tt>Return&nbsp;the&nbsp;list&nbsp;of&nbsp;genes&nbsp;of&nbsp;the&nbsp;imported&nbsp;datatables&nbsp;which&nbsp;have&nbsp;been&nbsp;found&nbsp;in&nbsp;the&nbsp;map.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-getDatatableList"><strong>getDatatableList</strong></a>(self)</dt><dd><tt>Return&nbsp;the&nbsp;datatables&nbsp;imported&nbsp;in&nbsp;the&nbsp;<a href="#NaviCell">NaviCell</a>&nbsp;map.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-getDatatableSampleList"><strong>getDatatableSampleList</strong></a>(self)</dt><dd><tt>Return&nbsp;the&nbsp;list&nbsp;of&nbsp;samples&nbsp;of&nbsp;the&nbsp;imported&nbsp;datatables.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-getHugoList"><strong>getHugoList</strong></a>(self)</dt><dd><tt>Return&nbsp;the&nbsp;list&nbsp;of&nbsp;HUGOs&nbsp;(gene&nbsp;names)&nbsp;of&nbsp;the&nbsp;<a href="#NaviCell">NaviCell</a>&nbsp;map.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-getModuleList"><strong>getModuleList</strong></a>(self)</dt><dd><tt>Return&nbsp;the&nbsp;module&nbsp;list&nbsp;of&nbsp;the&nbsp;<a href="#NaviCell">NaviCell</a>&nbsp;map.<br>
+&nbsp;<br>
+For&nbsp;instance,&nbsp;the&nbsp;module&nbsp;list&nbsp;returned&nbsp;from&nbsp;the&nbsp;CellCycle&nbsp;map:<br>
+[{'name':&nbsp;'E2F1',&nbsp;'id':&nbsp;'E2F1'},<br>
+{'name':&nbsp;'P21CIP',&nbsp;'id':&nbsp;'P21CIP'},<br>
+{'name':&nbsp;'CYCLIND',&nbsp;'id':&nbsp;'CYCLIND'},<br>
+{'name':&nbsp;'CYCLINE',&nbsp;'id':&nbsp;'CYCLINE'},<br>
+{'name':&nbsp;'E2F4',&nbsp;'id':&nbsp;'E2F4'},<br>
+{'name':&nbsp;'E2F6',&nbsp;'id':&nbsp;'E2F6'},<br>
+{'name':&nbsp;'CYCLINH',&nbsp;'id':&nbsp;'CYCLINH'},<br>
+{'name':&nbsp;'RB',&nbsp;'id':&nbsp;'RB'},<br>
+{'name':&nbsp;'INK4',&nbsp;'id':&nbsp;'INK4'},<br>
+{'name':&nbsp;'P27KIP',&nbsp;'id':&nbsp;'P27KIP'},<br>
+{'name':&nbsp;'APOPTOSIS_ENTRY',&nbsp;'id':&nbsp;'APOPTOSIS_ENTRY'},<br>
+{'name':&nbsp;'WEE',&nbsp;'id':&nbsp;'WEE'},<br>
+{'name':&nbsp;'CDC25',&nbsp;'id':&nbsp;'CDC25'},<br>
+{'name':&nbsp;'CYCLINA',&nbsp;'id':&nbsp;'CYCLINA'},<br>
+{'name':&nbsp;'CYCLINC',&nbsp;'id':&nbsp;'CYCLINC'},<br>
+{'name':&nbsp;'CYCLINB',&nbsp;'id':&nbsp;'CYCLINB'},<br>
+{'name':&nbsp;'APC',&nbsp;'id':&nbsp;'APC'}]</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-getSessionId"><strong>getSessionId</strong></a>(self)</dt><dd><tt>Return&nbsp;the&nbsp;session&nbsp;ID.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-glyphEditorApply"><strong>glyphEditorApply</strong></a>(self, module, num)</dt><dd><tt>Apply&nbsp;the&nbsp;changes&nbsp;in&nbsp;the&nbsp;glyph&nbsp;editor.<br>
+Similar&nbsp;to&nbsp;a&nbsp;click&nbsp;on&nbsp;the&nbsp;'Apply'&nbsp;button&nbsp;of&nbsp;the&nbsp;glyph&nbsp;editor.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;num&nbsp;(int):&nbsp;glyph&nbsp;editor&nbsp;number;&nbsp;valid&nbsp;values&nbsp;are&nbsp;1&nbsp;to&nbsp;5.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-glyphEditorApplyAndClose"><strong>glyphEditorApplyAndClose</strong></a>(self, module, num)</dt><dd><tt>Apply&nbsp;the&nbsp;changes&nbsp;in&nbsp;the&nbsp;glyph&nbsp;editor&nbsp;and&nbsp;close&nbsp;the&nbsp;window.<br>
+Similar&nbsp;to&nbsp;a&nbsp;click&nbsp;on&nbsp;the&nbsp;'OK'&nbsp;button&nbsp;of&nbsp;the&nbsp;glyph&nbsp;editor.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;num&nbsp;(int):&nbsp;glyph&nbsp;editor&nbsp;number;&nbsp;valid&nbsp;values&nbsp;are&nbsp;1&nbsp;to&nbsp;5.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-glyphEditorCancel"><strong>glyphEditorCancel</strong></a>(self, module, num)</dt><dd><tt>Cancel&nbsp;the&nbsp;changes&nbsp;in&nbsp;the&nbsp;glyph&nbsp;editor&nbsp;and&nbsp;close&nbsp;the&nbsp;window.<br>
+Similar&nbsp;to&nbsp;a&nbsp;click&nbsp;on&nbsp;the&nbsp;'Cancel'&nbsp;button&nbsp;of&nbsp;the&nbsp;glyph&nbsp;editor.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;num&nbsp;(int):&nbsp;glyph&nbsp;editor&nbsp;number;&nbsp;valid&nbsp;values&nbsp;are&nbsp;1&nbsp;to&nbsp;5.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-glyphEditorClose"><strong>glyphEditorClose</strong></a>(self, module, num)</dt><dd><tt>Close&nbsp;the&nbsp;glyph&nbsp;editor.<br>
+Similar&nbsp;to&nbsp;a&nbsp;click&nbsp;on&nbsp;the&nbsp;'Close'&nbsp;button&nbsp;of&nbsp;the&nbsp;glyph&nbsp;editor.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;num&nbsp;(int):&nbsp;glyph&nbsp;editor&nbsp;number;&nbsp;valid&nbsp;values&nbsp;are&nbsp;1&nbsp;to&nbsp;5.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-glyphEditorOpen"><strong>glyphEditorOpen</strong></a>(self, module, num)</dt><dd><tt>Open&nbsp;the&nbsp;glyph&nbsp;editor.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;num&nbsp;(int):&nbsp;glyph&nbsp;editor&nbsp;number;&nbsp;valid&nbsp;values&nbsp;are&nbsp;1&nbsp;to&nbsp;5.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-glyphEditorSelectColorDatatable"><strong>glyphEditorSelectColorDatatable</strong></a>(self, module, num, datatable)</dt><dd><tt>Select&nbsp;the&nbsp;color&nbsp;datatable&nbsp;(eg.&nbsp;used&nbsp;to&nbsp;select&nbsp;a&nbsp;color)&nbsp;in&nbsp;the&nbsp;glyph&nbsp;editor.<br>
+Similar&nbsp;to&nbsp;a&nbsp;selection&nbsp;in&nbsp;the&nbsp;'Select&nbsp;a&nbsp;datatable'&nbsp;Color&nbsp;list&nbsp;of&nbsp;the&nbsp;glyph&nbsp;editor.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;num&nbsp;(int):&nbsp;glyph&nbsp;editor&nbsp;number;&nbsp;valid&nbsp;values&nbsp;are&nbsp;1&nbsp;to&nbsp;5.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;datatable&nbsp;(string):&nbsp;datatable&nbsp;name&nbsp;to&nbsp;be&nbsp;selected.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-glyphEditorSelectSample"><strong>glyphEditorSelectSample</strong></a>(self, module, num, sample)</dt><dd><tt>Select&nbsp;a&nbsp;sample&nbsp;in&nbsp;the&nbsp;glyph&nbsp;editor.<br>
+Similar&nbsp;to&nbsp;a&nbsp;selection&nbsp;in&nbsp;the&nbsp;'Select&nbsp;a&nbsp;sample'&nbsp;list&nbsp;of&nbsp;the&nbsp;glyph&nbsp;editor.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;num&nbsp;(int):&nbsp;glyph&nbsp;editor&nbsp;number;&nbsp;valid&nbsp;values&nbsp;are&nbsp;1&nbsp;to&nbsp;5.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;sample&nbsp;(string):&nbsp;sample&nbsp;name&nbsp;to&nbsp;be&nbsp;selected.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-glyphEditorSelectShapeDatatable"><strong>glyphEditorSelectShapeDatatable</strong></a>(self, module, num, datatable)</dt><dd><tt>Select&nbsp;the&nbsp;shape&nbsp;datatable&nbsp;(eg.&nbsp;used&nbsp;to&nbsp;select&nbsp;a&nbsp;shape)&nbsp;in&nbsp;the&nbsp;glyph&nbsp;editor.<br>
+Similar&nbsp;to&nbsp;a&nbsp;selection&nbsp;in&nbsp;the&nbsp;'Select&nbsp;a&nbsp;datatable'&nbsp;Shape&nbsp;list&nbsp;of&nbsp;the&nbsp;glyph&nbsp;editor.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;num&nbsp;(int):&nbsp;glyph&nbsp;editor&nbsp;number;&nbsp;valid&nbsp;values&nbsp;are&nbsp;1&nbsp;to&nbsp;5.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;datatable&nbsp;(string):&nbsp;datatable&nbsp;name&nbsp;to&nbsp;be&nbsp;selected.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-glyphEditorSelectSizeDatatable"><strong>glyphEditorSelectSizeDatatable</strong></a>(self, module, num, datatable)</dt><dd><tt>Select&nbsp;the&nbsp;size&nbsp;datatable&nbsp;(eg.&nbsp;used&nbsp;to&nbsp;select&nbsp;a&nbsp;size)&nbsp;in&nbsp;the&nbsp;glyph&nbsp;editor.<br>
+Similar&nbsp;to&nbsp;a&nbsp;selection&nbsp;in&nbsp;the&nbsp;'Select&nbsp;a&nbsp;datatable'&nbsp;Size&nbsp;list&nbsp;of&nbsp;the&nbsp;glyph&nbsp;editor.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;num&nbsp;(int):&nbsp;glyph&nbsp;editor&nbsp;number;&nbsp;valid&nbsp;values&nbsp;are&nbsp;1&nbsp;to&nbsp;5.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;datatable&nbsp;(string):&nbsp;datatable&nbsp;name&nbsp;to&nbsp;be&nbsp;selected.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-glyphEditorSetTransparency"><strong>glyphEditorSetTransparency</strong></a>(self, module, num, value)</dt><dd><tt>Set&nbsp;the&nbsp;transparency&nbsp;in&nbsp;the&nbsp;glyph&nbsp;editor.<br>
+Similar&nbsp;to&nbsp;a&nbsp;change&nbsp;of&nbsp;the&nbsp;transparency&nbsp;slider&nbsp;of&nbsp;the&nbsp;glyph&nbsp;editor.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;num&nbsp;(int):&nbsp;glyph&nbsp;editor&nbsp;number;&nbsp;valid&nbsp;values&nbsp;are&nbsp;1&nbsp;to&nbsp;5.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;value&nbsp;(double):&nbsp;transparency&nbsp;value.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-heatmapEditorAllGroups"><strong>heatmapEditorAllGroups</strong></a>(self, module)</dt><dd><tt>Select&nbsp;all&nbsp;groups&nbsp;in&nbsp;the&nbsp;heatmap&nbsp;editor.<br>
+Similar&nbsp;to&nbsp;a&nbsp;click&nbsp;on&nbsp;the&nbsp;'All&nbsp;Groups'&nbsp;button&nbsp;of&nbsp;the&nbsp;heatmap&nbsp;editor.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-heatmapEditorAllSamples"><strong>heatmapEditorAllSamples</strong></a>(self, module)</dt><dd><tt>Select&nbsp;all&nbsp;samples&nbsp;in&nbsp;the&nbsp;heatmap&nbsp;editor.<br>
+Similar&nbsp;to&nbsp;a&nbsp;click&nbsp;on&nbsp;the&nbsp;'All&nbsp;Samples'&nbsp;button&nbsp;of&nbsp;the&nbsp;heatmap&nbsp;editor.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-heatmapEditorApply"><strong>heatmapEditorApply</strong></a>(self, module)</dt><dd><tt>Apply&nbsp;the&nbsp;changes&nbsp;in&nbsp;the&nbsp;heatmap&nbsp;editor.<br>
+Similar&nbsp;to&nbsp;a&nbsp;click&nbsp;on&nbsp;the&nbsp;'Apply'&nbsp;button&nbsp;of&nbsp;the&nbsp;heatmap&nbsp;editor.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-heatmapEditorApplyAndClose"><strong>heatmapEditorApplyAndClose</strong></a>(self, module)</dt><dd><tt>Apply&nbsp;the&nbsp;changes&nbsp;in&nbsp;the&nbsp;heatmap&nbsp;editor&nbsp;and&nbsp;close&nbsp;the&nbsp;window.<br>
+Similar&nbsp;to&nbsp;a&nbsp;click&nbsp;on&nbsp;the&nbsp;'OK'&nbsp;button&nbsp;of&nbsp;the&nbsp;heatmap&nbsp;editor.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-heatmapEditorCancel"><strong>heatmapEditorCancel</strong></a>(self, module)</dt><dd><tt>Cancel&nbsp;the&nbsp;changes&nbsp;in&nbsp;the&nbsp;heatmap&nbsp;editor&nbsp;and&nbsp;close&nbsp;the&nbsp;window.<br>
+Similar&nbsp;to&nbsp;a&nbsp;click&nbsp;on&nbsp;the&nbsp;'Cancel'&nbsp;button&nbsp;of&nbsp;the&nbsp;heatmap&nbsp;editor.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-heatmapEditorClearSamples"><strong>heatmapEditorClearSamples</strong></a>(self, module)</dt><dd><tt>Clear&nbsp;all&nbsp;samples&nbsp;and&nbsp;groups&nbsp;in&nbsp;the&nbsp;heatmap&nbsp;editor.<br>
+Similar&nbsp;to&nbsp;a&nbsp;click&nbsp;on&nbsp;the&nbsp;'Clear&nbsp;Samples'&nbsp;button&nbsp;of&nbsp;the&nbsp;heatmap&nbsp;editor.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-heatmapEditorClose"><strong>heatmapEditorClose</strong></a>(self, module)</dt><dd><tt>Close&nbsp;the&nbsp;heatmap&nbsp;editor.<br>
+Similar&nbsp;to&nbsp;a&nbsp;click&nbsp;on&nbsp;the&nbsp;'Close'&nbsp;button&nbsp;of&nbsp;the&nbsp;heatmap&nbsp;editor.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-heatmapEditorFromBarplot"><strong>heatmapEditorFromBarplot</strong></a>(self, module)</dt><dd><tt>Report&nbsp;samples&nbsp;and&nbsp;groups&nbsp;selected&nbsp;in&nbsp;the&nbsp;barplot&nbsp;editor&nbsp;to&nbsp;the&nbsp;heatmap&nbsp;editor.<br>
+Similar&nbsp;to&nbsp;a&nbsp;click&nbsp;on&nbsp;the&nbsp;'From&nbsp;Barplot'&nbsp;button&nbsp;of&nbsp;the&nbsp;heatmap&nbsp;editor.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-heatmapEditorOpen"><strong>heatmapEditorOpen</strong></a>(self, module)</dt><dd><tt>Open&nbsp;the&nbsp;heatmap&nbsp;editor.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-heatmapEditorSelectDatatable"><strong>heatmapEditorSelectDatatable</strong></a>(self, module, where, datatable)</dt><dd><tt>Select&nbsp;a&nbsp;datatable&nbsp;in&nbsp;the&nbsp;heatmap&nbsp;editor.<br>
+Similar&nbsp;to&nbsp;a&nbsp;selection&nbsp;in&nbsp;a&nbsp;'Select&nbsp;a&nbsp;Datatable'&nbsp;list&nbsp;of&nbsp;the&nbsp;heatmap&nbsp;editor.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;where&nbsp;(int):&nbsp;0-based&nbsp;datatable&nbsp;position&nbsp;in&nbsp;the&nbsp;heatmap.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;datatable&nbsp;(string):&nbsp;datatable&nbsp;name&nbsp;to&nbsp;be&nbsp;selected.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-heatmapEditorSelectSample"><strong>heatmapEditorSelectSample</strong></a>(self, module, where, sample)</dt><dd><tt>Select&nbsp;a&nbsp;sample&nbsp;in&nbsp;the&nbsp;heatmap&nbsp;editor.<br>
+Similar&nbsp;to&nbsp;a&nbsp;selection&nbsp;in&nbsp;a&nbsp;'Select&nbsp;a&nbsp;sample'&nbsp;list&nbsp;of&nbsp;the&nbsp;heatmap&nbsp;editor.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;where&nbsp;(int):&nbsp;0-based&nbsp;sample&nbsp;position&nbsp;in&nbsp;the&nbsp;heatmap.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;sample&nbsp;(string):&nbsp;sample&nbsp;name&nbsp;to&nbsp;be&nbsp;selected.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-heatmapEditorSetTransparency"><strong>heatmapEditorSetTransparency</strong></a>(self, module, value)</dt><dd><tt>Set&nbsp;the&nbsp;transparency&nbsp;in&nbsp;the&nbsp;heatmap&nbsp;editor.<br>
+Similar&nbsp;to&nbsp;a&nbsp;change&nbsp;of&nbsp;the&nbsp;transparency&nbsp;slider&nbsp;of&nbsp;the&nbsp;heatmap&nbsp;editor.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;value&nbsp;(double):&nbsp;transparency&nbsp;value.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-importDatatables"><strong>importDatatables</strong></a>(self, datatable_url_or_data, datatable_name, datatable_biotype, params<font color="#909090">={}</font>)</dt><dd><tt>Import&nbsp;one&nbsp;or&nbsp;several&nbsp;datatables.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;datatable_url_or_data&nbsp;(string):&nbsp;datatable(s)&nbsp;to&nbsp;be&nbsp;imported:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;URL&nbsp;or&nbsp;data&nbsp;returned&nbsp;from&nbsp;makeData&nbsp;or&nbsp;makeDataFromFile&nbsp;expected.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;datatable_name&nbsp;(string):&nbsp;name&nbsp;of&nbsp;the&nbsp;datatable&nbsp;that&nbsp;will&nbsp;appear&nbsp;in&nbsp;the&nbsp;<a href="#NaviCell">NaviCell</a>&nbsp;session.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;datatable_biotype&nbsp;(string):&nbsp;biotype&nbsp;of&nbsp;the&nbsp;datatable&nbsp;file.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;params&nbsp;(map):&nbsp;opening&nbsp;hints.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-launchBrowser"><strong>launchBrowser</strong></a>(self)</dt><dd><tt>Launchs&nbsp;the&nbsp;client&nbsp;browser&nbsp;according&nbsp;to&nbsp;options&nbsp;given&nbsp;at&nbsp;<a href="#NaviCell">NaviCell</a>&nbsp;instantation.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-listSessions"><strong>listSessions</strong></a>(self)</dt><dd><tt>Display&nbsp;all&nbsp;active&nbsp;<a href="#NaviCell">NaviCell</a>&nbsp;Web&nbsp;Service&nbsp;sessions.<br>
+Action&nbsp;granted&nbsp;according&nbsp;to&nbsp;security&nbsp;conditions&nbsp;defined&nbsp;in&nbsp;the&nbsp;Web&nbsp;Service&nbsp;configuration.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-makeAnnotationData"><strong>makeAnnotationData</strong></a>(self, data)</dt><dd><tt>Builds&nbsp;a&nbsp;string&nbsp;suitable&nbsp;for&nbsp;<a href="#NaviCell">NaviCell</a>&nbsp;Web&nbsp;Service&nbsp;from&nbsp;a&nbsp;python&nbsp;sample/annotation&nbsp;matrix.<br>
+&nbsp;<br>
+Matrix&nbsp;format:<br>
+-&nbsp;first&nbsp;line&nbsp;is:&nbsp;NAME&nbsp;word&nbsp;followed&nbsp;by&nbsp;a&nbsp;tab&nbsp;separated&nbsp;list&nbsp;of&nbsp;annotation&nbsp;names.<br>
+-&nbsp;each&nbsp;line&nbsp;begins&nbsp;with&nbsp;an&nbsp;sample&nbsp;name&nbsp;and&nbsp;must&nbsp;be&nbsp;followed&nbsp;by&nbsp;a&nbsp;tab&nbsp;separated&nbsp;list&nbsp;of<br>
+&nbsp;&nbsp;sample/annotation&nbsp;values.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-makeAnnotationDataFromFile"><strong>makeAnnotationDataFromFile</strong></a>(self, filename)</dt><dd><tt>Builds&nbsp;a&nbsp;string&nbsp;suitable&nbsp;for&nbsp;<a href="#NaviCell">NaviCell</a>&nbsp;Web&nbsp;Service&nbsp;from&nbsp;a&nbsp;python&nbsp;sample/annotation&nbsp;matrix&nbsp;contained&nbsp;in&nbsp;a&nbsp;file.<br>
+&nbsp;<br>
+Matrix&nbsp;format:<br>
+-&nbsp;first&nbsp;line&nbsp;is:&nbsp;NAME&nbsp;word&nbsp;followed&nbsp;by&nbsp;a&nbsp;tab&nbsp;separated&nbsp;list&nbsp;of&nbsp;annotation&nbsp;names.<br>
+-&nbsp;each&nbsp;line&nbsp;begins&nbsp;with&nbsp;an&nbsp;sample&nbsp;name&nbsp;and&nbsp;must&nbsp;be&nbsp;followed&nbsp;by&nbsp;a&nbsp;tab&nbsp;separated&nbsp;list&nbsp;of<br>
+&nbsp;&nbsp;sample/annotation&nbsp;values.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-makeData"><strong>makeData</strong></a>(self, data)</dt><dd><tt>Builds&nbsp;a&nbsp;string&nbsp;suitable&nbsp;for&nbsp;<a href="#NaviCell">NaviCell</a>&nbsp;Web&nbsp;Service&nbsp;from&nbsp;a&nbsp;python&nbsp;matrix&nbsp;of&nbsp;gene/sample&nbsp;values.<br>
+&nbsp;<br>
+Matrix&nbsp;format:<br>
+-&nbsp;first&nbsp;line&nbsp;is:&nbsp;GENE&nbsp;word&nbsp;followed&nbsp;by&nbsp;a&nbsp;tab&nbsp;separated&nbsp;list&nbsp;of&nbsp;sample&nbsp;names,<br>
+-&nbsp;each&nbsp;line&nbsp;begins&nbsp;with&nbsp;an&nbsp;gene&nbsp;name&nbsp;and&nbsp;must&nbsp;be&nbsp;followed&nbsp;by&nbsp;a&nbsp;tab&nbsp;separated&nbsp;list&nbsp;of&nbsp;gene/sample&nbsp;values.<br>
+&nbsp;<br>
+Eliminates&nbsp;genes&nbsp;not&nbsp;present&nbsp;in&nbsp;the&nbsp;<a href="#NaviCell">NaviCell</a>&nbsp;map.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-makeDataFromFile"><strong>makeDataFromFile</strong></a>(self, filename)</dt><dd><tt>Builds&nbsp;a&nbsp;string&nbsp;suitable&nbsp;for&nbsp;<a href="#NaviCell">NaviCell</a>&nbsp;Web&nbsp;Service&nbsp;from&nbsp;a&nbsp;matrix&nbsp;of&nbsp;gene/sample&nbsp;values&nbsp;contained&nbsp;in&nbsp;a&nbsp;file.<br>
+&nbsp;<br>
+Matrix&nbsp;format:<br>
+-&nbsp;first&nbsp;line&nbsp;is:&nbsp;GENE&nbsp;word&nbsp;followed&nbsp;by&nbsp;a&nbsp;tab&nbsp;separated&nbsp;list&nbsp;of&nbsp;sample&nbsp;names,<br>
+-&nbsp;each&nbsp;line&nbsp;begins&nbsp;with&nbsp;an&nbsp;gene&nbsp;name&nbsp;and&nbsp;must&nbsp;be&nbsp;followed&nbsp;by&nbsp;a&nbsp;tab&nbsp;separated&nbsp;list&nbsp;of&nbsp;gene/sample&nbsp;values.<br>
+&nbsp;<br>
+Eliminates&nbsp;genes&nbsp;not&nbsp;present&nbsp;in&nbsp;the&nbsp;<a href="#NaviCell">NaviCell</a>&nbsp;map.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-mapStainingEditorApply"><strong>mapStainingEditorApply</strong></a>(self, module)</dt><dd><tt>Apply&nbsp;the&nbsp;changes&nbsp;in&nbsp;the&nbsp;map&nbsp;staining&nbsp;editor.<br>
+Similar&nbsp;to&nbsp;a&nbsp;click&nbsp;on&nbsp;the&nbsp;'Apply'&nbsp;button&nbsp;of&nbsp;the&nbsp;map&nbsp;staining&nbsp;editor.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-mapStainingEditorApplyAndClose"><strong>mapStainingEditorApplyAndClose</strong></a>(self, module)</dt><dd><tt>Apply&nbsp;the&nbsp;changes&nbsp;in&nbsp;the&nbsp;map&nbsp;staining&nbsp;editor&nbsp;and&nbsp;close&nbsp;the&nbsp;window.<br>
+Similar&nbsp;to&nbsp;a&nbsp;click&nbsp;on&nbsp;the&nbsp;'OK'&nbsp;button&nbsp;of&nbsp;the&nbsp;map&nbsp;staining&nbsp;editor.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-mapStainingEditorCancel"><strong>mapStainingEditorCancel</strong></a>(self, module)</dt><dd><tt>Cancel&nbsp;the&nbsp;changes&nbsp;in&nbsp;the&nbsp;map&nbsp;staining&nbsp;editor&nbsp;and&nbsp;close&nbsp;the&nbsp;window.<br>
+Similar&nbsp;to&nbsp;a&nbsp;click&nbsp;on&nbsp;the&nbsp;'Cancel'&nbsp;button&nbsp;of&nbsp;the&nbsp;map&nbsp;staining&nbsp;editor.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-mapStainingEditorClose"><strong>mapStainingEditorClose</strong></a>(self, module)</dt><dd><tt>Close&nbsp;the&nbsp;map&nbsp;staining&nbsp;editor.<br>
+Similar&nbsp;to&nbsp;a&nbsp;click&nbsp;on&nbsp;the&nbsp;'Close'&nbsp;button&nbsp;of&nbsp;the&nbsp;map&nbsp;staining&nbsp;editor.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-mapStainingEditorOpen"><strong>mapStainingEditorOpen</strong></a>(self, module)</dt><dd><tt>Open&nbsp;the&nbsp;map&nbsp;staining&nbsp;editor.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-mapStainingEditorSelectDatatable"><strong>mapStainingEditorSelectDatatable</strong></a>(self, module, datatable)</dt><dd><tt>Select&nbsp;the&nbsp;datatable&nbsp;used&nbsp;for&nbsp;colors&nbsp;in&nbsp;the&nbsp;map&nbsp;staining&nbsp;editor.<br>
+Similar&nbsp;to&nbsp;a&nbsp;selection&nbsp;in&nbsp;the&nbsp;'Select&nbsp;a&nbsp;datatable'&nbsp;Color&nbsp;list&nbsp;of&nbsp;the&nbsp;map&nbsp;staining&nbsp;editor.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;datatable&nbsp;(string):&nbsp;datatable&nbsp;name&nbsp;to&nbsp;be&nbsp;selected.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-mapStainingEditorSelectSample"><strong>mapStainingEditorSelectSample</strong></a>(self, module, sample)</dt><dd><tt>Select&nbsp;the&nbsp;sample&nbsp;in&nbsp;the&nbsp;map&nbsp;staining&nbsp;editor.<br>
+Similar&nbsp;to&nbsp;a&nbsp;selection&nbsp;in&nbsp;the&nbsp;'Select&nbsp;a&nbsp;sample'&nbsp;list&nbsp;of&nbsp;the&nbsp;map&nbsp;staining&nbsp;editor.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;sample&nbsp;(string):&nbsp;sample&nbsp;name&nbsp;to&nbsp;be&nbsp;selected.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-mapStainingEditorSetTransparency"><strong>mapStainingEditorSetTransparency</strong></a>(self, module, value)</dt><dd><tt>Set&nbsp;the&nbsp;transparency&nbsp;in&nbsp;the&nbsp;map&nbsp;staining&nbsp;editor.<br>
+Similar&nbsp;to&nbsp;a&nbsp;change&nbsp;of&nbsp;the&nbsp;transparency&nbsp;slider&nbsp;of&nbsp;the&nbsp;map&nbsp;staining&nbsp;editor.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;value&nbsp;(double):&nbsp;transparency&nbsp;value.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-myDataClose"><strong>myDataClose</strong></a>(self, module)</dt><dd><tt>Close&nbsp;the&nbsp;MyData&nbsp;dialog.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-myDataOpen"><strong>myDataOpen</strong></a>(self, module)</dt><dd><tt>Open&nbsp;the&nbsp;MyData&nbsp;dialog.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-myDataSelectDatatableTab"><strong>myDataSelectDatatableTab</strong></a>(self, module)</dt><dd><tt>Select&nbsp;the&nbsp;'Datatable'&nbsp;Tab&nbsp;in&nbsp;the&nbsp;MyData&nbsp;dialog.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-myDataSelectGeneTab"><strong>myDataSelectGeneTab</strong></a>(self, module)</dt><dd><tt>Select&nbsp;the&nbsp;'Gene'&nbsp;Tab&nbsp;in&nbsp;the&nbsp;MyData&nbsp;dialog.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-myDataSelectGroupTab"><strong>myDataSelectGroupTab</strong></a>(self, module)</dt><dd><tt>Select&nbsp;the&nbsp;'Group'&nbsp;Tab&nbsp;in&nbsp;the&nbsp;MyData&nbsp;dialog.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-myDataSelectModuleTab"><strong>myDataSelectModuleTab</strong></a>(self, module)</dt><dd><tt>Select&nbsp;the&nbsp;'Module'&nbsp;Tab&nbsp;in&nbsp;the&nbsp;MyData&nbsp;dialog.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-myDataSelectSampleTab"><strong>myDataSelectSampleTab</strong></a>(self, module)</dt><dd><tt>Select&nbsp;the&nbsp;'Sample'&nbsp;Tab&nbsp;in&nbsp;the&nbsp;MyData&nbsp;dialog.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-noticeClose"><strong>noticeClose</strong></a>(self, module)</dt><dd><tt>Close&nbsp;the&nbsp;notice&nbsp;dialog.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-noticeMessage"><strong>noticeMessage</strong></a>(self, module, header, msg, position<font color="#909090">='left top'</font>, width<font color="#909090">=0</font>, height<font color="#909090">=0</font>)</dt><dd><tt>Open&nbsp;the&nbsp;notice&nbsp;dialog&nbsp;and&nbsp;display&nbsp;a&nbsp;message.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;header&nbsp;(string):&nbsp;message&nbsp;header&nbsp;(title)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;msg&nbsp;(string):&nbsp;html&nbsp;message<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;position&nbsp;(string):&nbsp;(optional)&nbsp;CSS&nbsp;position&nbsp;of&nbsp;the&nbsp;dialog,&nbsp;for&nbsp;instance&nbsp;'left&nbsp;top',&nbsp;'right&nbsp;top'&nbsp;etc.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;width&nbsp;(int):&nbsp;(optional)&nbsp;width&nbsp;in&nbsp;pixel<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;height&nbsp;(int):&nbsp;(optional)&nbsp;height&nbsp;in&nbsp;pixel</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-noticeOpen"><strong>noticeOpen</strong></a>(self, module)</dt><dd><tt>Open&nbsp;the&nbsp;notice&nbsp;dialog.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-openModule"><strong>openModule</strong></a>(self, module2open)</dt><dd><tt>Open&nbsp;a&nbsp;module.<br>
+This&nbsp;method&nbsp;works&nbsp;only&nbsp;under&nbsp;some&nbsp;conditions&nbsp;of&nbsp;the&nbsp;security&nbsp;configuration&nbsp;of&nbsp;the&nbsp;client&nbsp;browser&nbsp;(popup&nbsp;configuration).<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module2open&nbsp;(string):&nbsp;module&nbsp;to&nbsp;be&nbsp;opened</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-prepareImportDialog"><strong>prepareImportDialog</strong></a>(self, module, filename, name, biotype)</dt><dd><tt>Fill&nbsp;the&nbsp;import&nbsp;dialog&nbsp;fields.<br>
+Data&nbsp;(datatable,&nbsp;gene&nbsp;list&nbsp;etc.)&nbsp;can&nbsp;then&nbsp;be&nbsp;imported&nbsp;by&nbsp;a&nbsp;user&nbsp;click&nbsp;on&nbsp;the&nbsp;Import&nbsp;button:<br>
+the&nbsp;import&nbsp;itself&nbsp;cannot&nbsp;be&nbsp;trigged&nbsp;from&nbsp;javascript&nbsp;for&nbsp;security&nbsp;reasons,&nbsp;that's&nbsp;why&nbsp;a&nbsp;user<br>
+action&nbsp;is&nbsp;required.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;filename&nbsp;(string):&nbsp;path&nbsp;of&nbsp;the&nbsp;data&nbsp;file<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;name&nbsp;(string):&nbsp;name&nbsp;of&nbsp;the&nbsp;data&nbsp;to&nbsp;be&nbsp;imported<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;biotype&nbsp;(string):&nbsp;biotype&nbsp;of&nbsp;the&nbsp;data&nbsp;file.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-reset"><strong>reset</strong></a>(self)</dt><dd><tt>Resets&nbsp;the&nbsp;current&nbsp;session.&nbsp;<a href="#NaviCell">NaviCell</a>&nbsp;handle&nbsp;cannot&nbsp;communicate&nbsp;anymore&nbsp;with&nbsp;the&nbsp;Web&nbsp;Service.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-sampleAnnotationApply"><strong>sampleAnnotationApply</strong></a>(self, module)</dt><dd><tt>Apply&nbsp;the&nbsp;changes&nbsp;in&nbsp;the&nbsp;sample&nbsp;annotation&nbsp;dialog.<br>
+Similar&nbsp;to&nbsp;a&nbsp;click&nbsp;on&nbsp;the&nbsp;'Apply'&nbsp;button&nbsp;of&nbsp;the&nbsp;sample&nbsp;annotation&nbsp;dialog.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-sampleAnnotationCancel"><strong>sampleAnnotationCancel</strong></a>(self, module)</dt><dd><tt>Cancel&nbsp;the&nbsp;changes&nbsp;in&nbsp;the&nbsp;sample&nbsp;annotation&nbsp;dialog&nbsp;and&nbsp;close&nbsp;the&nbsp;window.<br>
+Similar&nbsp;to&nbsp;a&nbsp;click&nbsp;on&nbsp;the&nbsp;'Cancel'&nbsp;button&nbsp;of&nbsp;the&nbsp;sample&nbsp;annotation&nbsp;dialog.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-sampleAnnotationClose"><strong>sampleAnnotationClose</strong></a>(self, module)</dt><dd><tt>Close&nbsp;the&nbsp;sample&nbsp;annotation&nbsp;dialog.<br>
+Similar&nbsp;to&nbsp;a&nbsp;click&nbsp;on&nbsp;the&nbsp;'Close'&nbsp;button&nbsp;of&nbsp;the&nbsp;sample&nbsp;annotation&nbsp;dialog.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-sampleAnnotationImport"><strong>sampleAnnotationImport</strong></a>(self, sample_annotation_url_or_data)</dt><dd><tt>Import&nbsp;the&nbsp;given&nbsp;annotation&nbsp;data&nbsp;or&nbsp;URL.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;sample_annotation_url_or_data&nbsp;(string):&nbsp;sample&nbsp;annotation&nbsp;to&nbsp;be&nbsp;imported:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;URL&nbsp;or&nbsp;data&nbsp;returned&nbsp;from&nbsp;makeAnnotationData&nbsp;or&nbsp;makeAnnotationDataFromFile&nbsp;expected.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-sampleAnnotationOpen"><strong>sampleAnnotationOpen</strong></a>(self, module)</dt><dd><tt>Open&nbsp;the&nbsp;sample&nbsp;annotation&nbsp;dialog.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-sampleAnnotationSelectAnnotation"><strong>sampleAnnotationSelectAnnotation</strong></a>(self, module, annot, select<font color="#909090">=True</font>)</dt><dd><tt>Select/unselect&nbsp;an&nbsp;annotation.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;annot&nbsp;(annot):&nbsp;annotation&nbsp;name<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;select&nbsp;(boolean):&nbsp;select&nbsp;annotation&nbsp;if&nbsp;True,&nbsp;unselect&nbsp;otherwise</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-selectEntity"><strong>selectEntity</strong></a>(self, module, entity_name)</dt><dd><tt>Select&nbsp;a&nbsp;given&nbsp;entity.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;entity_name&nbsp;(string):&nbsp;name&nbsp;of&nbsp;the&nbsp;entity&nbsp;to&nbsp;be&nbsp;selected</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-setCenter"><strong>setCenter</strong></a>(self, module, where, lng<font color="#909090">=0</font>, lat<font color="#909090">=0</font>)</dt><dd><tt>Set&nbsp;the&nbsp;center&nbsp;of&nbsp;the&nbsp;map.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;where(string):&nbsp;the&nbsp;location&nbsp;of&nbsp;center,&nbsp;valid&nbsp;values&nbsp;are:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MAP_CENTER<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MAP_NORTH<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MAP_WEST<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MAP_EAST<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MAP_SOUTH<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MAP_NORTH_WEST<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MAP_NORTH_EAST<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MAP_SOUTH_WEST<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MAP_SOUTH_EAST<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RELATIVE<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ABSOLUTE<br>
+&nbsp;&nbsp;&nbsp;:param&nbsp;lng(double):&nbsp;longitude&nbsp;if&nbsp;center&nbsp;is&nbsp;set&nbsp;to&nbsp;RELATIVE&nbsp;or&nbsp;ABSOLUTE,&nbsp;ignored&nbsp;otherwise<br>
+&nbsp;&nbsp;&nbsp;:param&nbsp;lat(double):&nbsp;latitude&nbsp;if&nbsp;center&nbsp;is&nbsp;set&nbsp;to&nbsp;RELATIVE&nbsp;or&nbsp;ABSOLUTE,&nbsp;ignored&nbsp;otherwise</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-setTrace"><strong>setTrace</strong></a>(self, trace)</dt><dd><tt>For&nbsp;debug&nbsp;only.&nbsp;Activates&nbsp;/&nbsp;Desactivates&nbsp;traces&nbsp;according&nbsp;to&nbsp;the&nbsp;trace&nbsp;argument.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-setZoom"><strong>setZoom</strong></a>(self, module, zoom)</dt><dd><tt>Set&nbsp;the&nbsp;zoom&nbsp;level&nbsp;of&nbsp;a&nbsp;map&nbsp;to&nbsp;a&nbsp;given&nbsp;level.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;zoom&nbsp;(int):&nbsp;zoom&nbsp;level.</tt></dd></dl>
+
+<dl><dt><a name="NaviCell-uncheckAllEntities"><strong>uncheckAllEntities</strong></a>(self, module)</dt><dd><tt>Unselect&nbsp;all&nbsp;entities&nbsp;in&nbsp;the&nbsp;map.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;module&nbsp;(string):&nbsp;module&nbsp;on&nbsp;which&nbsp;to&nbsp;apply&nbsp;the&nbsp;command;&nbsp;empty&nbsp;string&nbsp;for&nbsp;current&nbsp;map.</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>COND_DISCRETE_ALL_ELEMENTS</strong> = 3</dl>
+
+<dl><dt><strong>COND_DISCRETE_AT_LEAST_ONE_ELEMENT</strong> = 2</dl>
+
+<dl><dt><strong>COND_DISCRETE_IGNORE</strong> = 0</dl>
+
+<dl><dt><strong>COND_DISCRETE_NO_ELEMENT</strong> = 1</dl>
+
+<dl><dt><strong>COND_DISCRETE_VALUE</strong> = 4</dl>
+
+<dl><dt><strong>CONFIG_COLOR</strong> = 'color'</dl>
+
+<dl><dt><strong>CONFIG_COLOR_SIZE</strong> = 'color_size'</dl>
+
+<dl><dt><strong>CONFIG_SHAPE</strong> = 'shape'</dl>
+
+<dl><dt><strong>CONFIG_SIZE</strong> = 'size'</dl>
+
+<dl><dt><strong>METHOD_CONTINUOUS_ABS_AVERAGE</strong> = 5</dl>
+
+<dl><dt><strong>METHOD_CONTINUOUS_ABS_MAXVAL</strong> = 7</dl>
+
+<dl><dt><strong>METHOD_CONTINUOUS_ABS_MINVAL</strong> = 6</dl>
+
+<dl><dt><strong>METHOD_CONTINUOUS_AVERAGE</strong> = 1</dl>
+
+<dl><dt><strong>METHOD_CONTINUOUS_MAXVAL</strong> = 4</dl>
+
+<dl><dt><strong>METHOD_CONTINUOUS_MEDIAN</strong> = 2</dl>
+
+<dl><dt><strong>METHOD_CONTINUOUS_MINVAL</strong> = 3</dl>
+
+<dl><dt><strong>SHAPE_CIRCLE</strong> = 5</dl>
+
+<dl><dt><strong>SHAPE_DIAMOND</strong> = 3</dl>
+
+<dl><dt><strong>SHAPE_HEXAGON</strong> = 4</dl>
+
+<dl><dt><strong>SHAPE_RECTANGLE</strong> = 2</dl>
+
+<dl><dt><strong>SHAPE_SQUARE</strong> = 1</dl>
+
+<dl><dt><strong>SHAPE_TRIANGLE</strong> = 0</dl>
+
+<dl><dt><strong>TABNAME_GROUPS</strong> = 'group'</dl>
+
+<dl><dt><strong>TABNAME_SAMPLES</strong> = 'sample'</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#f3efeb">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Options">class <strong>Options</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr bgcolor="#f3efeb"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Option&nbsp;wrapper&nbsp;to&nbsp;be&nbsp;given&nbsp;to&nbsp;<a href="#NaviCell">NaviCell</a>&nbsp;constructor.<br>
+&nbsp;<br>
+options&nbsp;=&nbsp;<a href="#Options">Options</a>()<br>
+options.browser_command&nbsp;=&nbsp;...<br>
+options.proxy_url&nbsp;=&nbsp;...<br>
+options.map_url&nbsp;=&nbsp;...<br>
+&nbsp;<br>
+nv&nbsp;=&nbsp;<a href="#NaviCell">NaviCell</a>(options)<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Options-__init__"><strong>__init__</strong></a>(self)</dt><dd><tt>Instantiate&nbsp;an&nbsp;<a href="#NaviCell">NaviCell</a>&nbsp;option&nbsp;wrapper.</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#f3efeb">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Proxy">class <strong>Proxy</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr bgcolor="#f3efeb"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>class&nbsp;used&nbsp;to&nbsp;communicate&nbsp;with&nbsp;<a href="#NaviCell">NaviCell</a>&nbsp;proxy&nbsp;on&nbsp;web&nbsp;server&nbsp;side.<br>
+Generally&nbsp;speaking,&nbsp;for&nbsp;internal&nbsp;use&nbsp;by&nbsp;<a href="#NaviCell">NaviCell</a>&nbsp;class&nbsp;only.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Proxy-__init__"><strong>__init__</strong></a>(self, proxy_url<font color="#909090">=''</font>)</dt><dd><tt>Instantiate&nbsp;a&nbsp;<a href="#Proxy">Proxy</a>&nbsp;client&nbsp;to&nbsp;communicate&nbsp;with&nbsp;the&nbsp;<a href="#NaviCell">NaviCell</a>&nbsp;proxy&nbsp;server.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:param&nbsp;proxy_url&nbsp;(string):&nbsp;the&nbsp;proxy&nbsp;URL&nbsp;using&nbsp;HTTP&nbsp;or&nbsp;HTTPS&nbsp;protocol</tt></dd></dl>
+
+<dl><dt><a name="Proxy-getHost"><strong>getHost</strong></a>(self)</dt><dd><tt>Return&nbsp;the&nbsp;<a href="#Proxy">Proxy</a>&nbsp;Host.</tt></dd></dl>
+
+<dl><dt><a name="Proxy-getProtocol"><strong>getProtocol</strong></a>(self)</dt><dd><tt>Return&nbsp;the&nbsp;protocol:&nbsp;HTTP&nbsp;or&nbsp;HTTPS.</tt></dd></dl>
+
+<dl><dt><a name="Proxy-getURL"><strong>getURL</strong></a>(self)</dt><dd><tt>Return&nbsp;the&nbsp;<a href="#Proxy">Proxy</a>&nbsp;URL.</tt></dd></dl>
+
+<dl><dt><a name="Proxy-isHttps"><strong>isHttps</strong></a>(self)</dt><dd><tt>Return&nbsp;True&nbsp;if&nbsp;the&nbsp;protocol&nbsp;is&nbsp;HTTPS&nbsp;based.</tt></dd></dl>
+
+<dl><dt><a name="Proxy-newConnection"><strong>newConnection</strong></a>(self)</dt><dd><tt>Creates&nbsp;a&nbsp;new&nbsp;connexion&nbsp;to&nbsp;the&nbsp;HTTP&nbsp;server.</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ff8500">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Author</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ff8500"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">['Eric&nbsp;Viara&nbsp;&lt;eric.viara@curie.fr&gt;',&nbsp;'Eric&nbsp;Bonnet&nbsp;&lt;eric.bonnet@curie.fr&gt;']</td></tr></table>
+</body></html>

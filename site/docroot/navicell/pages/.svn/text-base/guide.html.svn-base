@@ -1,0 +1,120 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<title>User Guides</title>
+<link href="../styles/style.css" rel="stylesheet" type="text/css" />
+<link rel="icon" type="image/ico" href="../images/favicon.ico"/>
+
+</head>
+
+<body>
+
+	<div id="wrapper"><div id="header"><div id="img">
+			<div id="img_left"><img class="left_img" alt="logoNaviCell" src="../images/navicelllogo1.png"/>
+				
+			</div><div id="img_center">
+				
+				<img class="img_center" alt="" src="../images/detailed.png"/>
+				</div>
+			
+			<div id="img_right">
+				
+				<a href="http://www.curie.fr" target="_blank"><img class="img_right" alt="" src="../images/logo_curie.gif"/></a>
+			</div>
+		
+			
+			<div id="header_text">Data analysis, navigation, curation and maintenance of molecular interaction maps</div>
+						
+				
+		</div>	
+		
+		
+	</div><div id="wrapper2"><div id="grey_line"></div>
+			
+			<div id="orange_line"></div>
+			
+			
+			
+			<div id="main"><div id="left_column"><div id="container_left"><ul class="list_left1">
+						<li><a href="../index.html">Home</a></li>
+						<li><a href="maps.html">Maps</a></li>
+						<li><a href="features.html">Features</a></li>
+						<li><a href="guide.html">User Guides</a></li>
+						
+						<li><a href="nav_web_service.html">NaviCell Web Service</a></li>
+						
+						<li><a href="faq.html">FAQ</a></li>
+					</ul>
+					
+					<ul class="list_left">
+						<li><a href="contact.html">Contacts</a></li>
+						<li><a href="publications.html">Publications</a></li>
+						<li style="padding-top:-10px; font-size: 70%; line-height: normal; font: serif; word-spacing: 20%;"><a href="citation.html">How to cite us</a></li>
+						<li><a href="team.html">People</a></li>
+						<li>
+						<a href="acknowledgements.html" style="font-size: 90%;">Acknowledgement</a></li>
+					</ul>
+					</div></div><div id="right_column"><div id="contain_right"><ul class="list_right">
+							<h4 class="right_column">Resources</h4>
+							<li class="list_long"><a href="http://acsn.curie.fr" target="_blank">ACSN <span style="font-size:65%">Atlas of Cancer Signaling Networks</span></a></li>
+							<li class="list_long2"><a href="http://www.celldesigner.org" target="_blank">CellDesigner</a></li>
+							<li class="list_long"><a href="http://www.sbgn.org" target="_blank">SBGN<span style="font-size:80%">
+									Systems Biology Graphical Notation</span></a></li>
+									
+							<li><a href="http://www.cytoscape.org" target="_blank">Cytoscape</a></li>
+							<li><a href="http://bioinfo-out.curie.fr/projects/binom/" target="_blank">BiNoM</a></li>
+							<li><a href="publications2.html" target="_blank">Literature</a></li>
+						</ul>
+					
+					
+						
+						<ul class="list_right">
+							<h4 class="right_column">Databases</h4>
+							<li><a href="http://www.cellsignal.com" target="_blank">Cell Signaling</a></li>
+							<li><a href="http://www.genome.jp/kegg/pathway.html" target="_blank">KEGG</a></li>
+							<li><a href="http://www.pantherdb.org" target="_blank">Panther</a></li>
+							<li><a href="http://www.reactome.org" target="_blank">Reactome</a></li>
+														<li><a href="http://www.cs.tau.ac.il/~spike/" target="_blank">SPIKE</a></li>
+							<li><a href="http://www.wikipathways.org" target="_blank">WikiPathways</a></li>
+						</ul>
+					</div>
+				</div>
+				
+				<div id="center_column">
+				
+					<p><h3>User Guides</h3></p>
+					<!--<p><h4 style="text-align:justify">Download User's Guide in <a href="../doc/usersguide.pdf">PDF </a>format</h4></p> -->
+                    <p><h4 style="color:black; text-align:justify"><a href="../doc/usersguide.pdf">NaviCell User Guide</a></h4></p>
+                    <p><h4 style="color:black; text-align:justify"><a href="../doc/NaviCellMapperAdminGuide.pdf">Guide for map creator and system administrator</a> </h4> </p>
+                    <p><h4 style="color:black; text-align:justify"><a href="../doc/NaviCellMapsPreparationProcedure.pdf">Procedure for the preparation of a map in NaviCell format</a> </h4> </p>
+                    <p><h4 style="color:black; text-align:justify"> <a href="../doc/NaviCell_ZoomsPreparation_Scripts.zip">Scripts for NaviCell Map Zooms Preparation</a> </h4> </p>
+                    <p><h4 style="color:black; text-align:justify"> <a href="nav_web_service.html">NaviCell Data Visualization Web service</a> </h4> </p>
+
+
+					<h4 style="color:black; text-align:justify">Quick Tutorial:</h4>
+					<ul class="list_center" style="text-align:justify">
+							<li><a href="guide1.html">How to navigate NaviCell?</a></li>
+							<li><a href="guide2.html">How to use a blog?</a></li>
+							<li><a href="guide3.html">How to leave comment in the annotation post?</a></li>
+							<li><a href="guide4.html">NaviCell terminology</a></li>
+							<li><a href="guide5.html">Who are investigators of NaviCell?</a></li>
+							<li><a href="guide6.html">Symbols for map entities representation (SBGN)</a></li>
+					</ul>
+
+          <p><h4 style="color:black; text-align:justify"> <a href="https://www.youtube.com/watch?v=CL4OE1qr25I" target="_blank">Video with step-by-step tutorial of how to explore NaviCell.</a></h4> </p>
+          <p></p>
+          <p></p>
+          <p></p>
+          <!-- <iframe width="430" height="250" src="http://www.youtube.com/embed/CL4OE1qr25I?rel=0" frameborder="0" allowfullscreen></iframe> -->
+          <iframe width="430" height="250" src="//www.youtube.com/embed/CL4OE1qr25I?feature=player_detailpage" frameborder="0" allowfullscreen></iframe>
+
+				</div></div><div id="footer">Web design by NaviCell team
+
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

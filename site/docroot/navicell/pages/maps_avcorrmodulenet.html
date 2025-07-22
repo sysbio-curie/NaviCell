@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<title>Maps</title>
+<link rel="icon" type="image/ico" href="../images/favicon.ico"/>
+
+<link href="../styles/style.css" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+	<div id="wrapper"><div id="header"><div id="img">
+			<div id="img_left"><img class="left_img" alt="logoNaviCell" src="../images/navicelllogo1.png"/>
+				
+			</div><div id="img_center">
+				
+				<img class="img_center" alt="" src="../images/detailed.png"/>
+				</div>
+			
+			<div id="img_right">
+				
+				<a href="http://www.curie.fr" target="_blank"><img class="img_right" alt="" src="../images/logo_curie.gif" style="border:0px"/></a>
+			</div>
+		
+			
+			<div id="header_text">Data analysis, navigation, curation and maintenance of molecular interactions maps</div>
+						
+				
+		</div>	
+		
+		
+	</div><div id="wrapper2"><div id="grey_line"></div>
+			
+			<div id="orange_line"></div>
+			
+			
+			
+			<div id="main"><div id="left_column"><div id="container_left"><ul class="list_left1">
+						<li><a href="../index.html">Home</a></li>
+						<li><a href="maps.html">Maps</a></li>
+						<li><a href="features.html">Features</a></li>
+						<li><a href="guide.html">User Guides</a></li>
+						
+						<li><a href="nav_web_service.html">NaviCell Web Service</a></li>
+						
+						<li><a href="faq.html">FAQ</a></li>
+					</ul>
+					
+					<ul class="list_left">
+						<li><a href="contact.html">Contacts</a></li>
+						<li><a href="publications.html">Publications</a></li>
+						<li style="padding-top:-10px; font-size: 70%; line-height: normal; font: serif; word-spacing: 20%;"><a href="citation.html">How to cite us</a></li>
+						<li><a href="team.html">People</a></li>
+						<li>
+						<a href="acknowledgements.html" style="font-size: 90%;">Acknowledgement</a></li>
+					</ul>
+					</div></div><div id="right_column"><div id="contain_right"><ul class="list_right">
+							<h4 class="right_column">Resources</h4>
+							<li class="list_long"><a href="http://acsn.curie.fr" target="_blank">ACSN <span style="font-size:65%">Atlas of Cancer Signaling Networks</span></a></li>
+							<li class="list_long2"><a href="http://www.celldesigner.org" target="_blank">CellDesigner</a></li>
+							<li class="list_long"><a href="http://www.sbgn.org" target="_blank">SBGN<span style="font-size:80%">
+									Systems Biology Graphical Notation</span></a></li>
+							<li><a href="http://www.cytoscape.org" target="_blank">Cytoscape</a></li>
+							<li><a href="http://bioinfo-out.curie.fr/projects/binom/" target="_blank">BiNoM</a></li>
+							<li><a href="publications2.html" target="_blank">Literature</a></li>
+						</ul>
+					
+					
+						
+						<ul class="list_right">
+							<h4 class="right_column">Databases</h4>
+							<li><a href="http://www.cellsignal.com" target="_blank">Cell Signaling</a></li>
+							<li><a href="http://www.genome.jp/kegg/pathway.html" target="_blank">KEGG</a></li>
+							<li><a href="http://www.pantherdb.org" target="_blank">Panther</a></li>
+							<li><a href="http://www.reactome.org" target="_blank">Reactome</a></li>
+														<li><a href="http://www.cs.tau.ac.il/~spike/" target="_blank">SPIKE</a></li>
+							<li><a href="http://www.wikipathways.org" target="_blank">WikiPathways</a></li>
+						</ul>
+					</div>
+				</div>
+				
+				<div id="center_column"><p><h3>Institut Curie Collection</h3></p>
+				 <ul class="list_center">
+				 	
+				 	<li><b><a href="http://navicell.curie.fr/navicell/newtest/maps/infosigmap/master/index.html" style="text-decoration:underline">Access to: InfoSigMap: map of functional redundancies between informative gene sets</a></b></li>
+<p>
+Gene Set Enrichment Analysis (GSEA) or other methods (e.g., Representation and Quantification of Module Activity from Target Expression Data, (ROMA)), are generally employed to explore which molecular mechanisms are dysregulated in a two-conditions or multi-conditions transcriptomics dataset. While the use of these tools has nowadays become a routine task in cancer research, extracting biological insights from their output remains a major challenge. Indeed the output of such methods consists of a table reporting for each gene set its enrichment statistics. This organization of the output, containing redundant and interdependent signatures scattered throughout the table, does not help the interpretation of the results and the formulation of consistent biological hypothesis. Some form of organization is thus required to navigate results and this is the task that InfoSigMap achieves. 
+</p>
+<p>
+InfoSigMap is thus a user-friendly Google Maps-based tool for functional enrichment visualization. The compendium of 962 informative signatures, selected as the most reliable from a huge collection of widely employed signatures, are here represented as nodes of a network.  A different shape is used to denote the gene sets that are only informative (diamond) and those that are also conserved (circle), while the node size denotes the number of genes in the  signature. Links in this network represent redundancy relationships between signatures. The major novelty of InfoSigMap is that it takes into account two kind of redundancy: overlap-based and  functional redundancy.  Indeed as proved in our work,  functional redundancy is a frequent phenomenon poorly captured by signatures overlap. Therefore dark gray is used for those edges that connect signatures being both functionally redundant and having a significant Jaccard-Index (JI), a measure of gene content intersection, while light gray denotes links only associated to functional redundancy. Finally, the thickness of the links is proportional to their weights and the standard Cytoscape organic layout is used to spatially organize the network. Nodes are thus arranged such that similar signatures are placed close together. The areas of the network containing signatures associated to same biological functions are identified and manually annotated on the top of the map to help the navigation of the users.
+</p>
+<p>
+To use InfoSigMap, enrichment results have to be generated outside employing our collection of informative signatures and any available method (e.g. GSEA, ROMA). The signatures ranking output of the analysis can be then charged into InfoSigMap to help a quick navigation of the common activation/repression behaviours of related informative signatures.
+</p>
+
+<p> <a href="infosigmap_gmts/infosigmap_gmts.zip">Download gmt files containing description of informative signatures and conserved eigengenes.</a>
+</p>
+
+<p>
+<a href="https://www.nature.com/articles/s41540-017-0038-8">Cantini L, Calzone L, Martignetti L, Rydenfelt M, Bluthgen N, Barillot E, Zinovyev A. Classification of gene signatures for their information value and functional redundancy. npj Systems Biology and Applications 4(2), 2017. </a>
+</p>
+
+<p>
+<a href="http://journal.frontiersin.org/article/10.3389/fgene.2016.00018/full">Martignetti L, Calzone L, Bonnet E, Barillot E, Zinovyev A. ROMA: Representation and Quantification of Module Activity from Target Expression Data. Front Genet. 2016. 7:18.</a>
+</p>
+
+</ul>
+        
+				</div></div><div id="footer">Web design by NaviCell team
+
+			</div>
+		</div>
+	</div>
+
+</body>
+
+</html>
