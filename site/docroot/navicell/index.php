@@ -1,7 +1,7 @@
 <!doctype html>
 
 <html lang="en">
-<?php $title="Factory"; include 'header.php'; ?>
+<?php $title="NaviCell"; include 'header.php'; ?>
 
 <body>
   

@@ -57,9 +57,9 @@
               <li class="nav-item">
                 <a class="nav-link" id="layers-tab" data-toggle="tab" href="#layers" role="tab" aria-controls="layers" aria-selected="false">Semantic Zooming</a>
               </li>
-              <li class="nav-item">
+              <!-- <li class="nav-item">
                 <a class="nav-link" id="modules-tab" data-toggle="tab" href="#modules" role="tab" aria-controls="modules" aria-selected="false">Modules</a>
-              </li>
+              </li> -->
             </ul>
             <div class="tab-content" id="myTabContent">
               <div class="tab-pane fade show active" id="simple" role="tabpanel" aria-labelledby="simple-tab">
@@ -139,9 +139,9 @@
                   </tbody>
                 </table>
               </div>
-              <div class="tab-pane fade" id="modules" role="tabpanel" aria-labelledby="modules-tab">
+              <!-- <div class="tab-pane fade" id="modules" role="tabpanel" aria-labelledby="modules-tab">
             
-              </div>
+              </div> -->
             </div>
            
           </div>

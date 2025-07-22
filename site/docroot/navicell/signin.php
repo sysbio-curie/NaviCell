@@ -1,7 +1,7 @@
 <!doctype html>
 
 <html lang="en">
-<?php $title="Factory"; include 'header.php'; ?>
+<?php $title="Login"; include 'header.php'; ?>
 
 <body>
   
@@ -24,9 +24,7 @@
           <label for="password" class="sr-only">Password</label>
           <input type="password" id="password" class="form-control" placeholder="Password" required>
           <div class="checkbox mb-3 form-signin-upper-border">
-            <label>
-              <input type="checkbox" value="remember-me"> Remember me
-            </label>
+            
           </div>
           <button class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
         </form>

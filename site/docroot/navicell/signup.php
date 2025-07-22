@@ -1,7 +1,7 @@
 <!doctype html>
 
 <html lang="en">
-<?php $title="Factory"; include 'header.php'; ?>
+<?php $title="Register"; include 'header.php'; ?>
 
 <body>
   
@@ -24,7 +24,7 @@
           <input type="password" id="password1" class="form-control form-signin-upper-border" placeholder="Password" required>
           <label for="password2" class="sr-only">Repeat password</label>
           <input type="password" id="password2" class="form-control" placeholder="Repeat password" required>
-          <button class="btn btn-lg btn-primary btn-block form-signin-upper-border" type="submit">Log in</button>
+          <button class="btn btn-lg btn-primary btn-block form-signin-upper-border" type="submit">Sign up</button>
         </form>
       </div>
     </main><!-- /.container -->

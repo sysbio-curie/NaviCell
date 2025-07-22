@@ -42,7 +42,7 @@
         <ul class="navbar-nav ml-auto">
 
         <li class="nav-item">
-          <a href="profile.php" class="logged_in nav-link"><i class="bi-person-circle"></i>&nbsp;<span id="username"></span></a>
+          <a href="#" class="logged_in nav-link"><i class="bi-person-circle"></i>&nbsp;<span id="username"></span></a>
         </li>  
         <li class="nav-item">
           <a href="admin.php" id="admin_link" class="logged_in nav-link" style="display: none;">Admin</a>        
