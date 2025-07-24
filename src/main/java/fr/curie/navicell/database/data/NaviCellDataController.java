@@ -74,7 +74,15 @@ public class NaviCellDataController {
         }
       }
       return result;
-    } else return new ArrayList<>();
+    } else {
+      List result = new ArrayList<>();
+      for (NaviCellData datum: repository.findAll()) {
+        if (datum.isPublic) {
+          result.add(datum);
+        }
+      }
+      return result;
+    }
   }
 
 
