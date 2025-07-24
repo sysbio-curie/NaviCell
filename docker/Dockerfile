@@ -1,4 +1,4 @@
-FROM openjdk:11.0.8 AS navicell-base
+FROM openjdk:26-slim AS navicell-base
 
 USER root
 WORKDIR /var/navicell
@@ -112,7 +112,7 @@ CMD bash -c "tail -f /dev/null"
 
 ## Now the production part, with WAR file compilation and tomcat server
 ## First, we produce a WAR file from this navicell-maven image
-FROM openjdk:11.0.8 AS navicell-maven
+FROM openjdk:26-slim AS navicell-maven
 
 USER root
 WORKDIR /var/navicell
@@ -191,7 +191,7 @@ RUN ./mvnw clean install
 
 ## Then we copy this WAR file inside a tomcat image
 
-FROM tomcat:9.0.44-jdk11-openjdk-buster AS navicell-tomcat
+FROM tomcat:9.0.65-jdk11-openjdk-buster AS navicell-tomcat
 
 USER root
 WORKDIR /var/navicell
@@ -237,9 +237,9 @@ VOLUME /var/navicell/site/docroot/navicell/maps
 
 RUN chown -R www-data:www-data /var/navicell/ && chown -R www-data:www-data /usr/local/tomcat/
 
-COPY docker/tomcat.service /etc/systemd/system/
-# CMD bash -c "tail -f /dev/null"
-CMD ["/lib/systemd/systemd"]
+#COPY docker/tomcat.service /etc/systemd/system/
+CMD bash -c "tail -f /dev/null"
+#CMD ["/lib/systemd/systemd"]
 # CMD service apache2 start && service tomcat start && bash -c "tail -f /dev/null"
 #/usr/local/tomcat9/bin/catalina.sh start 
 #&& ./mvnw spring-boot:run
