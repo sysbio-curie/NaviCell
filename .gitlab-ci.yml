@@ -1,0 +1,16 @@
+image: docker:latest
+
+services:
+  - docker:dind
+
+before_script:
+  - docker info
+  - docker-compose -v
+  
+ 
+build-prod:
+  stage: build
+  script:
+    - docker-compose build navicell
+    - docker login -u vnoel -p $token_registry registrygitlab.curie.fr
+    - docker push registrygitlab.curie.fr/vnoel/navicell:3.0.0
