@@ -16,7 +16,9 @@ services:
       MONGO_INITDB_DATABASE: navicell
 
   navicell:
-
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
     image: vnoel/navicell:3.0.0b10
     container_name: navicell
     ports:
