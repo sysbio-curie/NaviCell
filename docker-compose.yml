@@ -16,43 +16,22 @@ services:
       MONGO_INITDB_DATABASE: navicell
 
   navicell:
-    build:
-      context: ./
-      dockerfile: docker/Dockerfile
-      target: navicell
 
-    image: navicell
+    image: vnoel/navicell:3.0.0b10
     container_name: navicell
     ports:
-      - "80:80"
+      - "127.0.0.1:8088:80"
     user: root
     volumes:
-      - maps:/var/navicell/docroot/site/maps
-    
+      - maps:/var/navicell/site/docroot/navicell/maps
+      - data:/var/navicell/site/docroot/navicell/data    
     depends_on:
       - navicell-db
+    restart: unless-stopped
 
-  navicell-dev:
-    build:
-      context: ./
-      dockerfile: docker/Dockerfile
-      target: navicell-dev
-
-    image: navicell-dev
-    container_name: navicell
-    ports:
-      - "80:80"
-      - "8080:8080"
-      
-    volumes:
-      - .:/var/navicell
-      - maps:/var/navicell/site/docroot/maps/
-    user: root
-    
-    depends_on:
-      - navicell-db
       
 volumes:
   db:
   config-db:
   maps:
+  data:
